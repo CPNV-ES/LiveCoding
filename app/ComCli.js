@@ -19,4 +19,25 @@ class ComCli{
         this.ipcRenderer.send(this.channelMessage, msg);
         this.ipcRenderer.on(this.channelReply, callback);
     }
+
+    get(callback){
+        console.log(this.channelReply);
+        this.ipcRenderer.on(this.channelReply, callback);
+    }
 }
+
+
+// Use case example :
+const comCliEngine = new ComCli('engine');
+comCliEngine.send('my name is jeff', (event, msg) => {
+    /*
+    console.log("get msg on client");
+    console.log(msg); // arg contains message
+      */
+});
+console.log("new communication for editor....");
+const comCliEditor = new ComCli('editor');
+comCliEditor.get((event, message) => {
+    console.log("got message on editor");
+    console.log(message);
+});

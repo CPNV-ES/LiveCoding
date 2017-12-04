@@ -1,6 +1,8 @@
 let instance = null;
 class ComSrv {
-    constructor() {
+    constructor(messageChannel, replyChannel) {
+        this.messageChannel = (typeof messageChannel !== 'undefined') ? this.messageChannel : '-message';
+        this.replyChannel = (typeof replyChannel !== 'undefined') ? this.replyChannel : '-reply';
         if(!instance) {
             instance = this;
             let {ipcMain} = require('electron');
@@ -10,13 +12,21 @@ class ComSrv {
     }
 
     get(channel, callback) {
-        this.ipcmain.on(channel+'-message', callback);
+        this.ipcmain.on(channel + this.messageChannel, callback);
     }
 }
 
-let comSrv = new ComSrv();
+const comSrv = new ComSrv();
+console.log("......");
+
+console.log("......");
 comSrv.get('engine', (event, msg) => {
-    console.log("get msg on server");
+    console.log("get commands from engine");
     console.log(msg);
-    event.sender.send('engine-reply', 'Feu Feu');
+    console.log("sending...");
+    console.log('editor' + comSrv.replyChannel);
+
+    event.sender.send('editor' + comSrv.channelReply, 'Feu Feu');
 });
+
+
