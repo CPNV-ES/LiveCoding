@@ -1,8 +1,11 @@
 {
-  "name"    : "live-coding",
-  "version" : "0.0.1",
-  "main"    : "main.js",
+  "name": "live-coding",
+  "version": "0.0.1",
+  "main": "main.js",
   "scripts": {
     "start": "electron ."
+  },
+  "dependencies": {
+    "electron-require": "^0.3.0"
   }
 }
