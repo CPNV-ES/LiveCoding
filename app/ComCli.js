@@ -20,12 +20,3 @@ class ComCli{
         this.ipcRenderer.on(this.channelReply, callback);
     }
 }
-
-
-// Use case example :
- const comCli = new ComCli('engine');
-
- comCli.send('my name is jeff', (event, msg) => {
-  console.log("get msg on client");
-  console.log(msg); // arg contains message
-});

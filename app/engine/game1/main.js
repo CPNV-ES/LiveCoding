@@ -1,7 +1,12 @@
+// Engine Communication to the server
+var comCliEngine = new ComCli('engine');
+var availableCommands = {
+    availableCommands: ["moveRight", "moveLeft", "moveUp", "moveDown"]
+}
+
+
 var game = new Phaser.Game(600, 600);
 var velocity = 300;
-
-
 
 var gameState = {
     // Assets loading
@@ -28,12 +33,20 @@ var gameState = {
         game.physics.arcade.enable(this.player);
         this.player.body.collideWorldBounds = true;
         this.cursors  = game.input.keyboard.createCursorKeys();
+
+        sendMessageToServer(JSON.stringify(availableCommands));
     },
     // game Logic
     update: function(){
         movePlayer(this.player, this.cursors);
     }
 };
+
+function sendMessageToServer(messageToSend){
+    comCliEngine.send(messageToSend, (event, msg) => {
+        console.log("Response to send commands : "+msg); // arg contains message
+    });
+}
 
 function movePlayer(player, cursors){
     if(cursors.right.isDown){
@@ -51,7 +64,6 @@ function movePlayer(player, cursors){
         player.animations.stop();
     }
 }
-
 function moveRight(player){
     player.body.position.x = player.body.position.x + player.width;
     player.frame = 6;
@@ -68,6 +80,7 @@ function moveDown(player){
     player.body.position.y = player.body.position.y + player.height;
     player.frame = 0;
 }
+
 
 game.state.add('gameState', gameState);
 game.state.start('gameState');
