@@ -1,0 +1,21 @@
+#editor {
+    min-width: 600px;
+    min-height: 600px;
+}
+
+#editorControls {
+    display: flex;
+    justify-content: space-around;
+}
+
+.alert {
+    position: absolute;
+    display: none;
+    min-width: 300px;
+    max-width: 80%;
+    min-height: 100px;
+    max-height: 80%;
+    z-index: 1;
+    background-color: #ffffff;
+    cursor: pointer;
+}

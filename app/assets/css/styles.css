@@ -1,0 +1,20 @@
+body {
+    background-color: #CCC;
+}
+
+#wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#content {
+    display: flex;
+    justify-content: space-between;
+}
+
+#game {
+    display: flex;
+    flex-direction: column-reverse;
+}

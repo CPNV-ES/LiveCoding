@@ -1,15 +1,61 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <title>Electron Hello World!</title>
-    </head>
-    <body>
-        <div id="game">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="editor/assets/css/styles.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/styles.css">
+    <title>Hello World!</title>
+</head>
+<body>
+    <div id="wrapper">
+        <h1>Hello World!</h1>
+
+        <div id="content">
+            <div id="ide">
+                <div id="editor"></div>
+                <div id="editorControls">
+                    <div id="cursorInfo">
+                        Row: <span id="row">1</span>
+                        Column: <span id="col">2</span>
+                    </div>
+                    <span>Select a language: </span>
+                    <select id="languagePicker">
+                        <option value="javascript">javascript</option>
+                        <option value="java">Java</option>
+                        <option value="swift">Swift</option>
+                    </select>
+                    <button id="runButton">Run!</button>
+                </div>
+            </div>
+
+            <div id="game">
+                <div>
+                    <!-- To be removed - hardcoded game commands -->
+                    <span style="display: block;">hero.moveUp</span>
+                    <span style="display: block;">hero.moveDown</span>
+                    <span style="display: block;">hero.moveLeft</span>
+                    <span style="display: block;">hero.moveRight</span>
+                </div>
+            </div>
         </div>
 
-        <script type="text/javascript" src="ComCli.js"></script>
-        <script type="text/javascript" src="engine/assets/js/phaser.min.js"></script>
-        <script type="text/javascript" src="engine/game1/main.js"></script>
-    </body>
+        <div id="notification" class="alert">notification</div>
+        <div id="error" class="alert">error</div>
+    </div>
+
+    <!-- global -->
+    <script>window.$ = require('jquery');</script>
+    <script>window._ = require('lodash')</script>
+    <script type="text/javascript" src="ComCli.js"></script>
+
+    <!-- engine -->
+    <script type="text/javascript" src="engine/vendor/phaser.min.js"></script>
+    <script type="text/javascript" src="engine/game1/main.js"></script>
+
+    <!-- editor -->
+    <script src="editor/vendor/c9/src/ace.js" type="text/javascript" charset="utf-8"></script>
+    <script src="editor/assets/js/editorHandler.js" type="text/javascript" charset="utf-8"></script>
+    <script src="editor/assets/js/notification.js" type="text/javascript" charset="utf-8"></script>
+
+</body>
 </html>
