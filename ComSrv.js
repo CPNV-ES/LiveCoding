@@ -17,16 +17,13 @@ class ComSrv {
 }
 
 const comSrv = new ComSrv();
-console.log("......");
 
-console.log("......");
 comSrv.get('engine', (event, msg) => {
     console.log("get commands from engine");
     console.log(msg);
-    console.log("sending...");
-    console.log('editor' + comSrv.replyChannel);
+    console.log("sending to : editor" + comSrv.replyChannel);
 
-    event.sender.send('editor' + comSrv.channelReply, 'Feu Feu');
+    event.sender.send('editor' + comSrv.channelReply, msg);
 });
 
 
