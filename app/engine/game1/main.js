@@ -4,8 +4,8 @@ var availableCommands = {
     availableCommands: ["moveRight", "moveLeft", "moveUp", "moveDown"]
 }
 
-
-var game = new Phaser.Game(600, 600);
+// Create the gameFrame and added it to the parent html called "game"
+var game = new Phaser.Game(600, 600, Phaser.AUTO, "game");
 var velocity = 300;
 
 var gameState = {
