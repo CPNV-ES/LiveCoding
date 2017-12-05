@@ -1,9 +1,7 @@
 // Engine Communication to the server
 var comCliEngine = new ComCli('engine');
 
-var availableCommands = {
-    availableCommands: ["moveRight", "moveLeft", "moveUp", "moveDown"]
-};
+
 
 var gameState = new GameState();
 var game = new Game();
@@ -16,5 +14,5 @@ function sendMessageToServer(messageToSend){
 }
 
 $("#runButton").click(function(){
-    gameState.moveUp();
+    gameState.player.moveUp();
 });
