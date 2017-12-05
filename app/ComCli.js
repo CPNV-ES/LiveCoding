@@ -21,36 +21,28 @@ class ComCli{
      * @param {Function} Called when a reply is received. uses params (event, message)
      */
     send(msg, callback){
-        console.log("sending... on : " + this.channelMessage);
         this.ipcrenderer.send(this.channelMessage, msg);
         this.ipcrenderer.on(this.channelReply, callback);
     }
 
     get(callback){
-        console.log("waiting on... : " + this.channelReply);
         this.ipcrenderer.on(this.channelReply, callback);
     }
 }
 
-let commands = {
-    "enigne1": [
-        "cmd1",
-        "cmd2",
-        "cmd3"
-    ]
-};
-
-const comCliEngine = new ComCli('engine');
-comCliEngine.send(JSON.stringify(commands), (event, message) => {
-    console.log('*** response on engine ***');
-    console.log(message);
-    console.log("***");
-});
-
 const comCliEditor = new ComCli('editor');
 comCliEditor.get((event, message) => {
-    console.log('*** response on editor ***');
-    console.log(message);
-    console.log("***");
-});
+    let commands = JSON.parse(message);
+    //TODO: display commands.
+    // to Raph. : https://stackoverflow.com/questions/6453295/javascript-callback-how-to-return-the-result
+    comCliEditor.send(JSON.stringify(commands["availableCommands"][1]), (e, msg) => {
 
+    });
+
+    setTimeout(() => {
+        comCliEditor.send(JSON.stringify(commands["availableCommands"][0]), (e, msg) => {
+
+        });
+    }, 2000);
+
+});

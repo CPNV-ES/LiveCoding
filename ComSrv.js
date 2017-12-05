@@ -25,3 +25,9 @@ comSrv.get('engine', (event, message) => {
    //TODO: parse commands
    event.sender.send('editor'+comSrv.replyChannelSuffix, message);
 });
+
+comSrv.get('editor', (event, message) => {
+    console.log("*** message from editor ***");
+    console.log(message);
+    event.sender.send('engine' + comSrv.replyChannelSuffix, message);
+});
