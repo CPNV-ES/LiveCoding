@@ -1,54 +1,56 @@
 class ComCli{
+
     /**
      *
      * @param {String} channel channel's name (ex: 'engine' or 'editor')
+     * @param {String} [messageChannelSuffix='-message'] optional suffix for message channel
+     * @param {String} [replyChannelSuffix='-reply'] optional suffix for reply channel
      */
-    constructor(channel){
-        this.ipcRenderer = require('electron').ipcRenderer;
-        this.channelMessage = channel + "-message";
-        this.channelReply = channel + "-reply"
+    constructor(channel, messageChannelSuffix, replyChannelSuffix){
+        this.ipcrenderer = require('electron').ipcRenderer;
+        this.messageChannelSuffix = (typeof messageChannelSuffix !== 'undefined') ? this.messageChannelSuffix : '-message';
+        this.replyChannelSuffix = (typeof replyChannelSuffix !== 'undefined') ? this.replyChannelSuffix : '-reply';
+
+        this.channelMessage = channel + this.messageChannelSuffix;
+        this.channelReply = channel + this.replyChannelSuffix;
     }
 
     /**
      *
      * @param {String} msg
-     * @param {ListenerCallback} called when a reply is received. uses params (event, message)
+     * @param {Function} Called when a reply is received. uses params (event, message)
      */
     send(msg, callback){
         console.log("sending... on : " + this.channelMessage);
-        this.ipcRenderer.send(this.channelMessage, msg);
-        this.ipcRenderer.on(this.channelReply, callback);
+        this.ipcrenderer.send(this.channelMessage, msg);
+        this.ipcrenderer.on(this.channelReply, callback);
     }
 
     get(callback){
         console.log("waiting on... : " + this.channelReply);
-        this.ipcRenderer.once(this.channelReply, (e,m) => {
-            console.log(e);
-            console.log(m);
-        });
+        this.ipcrenderer.on(this.channelReply, callback);
     }
 }
 
-/*
-// Use case example :
+let commands = {
+    "enigne1": [
+        "cmd1",
+        "cmd2",
+        "cmd3"
+    ]
+};
+
 const comCliEngine = new ComCli('engine');
-comCliEngine.send('my name is jeff', (event, msg) => {
-
-    // console.log("get msg on client");
-    // console.log(msg); // arg contains message
-
-});
-console.log("new communication for editor....");
-const comCliEditor = new ComCli('editor');
-comCliEditor.get((event, message) => {
-    console.log("got message on editor");
+comCliEngine.send(JSON.stringify(commands), (event, message) => {
+    console.log('*** response on engine ***');
     console.log(message);
+    console.log("***");
 });
-
-*/
 
 const comCliEditor = new ComCli('editor');
 comCliEditor.get((event, message) => {
-    console.log("got new message...");
+    console.log('*** response on editor ***');
     console.log(message);
+    console.log("***");
 });
+

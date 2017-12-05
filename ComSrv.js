@@ -1,8 +1,8 @@
 let instance = null;
 class ComSrv {
-    constructor(messageChannel, replyChannel) {
-        this.messageChannel = (typeof messageChannel !== 'undefined') ? this.messageChannel : '-message';
-        this.replyChannel = (typeof replyChannel !== 'undefined') ? this.replyChannel : '-reply';
+    constructor(messageChannelSuffix, replyChannelSuffix) {
+        this.messageChannelSuffix = (typeof messageChannelSuffix !== 'undefined') ? this.messageChannelSuffix : '-message';
+        this.replyChannelSuffix = (typeof replyChannelSuffix !== 'undefined') ? this.replyChannelSuffix : '-reply';
         if(!instance) {
             instance = this;
             let {ipcMain} = require('electron');
@@ -12,18 +12,16 @@ class ComSrv {
     }
 
     get(channel, callback) {
-        this.ipcmain.on(channel + this.messageChannel, callback);
+        console.log("getting on :" + channel + this.messageChannelSuffix);
+        this.ipcmain.on(channel + this.messageChannelSuffix, callback);
     }
 }
 
 const comSrv = new ComSrv();
-
-comSrv.get('engine', (event, msg) => {
-    console.log("get commands from engine");
-    console.log(msg);
-    console.log("sending to : editor" + comSrv.replyChannel);
-
-    event.sender.send('editor' + comSrv.channelReply, msg);
+comSrv.get('engine', (event, message) => {
+   console.log("*** message from engine ***");
+   console.log(message);
+   console.log("***");
+   //TODO: parse commands
+   event.sender.send('editor'+comSrv.replyChannelSuffix, message);
 });
-
-
