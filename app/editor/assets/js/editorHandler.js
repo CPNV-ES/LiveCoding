@@ -1,8 +1,99 @@
 'use strict'
 
-let _editor = null;
+class Editor {
+    constructor(engine, frame, serverOutlet) {
+        this.engine = engine;
+        this.frame = frame;
+        this.serverOutlet = serverOutlet;
 
-let el = {};
+        // Controls
+        this.controls = {
+            'row': $('#row'),
+            'col': $('#col'),
+            'languagePicker': $('#languagePicker'),
+            'runButton': $('#runButton'),
+        }
+
+        // Internal configuration
+        this.allowCodeSubmission = true;
+    }
+
+    executeCode() {
+        console.log(this.engine.getSession().getMode());
+        console.log(this.engine.getValue());
+        this.serverOutlet.send(this.engine.getValue(), function(val1, val2) {
+            console.log('callback:');
+            console.log(val1);
+            console.log(val2);
+        });
+        // interpreter.eval(_editor.getValue());
+    }
+
+    /**
+     *
+     * Updates the front-end labels indicating the active editor row and column
+     *
+     * @param {Number} row
+     * @param {Number} col
+     */
+    updateCursor() {
+        const cursorInfo = this.engine.getSession().selection.getCursor();
+
+        this.controls.row.html(cursorInfo.row);
+        this.controls.col.html(cursorInfo.column);
+    }
+
+    /**
+     *
+     * Updates the UI to allow or prevent code submission according to
+     * the editor content
+     *
+     * @param {Boolean} locked indicates whether the UI should allow code submissions or not
+     */
+    updateUI(locked) {
+        if (locked) {
+            console.log('Unlock UI');
+        } else {
+            console.log('Lock UI');
+        }
+
+        this.controls.runButton.prop('disabled', !locked);
+    }
+
+    /**
+     *
+     * Updates the editor mode and content according to the provided language
+     *
+     * @param {String} language indicates the language the editor is handling
+     */
+    updateContent(language) {
+        this.engine.setValue(_editorDefaultContent[language]);
+        this.engine.getSession().setMode('ace/mode/' + language);
+    }
+
+    /**
+     *
+     * Initializes control event listners
+     */
+    initEventListners() {
+        this.controls.languagePicker.on('change', (e) => {
+            const pickedLanguage = $(e.currentTarget).val();
+            this.updateContent(pickedLanguage);
+        });
+
+        this.controls.runButton.on('click', () => this.executeCode());
+
+        this.engine.getSession().selection.on('changeCursor', () => this.updateCursor());
+
+        this.engine.getSession().on('change', (e) => {
+            // console.log(e);
+
+            // Make sure the editor has content before allowing submissions
+            this.allowCodeSubmission = this.engine.getValue() !== '';
+            this.updateUI(this.allowCodeSubmission);
+        });
+    }
+}
 
 // Editor placeholder content
 const _editorDefaultContent = {
@@ -11,89 +102,19 @@ const _editorDefaultContent = {
     'javascript': "// Type your code right here!\nfunction sayHello() {\n\tconsole.log('Hello World!');\n}",
 };
 
-initDom();
-initEditor();
-initEvents();
+const editor = new Editor(ace.edit('editor'), $('#editor'), new ComCli('editor'));
 
+// Editor config
+editor.engine.setTheme('ace/theme/monokai');
+editor.engine.getSession().setMode('ace/mode/javascript');
+editor.engine.$blockScrolling = Infinity;
 
-/**
- *
- * Initializes DOM element
- */
-function initDom() {
-    el.editor = $('#editor');
-    el.gameFrame = $('#gameFrame');
-    el.languagePicker = $('#languagePicker');
-    el.row = $('#row');
-    el.col = $('#col');
-    el.runButton = $('#runButton');
-}
+// Content config
+editor.frame.css( 'fontSize', '14px' );
+editor.engine.setShowPrintMargin(false);
 
-/**
- *
- * Initializes the editor with a default config and key bindings
- */
-function initEditor() {
-    // Editor config
-    _editor = ace.edit('editor');
-    _editor.setTheme('ace/theme/monokai');
-    _editor.getSession().setMode('ace/mode/javascript');
-    _editor.$blockScrolling = Infinity;
+// Initial content
+editor.engine.setValue(_editorDefaultContent.javascript);
 
-    // Content config
-    el.editor.css( 'fontSize', '14px' );
-    _editor.setShowPrintMargin(false);
-
-    // Initial content
-    _editor.setValue(_editorDefaultContent.javascript);
-
-    // Register key bindings
-    _editor.commands.addCommand({
-        name: 'executeCode',
-        bindKey: {win: 'Ctrl-F5',  mac: 'Command-F5'},
-        exec: function(editor) {
-            executeCode();
-        },
-        readOnly: true // false if this command should not apply in readOnly mode
-    });
-}
-
-function executeCode() {
-    console.log(_editor.getSession().getMode());
-    console.log(_editor.getValue());
-    // interpreter.eval(_editor.getValue());
-}
-
-/**
- *
- * Updates the front-end labels indicating the active editor row and column
- *
- * @param {Number} row
- * @param {Number} col
- */
-function updateCursor(row, col) {
-    el.row.html(row);
-    el.col.html(col);
-}
-
-/**
- *
- * Prepares events to be triggered
- */
-function initEvents() {
-    el.languagePicker.on('change', function() {
-        const pickedLanguage = $(this).val();
-        _editor.setValue(_editorDefaultContent[pickedLanguage]);
-        _editor.getSession().setMode('ace/mode/' + pickedLanguage);
-    });
-
-    el.runButton.on('click', function() {
-        executeCode();
-    });
-
-    _editor.getSession().selection.on('changeCursor', function(e) {
-        const cursorInfo = _editor.selection.getCursor();
-        updateCursor(cursorInfo.row, cursorInfo.column);
-    });
-
-}
+// Initialise event listeners
+editor.initEventListners();
