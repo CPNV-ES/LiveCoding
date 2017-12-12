@@ -9,8 +9,9 @@ const rq = require('electron-require');
 let mainWindow;
 
 function createWindow () {
-    // Create the browser window.
-    mainWindow = new BrowserWindow({width: 800, height: 600});
+    // Create the browser window on full screen.
+    mainWindow = new BrowserWindow();
+    //mainWindow.maximize();
 
     // and load the index.html of the app.
     mainWindow.loadURL(`file://${__dirname}/app/index.html`);
@@ -49,4 +50,7 @@ app.on('activate', function () {
     }
 });
 
-rq('./ComSrv');
+const comSrvModule = rq('./ComSrv.js');
+const builderModule = rq('./Builder.js');
+const builder = new builderModule(/*new comSrvModule()*/);
+console.log(builder);
