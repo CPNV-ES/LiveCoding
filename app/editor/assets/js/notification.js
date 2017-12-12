@@ -20,9 +20,9 @@ function initEvents() {
         });
     });
 
-    element.game.on('click', function() {
-        popNotification(element.frames.notification);
-    });
+    // element.game.on('click', function() {
+    //     popNotification(element.frames.notification);
+    // });
 }
 
 function popNotification(frame) {

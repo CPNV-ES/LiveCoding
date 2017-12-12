@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="editor/assets/css/styles.css">
-    <link rel="stylesheet" type="text/css" href="assets/css/styles.css">
+    <link rel="stylesheet" type="text/css" href="ui/assets/css/styles.css">
     <title>Hello World!</title>
 </head>
 <body>
@@ -29,13 +29,7 @@
             </div>
 
             <div id="game">
-                <div>
-                    <!-- To be removed - hardcoded game commands -->
-                    <span style="display: block;">hero.moveUp</span>
-                    <span style="display: block;">hero.moveDown</span>
-                    <span style="display: block;">hero.moveLeft</span>
-                    <span style="display: block;">hero.moveRight</span>
-                </div>
+                <div id="commandList"></div>
             </div>
         </div>
 
@@ -50,16 +44,20 @@
 
     <!-- engine -->
     <script type="text/javascript" src="engine/vendor/phaser.min.js"></script>
-       <script type="text/javascript" src="engine/game1/Player.js"></script>
+    <script type="text/javascript" src="engine/game1/Player.js"></script>
     <script type="text/javascript" src="engine/game1/GameState.js"></script>
     <script type="text/javascript" src="engine/game1/Game.js"></script>
 
     <script type="text/javascript" src="engine/game1/main.js"></script>
 
+    <!-- UI -->
+    <script src="ui/assets/js/UIHandler.js" type="text/javascript" charset="utf-8"></script>
+
     <!-- editor -->
     <script src="editor/vendor/c9/src/ace.js" type="text/javascript" charset="utf-8"></script>
-    <script src="editor/assets/js/editorHandler.js" type="text/javascript" charset="utf-8"></script>
+    <script src="editor/assets/js/EditorHandler.js" type="text/javascript" charset="utf-8"></script>
     <script src="editor/assets/js/notification.js" type="text/javascript" charset="utf-8"></script>
+
 
 </body>
 </html>
