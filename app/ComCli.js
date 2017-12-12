@@ -35,13 +35,11 @@ comCliEditor.get((event, message) => {
     let commands = JSON.parse(message);
     //TODO: display commands.
     // to Raph. : https://stackoverflow.com/questions/6453295/javascript-callback-how-to-return-the-result
-    comCliEditor.send(JSON.stringify(commands["availableCommands"][1]), (e, msg) => {
 
+    comCliEditor.send(commands['availableCommands'][0], (e, msg) => {
     });
-
     setTimeout(() => {
-        comCliEditor.send(JSON.stringify(commands["availableCommands"][0]), (e, msg) => {
-
+        comCliEditor.send(commands['availableCommands'][0], (e, msg) => {
         });
     }, 2000);
 

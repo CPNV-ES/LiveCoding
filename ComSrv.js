@@ -19,15 +19,16 @@ class ComSrv {
 
 const comSrv = new ComSrv();
 comSrv.get('engine', (event, message) => {
-   console.log("*** message from engine ***");
+   console.log("*** message from ENGINE ***");
    console.log(message);
    console.log("***");
    //TODO: parse commands
-   event.sender.send('editor'+comSrv.replyChannelSuffix, message);
+
+   event.sender.send('editor' + comSrv.replyChannelSuffix, message);
 });
 
 comSrv.get('editor', (event, message) => {
-    console.log("*** message from editor ***");
+    console.log("*** message from EDITOR ***");
     console.log(message);
     event.sender.send('engine' + comSrv.replyChannelSuffix, message);
 });
