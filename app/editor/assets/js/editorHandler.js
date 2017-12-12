@@ -1,10 +1,13 @@
+// This class acts as a controller for the code editor
+
 'use strict'
 
-class Editor {
-    constructor(engine, frame, serverOutlet) {
+class EditorHandler {
+    constructor(engine, frame, serverOutlet, uiHandler) {
         this.engine = engine;
         this.frame = frame;
-        this.serverOutlet = serverOutlet;
+        this.serverOutlet = serverOutlet; // Ref to the server
+        this.uiHandler = uiHandler; // Ref to the UI controller
 
         // Controls
         this.controls = {
@@ -18,15 +21,35 @@ class Editor {
         this.allowCodeSubmission = true;
     }
 
-    executeCode() {
-        console.log(this.engine.getSession().getMode());
-        console.log(this.engine.getValue());
-        this.serverOutlet.send(this.engine.getValue(), function(val1, val2) {
-            console.log('callback:');
-            console.log(val1);
-            console.log(val2);
+    getAvailableCommands(callback) {
+        this.serverOutlet.get((event, message) => {
+            let commands = JSON.parse(message);
+
+            this.availableCommands = message;
+
+            callback(message);
         });
-        // interpreter.eval(_editor.getValue());
+    }
+
+    /**
+     *
+     * Requests the UI to be updated with the provided list of cammands
+     */
+    displayAvailableCommands(commands) {
+        // Store the commands in JSON
+        commands = JSON.parse(commands).availableCommands;
+
+        // Update the UI with new commands
+        uiHandler.updateCommandList(commands);
+    }
+
+    /**
+     *
+     * Sends code to the server for evaluation / compilation
+     */
+    executeCode() {
+        this.serverOutlet.send(this.engine.getValue(), (e, msg) => {
+        });
     }
 
     /**
@@ -102,7 +125,8 @@ const _editorDefaultContent = {
     'javascript': "// Type your code right here!\nfunction sayHello() {\n\tconsole.log('Hello World!');\n}",
 };
 
-const editor = new Editor(ace.edit('editor'), $('#editor'), new ComCli('editor'));
+const uiHandler = new UIHandler();
+const editor = new EditorHandler(ace.edit('editor'), $('#editor'), new ComCli('editor'));
 
 // Editor config
 editor.engine.setTheme('ace/theme/monokai');
@@ -118,3 +142,6 @@ editor.engine.setValue(_editorDefaultContent.javascript);
 
 // Initialise event listeners
 editor.initEventListners();
+
+
+editor.getAvailableCommands(editor.displayAvailableCommands);
