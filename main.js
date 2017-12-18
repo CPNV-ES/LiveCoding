@@ -49,8 +49,15 @@ app.on('activate', function () {
         createWindow()
     }
 });
-
+/*
 const comSrvModule = rq('./ComSrv.js');
 const builderModule = rq('./Builder.js');
-const builder = new builderModule(/*new comSrvModule()*/);
-console.log(builder);
+const builder = new builderModule(new comSrvModule());
+builder.listen('engine', (message) => {
+    console.log(message);
+    return ['engine', 'value']
+});
+*/
+const comInterpreterModule = rq('./ComInterpreter');
+const k = new comInterpreterModule();
+k.post();

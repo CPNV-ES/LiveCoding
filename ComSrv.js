@@ -7,12 +7,11 @@ module.exports = class ComSrv {
             instance = this;
             let {ipcMain} = require('electron');
             this.ipcmain = ipcMain;
+            //TODO: FUSION WITH COM_INTERPRETER CLASS !!
         }
         return instance;
     }
-
     get(channel, callback) {
-        console.log("getting on :" + channel + this.messageChannelSuffix);
         this.ipcmain.on(channel + this.messageChannelSuffix, callback);
     }
 };
