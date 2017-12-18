@@ -8,4 +8,17 @@ class Pacman{
     show(){
         image(this.img, this.x, this.y);
     }
+
+    moveLeft(){
+        this.x = this.x - BLOCK_WIDTH;
+    }
+    moveRight(){
+        this.x = this.x + BLOCK_WIDTH;
+    }
+    moveUp(){
+        this.y = this.y - BLOCK_HEIGHT;
+    }
+    moveDown(){
+        this.y = this.y + BLOCK_HEIGHT;
+    }
 }

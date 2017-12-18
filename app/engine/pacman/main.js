@@ -1,3 +1,6 @@
+const BLOCK_WIDTH = 48;
+const BLOCK_HEIGHT = 48;
+
 let wallImg;
 let pacmanImg;
 let wall;
@@ -11,7 +14,7 @@ function preload(){
 
 function setup() {
 
-    let canvas = createCanvas(13*48, 13*48);
+    let canvas = createCanvas(13*BLOCK_WIDTH, 13*BLOCK_HEIGHT);
     canvas.parent("game");
 
     let map = new Map();
@@ -39,10 +42,10 @@ function interateOverMap(map){
         for (let j = 0; j < map.columns; j++) {
             if(map.pattern[i][j] == '*'){
                 // j first because columns defines the x position and i defines the y position
-                walls.push(new Wall(wallImg, j*48, i*48));
+                walls.push(new Wall(wallImg, j*BLOCK_WIDTH, i*BLOCK_HEIGHT));
             }
             if(map.pattern[i][j] == 'p'){
-                pacman = new Pacman(pacmanImg, j*48, i*48);
+                pacman = new Pacman(pacmanImg, j*BLOCK_WIDTH, i*BLOCK_HEIGHT);
             }
         }
     }
@@ -51,10 +54,57 @@ function interateOverMap(map){
 function isLeftSideFree(){
     let isFree = true;
     for (let i = 0; i < walls.length; i++) {
-        if(walls[i].x == pacman.x - 48 && walls[i].y == pacman.y){
+        if(walls[i].x == pacman.x - BLOCK_WIDTH && walls[i].y == pacman.y){
             isFree = false;
         }
     }
-
     return isFree;
+}
+function isRightSideFree(){
+    let isFree = true;
+    for (let i = 0; i < walls.length; i++) {
+        if(walls[i].x == pacman.x + BLOCK_WIDTH && walls[i].y == pacman.y){
+            isFree = false;
+        }
+    }
+    return isFree;
+}
+function isUpSideFree(){
+    let isFree = true;
+    for (let i = 0; i < walls.length; i++) {
+        if(walls[i].x == pacman.x && walls[i].y == pacman.y - BLOCK_HEIGHT){
+            isFree = false;
+        }
+    }
+    return isFree;
+}
+function isDownSideFree(){
+    let isFree = true;
+    for (let i = 0; i < walls.length; i++) {
+        if(walls[i].x == pacman.x && walls[i].y == pacman.y + BLOCK_HEIGHT){
+            isFree = false;
+        }
+    }
+    return isFree;
+}
+
+
+function keyPressed() {
+    if (keyCode === LEFT_ARROW){
+        if(isLeftSideFree()){
+            pacman.moveLeft();
+        }
+    }else if(keyCode === RIGHT_ARROW) {
+        if(isRightSideFree()){
+            pacman.moveRight();
+        }
+    }else if(keyCode === UP_ARROW) {
+        if(isUpSideFree()){
+            pacman.moveUp();
+        }
+    }else if(keyCode === DOWN_ARROW) {
+        if(isDownSideFree()){
+            pacman.moveDown();
+        }
+    }
 }
