@@ -1,5 +1,17 @@
 const BLOCK_WIDTH = 48;
 const BLOCK_HEIGHT = 48;
+const availableCommands = [
+    "isLeftSideFree()",
+    "isRightSideFree()",
+    "isUpSideFree()",
+    "isDownSideFree()",
+    "pacman.moveLeft()",
+    "pacman.moveRight()",
+    "pacman.moveUp()",
+    "pacman.moveDown()",
+];
+ // Engine Communication to the server
+let comCliEngine = new ComCli('engine');
 
 let wallImg;
 let pacmanImg;
@@ -13,14 +25,13 @@ function preload(){
 }
 
 function setup() {
-
     let canvas = createCanvas(13*BLOCK_WIDTH, 13*BLOCK_HEIGHT);
     canvas.parent("game");
-
     let map = new Map();
     map.loadLevel(1);
     interateOverMap(map);
-    console.log(isLeftSideFree());
+    // The game is fully loaded, we can send all the command to the editor (through the builder)
+    sendMessageToServer(JSON.stringify(availableCommands));
 }
 
 function draw() {
@@ -107,4 +118,11 @@ function keyPressed() {
             pacman.moveDown();
         }
     }
+}
+
+
+function sendMessageToServer(messageToSend){
+    comCliEngine.send(messageToSend, (event, msg) => {
+        console.log("Response from server: "+msg); // arg contains message
+    });
 }
