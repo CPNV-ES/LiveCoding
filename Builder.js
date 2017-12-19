@@ -5,7 +5,7 @@ module.exports = class Builder {
             comsrv = this._comSrv;
         } else {
             const rq = require('electron-require');
-            const comSrvModule = rq('./ComSrv.js');
+            const comSrvModule = rq('./ComIpcMain.js');
             comsrv = new comSrvModule();
         }
         return comsrv;
@@ -18,6 +18,9 @@ module.exports = class Builder {
     listen(channel, callback){
         this._comSrv.get(channel, (e, m) => {
             let action = callback(m);
+            console.log('sending %s message to', action[action.length - 1]);
+            console.log(action[0]);
+            console.log('***');
             e.sender.send(action[0] + this._comSrv.replyChannelSuffix, action[action.length - 1]);
         });
     }

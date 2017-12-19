@@ -49,15 +49,25 @@ app.on('activate', function () {
         createWindow()
     }
 });
-/*
-const comSrvModule = rq('./ComSrv.js');
-const builderModule = rq('./Builder.js');
-const builder = new builderModule(new comSrvModule());
+
+const ComIpcMain = rq('./ComIpcMain.js');
+const Builder = rq('./Builder.js');
+const builder = new Builder(new ComIpcMain());
+
 builder.listen('engine', (message) => {
+    console.log('***');
+    console.log('new message form engine');
     console.log(message);
-    return ['engine', 'value']
+    console.log('***');
+    return ['engine', message]
 });
-*/
-const comInterpreterModule = rq('./ComInterpreter');
-const k = new comInterpreterModule();
-k.post();
+
+builder.listen('builder', (message) => {
+    console.log('***');
+    console.log('new message form builder');
+    console.log(message);
+    console.log('***');
+    return ['engine', message]
+});
+
+

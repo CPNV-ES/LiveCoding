@@ -1,5 +1,5 @@
 let instance = null;
-module.exports = class ComSrv {
+module.exports = class ComIpcMain {
     constructor(messageChannelSuffix, replyChannelSuffix) {
         this.messageChannelSuffix = (typeof messageChannelSuffix !== 'undefined') ? this.messageChannelSuffix : '-message';
         this.replyChannelSuffix = (typeof replyChannelSuffix !== 'undefined') ? this.replyChannelSuffix : '-reply';
