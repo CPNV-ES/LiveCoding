@@ -48,8 +48,17 @@ class EditorHandler {
      * Sends code to the server for evaluation / compilation
      */
     executeCode() {
-        this.serverOutlet.send(this.engine.getValue(), (e, msg) => {
-        });
+        try {
+            eval(this.engine.getValue());
+        } catch (e) {
+            console.log(e.message);
+            // if (e instanceof SyntaxError) {
+
+            // }
+        }
+
+        // this.serverOutlet.send(this.engine.getValue(), (e, msg) => {
+        // });
     }
 
     /**
