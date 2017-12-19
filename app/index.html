@@ -7,58 +7,57 @@
     <title>Hello World!</title>
 </head>
 <body>
-<div id="wrapper">
-    <h1>Hello World!</h1>
+    <div id="wrapper">
+        <h1>Hello World!</h1>
 
-    <div id="content">
-        <div id="ide">
-            <div id="editor"></div>
-            <div id="editorControls">
-                <div id="cursorInfo">
-                    Row: <span id="row">1</span>
-                    Column: <span id="col">2</span>
+        <div id="content">
+            <div id="ide">
+                <div id="editor"></div>
+                <div id="editorControls">
+                    <div id="cursorInfo">
+                        Row: <span id="row">1</span>
+                        Column: <span id="col">2</span>
+                    </div>
+                    <span>Select a language: </span>
+                    <select id="languagePicker">
+                        <option value="javascript">javascript</option>
+                        <option value="java">Java</option>
+                        <option value="swift">Swift</option>
+                    </select>
+                    <button id="runButton">Run!</button>
                 </div>
-                <span>Select a language: </span>
-                <select id="languagePicker">
-                    <option value="javascript">javascript</option>
-                    <option value="java">Java</option>
-                    <option value="swift">Swift</option>
-                </select>
-                <button id="runButton">Run!</button>
+            </div>
+
+            <div id="game">
+                <div id="commandList"></div>
             </div>
         </div>
 
-        <div id="game">
-            <div>
-                <!-- To be removed - hardcoded game commands -->
-                <span style="display: block;">hero.moveUp</span>
-                <span style="display: block;">hero.moveDown</span>
-                <span style="display: block;">hero.moveLeft</span>
-                <span style="display: block;">hero.moveRight</span>
-            </div>
-        </div>
+        <div id="notification" class="alert">notification</div>
+        <div id="error" class="alert">error</div>
     </div>
 
-    <div id="notification" class="alert">notification</div>
-    <div id="error" class="alert">error</div>
-</div>
+    <!-- global -->
+    <script>window.$ = require('jquery');</script>
+    <script>window._ = require('lodash')</script>
+    <script type="text/javascript" src="ComCli.js"></script>
 
-<!-- global -->
-<script>window.$ = require('jquery');</script>
-<script>window._ = require('lodash')</script>
-<script type="text/javascript" src="ComCli.js"></script>
+    <!-- engine -->
+    <script type="text/javascript" src="engine/vendor/p5.min.js"></script>
+    <script type="text/javascript" src="engine/vendor/p5.dom.min.js"></script>
+    <script type="text/javascript" src="engine/vendor/p5.sound.min.js"></script>
+    <script type="text/javascript" src="engine/pacman/Wall.js"></script>
+    <script type="text/javascript" src="engine/pacman/Map.js"></script>
+    <script type="text/javascript" src="engine/pacman/Pacman.js"></script>
+    <script type="text/javascript" src="engine/pacman/main.js"></script>
 
-<!-- engine -->
-<script type="text/javascript" src="engine/vendor/phaser.min.js"></script>
-<script type="text/javascript" src="engine/game1/Player.js"></script>
-<script type="text/javascript" src="engine/game1/GameState.js"></script>
-<script type="text/javascript" src="engine/game1/Game.js"></script>
-<script type="text/javascript" src="engine/game1/main.js"></script>
+    <!-- UI -->
+    <script src="ui/assets/js/UIHandler.js" type="text/javascript" charset="utf-8"></script>
 
-<!-- editor -->
-<script src="editor/vendor/c9/src/ace.js" type="text/javascript" charset="utf-8"></script>
-<script src="editor/assets/js/editorHandler.js" type="text/javascript" charset="utf-8"></script>
-<script src="editor/assets/js/notification.js" type="text/javascript" charset="utf-8"></script>
+    <!-- editor -->
+    <script src="editor/vendor/c9/src/ace.js" type="text/javascript" charset="utf-8"></script>
+    <script src="editor/assets/js/EditorHandler.js" type="text/javascript" charset="utf-8"></script>
+    <script src="editor/assets/js/notification.js" type="text/javascript" charset="utf-8"></script>
 
 
 </body>
