@@ -12,15 +12,12 @@ module.exports = class ComIpcMain {
         return instance;
     }
     get(channel, callback) {
-        this.ipcmain.on(channel + this.messageChannelSuffix, (e, m) =>{
-          let action = callback(m);
-          e.sender.send(action[0] + this.replyChannelSuffix, action[action.length - 1]);
-        } );
-
-    }
-
+      this.ipcmain.on(channel + this.messageChannelSuffix, (e, m) => {
+        let action = callback(m);
+        e.sender.send(action[0] + this.replyChannelSuffix, action[action.length - 1]);
+      });
+    };
 };
-
 /*
 const comSrv = new ComSrv();
 comSrv.get('engine', (event, message) => {

@@ -17,8 +17,9 @@ module.exports = class Builder {
 
     listen(channel, callback) {
         this._comSrv.get(channel, (message) => {
-          return callback(message)
+          return callback(message);
         });
     }
+
 
 };
