@@ -51,6 +51,7 @@ app.on('activate', function () {
 });
 
 const ComIpcMain = rq('./ComIpcMain.js');
+const ComSocketIO = rq('./ComSocketIO.js');
 const Builder = rq('./Builder.js');
 const builder = new Builder(new ComIpcMain());
 
@@ -59,7 +60,7 @@ builder.listen('engine', (message) => {
     console.log('new message form engine');
     console.log(message);
     console.log('***');
-    return ['builder', message]
+    return ['builder', message];
 });
 
 builder.listen('builder', (message) => {
@@ -67,7 +68,13 @@ builder.listen('builder', (message) => {
     console.log('new message form builder');
     console.log(message);
     console.log('***');
-    return ['engine', message]
+    return ['engine', message];
 });
 
-
+/*
+const builderToProcessor = new Builder(new ComSocketIO());
+builderToProcessor.listen('chat', (data) => {
+  console.log("new message from chat !");
+  console.log(data);
+});
+*/
