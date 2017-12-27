@@ -1,3 +1,6 @@
+# source
+# https://github.com/shokai/ruby-socket.io-client-simple
+
 require 'rubygems'
 require 'socket.io-client-simple'
 
@@ -13,6 +16,12 @@ end
 
 socket.on :chat do |data|
   puts "> " + data['msg']
+end
+
+socket.on :receive do |data|
+    puts "***"
+    puts data
+    puts "***"
 end
 
 socket.on :error do |err|

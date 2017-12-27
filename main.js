@@ -73,6 +73,6 @@ builder.listen('builder', (message) => {
 
 
 const builderToProcessor = new Builder(new ComSocketIO());
-builderToProcessor.listen('chat', (data) => {
+builderToProcessor.listen('processor_ruby', (data) => {
   return ['receive', 'ok lets go !']
 });
