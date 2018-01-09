@@ -50,12 +50,28 @@ app.on('activate', function () {
     }
 });
 
+// What is the builder propose ? Let's decompose it in 6 easy steps.
+// 1. get language from editor
+// 2. start language processor thread
+// 3. tell engine thread is ready
+// 4. send available commands form engine to builder
+// 5. wait for commands, then send to processor
+// 6. wait instructions from processor, then send to builder
+
 const ComIpcMain = rq('./ComIpcMain.js');
 const ComSocketIO = rq('./ComSocketIO.js');
 const Builder = rq('./Builder.js');
-const builder = new Builder(new ComIpcMain());
+let builder = new Builder(new ComSocketIO());
 
-builder.listen('engine', (message) => {
+builder.listen('editor', (data) => {
+  console.log("***");
+  console.log(data);
+  console.log("***");
+  return ['edutor', 'ok lets go !'];
+});
+
+/*
+innerBuilder.listen('engine', (message) => {
     console.log('***');
     console.log('new message form engine');
     console.log(message);
@@ -63,16 +79,11 @@ builder.listen('engine', (message) => {
     return ['builder', message];
 });
 
-builder.listen('builder', (message) => {
+innerBuilder.listen('builder', (message) => {
     console.log('***');
     console.log('new message form builder');
     console.log(message);
     console.log('***');
     return ['engine', message];
 });
-
-
-const builderToProcessor = new Builder(new ComSocketIO());
-builderToProcessor.listen('processor_ruby', (data) => {
-  return ['receive', 'ok lets go !']
-});
+*/
