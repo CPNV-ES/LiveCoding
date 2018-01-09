@@ -11,15 +11,13 @@ module.exports = class Builder {
         return comsrv;
     }
 
-    constructor(comSrv) {
-        this._comSrv = (typeof comSrv !== 'undefined') ? comSrv : this.getComSrv();
+    constructor(comSrv){
+      this._comSrv = (typeof comSrv !== 'undefined') ? comSrv : this.getComSrv();
     }
 
-    listen(channel, callback) {
+    listen(channel, callback){
         this._comSrv.get(channel, (message) => {
           return callback(message);
         });
     }
-
-
 };

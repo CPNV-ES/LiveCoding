@@ -7,7 +7,6 @@ module.exports = class ComIpcMain {
             instance = this;
             let {ipcMain} = require('electron');
             this.ipcmain = ipcMain;
-            //TODO: FUSION WITH COM_INTERPRETER CLASS !!
         }
         return instance;
     }
