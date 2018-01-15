@@ -44,4 +44,8 @@ comCliEditor.get((event, message) => {
     }, 2000);
 
 });
-
+comCliEditor.send('send message from editor !', (msg) => {
+    console.log('got an answer !');
+    console.log(msg);
+});
+console.log("sending messages !!!");

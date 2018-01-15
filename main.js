@@ -59,19 +59,18 @@ app.on('activate', function () {
 // 6. wait instructions from processor, then send to builder
 
 const ComIpcMain = rq('./ComIpcMain.js');
-const ComSocketIO = rq('./ComSocketIO.js');
 const Builder = rq('./Builder.js');
-let builder = new Builder(new ComSocketIO());
-
+let builder = new Builder(new ComIpcMain());
+/*
 builder.listen('editor', (data) => {
   console.log("***");
   console.log(data);
   console.log("***");
-  return ['edutor', 'ok lets go !'];
+  return ['editor', 'ok lets go !'];
 });
+*/
 
-/*
-innerBuilder.listen('engine', (message) => {
+builder.listen('engine', (message) => {
     console.log('***');
     console.log('new message form engine');
     console.log(message);
@@ -79,11 +78,10 @@ innerBuilder.listen('engine', (message) => {
     return ['builder', message];
 });
 
-innerBuilder.listen('builder', (message) => {
+builder.listen('builder', (message) => {
     console.log('***');
     console.log('new message form builder');
     console.log(message);
     console.log('***');
     return ['engine', message];
 });
-*/

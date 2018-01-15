@@ -1,6 +1,6 @@
 class ComSocketIO{
   constructor(channel, messageChannelSuffix, replyChannelSuffix){
-    this.socket = require('socket.io-client')('http://localhost:5656');
+    this.socket = require('socket.io-client')('http://localhost:4000');
     this.messageChannelSuffix = (typeof messageChannelSuffix !== 'undefined') ? this.messageChannelSuffix : '-message';
     this.replyChannelSuffix = (typeof replyChannelSuffix !== 'undefined') ? this.replyChannelSuffix : '-reply';
     this.channel = channel;
@@ -9,12 +9,10 @@ class ComSocketIO{
   }
 
   send(msg, callback){
-    // console.log("waiting for conenction...")
-    // this.socket.on('connection', (client) => {
-    //   console.log("connection in !");
-      // this.socket.emit(this.channel, msg, callback);
+    console.log('try to sent....')
+    console.log(this.channel)
       this.socket.emit(this.channel, msg, callback);
-    // });
+
   }
 }
 
