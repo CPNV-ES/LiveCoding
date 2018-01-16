@@ -15,7 +15,7 @@ class ComSocketIO{
 
   }
 }
-
+/*
 console.log("GO");
 const comSocketIO = new ComSocketIO('editor');
 comSocketIO.send('feu', (data) =>{
@@ -24,3 +24,4 @@ comSocketIO.send('feu', (data) =>{
   console.log("***");
 })
 console.log("GO");
+*/

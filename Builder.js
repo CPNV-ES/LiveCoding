@@ -20,4 +20,8 @@ module.exports = class Builder {
           return callback(message);
         });
     }
+
+    send(message, callback){
+        this._comSrv.post(message, callback);
+    }
 };
