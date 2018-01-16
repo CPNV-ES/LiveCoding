@@ -18,34 +18,31 @@ class ComCli{
     /**
      *
      * @param {String} msg
-     * @param {Function} Called when a reply is received. uses params (event, message)
+     * @param {Function} Called when a reply is received. Uses params (event, message)
      */
     send(msg, callback){
         this.ipcrenderer.send(this.channelMessage, msg);
         this.ipcrenderer.on(this.channelReply, callback);
     }
 
+    /**
+     *
+     * @param {Function} Uses params (event, message)
+     */
     get(callback){
         this.ipcrenderer.on(this.channelReply, callback);
     }
 }
 
-const comCliEditor = new ComCli('editor');
-comCliEditor.get((event, message) => {
-    let commands = JSON.parse(message);
-    //TODO: display commands.
-    // to Raph. : https://stackoverflow.com/questions/6453295/javascript-callback-how-to-return-the-result
+/* Usage example */
 
-    comCliEditor.send(commands['availableCommands'][0], (e, msg) => {
-    });
-    setTimeout(() => {
-        comCliEditor.send(commands['availableCommands'][0], (e, msg) => {
-        });
-    }, 2000);
+const engineComCli = new ComCli('engine');
+const editorComCli = new ComCli('editor');
 
+editorComCli.send('language/python', (e,m)=>{
 });
-comCliEditor.send('send message from editor !', (msg) => {
-    console.log('got an answer !');
+engineComCli.get((event, msg) => {
+    console.log("***");
     console.log(msg);
+    console.log("***");
 });
-console.log("sending messages !!!");

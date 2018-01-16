@@ -60,7 +60,7 @@ app.on('activate', function () {
 
 const ComIpcMain = rq('./ComIpcMain.js');
 const Builder = rq('./Builder.js');
-let builder = new Builder(new ComIpcMain());
+let innerBuilder = new Builder(new ComIpcMain());
 /*
 builder.listen('editor', (data) => {
   console.log("***");
@@ -70,15 +70,15 @@ builder.listen('editor', (data) => {
 });
 */
 
-builder.listen('engine', (message) => {
+innerBuilder.listen('engine', (message) => {
     console.log('***');
     console.log('new message form engine');
     console.log(message);
     console.log('***');
-    return ['builder', message];
+    return ['editor', message];
 });
 
-builder.listen('builder', (message) => {
+innerBuilder.listen('editor', (message) => {
     console.log('***');
     console.log('new message form builder');
     console.log(message);
