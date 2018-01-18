@@ -1,5 +1,6 @@
 import socket
 import select
+from Processor import Processor
 
 host = ''
 port = 12800
@@ -10,6 +11,8 @@ mainSocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 mainSocket.bind((host, port))
 mainSocket.listen(5)
 print("Server listen port {}".format(port))
+
+processor = Processor()
 
 server_run = True
 connectedClients = []
@@ -38,10 +41,9 @@ while server_run:
                 clientsToListen.remove(clientSocket)
                 connectedClients.remove(clientSocket)
                 print("One client disconnected")
-            elif recvMsg == "close-server":
-                server_run = False
-            else :
-                print("Msg received : {}".format(recvMsg))
+            else:
+                processor.peel(recvMsg)
+                processor.execute()
                 clientSocket.send(b"5/5")
 
 print("Server close")
