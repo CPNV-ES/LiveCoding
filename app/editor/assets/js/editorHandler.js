@@ -48,17 +48,23 @@ class EditorHandler {
      * Sends code to the server for evaluation / compilation
      */
     executeCode() {
-        try {
-            eval(this.engine.getValue());
-        } catch (e) {
-            console.log(e.message);
-            // if (e instanceof SyntaxError) {
+        // Eval test
+        // try {
+        //     eval(this.engine.getValue());
+        // } catch (e) {
+        //     console.log(e.message);
+        //     // if (e instanceof SyntaxError) {
 
-            // }
-        }
+        //     // }
+        // }
 
-        // this.serverOutlet.send(this.engine.getValue(), (e, msg) => {
-        // });
+        // Continue here
+        const separator = '/';
+
+        const chosenLanguage = this.controls.languagePicker.val();
+
+        this.serverOutlet.send(chosenLanguage + separator + this.engine.getValue(), (e, msg) => {
+        });
     }
 
     /**
