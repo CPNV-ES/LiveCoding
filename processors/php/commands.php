@@ -27,7 +27,8 @@
 
         function moveDown2() {
             fwrite(STDOUT, 'pacman.moveDown();');
-            return fgets(STDIN);
+            //$stdin = fgets(STDIN);
+            //echo $stdin;
         }
     }
 

@@ -1,3 +1,4 @@
+import socket
 import subprocess
 
 class Processor:
@@ -13,7 +14,7 @@ class Processor:
         #print("Language : {}".format(self.language))
         #print("User cmds : {}".format(self.userCmds))
 
-    def execute(self):
+    def execute(self, socket):
         if self.language == "ruby":
             print("execution of ruby cmds")
         elif self.language == "php":
@@ -23,9 +24,17 @@ class Processor:
             cmdsToRun = cmdsFileToInclude+self.userCmds
 
             # Open a command line and run the php code into the php interpretor, and get results
-            proc = subprocess.Popen("php -r \""+cmdsToRun+"\"" , shell=True, stdout=subprocess.PIPE)
-            result = proc.stdout.read().decode()
-            print(result)
+            cliProcess = subprocess.Popen("php -r \""+cmdsToRun+"\"" , shell=True, stdout=subprocess.PIPE,stdin=subprocess.PIPE)
+
+            # Get the stdout returned cmds (cmds in JS format to send them to the JS gameEngine)
+            cmdsJS = "execute/{}".format(cliProcess.stdout.read().decode())
+            socket.send(cmdsJS.encode())
+            """print(cmdsJS)
+            # Returned value from the gameEngine cmds execution
+            gameReturnedMsg = socket.recv(1024).decode()
+            print("gameReturned->"+gameReturnedMsg)
+            # Put returned value to the STDIN of the cli.
+            cliProcess.stdin.write(b"blabla")"""
         elif self.language == "javascript":
             print("execution of javascript cmds")
 

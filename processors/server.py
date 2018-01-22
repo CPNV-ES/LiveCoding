@@ -42,8 +42,10 @@ while server_run:
                 connectedClients.remove(clientSocket)
                 print("One client disconnected")
             else:
+                print("server.py -> receive a msg")
                 processor.peel(recvMsg)
-                processor.execute()
+                processor.execute(clientSocket)
+
 
 print("Server close")
 for clientSocket in connectedClients:
