@@ -62,7 +62,9 @@ const ComIpcMain = rq('./ComIpcMain.js');
 const ComSocket = rq('./ComSocket.js');
 const Builder = rq('./Builder.js');
 const innerBuilder = new Builder(new ComIpcMain());
-const outerBuider = new Builder(new ComSocket());
+
+    const outerBuidler = new Builder(new ComSocket());
+
 /*
 builder.listen('editor', (data) => {
   console.log("***");
@@ -73,18 +75,21 @@ builder.listen('editor', (data) => {
 */
 
 innerBuilder.listen('engine', (message) => {
-    console.log('***');
-    console.log('new message form engine');
-    console.log(message);
-    console.log('***');
-    outerBuider.send(message);
+    // console.log('***');
+    // console.log('new message from engine');
+    // console.log(message);
+    // console.log('***');
+    // outerBuidler.send(message);
     return ['engine', 'ok'];
 });
 
 innerBuilder.listen('editor', (message) => {
     console.log('***');
-    console.log('new message form builder');
+    console.log('new message from editor');
     console.log(message);
     console.log('***');
+    outerBuidler.send(message);
+
+
     return ['engine', message];
 });

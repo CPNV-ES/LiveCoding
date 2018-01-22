@@ -23,6 +23,7 @@
 
         function moveDown() {
             echo 'pacman.moveDown();';
+            
         }
     }
 

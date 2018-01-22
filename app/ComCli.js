@@ -38,7 +38,7 @@ class ComCli{
 const engineComCli = new ComCli('engine');
 const editorComCli = new ComCli('editor');
 
-editorComCli.send('python/[\"pacman.moveUp\"(),\"pacman.moveDown\"]', (e,m)=>{
+editorComCli.send('php/pacman->moveUp();', (e,m)=>{
 });
 engineComCli.get((event, msg) => {
     console.log("***");

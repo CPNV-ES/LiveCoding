@@ -14,15 +14,15 @@ module.exports = class ComSocket{
         });
     }
 
-    get(msg, cb) {
+    get(message, callback) {
         this.client.on('data', (data) => {
             console.log('connected');
             client.write('fuck you please')
         });
     }
     
-    post(msg, callback) {
-        this.client.write(msg, callback);
+    post(message, callback) {
+        this.client.write(message, callback);
     }
 
     /*
@@ -39,7 +39,7 @@ module.exports = class ComSocket{
     post(channel, message){
         return false;
     }*/
-}
+};
 /*
 let comSocket = new ComSocket();
 console.log('about to send some shit !');

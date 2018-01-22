@@ -43,8 +43,8 @@ while server_run:
                 print("One client disconnected")
             else:
                 processor.peel(recvMsg)
-                processor.execute()
-                clientSocket.send(b"5/5")
+                r = processor.execute()
+                clientSocket.send('commands/' + r)
 
 print("Server close")
 for clientSocket in connectedClients:
