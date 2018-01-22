@@ -135,9 +135,9 @@ class EditorHandler {
 
 // Editor placeholder content
 const _editorDefaultContent = {
-    'swift': "// Type your code right here!\nfunc sayHello() {\n\tprint(\"Hello World!\")\n}",
-    'java': "// Type your code right here!\npublic void function sayHello() {\n\tSystem.out.println(\"Hello World!\");\n}",
     'javascript': "// Type your code right here!\nfunction sayHello() {\n\tconsole.log('Hello World!');\n}",
+    'php': "// Type your code right here!\nfunction sayHello() {\n\techo \"Hello World!\";\n}",
+    'ruby': "# Type your code right here!\ndef sayHello \n\tputs 'Hello World!' \nend",
 };
 
 const uiHandler = new UIHandler();
