@@ -25,7 +25,7 @@ class Processor:
             # Open a command line and run the php code into the php interpretor, and get results
             proc = subprocess.Popen("php -r \""+cmdsToRun+"\"" , shell=True, stdout=subprocess.PIPE)
             result = proc.stdout.read().decode()
-            return result
+            print(result)
         elif self.language == "javascript":
             print("execution of javascript cmds")
 
