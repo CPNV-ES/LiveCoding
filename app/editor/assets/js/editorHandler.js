@@ -106,7 +106,7 @@ class EditorHandler {
      */
     updateContent(language) {
         this.engine.setValue(_editorDefaultContent[language]);
-        this.engine.getSession().setMode('ace/mode/' + language);
+        this.engine.getSession().setMode({path:"ace/mode/"+ language, inline:true});
     }
 
     /**
