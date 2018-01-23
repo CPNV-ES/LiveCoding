@@ -11,7 +11,7 @@ let mainWindow;
 function createWindow () {
     // Create the browser window on full screen.
     mainWindow = new BrowserWindow();
-    //mainWindow.maximize();
+    mainWindow.maximize();
 
     // and load the index.html of the app.
     mainWindow.loadURL(`file://${__dirname}/app/index.html`);
@@ -89,7 +89,7 @@ innerBuilder.listen('editor', (message) => {
     console.log(message);
     console.log('***');
     outerBuidler.send(message);
-
-
+    outerBuidler.listen('data', (data) => {
+    });
     return ['engine', message];
 });

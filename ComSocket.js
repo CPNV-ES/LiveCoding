@@ -9,15 +9,23 @@ module.exports = class ComSocket{
         //this.server = net.createServer();
         //this.server.listen(this.host, this.port); 
         this.client = new net.Socket();
+
         this.client.connect(this.port, this.host, () => {
             console.log('connected.');
         });
+        this.client.on('error', (ex) => {
+           console.log('handled error');
+           console.log(ex);
+        });
+
+
     }
 
-    get(message, callback) {
-        this.client.on('data', (data) => {
-            console.log('connected');
-            client.write('fuck you please')
+    get(channel, callback) {
+        console.log('listening on ' + channel);
+        this.client.on(channel, (data) => {
+            console.log("got data !");
+            callback(data);
         });
     }
     

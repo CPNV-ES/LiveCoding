@@ -16,8 +16,9 @@ module.exports = class ComIpcMain {
         e.sender.send(action[0] + this.replyChannelSuffix, action[action.length - 1]);
       });
     };
+
     post(){
-        //TODO: post on ipc
+        // TODO post on ipc
     }
 };
 
