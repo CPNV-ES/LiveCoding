@@ -14,8 +14,8 @@ while msgToSend != b"fin":
     msgToSend = msgToSend.encode()
     # On envoie le message
     socket.send(msgToSend)
-    rcvMsg = socket.recv(1024)
-    print(rcvMsg.decode()) # Là encore, peut planter s'il y a des accents
+    #rcvMsg = socket.recv(1024)
+    #print(rcvMsg.decode()) # Là encore, peut planter s'il y a des accents
 
 print("Connection close")
 socket.close()

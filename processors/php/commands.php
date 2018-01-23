@@ -23,7 +23,12 @@
 
         function moveDown() {
             echo 'pacman.moveDown();';
-            
+        }
+
+        function moveDown2() {
+            fwrite(STDOUT, 'pacman.moveDown();');
+            //$stdin = fgets(STDIN);
+            //echo $stdin;
         }
     }
 
