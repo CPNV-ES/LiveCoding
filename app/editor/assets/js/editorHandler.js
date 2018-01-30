@@ -57,6 +57,7 @@ class EditorHandler {
 
         // Simulate an error
         // const error = new Notification('error', 'An error occured!');
+        // const error = new Notification('error', 'An error occured!', 'Null sector!');
         // error.show();
     }
 
@@ -139,6 +140,5 @@ editor.engine.setShowPrintMargin(false);
 
 // Initialise event listeners
 editor.initEventListners();
-
 
 editor.getAvailableCommands(editor.displayAvailableCommands);
