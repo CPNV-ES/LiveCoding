@@ -21,7 +21,4 @@ module.exports = class Builder {
         });
     }
 
-    send(message, callback){
-        this._comSrv.post(message, callback);
-    }
 };

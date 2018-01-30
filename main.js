@@ -12,7 +12,6 @@ function createWindow () {
     // Create the browser window on full screen.
     mainWindow = new BrowserWindow();
     mainWindow.maximize();
-
     // and load the index.html of the app.
     mainWindow.loadURL(`file://${__dirname}/app/index.html`);
 
@@ -62,8 +61,7 @@ const ComIpcMain = rq('./ComIpcMain.js');
 const ComSocket = rq('./ComSocket.js');
 const Builder = rq('./Builder.js');
 const innerBuilder = new Builder(new ComIpcMain());
-
-    const outerBuidler = new Builder(new ComSocket());
+const outerBuidler = new Builder(new ComSocket());
 
 /*
 builder.listen('editor', (data) => {
@@ -88,8 +86,12 @@ innerBuilder.listen('editor', (message) => {
     console.log('new message from editor');
     console.log(message);
     console.log('***');
-    outerBuidler.send(message);
     outerBuidler.listen('data', (data) => {
+        console.log("data from processor");
+        console.log(data);
+        console.log("***");
+        mainWindow.webContents.send('engine' + ComIpcMain.getReplyChannelSuffix(), 'oklm.com');
+      
     });
     return ['engine', message];
 });
