@@ -24,8 +24,7 @@ module.exports = class ComSocket{
     get(channel, callback) {
         console.log('listening on ' + channel);
         this.client.on(channel, (data) => {
-            console.log("got data !");
-            callback(data);
+            callback(data.toString('utf8'));
         });
     }
     
