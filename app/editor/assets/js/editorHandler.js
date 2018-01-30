@@ -48,23 +48,16 @@ class EditorHandler {
      * Sends code to the server for evaluation / compilation
      */
     executeCode() {
-        // Eval test
-        // try {
-        //     eval(this.engine.getValue());
-        // } catch (e) {
-        //     console.log(e.message);
-        //     // if (e instanceof SyntaxError) {
-
-        //     // }
-        // }
-
-        // Continue here
         const separator = '/';
 
         const chosenLanguage = this.controls.languagePicker.val();
 
         this.serverOutlet.send(chosenLanguage + separator + this.engine.getValue(), (e, msg) => {
         });
+
+        // Simulate an error
+        // const error = new Notification('error', 'An error occured!');
+        // error.show();
     }
 
     /**
@@ -105,7 +98,6 @@ class EditorHandler {
      * @param {String} language indicates the language the editor is handling
      */
     updateContent(language) {
-        this.engine.setValue(_editorDefaultContent[language]);
         this.engine.getSession().setMode({path:"ace/mode/"+ language, inline:true});
     }
 
@@ -133,13 +125,6 @@ class EditorHandler {
     }
 }
 
-// Editor placeholder content
-const _editorDefaultContent = {
-    'javascript': "// Type your code right here!\nfunction sayHello() {\n\tconsole.log('Hello World!');\n}",
-    'php': "// Type your code right here!\nfunction sayHello() {\n\techo \"Hello World!\";\n}",
-    'ruby': "# Type your code right here!\ndef sayHello \n\tputs 'Hello World!' \nend",
-};
-
 const uiHandler = new UIHandler();
 const editor = new EditorHandler(ace.edit('editor'), $('#editor'), new ComCli('editor'));
 
@@ -151,9 +136,6 @@ editor.engine.$blockScrolling = Infinity;
 // Content config
 editor.frame.css( 'fontSize', '14px' );
 editor.engine.setShowPrintMargin(false);
-
-// Initial content
-editor.engine.setValue(_editorDefaultContent.javascript);
 
 // Initialise event listeners
 editor.initEventListners();
