@@ -5,16 +5,29 @@
         }
     }
 
-    $console = new GameConsole;
+    $console = new GameConsole();
 
 
     class Pacman {
         function moveLeft() {
-            echo 'pacman.moveLeft();';
+			fwrite(STDERR, "MoveLeft => Debug1\n");
+			fwrite(STDOUT, "pacman.moveLeft();\n");
+			fwrite(STDERR, "MoveLeft => Debug2\n");
+			$stdin = fgets(STDIN);
+			return $stdin;
         }
 
         function moveRight() {
-            echo 'pacman.moveRight();';
+		fwrite(STDERR, "MoveRight => Debug1\n");
+
+        	fwrite(STDOUT, "pacman.moveRight();\n");
+
+		fwrite(STDERR, "MoveRight => Debug2\n");
+
+		$stdin = fgets(STDIN);
+		fwrite(STDOUT, $stdin."\n");
+
+		fwrite(STDERR, "MoveRight => Debug3\n");
         }
 
         function moveUp() {
@@ -32,11 +45,12 @@
         }
     }
 
-    $pacman = new Pacman;
+    $pacman = new Pacman();
 
 
     function isLeftSideFree() {
-        echo 'isLeftSideFree();';
+		fwrite(STDERR, "isLeftSideFree();");
+		fwrite(STDOUT, "isLeftSideFree();");
     }
 
     function isRightSideFree() {
