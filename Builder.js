@@ -21,4 +21,11 @@ module.exports = class Builder {
         });
     }
 
+    send(channel, message){
+        // if comServer has a post method
+        if(typeof this._comSrv.post !== 'undefined'){
+            this._comSrv.post(channel, message);
+        }        
+    }
+
 };

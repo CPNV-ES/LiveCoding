@@ -7,7 +7,7 @@ module.exports = class ComSocket{
         this.host = host || 'localhost';
         this.port = port || '12800';
         //this.server = net.createServer();
-        //this.server.listen(this.host, this.port); 
+        //this.server.listen(this.host, this.port);
         this.client = new net.Socket();
 
         this.client.connect(this.port, this.host, () => {
@@ -18,18 +18,16 @@ module.exports = class ComSocket{
            console.log(ex);
         });
 
-
     }
 
     get(channel, callback) {
-        console.log('listening on ' + channel);
         this.client.on(channel, (data) => {
             callback(data.toString('utf8'));
         });
     }
-    
-    post(message, callback) {
-        this.client.write(message, callback);
+
+    post(channel, message) {
+        this.client.write(message);
     }
 
     /*
@@ -42,7 +40,7 @@ module.exports = class ComSocket{
                 console.log('***');
             });
         });
-    } 
+    }
     post(channel, message){
         return false;
     }*/

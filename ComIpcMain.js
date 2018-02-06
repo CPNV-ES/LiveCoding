@@ -2,24 +2,29 @@ let instance = null;
 module.exports = class ComIpcMain {
     constructor(messageChannelSuffix, replyChannelSuffix) {
         this.messageChannelSuffix = (typeof messageChannelSuffix !== 'undefined') ? messageChannelSuffix : ComIpcMain.getMessageChannelSuffix();
-        this.replyChannelSuffix = (typeof replyChannelSuffix !== 'undefined') ? replyChannelSuffix : ComIpcMain.getReplyChannelSuffix(); 
+        this.replyChannelSuffix = (typeof replyChannelSuffix !== 'undefined') ? replyChannelSuffix : ComIpcMain.getReplyChannelSuffix();
         if(!instance) {
             instance = this;
             let {ipcMain} = require('electron');
             this.ipcmain = ipcMain;
         }
+
         return instance;
     }
+
     get(channel, callback) {
       this.ipcmain.on(channel + this.messageChannelSuffix, (e, m) => {
         let action = callback(m);
-        e.sender.send(action[0] + this.replyChannelSuffix, action[action.length - 1]);
+        if(typeof action !== 'undefined'){
+            e.sender.send(action[0] + this.replyChannelSuffix, action[action.length - 1]);
+        }
       });
     };
 
-    post(channel, value){
-        // how to i access mainWindow from here ?
-        // mainWindow.webContents.send(channel, value);
+    post(channel, message){
+        // TODO: 
+        // how to access to mainWindow
+        // console.log(this.mainWindow);
     }
 
     static getMessageChannelSuffix(){

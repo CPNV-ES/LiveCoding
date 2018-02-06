@@ -46,3 +46,8 @@ engineComCli.get((event, msg) => {
     console.log(msg);
     console.log("***");
 });
+engineComCli.get((event, message) => {
+    console.log("^^^");
+    console.log(message);
+    console.log("^^^");
+})

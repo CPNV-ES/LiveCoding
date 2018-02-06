@@ -49,49 +49,30 @@ app.on('activate', function () {
     }
 });
 
-// What is the builder propose ? Let's decompose it in 6 easy steps.
-// 1. get language from editor
-// 2. start language processor thread
-// 3. tell engine thread is ready
-// 4. send available commands form engine to builder
-// 5. wait for commands, then send to processor
-// 6. wait instructions from processor, then send to builder
-
 const ComIpcMain = rq('./ComIpcMain.js');
 const ComSocket = rq('./ComSocket.js');
 const Builder = rq('./Builder.js');
 const innerBuilder = new Builder(new ComIpcMain());
-const outerBuidler = new Builder(new ComSocket());
-
+const outerBuilder = new Builder(new ComSocket());
 /*
 builder.listen('editor', (data) => {
-  console.log("***");
-  console.log(data);
-  console.log("***");
-  return ['editor', 'ok lets go !'];
+    console.log("***");
+    console.log(data);
+    console.log("***");
+    return ['editor', 'ok lets go !'];
 });
 */
 
 innerBuilder.listen('engine', (message) => {
-    // console.log('***');
-    // console.log('new message from engine');
-    // console.log(message);
-    // console.log('***');
-    // outerBuidler.send(message);
-    return ['engine', 'ok'];
+    return ['editor', message];
 });
 
+
 innerBuilder.listen('editor', (message) => {
-    console.log('***');
-    console.log('new message from editor');
-    console.log(message);
-    console.log('***');
-    outerBuidler.listen('data', (data) => {
-        console.log("data from processor");
-        console.log(data);
-        console.log("***");
-        mainWindow.webContents.send('engine' + ComIpcMain.getReplyChannelSuffix(), 'oklm.com');
-      
+    outerBuilder.send(null, message, null);
+    outerBuilder.listen('data', (data) => {
+        // sending returns message
+        mainWindow.webContents.send('editor' + ComIpcMain.getReplyChannelSuffix(), data);
     });
-    return ['engine', message];
+    // return ['engine', 'ok'];
 });
