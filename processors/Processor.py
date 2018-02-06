@@ -27,7 +27,7 @@ class Processor:
 			cliProcess = subprocess.Popen('php -r \''+cmdsToRun+"' 2>./out.txt" , shell=True, stdout=subprocess.PIPE, stdin=subprocess.PIPE)
 			# Get the stdout returned cmds (cmds in JS format to send them to the JS gameEngine)
 			cmdsJS = "execute/{}".format(cliProcess.stdout.readline().decode())
-			#socket.send(cmdsJS.encode())
+			socket.send(cmdsJS.encode())
 			print(cmdsJS)
 			# Returned value from the gameEngine cmds execution
 			gameReturnedMsg = socket.recv(1024).decode()
