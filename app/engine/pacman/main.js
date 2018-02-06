@@ -123,6 +123,7 @@ function keyPressed() {
 
 function sendMessageToServer(messageToSend){
     comCliEngine.send(messageToSend, (event, msg) => {
+        eval(msg);
         console.log("Response from server: "+msg); // arg contains message
     });
 }

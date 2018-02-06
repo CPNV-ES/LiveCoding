@@ -72,7 +72,21 @@ innerBuilder.listen('editor', (message) => {
     outerBuilder.send(null, message, null);
     outerBuilder.listen('data', (data) => {
         // sending returns message
-        mainWindow.webContents.send('editor' + ComIpcMain.getReplyChannelSuffix(), data);
+        console.log("RECEIVED A DATA");
+        console.log(data);
+        console.log("=====");
+        let channel = "";
+        let prefix = data.split("/")[0];
+        switch(prefix){
+            case "excecute": 
+                channel = 'engine';
+                break;
+            case "error":
+                channel = 'editor';
+            default:
+                break;
+        }
+        mainWindow.webContents.send(channel + ComIpcMain.getReplyChannelSuffix(), data.split("/").pop());
     });
     // return ['engine', 'ok'];
 });
