@@ -1,4 +1,5 @@
 const electron = require('electron');
+const settings = require('electron-settings');
 // Module to control application life.
 const app = electron.app;
 // Module to create native browser window.
@@ -9,14 +10,57 @@ const rq = require('electron-require');
 let mainWindow;
 
 function createWindow () {
-    // Create the browser window on full screen.
-    mainWindow = new BrowserWindow();
-    mainWindow.maximize();
+    // Initialize default window settings
+    let defaultWidth = 1200;
+    let defaultHeight = 900;
+    let defaultXpos = undefined;
+    let defaultYpos = undefined;
+
+    // Fetch saved windows settings, if any
+    if (settings.has('mainWindow.dimensions') && settings.has('mainWindow.position')) {
+        const dimensions = settings.get('mainWindow.dimensions');
+        const position = settings.get('mainWindow.position');
+
+        defaultWidth = dimensions.width;
+        defaultHeight = dimensions.height;
+        defaultXpos = position.x;
+        defaultYpos = position.y;
+    }
+
+    // Create the browser window.
+    mainWindow = new BrowserWindow({width: defaultWidth, height: defaultHeight})
+
+    // Set the window position that have been saved, set it to fullscreen otherwise
+    if (defaultXpos !== undefined && defaultYpos !== undefined) {
+        mainWindow.setPosition(defaultXpos, defaultYpos);
+    } else {
+        mainWindow.maximize();
+    }
+
     // and load the index.html of the app.
     mainWindow.loadURL(`file://${__dirname}/app/index.html`);
 
     // Open the DevTools.
     mainWindow.webContents.openDevTools();
+
+    // Emitted when the windows is going to be closed
+    mainWindow.on('close', function () {
+        // Fetch the current windows configuration
+        const windowDimensions = mainWindow.getSize();
+        const windowPosition = mainWindow.getPosition();
+
+        // Save the window dimensions and position
+        settings.set('mainWindow', {
+            dimensions: {
+                width: windowDimensions[0],
+                height: windowDimensions[1],
+            },
+            position: {
+                x: windowPosition[0],
+                y: windowPosition[1],
+            },
+        });
+    })
 
     // Emitted when the window is closed.
     mainWindow.on('closed', function () {
@@ -78,7 +122,7 @@ innerBuilder.listen('editor', (message) => {
         let channel = "";
         let prefix = data.split("/")[0];
         switch(prefix){
-            case "excecute": 
+            case "excecute":
                 channel = 'engine';
                 break;
             case "error":

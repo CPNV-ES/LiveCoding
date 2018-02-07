@@ -45,7 +45,10 @@ class Notification {
         });
     }
 
-    // Returns a default title for the notification if none has been provided
+    /*
+    * Returns a default title for the notification if none has been set
+    * @param {String} A String representing the notification type
+    */
     getDefaultTitle(type) {
         // Avoid mismatch due to uppercase letter usage
         const lowercasedType = type.toLowerCase();

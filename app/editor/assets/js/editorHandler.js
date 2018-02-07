@@ -2,6 +2,11 @@
 
 'use strict'
 
+// Import the electron-settings instance from the main process
+// and ensure only one electron setting instance exists in order to avoid collision
+const settings = require('electron').remote.require('electron-settings');
+
+
 class EditorHandler {
     constructor(engine, frame, serverOutlet, uiHandler) {
         this.engine = engine;
@@ -23,6 +28,9 @@ class EditorHandler {
 
     getAvailableCommands(callback) {
         this.serverOutlet.get((event, message) => {
+            // console.log(event);
+            // console.log(message);
+
             let commands = JSON.parse(message);
 
             this.availableCommands = message;
@@ -53,6 +61,12 @@ class EditorHandler {
         const chosenLanguage = this.controls.languagePicker.val();
 
         this.serverOutlet.send(chosenLanguage + separator + this.engine.getValue(), (e, msg) => {
+        });
+
+        // Save settings
+        settings.set('editor', {
+            content: this.engine.getValue(),
+            language: chosenLanguage,
         });
 
         // Simulate an error
@@ -98,7 +112,7 @@ class EditorHandler {
      *
      * @param {String} language indicates the language the editor is handling
      */
-    updateContent(language) {
+    updateLanguageMode(language) {
         this.engine.getSession().setMode({path:"ace/mode/"+ language, inline:true});
     }
 
@@ -109,7 +123,7 @@ class EditorHandler {
     initEventListners() {
         this.controls.languagePicker.on('change', (e) => {
             const pickedLanguage = $(e.currentTarget).val();
-            this.updateContent(pickedLanguage);
+            this.updateLanguageMode(pickedLanguage);
         });
 
         this.controls.runButton.on('click', () => this.executeCode());
@@ -126,17 +140,35 @@ class EditorHandler {
     }
 }
 
+
 const uiHandler = new UIHandler();
 const editor = new EditorHandler(ace.edit('editor'), $('#editor'), new ComCli('editor'));
 
 // Editor config
 editor.engine.setTheme('ace/theme/monokai');
-editor.engine.getSession().setMode('ace/mode/javascript');
 editor.engine.$blockScrolling = Infinity;
 
-// Content config
 editor.frame.css( 'fontSize', '14px' );
 editor.engine.setShowPrintMargin(false);
+
+// Fetch and set the editor content
+let initialContent = "";
+let initialLanguage = 'javascript';
+
+// Are there saved editor content and language ?
+if (settings.has('editor.content') && settings.has('editor.language')) {
+    // Load saved settings
+    initialContent = settings.get('editor.content');
+    initialLanguage = settings.get('editor.language');
+
+    // Define the selected language in the language picker
+    const targetLanguage = $('option[value="' + initialLanguage + '"]');
+    targetLanguage.prop('selected', true);
+}
+
+// Apply saved settings
+editor.engine.getSession().setMode('ace/mode/' + initialLanguage);
+editor.engine.setValue(initialContent);
 
 // Initialise event listeners
 editor.initEventListners();
