@@ -122,7 +122,7 @@ innerBuilder.listen('editor', (message) => {
         let channel = "";
         let prefix = data.split("/")[0];
         switch(prefix){
-            case "excecute":
+            case "execute":
                 channel = 'engine';
                 break;
             case "error":
