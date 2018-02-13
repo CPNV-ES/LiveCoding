@@ -1,2 +1,2 @@
-MoveLeft => Debug1
-MoveLeft => Debug2
+MoveRight => Debug1
+MoveRight => Debug2

@@ -13,21 +13,16 @@
 			fwrite(STDERR, "MoveLeft => Debug1\n");
 			fwrite(STDOUT, "pacman.moveLeft();\n");
 			fwrite(STDERR, "MoveLeft => Debug2\n");
-			$stdin = fgets(STDIN);
-			return $stdin;
+			#$stdin = fgets(STDIN);
+            #fwrite(STDERR, "MoveLeft => Debug3\n");
+            #fwrite(STDOUT, $stdin."\n");
+			#return $stdin;
         }
 
         function moveRight() {
-		fwrite(STDERR, "MoveRight => Debug1\n");
-
+            fwrite(STDERR, "MoveRight => Debug1\n");
         	fwrite(STDOUT, "pacman.moveRight();\n");
-
-		fwrite(STDERR, "MoveRight => Debug2\n");
-
-		$stdin = fgets(STDIN);
-		fwrite(STDOUT, $stdin."\n");
-
-		fwrite(STDERR, "MoveRight => Debug3\n");
+            fwrite(STDERR, "MoveRight => Debug2\n");
         }
 
         function moveUp() {
