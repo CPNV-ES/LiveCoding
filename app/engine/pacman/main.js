@@ -120,10 +120,13 @@ function keyPressed() {
     }
 }
 
-
 function sendMessageToServer(messageToSend){
     comCliEngine.send(messageToSend, (event, msg) => {
-        eval(msg);
+        // eval(msg);
+        // returns response
+        comCliEngine.send(eval(msg), (r) => {
+            // 
+        });
         console.log("Response from server: "+msg); // arg contains message
     });
 }
