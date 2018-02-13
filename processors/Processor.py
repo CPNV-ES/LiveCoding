@@ -33,7 +33,8 @@ class Processor:
 			gameReturnedMsg = socket.recv(1024).decode()
 			print("gameReturned->"+gameReturnedMsg)
 			# Put returned value to the STDIN of the cli.
-			cliProcess.stdin.write(gameReturnedMsg+'\n')
+			#cliProcess.stdin.write(gameReturnedMsg+'\n')
+			#print("phpReturned->"+cliProcess.stdout.readline().decode())
 			cliProcess.terminate()
 		elif self.language == "javascript":
 			print("execution of javascript cmds")
