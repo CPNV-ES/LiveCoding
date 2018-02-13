@@ -7,13 +7,3 @@
     display: flex;
     justify-content: space-around;
 }
-
-.notification {
-    min-width: 25%;
-    min-height: 100px;
-    padding: 10px;
-    position: absolute;
-    z-index: 10;
-    cursor: pointer;
-    background-color: #ffffff;
-}

@@ -1,5 +1,9 @@
 const electron = require('electron');
 const settings = require('electron-settings');
+const {SettingsHandler} = require('./app/settings/assets/js/settingsHandler');
+const settingsHandler = new SettingsHandler(settings);
+// Access to settings for renderer process
+global.settingsHandler = settingsHandler;
 // Module to control application life.
 const app = electron.app;
 // Module to create native browser window.
@@ -10,30 +14,21 @@ const rq = require('electron-require');
 let mainWindow;
 
 function createWindow () {
-    // Initialize default window settings
-    let defaultWidth = 1200;
-    let defaultHeight = 900;
-    let defaultXpos = undefined;
-    let defaultYpos = undefined;
+    // Get window settings or default values defined in SettingsHandler
+    const savedDimensions = settingsHandler.getWindowSize();
+    const savedPosition = settingsHandler.getWindowPosition();
 
-    // Fetch saved windows settings, if any
-    if (settings.has('mainWindow.dimensions') && settings.has('mainWindow.position')) {
-        const dimensions = settings.get('mainWindow.dimensions');
-        const position = settings.get('mainWindow.position');
-
-        defaultWidth = dimensions.width;
-        defaultHeight = dimensions.height;
-        defaultXpos = position.x;
-        defaultYpos = position.y;
-    }
+    const defaultWidth = savedDimensions.width;
+    const defaultHeight = savedDimensions.height;
 
     // Create the browser window.
     mainWindow = new BrowserWindow({width: defaultWidth, height: defaultHeight})
 
-    // Set the window position that have been saved, set it to fullscreen otherwise
-    if (defaultXpos !== undefined && defaultYpos !== undefined) {
-        mainWindow.setPosition(defaultXpos, defaultYpos);
+    if (savedPosition !== undefined) {
+        // Set the window position that have been saved
+        mainWindow.setPosition(savedPosition.xPos, savedPosition.yPos);
     } else {
+        // No position has been saved. Set the window to fullscreen mode
         mainWindow.maximize();
     }
 
@@ -45,21 +40,9 @@ function createWindow () {
 
     // Emitted when the windows is going to be closed
     mainWindow.on('close', function () {
-        // Fetch the current windows configuration
-        const windowDimensions = mainWindow.getSize();
-        const windowPosition = mainWindow.getPosition();
-
-        // Save the window dimensions and position
-        settings.set('mainWindow', {
-            dimensions: {
-                width: windowDimensions[0],
-                height: windowDimensions[1],
-            },
-            position: {
-                x: windowPosition[0],
-                y: windowPosition[1],
-            },
-        });
+        // Store the window width, height and position
+        settingsHandler.saveWindowSize(mainWindow);
+        settingsHandler.saveWindowPosition(mainWindow);
     })
 
     // Emitted when the window is closed.
