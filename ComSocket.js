@@ -1,5 +1,4 @@
 module.exports = class ComSocket{
-
     constructor(host, port){
         let net = require('net');
         //this.host = (typeof host !== 'undefined') ? this.host : 'localhost'
@@ -45,11 +44,3 @@ module.exports = class ComSocket{
         return false;
     }*/
 };
-/*
-let comSocket = new ComSocket();
-console.log('about to send some shit !');
-comSocket.send('oklm', (data) => {
-    console.log('answer...')
-    console.log(data);
-});
-*/

@@ -2,10 +2,9 @@
 
 'use strict'
 
-// Import the electron-settings instance from the main process
-// and ensure only one electron setting instance exists in order to avoid collision
-const settings = require('electron').remote.require('electron-settings');
-
+const remote = require('electron').remote;
+// Get a reference to the global SettingsHandler instance
+const settingsHandler = remote.getGlobal('settingsHandler');
 
 class EditorHandler {
     constructor(engine, frame, serverOutlet, uiHandler) {
@@ -24,6 +23,10 @@ class EditorHandler {
 
         // Internal configuration
         this.allowCodeSubmission = true;
+    }
+
+    get languageMode() {
+        return this.controls.languagePicker.val();
     }
 
     getAvailableCommands(callback) {
@@ -64,10 +67,9 @@ class EditorHandler {
         });
 
         // Save settings
-        settings.set('editor', {
-            content: this.engine.getValue(),
-            language: chosenLanguage,
-        });
+        settingsHandler.saveEditorLanguageMode(chosenLanguage);
+        settingsHandler.saveEditorContent(this.engine.getValue());
+
 
         // Simulate an error
         // const error = new Notification('error', 'An error occured!');
@@ -151,23 +153,16 @@ editor.engine.$blockScrolling = Infinity;
 editor.frame.css( 'fontSize', '14px' );
 editor.engine.setShowPrintMargin(false);
 
-// Fetch and set the editor content
-let initialContent = "";
-let initialLanguage = 'javascript';
+// Get saved editor settings if any or default values from SettingsHandler
+const initialLanguage = settingsHandler.getEditorLanguageMode();
+const initialContent = settingsHandler.getEditorContent();
 
-// Are there saved editor content and language ?
-if (settings.has('editor.content') && settings.has('editor.language')) {
-    // Load saved settings
-    initialContent = settings.get('editor.content');
-    initialLanguage = settings.get('editor.language');
+// Define the selected language in the language picker
+const targetLanguage = $('option[value="' + initialLanguage + '"]');
+targetLanguage.prop('selected', true);
 
-    // Define the selected language in the language picker
-    const targetLanguage = $('option[value="' + initialLanguage + '"]');
-    targetLanguage.prop('selected', true);
-}
-
-// Apply saved settings
-editor.engine.getSession().setMode('ace/mode/' + initialLanguage);
+// Define the language mode for syntax highlighting and editor content
+editor.engine.getSession().setMode({path:"ace/mode/"+ initialLanguage, inline:true});
 editor.engine.setValue(initialContent);
 
 // Initialise event listeners
