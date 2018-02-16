@@ -1,5 +1,6 @@
 import socket
 import subprocess
+import os
 
 class Processor:
 
@@ -14,8 +15,16 @@ class Processor:
 		#print("Language : {}".format(self.language))
 		#print("User cmds : {}".format(self.userCmds))
 
+
 	def execute(self, socket):
 		if self.language == "ruby":
+			runFile = open("./run.rb", "w")
+			splittedCmds = self.userCmds.split('{{nl}}')
+
+			for oneLineCmd in splittedCmds:
+				runFile.write(oneLineCmd+"\n")	
+			runFile.close();
+
 			print("execution of ruby cmds")
 		elif self.language == "php":
 			pathToCmds = "php/commands.php"
