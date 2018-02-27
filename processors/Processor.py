@@ -19,13 +19,21 @@ class Processor:
 	def execute(self, socket):
 		if self.language == "ruby":
 			runFile = open("./run.rb", "w")
-			splittedCmds = self.userCmds.split('{{nl}}')
-
-			for oneLineCmd in splittedCmds:
-				runFile.write(oneLineCmd+"\n")	
-			runFile.close();
-
+			runFile.write(self.userCmds)
+			runFile.write("\n")
+			runFile.close()
 			print("execution of ruby cmds")
+
+			# Open a command line and run the ruby file into the ruby interpretor, and get results
+			cliProcess = subprocess.Popen('ruby run.rb', shell=True, stdout=subprocess.PIPE, stdin=subprocess.PIPE)
+			cmdsJS = "execute/{}".format(cliProcess.stdout.readline().decode())
+			print(cmdsJS)
+			socket.send(cmdsJS.encode())
+			gameReturnedMsg = socket.recv(1024).decode()
+			cliProcess.stdin.write(bytes(gameReturnedMsg+"\n","UTF-8"))
+			cliProcess.stdin.flush()
+			print("rubyReturned->"+cliProcess.stdout.readline().decode())
+
 		elif self.language == "php":
 			pathToCmds = "php/commands.php"
 			# This is the PHP code to include the cmds file before the php user's cmds. This way all our game methods (in php) are availabe for the php interpretor
@@ -38,7 +46,7 @@ class Processor:
 			cmdsJS = "execute/{}".format(cliProcess.stdout.readline().decode())
 			print("sending..")
 			print(socket)
-			socket.send(cmdsJS.encode()) 
+			socket.send(cmdsJS.encode())
 			# print(cmdsJS)
 			# Returned value from the gameEngine cmds execution
 			# gameReturnedMsg = socket.recv(1024).decode()
