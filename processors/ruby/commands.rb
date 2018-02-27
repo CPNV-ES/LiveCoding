@@ -9,23 +9,33 @@ console = GameConsole.new
 
 class Pacman
   def moveLeft
-    puts 'pacman.moveLeft();'
+    puts "pacman.moveLeft();"
+    STDOUT.flush
+    msg = STDIN.gets
+    puts msg
   end
 
   def moveRight
-    puts 'pacman.moveRight();'
+    puts "pacman.moveRight();"
+    STDOUT.flush
+    msg = STDIN.gets
+    puts msg
   end
 
   def moveUp
-    puts 'pacman.moveUp();'
+    puts "pacman.moveUp();"
+    STDOUT.flush
+    msg = STDIN.gets
+    puts msg
   end
 
   def moveDown
-    puts 'pacman.moveDown();'
+    puts "pacman.moveDown();"
+    STDOUT.flush
+    msg = STDIN.gets
+    puts msg
   end
 end
-
-pacman = Pacman.new
 
 
 def isLeftSideFree
