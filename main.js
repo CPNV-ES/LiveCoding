@@ -96,12 +96,14 @@ innerBuilder.listen('engine', (message) => {
 
 
 innerBuilder.listen('editor', (message) => {
-    outerBuilder.send(null, message, null);
+    let forgery = 'python/pacman.moveUp()'
+    // outerBuilder.send(null, message, null);
+    outerBuilder.send(null, forgery, null);
     outerBuilder.listen('data', (data) => {
         // sending returns message
-        console.log("RECEIVED A DATA");
+        console.log("data in.");
         console.log(data);
-        console.log("=====");
+        console.log("=");
         let channel = "";
         let prefix = data.split("/")[0];
         switch(prefix){
@@ -114,6 +116,7 @@ innerBuilder.listen('editor', (message) => {
                 break;
         }
         mainWindow.webContents.send(channel + ComIpcMain.getReplyChannelSuffix(), data.split("/").pop());
+        outerBuilder.send(null, 'ok') 
     });
     // return ['engine', 'ok'];
 });
