@@ -20,7 +20,7 @@ module.exports = class ComSocket{
     }
 
     get(channel, callback) {
-        this.client.on(channel, (data) => {
+        this.client.once(channel, (data) => {
             callback(data.toString('utf8'));
         });
     }
