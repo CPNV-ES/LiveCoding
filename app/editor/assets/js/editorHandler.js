@@ -63,6 +63,8 @@ class EditorHandler {
 
         const chosenLanguage = this.controls.languagePicker.val();
 
+        console.log('Now sending ' + this.engine.getValue());
+
         this.serverOutlet.send(chosenLanguage + separator + this.engine.getValue(), (e, msg) => {
         });
 
