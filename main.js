@@ -80,7 +80,7 @@ const ComIpcMain = rq('./ComIpcMain.js');
 const ComSocket = rq('./ComSocket.js');
 const Builder = rq('./Builder.js');
 const innerBuilder = new Builder(new ComIpcMain());
-const outerBuilder = new Builder(new ComSocket());
+const outerBuilder = new Builder(new ComSocket("172.17.219.131"));
 /*
 builder.listen('editor', (data) => {
     console.log("***");
@@ -96,9 +96,10 @@ innerBuilder.listen('engine', (message) => {
 
 
 innerBuilder.listen('editor', (message) => {
-    let forgery = 'python/pacman.moveUp()'
     // outerBuilder.send(null, message, null);
-    outerBuilder.send(null, forgery, null);
+    console.log('Now sending ' + message);
+    outerBuilder.send(null, message, null);
+    let forgery = 'python/pacman.moveUp()'
     outerBuilder.listen('data', (data) => {
         // sending returns message
         console.log("data in.");
