@@ -1,6 +1,7 @@
 import socket
 import subprocess
 import os
+import tempfile
 
 class Processor:
 
@@ -18,20 +19,24 @@ class Processor:
 
 	def execute(self, socket):
 		if self.language == "ruby":
-			runFile = open("./run.rb", "w")
-			runFile.write(self.userCmds)
-			runFile.write("\n")
-			runFile.close()
-			print("execution of ruby cmds")
 
-			# Open a command line and run the ruby file into the ruby interpretor, and get results
-			cliProcess = subprocess.Popen('ruby run.rb', shell=True, stdout=subprocess.PIPE, stdin=subprocess.PIPE)
+			# Create a tmpfile which contains all the user code that we will execute. (the file is deleted by itself as soon as it is closed)
+			tmpFileToRun = tempfile.NamedTemporaryFile(delete=True)
+			tmpFileToRun.write(bytes(self.userCmds+"\n", "UTF-8"))
+			tmpFileToRun.seek(0)
+
+
+			# Open a command line and run the userCmds tmp file into the good interpretor
+			cliProcess = subprocess.Popen('ruby '+tmpFileToRun.name, shell=True, stdout=subprocess.PIPE, stdin=subprocess.PIPE)
+			# Fetch from the process the JS commande that the game will be able to execute, and format the string
 			cmdsJS = "execute/{}".format(cliProcess.stdout.readline().decode())
 			print(cmdsJS)
+			# Send the JS commands through the socket and fetch the return message of the game execution
 			socket.send(cmdsJS.encode())
 			gameReturnedMsg = socket.recv(1024).decode()
+			# Put the game returned message into the STDIN (because the game method of the target langage wait a response to return it to the langage interpretor)
 			cliProcess.stdin.write(bytes(gameReturnedMsg+"\n","UTF-8"))
-			cliProcess.stdin.flush()
+			cliProcess.stdin.flush() # !! DONT FORGET TO FLUSH THE BUFER AFTER EACH WRITE !!
 			print("rubyReturned->"+cliProcess.stdout.readline().decode())
 
 		elif self.language == "php":
