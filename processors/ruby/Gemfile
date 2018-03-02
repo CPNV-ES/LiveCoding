@@ -1,3 +1,0 @@
-gem 'socket.io-client-simple' # for Socket.IO v1.4.x
-# if bundle install does not work, use
-# % gem install socket.io-client-simple

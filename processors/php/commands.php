@@ -5,58 +5,103 @@
         }
     }
 
-    $console = new GameConsole();
-
 
     class Pacman {
         function moveLeft() {
-			fwrite(STDERR, "MoveLeft => Debug1\n");
 			fwrite(STDOUT, "pacman.moveLeft();\n");
-			fwrite(STDERR, "MoveLeft => Debug2\n");
-			#$stdin = fgets(STDIN);
-            #fwrite(STDERR, "MoveLeft => Debug3\n");
-            #fwrite(STDOUT, $stdin."\n");
-			#return $stdin;
+            fflush(STDOUT);
+
+			$stdin = fgets(STDIN);
+
+            fwrite(STDOUT, $stdin."\n");
+            fflush(STDOUT);
+
+			return $stdin;
         }
 
         function moveRight() {
-            fwrite(STDERR, "MoveRight => Debug1\n");
-        	fwrite(STDOUT, "pacman.moveRight();\n");
-            fwrite(STDERR, "MoveRight => Debug2\n");
+            fwrite(STDOUT, "pacman.moveRight();\n");
+            fflush(STDOUT);
+
+            $stdin = fgets(STDIN);
+
+            fwrite(STDOUT, $stdin."\n");
+            fflush(STDOUT);
+
+            return $stdin;
         }
 
         function moveUp() {
-            echo 'pacman.moveUp();';
+            fwrite(STDOUT, "pacman.moveUp();\n");
+            fflush(STDOUT);
+
+            $stdin = fgets(STDIN);
+
+            fwrite(STDOUT, $stdin."\n");
+            fflush(STDOUT);
+
+            return $stdin;
         }
 
         function moveDown() {
-            echo 'pacman.moveDown();';
-        }
+            fwrite(STDOUT, "pacman.moveDown();\n");
+            fflush(STDOUT);
 
-        function moveDown2() {
-            fwrite(STDOUT, 'pacman.moveDown();');
-            //$stdin = fgets(STDIN);
-            //echo $stdin;
+            $stdin = fgets(STDIN);
+
+            fwrite(STDOUT, $stdin."\n");
+            fflush(STDOUT);
+
+            return $stdin;
         }
     }
-
-    $pacman = new Pacman();
 
 
     function isLeftSideFree() {
-		fwrite(STDERR, "isLeftSideFree();");
-		fwrite(STDOUT, "isLeftSideFree();");
+		fwrite(STDOUT, "isLeftSideFree();\n");
+        fflush(STDOUT);
+
+        $stdin = fgets(STDIN);
+
+        fwrite(STDOUT, $stdin."\n");
+        fflush(STDOUT);
+
+        return $stdin;
     }
 
     function isRightSideFree() {
-        echo 'isRightSideFree();';
+        fwrite(STDOUT, "isRightSideFree();\n");
+        fflush(STDOUT);
+
+        $stdin = fgets(STDIN);
+
+        fwrite(STDOUT, $stdin."\n");
+        fflush(STDOUT);
+
+        return $stdin;
     }
 
     function isUpSideFree() {
-        echo 'isUpSideFree();';
+        fwrite(STDOUT, "isUpSideFree();\n");
+        fflush(STDOUT);
+
+        $stdin = fgets(STDIN);
+
+        fwrite(STDOUT, $stdin."\n");
+        fflush(STDOUT);
+
+        return $stdin;
     }
 
     function isDownSideFree() {
-        echo 'isDownSideFree();';
+        fwrite(STDOUT, "isDownSideFree();\n");
+        fflush(STDOUT);
+
+        $stdin = fgets(STDIN);
+
+        fwrite(STDOUT, $stdin."\n");
+        fflush(STDOUT);
+
+        return $stdin;
     }
 ?>
