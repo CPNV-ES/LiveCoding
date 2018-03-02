@@ -31,9 +31,6 @@ class EditorHandler {
 
     getAvailableCommands(callback) {
         this.serverOutlet.get((event, message) => {
-            // console.log(event);
-            // console.log(message);
-
             let commands = JSON.parse(message);
 
             this.availableCommands = message;
@@ -48,10 +45,10 @@ class EditorHandler {
      */
     displayAvailableCommands(commands) {
         // Store the commands in JSON
-        commands = JSON.parse(commands).availableCommands;
+        const parsedCommands = JSON.parse(commands);
 
         // Update the UI with new commands
-        uiHandler.updateCommandList(commands);
+        uiHandler.updateCommandList(parsedCommands);
     }
 
     /**
