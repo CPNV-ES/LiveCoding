@@ -8,6 +8,7 @@ port = 12800
 # AF_INET for INET ADDRESS
 # SOCK_STREAM for TCP protocol
 mainSocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+mainSocket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
 mainSocket.bind((host, port))
 mainSocket.listen(5)
 print("Server listen port {}".format(port))
@@ -47,6 +48,8 @@ try:
                     processor.peel(recvMsg)
                     processor.execute(clientSocket)
 except IndexError:
+    mainSocket.close()
+finally: 
     mainSocket.close()
 
 print("Server close")
