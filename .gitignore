@@ -46,3 +46,4 @@
 /vendor/python_26/
 node_modules/
 SHASUMS256.txt
+/processor/out.txt

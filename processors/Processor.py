@@ -23,9 +23,12 @@ class Processor:
 
 		elif self.language == "php":
 			tmpFileToRun = self.createTempFile("<?php require \"php/commands.php\";", "?>")
-
+	
 			self.runInInterpretor(socket, tmpFileToRun)
-
+			
+		elif self.language == "python":
+			tmpFileToRun = self.createTempFile("exec(open(\"python/commands.py\").read()) ")
+			self.runInInterpretor(socket, tmpFileToRun)
 
 	# Create a tmpfile which contains all the user code that we will execute. (the file is deleted by itself as soon as it is closed)
 	def createTempFile(self, header = "", footer = ""):
