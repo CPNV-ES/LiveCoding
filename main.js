@@ -116,8 +116,8 @@ innerBuilder.listen('editor', (message) => {
             default:
                 break;
         }
-        mainWindow.webContents.send(channel + ComIpcMain.getReplyChannelSuffix(), data.split("/").pop());
-        outerBuilder.send(null, 'ok') 
+        mainWindow.webContents.send(channel + ComIpcMain.getReplyChannelSuffix(), data);
+        outerBuilder.send(null, 'ok')
     });
     // return ['engine', 'ok'];
 });

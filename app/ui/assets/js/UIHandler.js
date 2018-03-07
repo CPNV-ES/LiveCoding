@@ -22,4 +22,23 @@ class UIHandler {
             this.components.commandList.append('<span class="command">' + command + '<span>');
         });
     }
+
+    /**
+     *
+     * Displays an error pop-up with the provided message and title
+     *
+     * @param {String} message a String representation of the error message
+     * @param {String} title an optional title that will be given to the pop-up
+     */
+    displayError(message, title = null) {
+        let error;
+
+        if (title === null) {
+            error = new Notification('error', message);
+        } else {
+            error = new Notification('error', message, title)
+        }
+
+        error.show();
+    }
 }
