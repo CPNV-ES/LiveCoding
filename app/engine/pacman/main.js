@@ -122,9 +122,8 @@ function keyPressed() {
 
 function sendMessageToServer(messageToSend){
     comCliEngine.send(messageToSend, (event, msg) => {
-        // eval(msg);
-        // returns response
-        comCliEngine.send(eval(msg), (r) => {
+        let command = msg.split("/")[1];
+        comCliEngine.send(eval(command), (r) => {
             // 
         });
         console.log("Response from server: "+msg); // arg contains message
