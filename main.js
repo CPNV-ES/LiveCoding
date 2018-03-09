@@ -13,6 +13,12 @@ const rq = require('electron-require');
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow;
 
+const ComIpcMain = rq('./ComIpcMain.js');
+const ComSocket = rq('./ComSocket.js');
+const Builder = rq('./Builder.js');
+const innerBuilder = new Builder(new ComIpcMain());
+const outerBuilder = new Builder(new ComSocket());
+
 function createWindow () {
     // Get window settings or default values defined in SettingsHandler
     const savedDimensions = settingsHandler.getWindowSize();
@@ -40,6 +46,7 @@ function createWindow () {
 
     // Emitted when the windows is going to be closed
     mainWindow.on('close', function () {
+        outerBuilder.send(null, 'close');
         // Store the window width, height and position
         settingsHandler.saveWindowSize(mainWindow);
         settingsHandler.saveWindowPosition(mainWindow);
@@ -76,24 +83,9 @@ app.on('activate', function () {
     }
 });
 
-const ComIpcMain = rq('./ComIpcMain.js');
-const ComSocket = rq('./ComSocket.js');
-const Builder = rq('./Builder.js');
-const innerBuilder = new Builder(new ComIpcMain());
-const outerBuilder = new Builder(new ComSocket("172.17.219.131"));
-/*
-builder.listen('editor', (data) => {
-    console.log("***");
-    console.log(data);
-    console.log("***");
-    return ['editor', 'ok lets go !'];
-});
-*/
-
 innerBuilder.listen('engine', (message) => {
     return ['editor', message];
 });
-
 
 innerBuilder.listen('editor', (message) => {
     // outerBuilder.send(null, message, null);

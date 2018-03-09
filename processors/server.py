@@ -38,7 +38,7 @@ try:
             for clientSocket in clientsToListen:
                 recvMsg = clientSocket.recv(1024)
                 recvMsg = recvMsg.decode()
-                if recvMsg == "fin":
+                if recvMsg == "close":
                     clientSocket.close()
                     clientsToListen.remove(clientSocket)
                     connectedClients.remove(clientSocket)
