@@ -29,17 +29,40 @@ class EditorHandler {
         return this.controls.languagePicker.val();
     }
 
-    getAvailableCommands(callback) {
-
-        // TODO handle execute + error
-
-
+    registerForEvents() {
         this.serverOutlet.get((event, message) => {
-            let commands = JSON.parse(message);
+            // console.log(event);
+            // console.log(message);
 
-            this.availableCommands = message;
+            // Get the index of the first occurence of / to detect message type
+            const slashIndex = message.indexOf('/');
 
-            callback(message);
+            // Get the type
+            const messageType = message.substring(0, slashIndex);
+
+            // console.log('messageType:');
+            // console.log(messageType);
+
+            // Get the message itself (payload)
+            const payload = message.substring(slashIndex + 1, message.length);
+
+            // console.log('FULL PAYLOAD:');
+            // console.log(payload);
+
+            // React according to the type
+            switch (messageType) {
+                case 'commands':
+                    this.displayAvailableCommands(payload);
+                    break;
+
+                case 'error':
+                    const error = this.formatErrorMessage(payload);
+                    uiHandler.displayError(error);
+                    break;
+
+                default:
+                    console.log('[editorHandler]: WARNING! UNHANDLED MESSAGE TYPE.');
+            }
         });
     }
 
@@ -64,39 +87,12 @@ class EditorHandler {
 
         const chosenLanguage = this.controls.languagePicker.val();
 
-        console.log('Now sending ' + this.engine.getValue());
-
         this.serverOutlet.send(chosenLanguage + separator + this.engine.getValue(), (e, msg) => {
         });
 
         // Save settings
         settingsHandler.saveEditorLanguageMode(chosenLanguage);
         settingsHandler.saveEditorContent(this.engine.getValue());
-
-
-        // ________Error POC________
-
-        const phpError = {
-            'language': 'php',
-            'message': "PHP Parse error:  syntax error, unexpected '3' (T_LNUMBER), expecting identifier (T_STRING) or variable (T_VARIABLE) or '{' or '$' in /tmp/tmp5pfa2g66 on line 3",
-            'fileName': '/tmp/tmp5pfa2g66',
-            // 'headersCount': 3,
-        };
-
-        const rubyError = {
-            'language': 'ruby',
-            'message': "/tmp/tmp5pfa2g66:3:in `<main>': undefined method `movelol' for #<Pacman:0x000000018249b0> (NoMethodError)",
-            'fileName': '/tmp/tmp5pfa2g66',
-            // 'headersCount': 3,
-        };
-
-        const errorMessage = this.formatErrorMessage(rubyError);
-
-        console.log('Error POC:');
-        console.log(errorMessage);
-
-        // Simulate an error
-        // uiHandler.displayError(errorMessage);
     }
 
     /**
@@ -108,14 +104,16 @@ class EditorHandler {
     formatErrorMessage(jsonError) {
         let finalErrorMessage = "";
 
-        const errorLanguage = jsonError.language;
-        const errorMessage = jsonError.message;
-        const errorFileName = jsonError.fileName;
-        // const errorHeadersCount = jsonError.headersCount;
+        const error = JSON.parse(jsonError);
 
-        // console.log('Original message: ', jsonError.message);
-        // console.log('fileName: ', jsonError.fileName);
-        // console.log('headersCount', jsonError.headersCount);
+        const errorLanguage = error.language;
+        const errorMessage = error.message;
+        const errorFileName = error.fileName;
+        // const errorHeadersCount = error.headersCount;
+
+        // console.log('Original message: ', error.message);
+        // console.log('fileName: ', error.fileName);
+        // console.log('headersCount', error.headersCount);
 
         // Parse the error according to the language
         switch (errorLanguage) {
@@ -299,4 +297,5 @@ editor.engine.setValue(initialContent);
 // Initialise event listeners
 editor.initEventListners();
 
-editor.getAvailableCommands(editor.displayAvailableCommands);
+// Let the editor react to events
+editor.registerForEvents();
