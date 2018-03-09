@@ -17,7 +17,7 @@ const ComIpcMain = rq('./ComIpcMain.js');
 const ComSocket = rq('./ComSocket.js');
 const Builder = rq('./Builder.js');
 const innerBuilder = new Builder(new ComIpcMain());
-const outerBuilder = new Builder(new ComSocket());
+const outerBuilder = new Builder(new ComSocket("172.17.219.131"));
 
 function createWindow () {
     // Get window settings or default values defined in SettingsHandler
