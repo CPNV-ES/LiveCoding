@@ -1,5 +1,5 @@
 class PacmanGame{
-    constructor(){
+    constructor(comCli){
         this.BLOCK_WIDTH = 48;
         this.BLOCK_HEIGHT = 48;
         this.availableCommands = [
@@ -13,7 +13,7 @@ class PacmanGame{
             "pacman.moveDown()",
         ];
          // Engine Communication to the server
-        this.comCliEngine = new ComCli('engine');
+        this.comCliEngine = comCli;
         this.wallImg;
         this.pacmanImg;
         this.wall;

@@ -1,5 +1,8 @@
+// Enable the IPC communication for the engine module
+let comCliEngine = new ComCli('engine');
+
 // We can load our games
-let game = new PacmanGame();
+let game = new PacmanGame(comCliEngine);
 
 // P5.js function
 function preload(){
