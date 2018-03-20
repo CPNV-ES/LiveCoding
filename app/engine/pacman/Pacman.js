@@ -10,29 +10,29 @@ class Pacman{
     }
 
     moveLeft(){
-        if(isLeftSideFree()){
-            this.x = this.x - BLOCK_WIDTH;
+        if(game.isLeftSideFree()){
+            this.x = this.x - game.BLOCK_WIDTH;
             return true;
         }
         return false;
     }
     moveRight(){
-        if(isRightSideFree()){
-            this.x = this.x + BLOCK_WIDTH;
+        if(game.isRightSideFree()){
+            this.x = this.x + game.BLOCK_WIDTH;
             return true;
         }
         return false;
     }
     moveUp(){
-        if(isUpSideFree()){
-            this.y = this.y - BLOCK_HEIGHT;
+        if(game.isUpSideFree()){
+            this.y = this.y - game.BLOCK_HEIGHT;
             return true;
         }
         return false;
     }
     moveDown(){
-        if(isDownSideFree()){
-            this.y = this.y + BLOCK_HEIGHT;
+        if(game.isDownSideFree()){
+            this.y = this.y + game.BLOCK_HEIGHT;
             return true;
         }
         return false;
