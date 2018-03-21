@@ -84,7 +84,7 @@ app.on('activate', function () {
 });
 
 innerBuilder.listen('engine', (message) => {
-    return ['editor', message];
+    return ['editor', 'commands/' + message];
 });
 
 innerBuilder.listen('editor', (message) => {
