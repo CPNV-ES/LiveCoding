@@ -15,7 +15,6 @@ class Processor:
 		self.language = datas.split('/', 1)[0]
 		self.userCmds = datas.split('/', 1)[1]
 
-
 	def execute(self, socket):
 		if self.language == "ruby":
 			tmpFileToRun = TempFile(self.userCmds, "load \"ruby/commands.rb\"")
@@ -25,10 +24,6 @@ class Processor:
 		elif self.language == "php":
 			tmpFileToRun = TempFile(self.userCmds, "<?php require \"php/commands.php\";", "?>")
 			tmpFileToRun.create()
-			self.runInInterpretor(socket, tmpFileToRun)
-			
-		elif self.language == "python":
-			tmpFileToRun = self.createTempFile("exec(open(\"python/commands.py\").read()) ")
 			self.runInInterpretor(socket, tmpFileToRun)
 
 	def runInInterpretor(self, socket, fileToRun):
@@ -48,7 +43,7 @@ class Processor:
 			cliProcess.stdin.write(bytes(gameReturnedMsg+"\n","UTF-8"))
 			cliProcess.stdin.flush() # !! DONT FORGET TO FLUSH THE BUFER AFTER EACH WRITE !!
 			print("Returned by interpretor -> "+cliProcess.stdout.readline().decode())
-		# Error detected -> send to the builder via the socket the errorMsg 
+		# Error detected -> send to the builder via the socket the errorMsg
 		else:
 			data = {}
 			data['language'] = self.language
@@ -60,4 +55,3 @@ class Processor:
 
 			socket.send(data.encode())
 
-			
