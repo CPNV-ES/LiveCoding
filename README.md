@@ -1,7 +1,8 @@
 # LiveCoding
 _What is this project about_
 ## Installation
-### Electron app
+
+### Electron app
 Simply run  
 `npm i`  
 to install electron and all the dependencies.  
