@@ -14,7 +14,7 @@ _What is this project about_
 
     	- [Running the app](#running-the-app-clap)
 
-    - [Debian server](l#debian-server)
+    - [Debian server](#debian-server)
 
     	- [Specifications](#specifications)
 
@@ -22,7 +22,7 @@ _What is this project about_
 
     	- [Configuration](#configuration)
 
-    	- [Running the python server](#running-the-python-server-clap)
+    	- [Running the python TCP server](#running-the-python-tcp-server-clap)
 
 - [Built with](#built-with-muscle)
     
@@ -75,7 +75,7 @@ The server is ready to use and have git installed, so if you want to have the la
 #### Configuration
 IP / DNS, etc...
 
-#### Running the python server :clap:
+#### Running the python TCP server :clap:
 We have a TCP server wrote in Python to communicate with the clients by sockets.
 
 To run the server without errors you need to have root privileges and go to the `/home/cpnv/LiveCoding/processors` folder and run `sudo python3 server.py` 
