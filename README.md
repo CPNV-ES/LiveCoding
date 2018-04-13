@@ -58,22 +58,26 @@ When everything is installed, run `npm start` in the project folder and you shou
 We have a debian server which communicate with all electron applications.
 
 #### Specifications
- - Debian xxx
+ - Debian 8.6
  - Python 3
- - Ruby xx
- - Node.js xx
- - Git
- ...
+ - Ruby 2.1
+ - php 7.0
+ - Git 2.1.4
+
 
 #### Installation
-We used VMware Workstation, so you can find in the **debian_server** folder an export of the actual server version. To install it you just have to import the .ovf in VMware Workstation and follow the instructions.
+We used VMware Workstation, so you can find in the [realeases page](https://github.com/CPNV-ES/LiveCoding/releases) of the repo a .zip in the last release that include an export of the actual server version. To install it you just have to import the .ovf in VMware Workstation and follow the instructions.
 
 The server is ready to use and have git installed, so if you want to have the last updates, go to the project folder : `/home/cpnv/LiveCoding` and used the git commands to fetch updates.
 
-*If you don't want to use our virtual machine export, you have to build a debian server which contains all specifications mentioned [here](#specifications)*.
+*If you don't want to use our virtual machine export, you have to build our own server which contains all specifications mentioned [here](#specifications)*.
+
+All the code executed by the server is in the folder : `LiveCoding/processors`.
 
 #### Configuration
-IP / DNS, etc...
+ - The server need to communicate to the client so you have to put a static IP. 
+ - If you want to pull the repository, be sure to have internet connection. *Be carefull to change the DNS to yours*
+ - The client application must know the server IP to connect to the TCP server (running in the server). Open the `LiveCoding/main.js` file and search the `new ComSocket("...")` line to type your right server IP.
 
 #### Running the python TCP server :clap:
 We have a TCP server wrote in Python to communicate with the clients by sockets.
