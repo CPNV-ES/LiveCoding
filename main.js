@@ -13,6 +13,7 @@ const rq = require('electron-require');
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow;
 
+// Instanciate the connexions
 const ComIpcMain = rq('./ComIpcMain.js');
 const ComSocket = rq('./ComSocket.js');
 const Builder = rq('./Builder.js');
@@ -84,6 +85,7 @@ app.on('activate', function () {
 });
 
 innerBuilder.listen('engine', (message) => {
+    // all messages from engine goes to the editor
     return ['editor', 'commands/' + message];
 });
 
@@ -91,14 +93,14 @@ innerBuilder.listen('editor', (message) => {
     // outerBuilder.send(null, message, null);
     console.log('Now sending ' + message);
     outerBuilder.send(null, message, null);
-    let forgery = 'python/pacman.moveUp()'
+    // let forgery = 'python/pacman.moveUp()'
     outerBuilder.listen('data', (data) => {
         // sending returns message
         console.log("data in.");
         console.log(data);
         console.log("=");
         let channel = "";
-        let prefix = data.split("/")[0];
+        let prefix = data.split("/")[0]; // split as ["{prefix}","{data-content}"]
         switch(prefix){
             case "execute":
                 channel = 'engine';
@@ -108,7 +110,9 @@ innerBuilder.listen('editor', (message) => {
             default:
                 break;
         }
+        // send the data to ipc-renderer
         mainWindow.webContents.send(channel + ComIpcMain.getReplyChannelSuffix(), data);
+        // send dump data to processor to keep going
         outerBuilder.send(null, 'ok')
     });
     // return ['engine', 'ok'];

@@ -15,12 +15,22 @@ module.exports = class Builder {
       this._comSrv = (typeof comSrv !== 'undefined') ? comSrv : this.getComSrv();
     }
 
+    /**
+     * Listen message on given channel.
+     * @param {String} channel Receiver, example : "engine" 
+     * @param {Function} callback Takes as parameter the message
+     */
     listen(channel, callback){
         this._comSrv.get(channel, (message) => {
           return callback(message);
         });
     }
 
+    /**
+     * Send message on given channel. 
+     * @param {String} channel Receiver, example : "engine"
+     * @param {String} message Message to transmit
+     */
     send(channel, message){
         // if comServer has a post method
         if(typeof this._comSrv.post !== 'undefined'){

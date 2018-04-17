@@ -1,5 +1,12 @@
 let instance = null;
 module.exports = class ComIpcMain {
+
+    /**
+     * Uses the Electron ipcMain library for commmunication 
+     * https://github.com/electron/electron/blob/master/docs/api/ipc-main.md
+     * @param {String} messageChannelSuffix  default value : -message
+     * @param {String} replyChannelSuffix default value : -reply 
+     */
     constructor(messageChannelSuffix, replyChannelSuffix) {
         this.messageChannelSuffix = (typeof messageChannelSuffix !== 'undefined') ? messageChannelSuffix : ComIpcMain.getMessageChannelSuffix();
         this.replyChannelSuffix = (typeof replyChannelSuffix !== 'undefined') ? replyChannelSuffix : ComIpcMain.getReplyChannelSuffix();
@@ -12,6 +19,11 @@ module.exports = class ComIpcMain {
         return instance;
     }
 
+    /**
+     * Listen on given channel. Call callback when receiving data. 
+     * @param {String} channel 
+     * @param {Function} callback 
+     */
     get(channel, callback) {
       this.ipcmain.on(channel + this.messageChannelSuffix, (e, m) => {
         let action = callback(m);
@@ -21,10 +33,15 @@ module.exports = class ComIpcMain {
       });
     };
 
+    /**
+     * Send message on given channel.
+     * @param {String} channel 
+     * @param {String} message 
+     */
     post(channel, message){
-        // TODO: 
-        // how to access to mainWindow
-        // console.log(this.mainWindow);
+        // We actually cannot access to "mainWindow" from here.
+        // So, we use a workaround in main.js which is :  
+        // mainWindow.webContents.send(channel + ComIpcMain.getReplyChannelSuffix(), data);
     }
 
     static getMessageChannelSuffix(){
@@ -35,21 +52,3 @@ module.exports = class ComIpcMain {
         return (typeof this.replyChannelSuffix !== 'undefined') ? this.replyChannelSuffix : '-reply';
     }
 };
-
-/*
-const comSrv = new ComSrv();
-comSrv.get('engine', (event, message) => {
-   console.log("*** message from ENGINE ***");
-   console.log(message);
-   console.log("***");
-   //TODO: parse commands
-
-   event.sender.send('editor' + comSrv.replyChannelSuffix, message);
-});
-
-comSrv.get('editor', (event, message) => {
-    console.log("*** message from EDITOR ***");
-    console.log(message);
-    event.sender.send('engine' + comSrv.replyChannelSuffix, message);
-});
-*/
