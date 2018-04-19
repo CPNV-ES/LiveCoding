@@ -1,5 +1,7 @@
 import socket
 
+# This Script is a client test to check and try to communicate with a TCP server with socket
+
 host = "localhost"
 port = 12800
 
