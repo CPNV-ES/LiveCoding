@@ -1,34 +1,6 @@
 # LiveCoding
-_What is this project about_
-
-# Table of Contents
-- [Getting started](#getting-started-ok_hand)
-
-    - [Electron app (client)](#electron-app-client)
-
-		- [Prerequisites](#prerequisites)
-
-    	- [Node.js](#nodejs)
-
-    	- [installation](#installation)
-
-    	- [Running the app](#running-the-app-clap)
-
-    - [Debian server](#debian-server)
-
-    	- [Specifications](#specifications)
-
-    	- [Installation](#installation-1)
-
-    	- [Configuration](#configuration)
-
-    	- [Running the python TCP server](#running-the-python-tcp-server-clap)
-
-- [Built with](#built-with-muscle)
-    
-- [Authors](#authors-wave)
-
-- [Documentation](#documentation-book)
+_Livecoding is a desktop appliaction where newbies can learn the basics of programmation._  
+_The principle is simple : You write commands in the in-app editor, press send, and the commands will interact the a little game (like pacman)._  
 
 ## Getting started :ok_hand:
 
@@ -51,7 +23,7 @@ you need to install all the dependencies of the project. So you have to be in th
 
 So there, now you're up and running and you can start messing arround with the project.
 
-#### Running the app :clap:
+#### Running the app
 When everything is installed, run `npm start` in the project folder and you should be good to go. 
 
 ### Debian server
@@ -61,8 +33,7 @@ We have a debian server which communicate with all electron applications.
  - Debian 8.6
  - Python 3
  - Ruby 2.1
- - php 7.0
- - Git 2.1.4
+ - Php 7.0
 
 
 #### Installation
