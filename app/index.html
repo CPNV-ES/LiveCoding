@@ -20,9 +20,8 @@
                     </div>
                     <span>Select a language: </span>
                     <select id="languagePicker">
-                        <option value="php">php</option>
-                        <option value="ruby">ruby</option>
-                        <option value="python">python</option>
+                        <option data-language="php">php</option>
+                        <option data-language="ruby">ruby</option>
                     </select>
                     <button id="runButton">Run!</button>
                 </div>
@@ -37,6 +36,7 @@
     <!-- global -->
     <script>window.$ = require('jquery');</script>
     <script>window._ = require('lodash')</script>
+
     <!-- <script src="/socket.io/socket.io.js"></script> -->
     <!-- <script src="socket.js"></script> -->
     <script type="text/javascript" src="ComCli.js"></script>
@@ -52,6 +52,11 @@
     <script type="text/javascript" src="engine/pacman/PacmanGame.js"></script>
     <script type="text/javascript" src="engine/main.js"></script>
 
+    <!-- error handling -->
+    <script src="errors/assets/js/PHPErrorFormatter.js" type="text/javascript" charset="utf-8"></script>
+    <script src="errors/assets/js/RubyErrorFormatter.js" type="text/javascript" charset="utf-8"></script>
+    <script src="errors/assets/js/ErrorFormatterFactory.js" type="text/javascript" charset="utf-8"></script>
+
     <!-- UI -->
     <script src="ui/assets/js/UIHandler.js" type="text/javascript" charset="utf-8"></script>
     <script src="ui/assets/js/notification.js" type="text/javascript" charset="utf-8"></script>
@@ -59,6 +64,9 @@
     <!-- editor -->
     <script src="editor/vendor/c9/src/ace.js" type="text/javascript" charset="utf-8"></script>
     <script src="editor/assets/js/editorHandler.js" type="text/javascript" charset="utf-8"></script>
+
+    <!-- main app file -->
+    <script src="app.js" type="text/javascript" charset="utf-8"></script>
 
 </body>
 </html>

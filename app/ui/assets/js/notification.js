@@ -1,7 +1,7 @@
 'use strict'
 
 class Notification {
-    constructor(type, message, title = null) {
+    constructor(type, message, title = '') {
         // Holds the actual notification frame
         this.frame = null;
         this.type = type;
@@ -18,7 +18,7 @@ class Notification {
 
     // Animates (fadeIn) the notification, appends it to the DOM
     show() {
-        const notificationTitle = this.title === null ? this.getDefaultTitle(this.type) : this.title;
+        const notificationTitle = this.title === '' ? this.getDefaultTitle(this.type) : this.title;
 
         // Append the notification into the DOM
         const notification = $('<div class="notification ' + this.type + '"><h3>' + notificationTitle + '</h3><span>' + this.message + '</span></div>');
@@ -41,7 +41,6 @@ class Notification {
         this.frame.fadeOut( "fast", function() {
             // Remove it from the DOM
             this.remove();
-            console.log('destroy now');
         });
     }
 
@@ -52,7 +51,7 @@ class Notification {
     getDefaultTitle(type) {
         // Avoid mismatch due to uppercase letter usage
         const lowercasedType = type.toLowerCase();
-        let title = undefined;
+        let title = '';
 
         switch (type) {
           case 'info':

@@ -13,11 +13,10 @@ class SettingsHandler {
         // Default BrowserWindow settings
         this.windowDefaultWidth = 1200;
         this.windowDefaultHeight = 900;
-        this.windowDefaultPosition = undefined;
 
         // Default Editor settings
-        this.editorDefaultContent = "";
         this.editorDefaultLanguage = 'javascript';
+        this.editorDefaultContent = "";
     }
 
     /**
@@ -116,8 +115,7 @@ class SettingsHandler {
             }
         }
 
-        // Return default values
-        return this.windowDefaultPosition;
+        return undefined;
     }
 
     /**
