@@ -23,26 +23,20 @@ class UIHandler {
         this.registerForEvents();
     }
 
-    // Let this react to builder events
+    /**
+     *
+     * Enables this class react to Builder events
+     */
     registerForEvents() {
         this.serverOutlet.get((event, message) => {
-            // console.log(event);
-            // console.log(message);
-
             // Get the index of the first occurence of / to detect message type
             const slashIndex = message.indexOf('/');
 
             // Get the type
             const messageType = message.substring(0, slashIndex);
 
-            // console.log('messageType:');
-            // console.log(messageType);
-
             // Get the message itself (payload)
             const payload = message.substring(slashIndex + 1, message.length);
-
-            // console.log('FULL PAYLOAD:');
-            console.log(payload);
 
             // React according to the message type
             switch (messageType) {
@@ -74,7 +68,7 @@ class UIHandler {
         this.editor = new EditorHandler(ace.edit('editor'), this, this.serverOutlet);
         this.editor.init();
 
-        this.components.editorFrame.css('fontSize', '14px');
+        this.setEditorFontSize(14);
 
         // Define the selected language in the language picker
         const initialLanguage = settingsHandler.getEditorLanguageMode();
@@ -87,6 +81,19 @@ class UIHandler {
         });
 
         this.components.runButton.on('click', () => this.editor.executeCode());
+    }
+
+    /**
+     *
+     * Sets the editor font-size to the value passed by parameter
+     * if it is a number
+     *
+     * @param {number} the new font-size
+     */
+    setEditorFontSize(value) {
+        // Make sure the value is a number
+        if (!isNaN(value))
+            this.components.editorFrame.css('fontSize',  value + 'px');
     }
 
     /**
@@ -114,11 +121,21 @@ class UIHandler {
         });
     }
 
-    // TODO
+    /**
+     *
+     * Enables or disables the run button depending on what is passed by parameter
+     *
+     * @param {Boolean} the specifying whether the run button should be disabled or not
+     */
     enableRunButton(state) {
         this.components.runButton.prop('disabled', state);
     }
 
+
+    /**
+     *
+     * Simple getter that returns the language that has been chosen in the UI
+     */
     get chosenLanguage() {
         return this.components.languagePicker.val();
     }

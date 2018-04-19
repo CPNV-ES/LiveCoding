@@ -1,3 +1,5 @@
+// This class represents notification pop-ups that are presented to the users
+// when an error or an information needs to be displayed
 'use strict'
 
 class Notification {
@@ -9,14 +11,20 @@ class Notification {
         this.message = message;
     }
 
-    // Initializes events handling for the notification
+    /**
+    *
+    * Initializes events handling for this notification
+    */
     initEvents() {
         this.frame.on('click', () => {
             this.destroy();
         });
     }
 
-    // Animates (fadeIn) the notification, appends it to the DOM
+    /**
+    *
+    * Animates (fadeIn) the notification, appends it to the DOM
+    */
     show() {
         const notificationTitle = this.title === '' ? this.getDefaultTitle(this.type) : this.title;
 
@@ -35,7 +43,10 @@ class Notification {
         this.frame.fadeIn("fast");
     }
 
-    // Animates (fadeOut) the notification, removes it from the DOM afterwards
+    /**
+    *
+    * Animates (fadeOut) the notification, removes it from the DOM afterwards
+    */
     destroy() {
         // Animate the notification
         this.frame.fadeOut( "fast", function() {
@@ -46,6 +57,7 @@ class Notification {
 
     /*
     * Returns a default title for the notification if none has been set
+    *
     * @param {String} A String representing the notification type
     */
     getDefaultTitle(type) {

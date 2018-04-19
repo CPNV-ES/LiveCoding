@@ -28,7 +28,6 @@ class EditorHandler {
         this.engine.getSession().setMode({path:'ace/mode/' + initialLanguage, inline:true});
         this.engine.setValue(initialContent);
 
-        // Initialise event listeners
         this.initEventListners();
     }
 

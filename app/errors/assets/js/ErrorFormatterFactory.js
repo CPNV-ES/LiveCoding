@@ -1,4 +1,10 @@
 class ErrorFormatterFactory {
+    /**
+    *
+    * Returns a new instance of a language formatter depending on the language parameter
+    *
+    * @param {String} a String representation of the error's language
+    */
     static create(language) {
         switch (language.toLowerCase()) {
             case 'php':
