@@ -63,7 +63,7 @@ class EditorHandler {
      *
      * @param {Boolean} locked indicates whether the UI should allow code submissions or not
      */
-    setUIMode(locked) {
+    enableRunButton(locked) {
         this.uiHandler.enableRunButton(!locked);
     }
 
@@ -89,7 +89,7 @@ class EditorHandler {
 
             // Make sure the editor has content before allowing submissions
             this.allowCodeSubmission = this.engine.getValue() !== '';
-            this.setUIMode(this.allowCodeSubmission);
+            this.enableRunButton(this.allowCodeSubmission);
         });
     }
 }
