@@ -69,7 +69,7 @@ Now the TCP server listen in the 12800 port and are ready to communicate with cl
 ## Authors :wave:
 * [EricBroutba](https://github.com/EricBroutba)
 * [Loïc Dessaules](https://github.com/gollgot)
-* ...
+* [Raphaël](https://github.com/raph-u)
 
 ## Documentation :book:
 You can read the full documentation in **french** [here](https://docs.google.com/document/d/1fkNICn0q7WczbRoqzaK3-Cywe4iNDkT-OlqZPiTaOvw/edit?usp=sharing).
