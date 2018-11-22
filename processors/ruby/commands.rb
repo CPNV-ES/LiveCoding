@@ -1,3 +1,7 @@
+#
+# Regroups all commands for the Ruby version of the default game
+#
+
 class GameConsole
   def print(value)
     puts "console.log('#{value}');";
@@ -6,8 +10,13 @@ end
 
 console = GameConsole.new
 
-
+#
+# Character of the game
+# Allows you to control its movements
+#
 class Pacman
+
+  # Moves the character to the left of his position
   def moveLeft
     STDERR.puts "none"
     STDERR.flush
@@ -20,6 +29,7 @@ class Pacman
     msg
   end
 
+  # Moves the character to the right of his position
   def moveRight
     STDERR.puts "none"
     STDERR.flush
@@ -32,6 +42,7 @@ class Pacman
     msg
   end
 
+  # Moves the character above his position
   def moveUp
     STDERR.puts "none"
     STDERR.flush
@@ -44,6 +55,7 @@ class Pacman
     msg
   end
 
+  # Moves the character below his position
   def moveDown
     STDERR.puts "none"
     STDERR.flush
@@ -55,9 +67,14 @@ class Pacman
 
     msg
   end
+
 end
 
-
+# Check if the case on the left of the character is free
+#
+#   isLeftSideFree
+#   # => true|false
+#
 def isLeftSideFree
   STDERR.puts "none"
   STDERR.flush
@@ -70,6 +87,11 @@ def isLeftSideFree
   msg
 end
 
+# Check if the case on the right of the character is free
+#
+#   isRightSideFree
+#   # => true|false
+#
 def isRightSideFree
   STDERR.puts "none"
   STDERR.flush
@@ -82,6 +104,11 @@ def isRightSideFree
   msg
 end
 
+# Check if the case on the top of the character is free
+#
+#   isUpSideFree
+#   # => true|false
+#
 def isUpSideFree
   STDERR.puts "none"
   STDERR.flush
@@ -94,6 +121,11 @@ def isUpSideFree
   msg
 end
 
+# Check if the case on the bottom of the character is free
+#
+#   isDownSideFree
+#   # => true|false
+#
 def isDownSideFree
   STDERR.puts "none"
   STDERR.flush
