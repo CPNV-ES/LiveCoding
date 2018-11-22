@@ -1,3 +1,10 @@
+/**
+ * Entry point of the Electron app
+ */
+
+// Loads the env configuration vars
+require('dotenv').config()
+
 const electron = require('electron');
 const settings = require('electron-settings');
 const {SettingsHandler} = require('./app/settings/assets/js/settingsHandler');
@@ -18,7 +25,7 @@ const ComIpcMain = rq('./ComIpcMain.js');
 const ComSocket = rq('./ComSocket.js');
 const Builder = rq('./Builder.js');
 const innerBuilder = new Builder(new ComIpcMain());
-const outerBuilder = new Builder(new ComSocket("172.17.219.131"));
+const outerBuilder = new Builder(new ComSocket(process.env.PROCESSOR_HOST));
 
 function createWindow () {
     // Get window settings or default values defined in SettingsHandler
