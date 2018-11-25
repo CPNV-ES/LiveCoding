@@ -106,7 +106,7 @@ function isLeftSideFree() {
     fwrite(STDERR, "none\n");
     fflush(STDERR);
 
-    fwrite(STDOUT, "isLeftSideFree();\n");
+    fwrite(STDOUT, "game.isLeftSideFree();\n");
     fflush(STDOUT);
 
     $stdin = fgets(STDIN);
@@ -126,10 +126,11 @@ function isRightSideFree() {
     fwrite(STDERR, "none\n");
     fflush(STDERR);
 
-    fwrite(STDOUT, "isRightSideFree();\n");
+    fwrite(STDOUT, "game.isRightSideFree();\n");
     fflush(STDOUT);
 
     $stdin = fgets(STDIN);
+    fwrite(STDOUT, $stdin);
 
     fwrite(STDOUT, $stdin."\n");
     fflush(STDOUT);
@@ -146,7 +147,7 @@ function isUpSideFree() {
     fwrite(STDERR, "none\n");
     fflush(STDERR);
 
-    fwrite(STDOUT, "isUpSideFree();\n");
+    fwrite(STDOUT, "game.isUpSideFree();\n");
     fflush(STDOUT);
 
     $stdin = fgets(STDIN);
@@ -166,7 +167,7 @@ function isDownSideFree() {
     fwrite(STDERR, "none\n");
     fflush(STDERR);
 
-    fwrite(STDOUT, "isDownSideFree();\n");
+    fwrite(STDOUT, "game.isDownSideFree();\n");
     fflush(STDOUT);
 
     $stdin = fgets(STDIN);

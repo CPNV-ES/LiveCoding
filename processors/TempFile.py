@@ -1,4 +1,4 @@
-import tempfile;
+import tempfile
 
 # Wrapper class to create a temp file, it uses the temfile library
 class TempFile:

@@ -8,8 +8,6 @@ class GameConsole
   end
 end
 
-console = GameConsole.new
-
 #
 # Character of the game
 # Allows you to control its movements

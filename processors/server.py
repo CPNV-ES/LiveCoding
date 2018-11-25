@@ -30,7 +30,7 @@ try:
         clientsToListen = []
         # Verify each 0.05 (max) sec, if a connected client is enabled to read (he sent a msg)
         try:
-            clientsToListen, wList, xList = select.select(connectedClients, [], [], 0.05) 
+            clientsToListen, wList, xList = select.select(connectedClients, [], [], 0.05)
         except select.error:
             pass
         else:
@@ -49,7 +49,7 @@ try:
                     processor.execute(clientSocket)
 except IndexError:
     mainSocket.close()
-finally: 
+finally:
     mainSocket.close()
 
 print("Server close")
