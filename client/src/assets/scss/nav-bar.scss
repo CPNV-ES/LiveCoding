@@ -6,19 +6,23 @@
   display: flex;
   justify-content: space-between;
 
-  padding: 6px;
+  padding: 8px;
 
   .nav-left {
-    background-color: $grey;
+    .spacing {
+      margin-right: 8px;
+    }
   }
 
   .nav-center {
-    margin: 0px 6px;
+    margin: 0px 8px;
     display: flex;
     align-items: center;
   }
 
   .nav-right {
-    background-color: $grey;
+    .spacing {
+      margin-left: 8px;
+    }
   }
 }
