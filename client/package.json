@@ -8,6 +8,7 @@
     "dev": "vue-cli-service serve"
   },
   "dependencies": {
+    "modern-normalize": "^0.5.0",
     "vue": "^2.5.17",
     "vue-router": "^3.0.1",
     "vuex": "^3.0.1"
