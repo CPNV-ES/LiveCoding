@@ -1,4 +1,5 @@
 const path = require('path')
+const MonacoWebpackPlugin = require('monaco-editor-webpack-plugin')
 
 /**
  * Vue CLI plugins config
@@ -15,5 +16,21 @@ module.exports = {
         path.resolve(__dirname, 'src/assets/scss/vars.scss')
       ]
     }
+  },
+  configureWebpack: {
+    plugins: [
+      new MonacoWebpackPlugin({
+        languages: [
+          'javascript',
+          'typescript',
+          'json',
+          'html',
+          'markdown',
+          'php',
+          'python',
+          'ruby'
+        ]
+      })
+    ]
   }
 }
