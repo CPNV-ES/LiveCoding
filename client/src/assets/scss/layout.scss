@@ -1,5 +1,41 @@
 // Layout of the page
 
+// Container
 #app {
+  height: 100%;
   display: grid;
+  grid-template-columns: auto 768px;
+  grid-template-rows: 50px 768px auto;
+}
+
+// Childs of the grid
+#nav-bar {
+  grid-column-start: 1;
+  grid-column-end: 3;
+  grid-row-start: 1;
+  grid-row-end: 2;
+}
+
+#editor-box {
+  grid-column-start: 1;
+  grid-column-end: 2;
+  grid-row-start: 2;
+  grid-row-end: 4;
+}
+
+#game-box {
+  background-color: $grey-light;
+  grid-column-start: 2;
+  grid-column-end: 3;
+  grid-row-start: 2;
+  grid-row-end: 3;
+}
+
+#console-box {
+  background-color: $black-ter;
+  min-height: 140px;
+  grid-column-start: 2;
+  grid-column-end: 3;
+  grid-row-start: 3;
+  grid-row-end: 4;
 }
