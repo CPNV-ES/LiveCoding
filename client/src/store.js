@@ -18,6 +18,12 @@ export default new Vuex.Store({
   mutations: {
     UPDATE_EDITOR_VALUE: (state, value) => {
       state.editor.value = value
+    },
+    UPDATE_EDITOR_THEME: (state, value) => {
+      state.editor.theme = value
+    },
+    UPDATE_EDITOR_LANGUAGE: (state, value) => {
+      state.editor.language = value
     }
   },
   actions: {

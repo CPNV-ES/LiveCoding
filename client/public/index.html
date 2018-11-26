@@ -6,8 +6,74 @@
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <link rel="icon" href="<%= BASE_URL %>favicon.ico">
     <title>LiveCoding</title>
+    <style>
+    .loader-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .points-loader {
+      display: inline-block;
+      position: relative;
+      width: 64px;
+      height: 64px;
+    }
+    .points-loader div {
+      position: absolute;
+      top: 27px;
+      width: 11px;
+      height: 11px;
+      border-radius: 50%;
+      background: #303952;
+      animation-timing-function: cubic-bezier(0, 1, 1, 0);
+    }
+    .points-loader div:nth-child(1) {
+      left: 6px;
+      animation: points-loader1 0.6s infinite;
+    }
+    .points-loader div:nth-child(2) {
+      left: 6px;
+      animation: points-loader2 0.6s infinite;
+    }
+    .points-loader div:nth-child(3) {
+      left: 26px;
+      animation: points-loader2 0.6s infinite;
+    }
+    .points-loader div:nth-child(4) {
+      left: 45px;
+      animation: points-loader3 0.6s infinite;
+    }
+    @keyframes points-loader1 {
+      0% {
+        transform: scale(0);
+      }
+      100% {
+        transform: scale(1);
+      }
+    }
+    @keyframes points-loader3 {
+      0% {
+        transform: scale(1);
+      }
+      100% {
+        transform: scale(0);
+      }
+    }
+    @keyframes points-loader2 {
+      0% {
+        transform: translate(0, 0);
+      }
+      100% {
+        transform: translate(19px, 0);
+      }
+    }
+    </style>
   </head>
   <body>
-    <div id="app"></div>
+    <div id="app">
+      <div class="loader-container">
+        <div class="points-loader"><div></div><div></div><div></div><div></div></div>
+      </div>
+    </div>
   </body>
 </html>

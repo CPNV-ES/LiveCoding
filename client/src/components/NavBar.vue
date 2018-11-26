@@ -1,8 +1,26 @@
 <script>
+/**
+ * NavBar
+ *
+ * @author Bastien Nicoud
+ */
 export default {
-  data () {
-    return {
-      language: 'php'
+  computed: {
+    language: {
+      get () {
+        return this.$store.state.editor.language
+      },
+      set (value) {
+        this.$store.commit('UPDATE_EDITOR_LANGUAGE', value)
+      }
+    },
+    theme: {
+      get () {
+        return this.$store.state.editor.theme
+      },
+      set (value) {
+        this.$store.commit('UPDATE_EDITOR_THEME', value)
+      }
     }
   }
 }
@@ -28,11 +46,14 @@ export default {
           PHP
         </option>
       </select>
-      <select class="spacing">
-        <option value="Tutu">
+      <select
+        v-model="theme"
+        class="spacing"
+      >
+        <option value="vs">
           Light
         </option>
-        <option value="Tutu">
+        <option value="vs-dark">
           Dark
         </option>
       </select>
@@ -45,8 +66,12 @@ export default {
     </div>
     <div class="nav-right">
       <select class="spacing">
-        <option value="Tutu">GitHub</option>
-        <option value="Tutu">Doosier</option>
+        <option value="github">
+          GitHub
+        </option>
+        <option value="folder">
+          Doosier
+        </option>
       </select>
       <input
         class="spacing"
