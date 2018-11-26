@@ -1,0 +1,1 @@
+# Protocol between app and processor
