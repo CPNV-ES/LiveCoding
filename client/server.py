@@ -1,4 +1,5 @@
 # websocket server for dev purpose
+# Not used in production
 
 import asyncio
 import websockets
