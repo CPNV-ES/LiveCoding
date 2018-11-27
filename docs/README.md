@@ -11,6 +11,8 @@ Live coding is built arround two main blocks :
 * [Installation](./installation.md)
 * [Protocol between app and processor](./websocket_protocol.md)
 * **Client side app**
-  * [Game engines](./client/game.md)
+  * [The editor](./client/editor.md)
 * **Server side processor**
   * [The processor](./server/processor.md)
+* **Creating games**
+  * [Create your own game](./games/create_one.md)
