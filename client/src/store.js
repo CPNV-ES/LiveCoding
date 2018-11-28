@@ -1,5 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import GameManager from '@/game/GameManager'
+import { logError } from '@/console/DevConsole'
 
 Vue.use(Vuex)
 
@@ -18,7 +20,7 @@ export default new Vuex.Store({
      * Information form the current loaded game
      */
     game: {
-      type: 'github',
+      provider: 'github',
       url: 'https://github.com/bastiennicoud/LiveCoding-Block-Game'
     }
   },
@@ -37,8 +39,18 @@ export default new Vuex.Store({
     /**
      * Loads a game in the app
      */
-    load () {
-
+    async load ({ state }) {
+      try {
+        let gameManager = new GameManager({
+          provider: state.game.provider,
+          url: state.game.url
+        })
+        await gameManager.loadGame()
+      } catch (e) {
+        logError('Error during Game loading !', e)
+      } finally {
+        //
+      }
     },
     /**
      * Run the current code for the current game

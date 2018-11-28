@@ -1,5 +1,4 @@
 <script>
-import { setTimeout } from 'timers';
 /**
  * This components display the inputs to load a game from a url
  */
@@ -15,11 +14,10 @@ export default {
     /**
      * Launch the game loading procedure
      */
-    load () {
+    async load () {
       this.loader = true
-      setTimeout(() => {
-        this.loader = false
-      }, 2000)
+      await this.$store.dispatch('load')
+      this.loader = false
     }
   }
 }
@@ -34,8 +32,8 @@ export default {
       <option value="github">
         GitHub
       </option>
-      <option value="folder">
-        Doosier
+      <option value="url">
+        URL
       </option>
     </select>
     <input
@@ -49,7 +47,7 @@ export default {
       @click="load()"
     >
       <span
-        v-if="loading"
+        v-if="loader"
         class="loader-spinner"
       />
       <p v-else>
