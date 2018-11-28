@@ -13,6 +13,13 @@ export default new Vuex.Store({
       language: 'javascript',
       // The value of the editor (the code)
       value: 'console.log(tutu)'
+    },
+    /**
+     * Information form the current loaded game
+     */
+    game: {
+      type: 'github',
+      url: 'https://github.com/bastiennicoud/LiveCoding-Block-Game'
     }
   },
   mutations: {
@@ -27,6 +34,22 @@ export default new Vuex.Store({
     }
   },
   actions: {
+    /**
+     * Loads a game in the app
+     */
+    load () {
 
+    },
+    /**
+     * Run the current code for the current game
+     *
+     * - launch the socket connexion
+     * - send the code
+     * - execute commands
+     * - clode the connexion
+     */
+    run () {
+
+    }
   }
 })

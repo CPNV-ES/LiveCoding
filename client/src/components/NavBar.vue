@@ -4,7 +4,12 @@
  *
  * @author Bastien Nicoud
  */
+import GameUrlInput from '@/components/game/GameUrlInput'
+
 export default {
+  components: {
+    GameUrlInput
+  },
   computed: {
     language: {
       get () {
@@ -64,23 +69,6 @@ export default {
     <div class="nav-center">
       <h1>LiveCoding</h1>
     </div>
-    <div class="nav-right">
-      <select class="spacing">
-        <option value="github">
-          GitHub
-        </option>
-        <option value="folder">
-          Doosier
-        </option>
-      </select>
-      <input
-        class="spacing"
-        type="text"
-        placeholder="URL du jeux"
-      >
-      <button class="is-blue spacing">
-        Charger
-      </button>
-    </div>
+    <GameUrlInput />
   </nav>
 </template>
