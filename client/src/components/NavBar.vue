@@ -61,6 +61,12 @@ export default {
         <option value="vs-dark">
           Dark
         </option>
+        <option value="solarized-dark">
+          Solarized Dark
+        </option>
+        <option value="cobalt">
+          Cobalt
+        </option>
       </select>
       <button class="is-blue spacing">
         Run

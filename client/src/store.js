@@ -14,7 +14,7 @@ export default new Vuex.Store({
       theme: 'vs-dark',
       language: 'javascript',
       // The value of the editor (the code)
-      value: 'console.log(tutu)'
+      value: `let tutu = 'Hello Guys'\nconsole.log(tutu)`
     },
     /**
      * Information form the current loaded game

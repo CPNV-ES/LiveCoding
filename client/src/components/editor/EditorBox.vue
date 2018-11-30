@@ -5,6 +5,8 @@
  * @author Bastien Nicoud
  */
 import * as monaco from 'monaco-editor'
+import SolarizedDark from 'monaco-themes/themes/Solarized-dark.json'
+import Cobalt from 'monaco-themes/themes/Cobalt.json'
 import { mapState } from 'vuex'
 
 export default {
@@ -43,7 +45,7 @@ export default {
    * When the component is mounted
    */
   mounted () {
-    this.initEditor(monaco)
+    this.initEditor()
   },
   beforeDestroy () {
     /**
@@ -55,7 +57,7 @@ export default {
     /**
      * Launch the code editor (left side of the page)
      */
-    initEditor (monaco) {
+    initEditor () {
       // Editor base options
       const options = {
         value: this.value,
@@ -66,6 +68,9 @@ export default {
           enabled: false
         }
       }
+      // Import two themes
+      monaco.editor.defineTheme('solarized-dark', SolarizedDark)
+      monaco.editor.defineTheme('cobalt', Cobalt)
       // Create the editor with default option
       this.monaco = monaco.editor.create(document.getElementById('editor-box'), options)
       /**
