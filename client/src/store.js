@@ -89,12 +89,10 @@ export default new Vuex.Store({
      */
     async load ({ state }) {
       try {
-        let gameManager = new GameManager(ProviderFactory.create(state.game.provider, { url: state.game.url }))
+        let gameManager = new GameManager(ProviderFactory.create(state.game.provider, state.game.url))
         await gameManager.loadGame()
       } catch (e) {
         logError('Error during Game loading !', e)
-      } finally {
-        //
       }
     },
     /**

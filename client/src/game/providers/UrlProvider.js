@@ -10,10 +10,12 @@ export default class UrlProvider extends Provider {
    */
   async loadManifest () {
     try {
+      // FIX : Cors errors on diffrent origin
       let response = await fetch(`${this.url}/manifest.json`)
-      let manifest = JSON.stringify(await response.json())
+      let manifest = await response.json()
       return manifest
     } catch (e) {
+      console.warn(e)
       throw new Error('Impossible to load the game manifest, check your url, or if a manifest is present.')
     }
   }

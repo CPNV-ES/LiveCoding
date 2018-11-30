@@ -24,7 +24,7 @@ export default class ProviderFactory {
   /**
    * Return an instance of the corresponding provider
    * @param {string} providerType github | url
-   * @param {Object} params Params to inject on the provider instance
+   * @param {any} params Params to inject on the provider instance
    */
   static create (providerType, params) {
     // Get the right provider

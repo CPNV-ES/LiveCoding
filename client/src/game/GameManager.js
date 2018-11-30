@@ -5,9 +5,10 @@
  * - Run the game
  * - Execute commands from the processor
  * - destroying the game
+ *
+ * @class
+ * @author Bastien Nicoud
  */
-import ProviderFactory from './providers/ProviderFactory'
-
 export default class GameManager {
   /**
    * Constructor
@@ -21,6 +22,6 @@ export default class GameManager {
    * Loads the game
    */
   loadGame () {
-    this.provider.loadManifest()
+    console.log(this.provider.loadManifest())
   }
 }
