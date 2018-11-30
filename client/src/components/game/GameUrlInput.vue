@@ -5,9 +5,25 @@
 export default {
   data () {
     return {
-      loader: false,
-      provider: 'github',
-      url: ''
+      loader: false
+    }
+  },
+  computed: {
+    url: {
+      get () {
+        return this.$store.state.game.url
+      },
+      set (v) {
+        this.$store.commit('UPDATE_GAME_URL', v)
+      }
+    },
+    provider: {
+      get () {
+        return this.$store.state.game.provider
+      },
+      set (v) {
+        this.$store.commit('UPDATE_GAME_PROVIDER', v)
+      }
     }
   },
   methods: {
