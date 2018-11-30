@@ -39,10 +39,10 @@ export default {
       }
     }
   },
+  /**
+   * When the component is mounted
+   */
   mounted () {
-    /**
-     * When the component is mounted, load the editor
-     */
     this.initEditor(monaco)
   },
   beforeDestroy () {
@@ -56,20 +56,21 @@ export default {
      * Launch the code editor (left side of the page)
      */
     initEditor (monaco) {
-      // Construct options
+      // Editor base options
       const options = {
         value: this.value,
         theme: this.theme,
         language: this.language,
+        fontSize: 16,
         minimap: {
           enabled: false
         }
       }
-
       // Create the editor with default option
       this.monaco = monaco.editor.create(document.getElementById('editor-box'), options)
-
-      // Observe editor content changes
+      /**
+       * Register observers on the editor
+       */
       this.monaco.onDidChangeModelContent(event => {
         // Get the current content of the editor
         let value = this.monaco.getValue()
