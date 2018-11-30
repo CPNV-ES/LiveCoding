@@ -6,12 +6,10 @@ import UrlProvider from './UrlProvider'
 
 export default class ProviderFactory {
   /**
-   * Return an instance of the corresponding provider
-   * @param {string} providerType github | url
-   * @param {Object} params Params to inject on the provider instance
+   * Register available providers
    */
-  static create (providerType, params) {
-    let providers = [
+  static get providers () {
+    return [
       {
         name: 'github',
         class: GitHubProvider
@@ -21,7 +19,17 @@ export default class ProviderFactory {
         class: UrlProvider
       }
     ]
+  }
 
-    let provider = providers.find(p => p.name === providerType).class
+  /**
+   * Return an instance of the corresponding provider
+   * @param {string} providerType github | url
+   * @param {Object} params Params to inject on the provider instance
+   */
+  static create (providerType, params) {
+    // Get the right provider
+    let provider = this.providers.find(p => p.name === providerType)
+    // Return new instance of the corresponding provider
+    return new provider.class(params)
   }
 }
