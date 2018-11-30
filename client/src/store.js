@@ -11,10 +11,17 @@ export default new Vuex.Store({
      * Stores all editor related datas
      */
     editor: {
-      theme: 'vs-dark',
-      language: 'javascript',
-      // The value of the editor (the code)
-      value: `let tutu = 'Hello Guys'\nconsole.log(tutu)`
+      // Default theme
+      theme: 'solarized-dark',
+      // Default selected language
+      language: 'ruby',
+      // Mapping between the language and the content of the editor
+      languagesContent: {
+        javascript: `let tutu = 'Bienvenue sur LiveCoding'\ndebugger.log(tutu)\n`,
+        ruby: `tutu = 'Bienvenue sur LiveCoding'\ndebugger.log tutu\n`,
+        php: `<?php\n$tutu = 'Bienvenue sur LiveCoding';\n$debugger->log($tutu);\n`,
+        python: `tutu = 'Bienvenue sur LiveCoding'\ndebugger.log(tutu)\n`
+      }
     },
     /**
      * Information form the current loaded game
@@ -24,9 +31,14 @@ export default new Vuex.Store({
       url: 'https://github.com/bastiennicoud/LiveCoding-Block-Game'
     }
   },
+  getters: {
+    editorContent: state => {
+      return state.editor.languagesContent[state.editor.language]
+    }
+  },
   mutations: {
-    UPDATE_EDITOR_VALUE: (state, value) => {
-      state.editor.value = value
+    UPDATE_EDITOR_CONTENT: (state, value) => {
+      state.editor.languagesContent[state.editor.language] = value
     },
     UPDATE_EDITOR_THEME: (state, value) => {
       state.editor.theme = value

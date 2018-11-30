@@ -18,12 +18,12 @@ export default {
     /**
      * Get and set the store with the current editor state
      */
-    value: {
+    editorContent: {
       get () {
-        return this.$store.state.editor.value
+        return this.$store.getters.editorContent
       },
       set (value) {
-        this.$store.commit('UPDATE_EDITOR_VALUE', value)
+        this.$store.commit('UPDATE_EDITOR_CONTENT', value)
       }
     }
   },
@@ -32,6 +32,7 @@ export default {
     language (newVal) {
       if (this.monaco) {
         window.monaco.editor.setModelLanguage(this.monaco.getModel(), newVal)
+        this.monaco.getModel().setValue(this.editorContent)
       }
     },
     // Theme change
@@ -60,7 +61,7 @@ export default {
     initEditor () {
       // Editor base options
       const options = {
-        value: this.value,
+        value: this.editorContent,
         theme: this.theme,
         language: this.language,
         fontSize: 16,
@@ -79,8 +80,8 @@ export default {
       this.monaco.onDidChangeModelContent(event => {
         // Get the current content of the editor
         let value = this.monaco.getValue()
-        if (this.value !== value) {
-          this.value = value
+        if (this.editorContent !== value) {
+          this.editorContent = value
         }
       })
     }
