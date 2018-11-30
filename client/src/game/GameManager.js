@@ -11,12 +11,10 @@ import ProviderFactory from './providers/ProviderFactory'
 export default class GameManager {
   /**
    * Constructor
-   * @param {Object} options
-   * @param {String} options.providerType
-   * @param {String} options.url
+   * @param {Provider} provider
    */
-  constructor ({ providerType, url }) {
-    this.provider = ProviderFactory(providerType, { url })
+  constructor (provider) {
+    this.provider = provider
   }
 
   /**
