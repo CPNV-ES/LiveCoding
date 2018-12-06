@@ -5,13 +5,6 @@ import Provider from './Provider'
  */
 export default class UrlProvider extends Provider {
   /**
-   * Returns the name of the loaded game
-   * @return {String}
-   */
-  get gameName () {
-    //
-  }
-  /**
    * Loads the manifest of the specified game
    * @async
    */

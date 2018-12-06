@@ -17,11 +17,16 @@ export default class GameManager {
   constructor (provider) {
     this.provider = provider
   }
-
   /**
    * Loads the game
    */
   loadGame () {
     console.log(this.provider.loadManifest())
+  }
+  /**
+   * Loads the game
+   */
+  startGame () {
+    //
   }
 }

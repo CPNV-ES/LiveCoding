@@ -12,4 +12,18 @@ export default class Provider {
   constructor (url) {
     this.url = url
   }
+  /**
+   * Returns the name of the loaded game
+   * @return {String}
+   */
+  get gameName () {
+    return this.manifest.name
+  }
+  /**
+   * Returns the name of the loaded game
+   * @return {String}
+   */
+  get gameDescription () {
+    return this.manifest.description
+  }
 }
