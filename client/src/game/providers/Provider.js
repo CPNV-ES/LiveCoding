@@ -26,4 +26,11 @@ export default class Provider {
   get gameDescription () {
     return this.manifest.description
   }
+  /**
+   * Returns the name of the loaded game
+   * @return {String}
+   */
+  get gameInterpreters () {
+    return this.manifest.interpreters
+  }
 }

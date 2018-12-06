@@ -11,10 +11,11 @@ export default {
   /**
    * Loads a game in the app
    */
-  async load ({ state }) {
+  async load ({ state, commit }) {
     try {
       let gameManager = new GameManager(ProviderFactory.create(state.game.provider, state.game.url))
       await gameManager.loadGame()
+      commit('SET_GAME_MANAGER', gameManager)
     } catch (e) {
       logError('Error during Game loading !', e)
     }

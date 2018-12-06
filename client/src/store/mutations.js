@@ -38,5 +38,13 @@ export default {
    */
   UPDATE_GAME_PROVIDER: (state, value) => {
     state.game.provider = value
+  },
+  /**
+   * Set a new gamemanager (when a game is loaded)
+   * @param {String} value
+   */
+  SET_GAME_MANAGER: (state, value) => {
+    state.game.manager = value
+    state.game.loaded = true
   }
 }

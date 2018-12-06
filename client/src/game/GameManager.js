@@ -20,8 +20,8 @@ export default class GameManager {
   /**
    * Loads the game
    */
-  loadGame () {
-    console.log(this.provider.loadManifest())
+  async loadGame () {
+    await this.provider.loadManifest()
   }
   /**
    * Loads the game

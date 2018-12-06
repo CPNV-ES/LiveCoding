@@ -32,6 +32,8 @@ export default {
    */
   game: {
     provider: 'url',
-    url: 'http://localhost:3333'
+    url: 'http://localhost:3333',
+    loaded: false,
+    manager: null
   }
 }
