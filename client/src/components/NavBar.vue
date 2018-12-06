@@ -5,12 +5,17 @@
  * @author Bastien Nicoud
  */
 import GameUrlInput from '@/components/game/GameUrlInput'
+import { mapState } from 'vuex'
 
 export default {
   components: {
     GameUrlInput
   },
   computed: {
+    ...mapState({
+      gameLoaded: state => state.game.loaded,
+      gameManager: state => state.game.manager
+    }),
     language: {
       get () {
         return this.$store.state.editor.language
@@ -73,7 +78,7 @@ export default {
       </button>
     </div>
     <div class="nav-center">
-      <h1>LiveCoding</h1>
+      <h1>LiveCoding{{ gameLoaded ? ` - ${gameManager.provider.gameName}` : '' }}</h1>
     </div>
     <GameUrlInput />
   </nav>
