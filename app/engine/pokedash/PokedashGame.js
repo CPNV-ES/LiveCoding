@@ -25,9 +25,6 @@ class PokedashGame{
 
    
     preload(){
-        System.import('maps/' + this.mapName.toString() + '.js').then(function(log){
-            console.log(log)
-        })
         // Create PokedashGame's classes attribute amongst element found in the map to load in param
         for (let e in this.mapName.e){      
             this[this.mapName.e[e].toLowerCase()]
@@ -39,7 +36,7 @@ class PokedashGame{
     setup(){
 
         // Define dimension of the map and of each block
-        let canvas = createCanvas(HEIGHT, WIDTH)
+        let canvas = createCanvas(this.HEIGHT, this.WIDTH)
         this.columns = this.mapName.pattern.length    
         this.rows = this.mapName.pattern[0].length
         this.blockHeight = floor(HEIGHT/this.rows)
@@ -70,5 +67,8 @@ class PokedashGame{
                 this.mapElement.push(new this[element].apply(x*this.blockHeight, y*this.blockWidth, this[this.mapName.e[e].toString().toLowerCase()+'Img']))
             }
         }
+    }
+
+    keyPressed() {
     }
 }

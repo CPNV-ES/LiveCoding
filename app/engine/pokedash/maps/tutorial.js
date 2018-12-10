@@ -1,4 +1,5 @@
-export const tutorial = {
+tutorial = {
+    
     /* 
         0 = chemin
         1 = rocher
