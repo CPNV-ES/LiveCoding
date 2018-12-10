@@ -4,83 +4,33 @@
  *
  * @author Bastien Nicoud
  */
+import GameUrlInput from '@/components/game/GameUrlInput'
+import EditorMenu from '@/components/editor/EditorMenu'
+import { mapState } from 'vuex'
+
 export default {
+  components: {
+    GameUrlInput,
+    EditorMenu
+  },
   computed: {
-    language: {
-      get () {
-        return this.$store.state.editor.language
-      },
-      set (value) {
-        this.$store.commit('UPDATE_EDITOR_LANGUAGE', value)
-      }
-    },
-    theme: {
-      get () {
-        return this.$store.state.editor.theme
-      },
-      set (value) {
-        this.$store.commit('UPDATE_EDITOR_THEME', value)
-      }
-    }
+    ...mapState({
+      gameLoaded: state => state.game.loaded,
+      gameManager: state => state.game.manager
+    })
   }
 }
 </script>
 
 <template>
   <nav id="nav-bar">
-    <div class="nav-left">
-      <select
-        v-model="language"
-        class="spacing"
-      >
-        <option value="javascript">
-          JavaScript
-        </option>
-        <option value="ruby">
-          Ruby
-        </option>
-        <option value="python">
-          Python
-        </option>
-        <option value="php">
-          PHP
-        </option>
-      </select>
-      <select
-        v-model="theme"
-        class="spacing"
-      >
-        <option value="vs">
-          Light
-        </option>
-        <option value="vs-dark">
-          Dark
-        </option>
-      </select>
-      <button class="is-blue spacing">
-        Run
-      </button>
-    </div>
+    <!-- EDITOR MENU - LANG SELECTION - THEME -->
+    <EditorMenu />
+    <!-- APP NAME AND GAME NAME -->
     <div class="nav-center">
-      <h1>LiveCoding</h1>
+      <h1>LiveCoding{{ gameLoaded ? ` - ${gameManager.provider.gameName}` : '' }}</h1>
     </div>
-    <div class="nav-right">
-      <select class="spacing">
-        <option value="github">
-          GitHub
-        </option>
-        <option value="folder">
-          Doosier
-        </option>
-      </select>
-      <input
-        class="spacing"
-        type="text"
-        placeholder="URL du jeux"
-      >
-      <button class="is-blue spacing">
-        Charger
-      </button>
-    </div>
+    <!-- GAME LOADING INPUTS -->
+    <GameUrlInput />
   </nav>
 </template>

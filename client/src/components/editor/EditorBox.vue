@@ -5,6 +5,8 @@
  * @author Bastien Nicoud
  */
 import * as monaco from 'monaco-editor'
+import SolarizedDark from 'monaco-themes/themes/Solarized-dark.json'
+import Cobalt from 'monaco-themes/themes/Cobalt.json'
 import { mapState } from 'vuex'
 
 export default {
@@ -16,12 +18,12 @@ export default {
     /**
      * Get and set the store with the current editor state
      */
-    value: {
+    editorContent: {
       get () {
-        return this.$store.state.editor.value
+        return this.$store.getters.editorContent
       },
       set (value) {
-        this.$store.commit('UPDATE_EDITOR_VALUE', value)
+        this.$store.commit('UPDATE_EDITOR_CONTENT', value)
       }
     }
   },
@@ -30,6 +32,7 @@ export default {
     language (newVal) {
       if (this.monaco) {
         window.monaco.editor.setModelLanguage(this.monaco.getModel(), newVal)
+        this.monaco.getModel().setValue(this.editorContent)
       }
     },
     // Theme change
@@ -39,11 +42,11 @@ export default {
       }
     }
   },
+  /**
+   * When the component is mounted
+   */
   mounted () {
-    /**
-     * When the component is mounted, load the editor
-     */
-    this.initEditor(monaco)
+    this.initEditor()
   },
   beforeDestroy () {
     /**
@@ -55,26 +58,30 @@ export default {
     /**
      * Launch the code editor (left side of the page)
      */
-    initEditor (monaco) {
-      // Construct options
+    initEditor () {
+      // Editor base options
       const options = {
-        value: this.value,
+        value: this.editorContent,
         theme: this.theme,
         language: this.language,
+        fontSize: 16,
         minimap: {
           enabled: false
         }
       }
-
+      // Import two themes
+      monaco.editor.defineTheme('solarized-dark', SolarizedDark)
+      monaco.editor.defineTheme('cobalt', Cobalt)
       // Create the editor with default option
       this.monaco = monaco.editor.create(document.getElementById('editor-box'), options)
-
-      // Observe editor content changes
+      /**
+       * Register observers on the editor
+       */
       this.monaco.onDidChangeModelContent(event => {
         // Get the current content of the editor
         let value = this.monaco.getValue()
-        if (this.value !== value) {
-          this.value = value
+        if (this.editorContent !== value) {
+          this.editorContent = value
         }
       })
     }
