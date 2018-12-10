@@ -26,7 +26,11 @@ export default class GameManager {
   /**
    * Loads the game
    */
-  startGame () {
-    //
+  async startGame () {
+    // Each game must have a entry class, thi class will be used to access the game
+    // TODO :
+    // - Load the context of the game (with js module)
+    // - loads the game context (suported languages)
+    // - Create the game class
   }
 }

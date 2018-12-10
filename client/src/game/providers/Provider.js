@@ -1,5 +1,8 @@
 /**
  * Provider base class
+ *
+ * @class
+ * @author Bastien Nicoud
  */
 export default class Provider {
   /** @type {String} */

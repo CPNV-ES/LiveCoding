@@ -43,19 +43,16 @@ export default {
         v-model="language"
         class="spacing"
       >
-        <option value="javascript">
-          JavaScript
-        </option>
-        <option value="ruby">
-          Ruby
-        </option>
-        <option value="python">
-          Python
-        </option>
-        <option value="php">
-          PHP
+        <!-- DISPLAY THE INTERPRETERS SUPPORTED BY THE GAME -->
+        <option
+          v-for="lang in gameManager.provider.gameInterpreters"
+          :key="lang"
+          value="lang"
+        >
+          {{ lang }}
         </option>
       </select>
+      <!-- SELECT COLOR THEME -->
       <select
         v-model="theme"
         class="spacing"
