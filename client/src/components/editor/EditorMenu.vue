@@ -36,6 +36,7 @@ export default {
   <div class="nav-left">
     <!-- LANGUAGES LIST -->
     <select
+      v-if="gameLoaded"
       v-model="language"
       class="spacing"
     >

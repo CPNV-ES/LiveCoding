@@ -24,6 +24,7 @@ export default {
 
 <template>
   <nav id="nav-bar">
+    <!-- EDITOR MENU - LANG SELECTION - THEME -->
     <EditorMenu />
     <!-- APP NAME AND GAME NAME -->
     <div class="nav-center">
