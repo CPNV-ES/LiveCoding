@@ -1,5 +1,5 @@
 class Pokeball extends StaticElement{
-    constructor(x, y){
-        super(x, y)
+    constructor(x, y, img){
+        super(x, y, img)
     }
 }

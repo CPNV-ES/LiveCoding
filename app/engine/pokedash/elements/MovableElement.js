@@ -1,6 +1,6 @@
 class MovableElement extends Element {
-    constructor(x,y){
-        super(x,y)
+    constructor(x,y, img){
+        super(x,y, img)
     }
 
     moveRight(){

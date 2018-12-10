@@ -1,8 +1,10 @@
 class PokedashGame{
-    constructor(comCli){
+    constructor(mapName, comCli){
+        this.mapName = mapName
         this.HEIGHT = 768
         this.WIDTH = 768
-        this.blockDimension
+        this.blockHeight
+        this.blockWidth
         this.columns
         this.rows
 
@@ -11,58 +13,62 @@ class PokedashGame{
             "isRightSideFree()",
             "isUpSideFree()",
             "isDownSideFree()",
-            "pacman.moveLeft()",
-            "pacman.moveRight()",
-            "pacman.moveUp()",
-            "pacman.moveDown()",
+            "moveLeft()",
+            "moveRight()",
+            "moveUp()",
+            "moveDown()",
         ];
-         // Engine Communication to the server
-        this.comCliEngine = comCli
-        this.wallImg
-        this.pacmanImg
-        this.wall
-        this.pikachu
-        this.element = []
+
+        this.comCliEngine = comCli   // Engine Communication to the server
+        this.mapElement = []
     }
 
-    preload(mapName){
-        for (let e in mapName.e){      //Example: Elements in tutorial => Road, Boulder, Door, OpenDoor, Pikachu, Pokeball, Tree
-            this[mapName.e[i].toString().toLowerCase()+'Img'] = e.loadSprite() //Example with 'e'="Road": this.roadImg = loadImage("assets/road.jpg")       
+   
+    preload(){
+        System.import('maps/' + this.mapName.toString() + '.js').then(function(log){
+            console.log(log)
+        })
+        // Create PokedashGame's classes attribute amongst element found in the map to load in param
+        for (let e in this.mapName.e){      
+            this[this.mapName.e[e].toLowerCase()]
+            this[this.mapName.e[e].toString().toLowerCase()+'Img'] = e.loadSprite() // Load sprite of element and assign it as an attribute
         }
+        
     }
 
-    setup(mapName){
+    setup(){
 
         // Define dimension of the map and of each block
-        let canvas = createCanvas(HEIGHT, WIDTH);
-        this.blockDimension = mapName.pattern.length 
-        this.columns = floor(WIDTH/blockDimension)          
-        this.rows = floor(HEIGHT/blockDimension)
+        let canvas = createCanvas(HEIGHT, WIDTH)
+        this.columns = this.mapName.pattern.length    
+        this.rows = this.mapName.pattern[0].length
+        this.blockHeight = floor(HEIGHT/this.rows)
+        this.blockWidth = floor(WIDTH/this.columns)
         canvas.parent("game");
-        this.loadMap();
+        this.iterateOverMap()
         // The game is fully loaded, we can send all the command to the editor (through the builder)
         this.sendMessageToServer(JSON.stringify(this.availableCommands));
     }
 
     draw() {
         background("#5E3F6B");
-        // Traval all the walls array and display each walls
-        for (let i = 0; i < this.walls.length; i++) {
-            this.walls[i].show();
+        // Display each element on the map
+        for (let i = 0; i < this.mapElement.length; i++) {
+            this.mapElement[i].show();
         }
-        this.pacman.show();
     }
 
     //Function to iterate through the pattern map to fill the array map
-    fillMap()
-
-
-    loadMap(mapName){
-        System.import('maps/' + mapName.toString()).then(function(log){
-            console.log(log)
-        })
-        this.preload(mapName)
-        this.setup(mapName)
-        this.draw
+    iterateOverMap(){
+        for (let x = 0; x < this.rows; x++) {
+            for (let y = 0; y < this.columns; y++) {
+                element = this.mapName.e[x][y].toLowerCase()
+                elementImg = this.mapName.e[x][y].toString().toLowerCase()+'Img' 
+                /*if((this.mapName.e[x][y]) == pikachu){
+                    this.mapElement.push(pikachu(x, y, this.pikachuImg))
+                }*/
+                this.mapElement.push(new this[element].apply(x*this.blockHeight, y*this.blockWidth, this[this.mapName.e[e].toString().toLowerCase()+'Img']))
+            }
+        }
     }
 }

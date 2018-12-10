@@ -1,7 +1,8 @@
 class Element{
-    constructor(x, y){
-        this.x = x;
-        this.y = y;
+    constructor(x, y, img){
+        this.x = x
+        this.y = y
+        this.img = img
     }
 
     static loadSprite(){

@@ -1,5 +1,5 @@
 class Boulder extends MovableElement{
-    constructor(x, y){
-        super(x, y)
+    constructor(x, y, img){
+        super(x, y, img)
     }
 }
