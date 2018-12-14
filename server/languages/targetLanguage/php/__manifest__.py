@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 {
     'name': 'Php Language Class',
     'targetLanguage': 'Php',
