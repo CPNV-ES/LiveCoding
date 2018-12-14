@@ -1,6 +1,8 @@
 # Client side app
 
-# Installation
+This part of the platform is responsible of displaying the LiveCoding interface, loading the game, comunicate with the interpreter, and provide a code editor.
+
+## Installation
 
 ```sh
 # Install dependencies
