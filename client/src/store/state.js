@@ -49,16 +49,19 @@ export default {
      */
     messages: [
       {
+        id: 1,
         content: 'Application launched',
         type: 'info',
         time: new Date()
       },
       {
+        id: 2,
         content: 'Loading Game ...',
         type: 'info',
         time: new Date()
       },
       {
+        id: 3,
         content: 'Error, game not accesible, check network.',
         type: 'error',
         time: new Date()
