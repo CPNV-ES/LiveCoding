@@ -1,4 +1,4 @@
-from Language import *
+from . import *
 
 class LanguageFactory:
 
@@ -6,8 +6,8 @@ class LanguageFactory:
 		pass
 
 	@staticmethod
-	def create(targetLanguage):
-		if targetLanguage == "ruby":
-			return Ruby()
-		elif targetLanguage == "php":
+	def create(Language):
+		if Language == "ruby":
+			return  Ruby()
+		elif Language == "php":
 			return Php()
