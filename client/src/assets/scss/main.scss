@@ -1,0 +1,29 @@
+@charset "utf-8";
+// Style entry file
+
+// Normalize css across browsers
+@import '~modern-normalize/modern-normalize.css';
+
+// Import our custom vars
+@import "./vars.scss";
+
+// Globals for all the app
+@import "./globals.scss";
+
+// Layout of the app
+@import "./layout.scss";
+
+// Nav Bat
+@import "./nav-bar.scss";
+
+// Buttons
+@import "./buttons.scss";
+
+// Inputs
+@import "./inputs.scss";
+
+// Loader
+@import "./loader.scss";
+
+// Console
+@import "./console.scss";

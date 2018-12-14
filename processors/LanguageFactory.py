@@ -1,5 +1,7 @@
-exec(open("Php.py").read())
-exec(open("Ruby.py").read())
+from Php import Php
+from Ruby import Ruby
+# exec(open("Php.py").read())
+# exec(open("Ruby.py").read())
 
 class LanguageFactory:
 

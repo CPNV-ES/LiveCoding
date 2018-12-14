@@ -6,8 +6,6 @@ class Wall {
         this.y = y;
     }
 
-
-
     show(){
         image(this.img, this.x, this.y);
     }
