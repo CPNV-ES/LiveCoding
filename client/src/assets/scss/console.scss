@@ -2,33 +2,33 @@
 
 #console-box {
   display: flex;
-  flex-direction: column-reverse;
+  flex-direction: column;
   flex-wrap: nowrap;
   padding: 4px;
+
+  overflow: scroll;
 
   .message {
     padding: 4px 4px;
 
     font-family: monospace;
 
-    span {
-      color: $grey-light;
+    color: $grey-light;
 
-      &.log {
-        color: $white-ter;
-      }
+    &.log {
+      color: $white-ter;
+    }
 
-      &.info {
-        color: $turquoise;
-      }
+    &.info {
+      color: $turquoise;
+    }
 
-      &.warning {
-        color: $orange;
-      }
+    &.warning {
+      color: $orange;
+    }
 
-      &.error {
-        color: $red;
-      }
+    &.error {
+      color: $red;
     }
   }
 }
