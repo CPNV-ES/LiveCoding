@@ -21,7 +21,12 @@ export default class GameManager {
    * Loads the game
    */
   async loadGame () {
+    // Loads the manifest of the game (from the external source)
     await this.provider.loadManifest()
+    // Loads game classes
+    await this.provider.loadGame()
+    // Starts the game
+    await this.startGame()
   }
   /**
    * Loads the game

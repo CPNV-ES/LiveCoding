@@ -36,4 +36,10 @@ export default class Provider {
   get gameInterpreters () {
     return this.manifest.paths.interpreters
   }
+  /**
+   * Loads the game scripts (described in the game manifest)
+   */
+  loadGame () {
+    // - Get all the nesesary resources for the game
+  }
 }

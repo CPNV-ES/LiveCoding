@@ -46,5 +46,12 @@ export default {
   SET_GAME_MANAGER: (state, value) => {
     state.game.manager = value
     state.game.loaded = true
+  },
+  /**
+   * Add a console message
+   * @param {Object} message
+   */
+  NEW_MESSAGE: (state, message) => {
+    state.console.messages.push(message)
   }
 }
