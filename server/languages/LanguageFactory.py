@@ -1,5 +1,3 @@
-from . import *
-
 class LanguageFactory:
 
 	def __init__(self):

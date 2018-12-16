@@ -3,7 +3,8 @@ import os
 import json
 import logging
 from TempFile import TempFile
-import languages
+from languages.LanguageFactory import LanguageFactory
+exec(open("setup.py").read())
 
 class Processor:
 
@@ -15,7 +16,7 @@ class Processor:
 	def peel(self, data):
 		targetLanguage = data.split('/', 1)[0] # Target language is just the name who become from the socket message
 		self.userCmds = data.split('/', 1)[1]
-		self.language = languages.LanguageFactory.create(targetLanguage) # language is the real language object /ruby, Php, etc.)
+		self.language = LanguageFactory.create(targetLanguage) # language is the real language object /ruby, Php, etc.)
 
 	def execute(self, socket):
 		tmpFileToRun = TempFile(self.userCmds, self.language.getFileHeader(), self.language.getFileFooter())
