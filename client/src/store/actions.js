@@ -1,5 +1,4 @@
 import GameManager from '@/game/GameManager'
-import { logError } from '@/console/DevConsole'
 import ProviderFactory from '../game/providers/ProviderFactory'
 
 /**
@@ -17,7 +16,12 @@ export default {
       await gameManager.loadGame()
       commit('SET_GAME_MANAGER', gameManager)
     } catch (e) {
-      logError('Error during Game loading !', e)
+      commit('ADD_CONSOLE_MESSAGE', {
+        text: 'Error during Game loading !',
+        payload: e,
+        type: 'error',
+        time: new Date()
+      })
     }
   },
   /**

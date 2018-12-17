@@ -1,3 +1,5 @@
+import { logError } from '@/console/DevConsole'
+
 /**
  * Mutations for the vuex store
  * @module
@@ -51,7 +53,11 @@ export default {
    * Add a console message
    * @param {Object} message
    */
-  NEW_MESSAGE: (state, message) => {
+  ADD_CONSOLE_MESSAGE: (state, message) => {
+    message.id = 2
+    // Add the message in the store
     state.console.messages.push(message)
+    // Logs the message in the developpment console
+    logError(message.text, message.payload)
   }
 }
