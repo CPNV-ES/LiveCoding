@@ -4,17 +4,12 @@
  *
  * @author Bastien Nicoud
  */
-import { mapState, mapMutations } from 'vuex'
+import { mapState } from 'vuex'
 
 export default {
   computed: {
     ...mapState({
       messages: state => state.console.messages
-    })
-  },
-  methods: {
-    ...mapMutations({
-      msg: 'NEW_MESSAGE'
     })
   }
 }
