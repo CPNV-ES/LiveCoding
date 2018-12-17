@@ -1,5 +1,3 @@
-import { log } from '@/console/DevConsole'
-
 /**
  * Mutations for the vuex store
  * @module
@@ -48,17 +46,5 @@ export default {
   SET_GAME_MANAGER: (state, value) => {
     state.game.manager = value
     state.game.loaded = true
-  },
-  /**
-   * Add a console message
-   * @param {Object} message
-   */
-  ADD_CONSOLE_MESSAGE: (state, message) => {
-    // Create a random id for each messages
-    message.id = crypto.getRandomValues(new Uint32Array(2)).join()
-    // Add the message in the store
-    state.console.messages.push(message)
-    // Logs the message in the developpment console
-    log(message)
   }
 }

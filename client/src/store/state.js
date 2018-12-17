@@ -35,19 +35,5 @@ export default {
     url: 'http://localhost:3333',
     loaded: false,
     manager: null
-  },
-  /**
-   * Conosole stores the messages displayed in the little console on bottom of the page
-   */
-  console: {
-    /**
-     * Each messages will be displayed into the console of the browser, and the console of the game
-     * **Message datas**
-     * - **text :** the message to display
-     * - **payload :** value to log in the console
-     * - **type :** the type of message (log, info, warning, error, ...)
-     * - **time :** timestamp at the emission of the message
-     */
-    messages: []
   }
 }
