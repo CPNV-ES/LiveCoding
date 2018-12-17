@@ -8,7 +8,7 @@ exec(open("setup.py").read())
 class Processor:
 
 	def __init__(self):
-		self.language = ''
+		self.language = object
 		self.userCmds = ''
 		pass
 
