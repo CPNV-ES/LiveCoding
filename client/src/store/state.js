@@ -43,29 +43,11 @@ export default {
     /**
      * Each messages will be displayed into the console of the browser, and the console of the game
      * **Message datas**
-     * - **content :** the value to display
+     * - **text :** the message to display
+     * - **payload :** value to log in the console
      * - **type :** the type of message (log, info, warning, error, ...)
      * - **time :** timestamp at the emission of the message
      */
-    messages: [
-      {
-        id: 1,
-        content: 'Application launched',
-        type: 'info',
-        time: new Date()
-      },
-      {
-        id: 2,
-        content: 'Loading Game ...',
-        type: 'info',
-        time: new Date()
-      },
-      {
-        id: 3,
-        content: 'Error, game not accesible, check network.',
-        type: 'error',
-        time: new Date()
-      }
-    ]
+    messages: []
   }
 }
