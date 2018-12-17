@@ -3,3 +3,5 @@ class Boulder extends MovableElement{
         super(x, y, img)
     }
 }
+
+module.exports = Boulder

@@ -5,7 +5,9 @@ class Element{
         this.img = img
     }
 
-    static loadSprite(){
+   /* static loadSprite(){
         return loadImage(`assets/${this.constructor.name.toLowerCase()}.jpg`)
-    }
+    }*/
 }
+
+// TO DELETE IF NOT USED : module.exports = Element

@@ -19,3 +19,5 @@ class MovableElement extends Element {
         
     }
 }
+
+// TO DELETE IF NOT USED : module.exports = MovableElement

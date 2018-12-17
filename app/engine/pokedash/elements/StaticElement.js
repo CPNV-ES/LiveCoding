@@ -3,3 +3,5 @@ class StaticElement extends Element {
         super(x, y, img)
     }
 }
+
+// TO DELETE IF NOT USED : module.exports = StaticElement

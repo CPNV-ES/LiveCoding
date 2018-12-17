@@ -4,3 +4,5 @@ class Pikachu extends MovableElement{
     } 
     //static LIFE = 3 
 }
+
+// TO DELETE IF NOT USED : module.exports = Pikachu

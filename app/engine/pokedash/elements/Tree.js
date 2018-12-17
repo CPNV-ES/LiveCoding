@@ -3,3 +3,5 @@ class Tree extends StaticElement{
         super(x, y, img)
     }
 }
+
+// TO DELETE IF NOT USED : module.exports = Tree

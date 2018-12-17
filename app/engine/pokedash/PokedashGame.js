@@ -1,3 +1,4 @@
+//TO DELETE IF NOT USED: const DynamicElement = require('./DynamicElement')
 class PokedashGame{
     constructor(mapName, comCli){
         this.mapName = mapName
@@ -26,28 +27,31 @@ class PokedashGame{
    
     preload(){
         // Create PokedashGame's classes attribute amongst element found in the map to load in param
-        for (let e in this.mapName.e){      
-            this[this.mapName.e[e].toLowerCase()]
-            this[this.mapName.e[e].toString().toLowerCase()+'Img'] = e.loadSprite() // Load sprite of element and assign it as an attribute
-        }
-        
+        //Example: Create this.pokemon and this.pokemonImg
+        for (let ele in window[this.mapName.e]){
+            let eName = window[this.mapName].e[ele].name.toLowerCase()
+            this[eName] //if ele = 0 -> this.road
+            this[eName+'Img'] = loadImage("engine/pokedash/assets/"+eName+".png") // -> this.roadImg = loadImg(assets/road.jpg)
+        }    
     }
 
     setup(){
-
         // Define dimension of the map and of each block
+        console.log("mapname: " + this.mapName)
+        console.log("tutorial.js elements: " + window[this.mapName].e[5])
         let canvas = createCanvas(this.HEIGHT, this.WIDTH)
-        this.columns = this.mapName.pattern.length    
-        this.rows = this.mapName.pattern[0].length
-        this.blockHeight = floor(HEIGHT/this.rows)
-        this.blockWidth = floor(WIDTH/this.columns)
-        canvas.parent("game");
+        this.columns = window[this.mapName].pattern.length    
+        this.rows = window[this.mapName].pattern[0].length
+        this.blockHeight = floor(this.HEIGHT/this.rows)
+        this.blockWidth = floor(this.WIDTH/this.columns)
+        canvas.parent("game")
+        // illegal constructor ??? test:=> new Element()
         this.iterateOverMap()
         // The game is fully loaded, we can send all the command to the editor (through the builder)
-        this.sendMessageToServer(JSON.stringify(this.availableCommands));
+        this.sendMessageToServer(JSON.stringify(this.availableCommands))
     }
 
-    draw() {
+    draw() { 
         background("#5E3F6B");
         // Display each element on the map
         for (let i = 0; i < this.mapElement.length; i++) {
@@ -57,18 +61,38 @@ class PokedashGame{
 
     //Function to iterate through the pattern map to fill the array map
     iterateOverMap(){
-        for (let x = 0; x < this.rows; x++) {
+        for (let x = 0; x < this.rows; x++){
             for (let y = 0; y < this.columns; y++) {
-                element = this.mapName.e[x][y].toLowerCase()
-                elementImg = this.mapName.e[x][y].toString().toLowerCase()+'Img' 
+                let idElement = window[this.mapName].pattern[x][y]
+                let element = window[this.mapName].e[idElement].name
+                let elementImg = element.toLowerCase()+'Img' 
+                console.log("id element: "+idElement)
+                console.log("element: " + element)
+                console.log("element image: " + elementImg)
                 /*if((this.mapName.e[x][y]) == pikachu){
                     this.mapElement.push(pikachu(x, y, this.pikachuImg))
                 }*/
-                this.mapElement.push(new this[element].apply(x*this.blockHeight, y*this.blockWidth, this[this.mapName.e[e].toString().toLowerCase()+'Img']))
+               // this.mapElement.push(new DynamicElement(element, [x*this.blockHeight, y*this.blockWidth, this[elementImg]]))
+               //this.mapElement.push(new[element].apply(x*this.blockHeight, y*this.blockWidth, this[elementImg]))
+
             }
         }
     }
 
-    keyPressed() {
+    keyPressed(){
+    }
+
+    sendMessageToServer(messageToSend){
+        // Send message (cmdsEvailable) to the Editor
+        this.comCliEngine.send(messageToSend, (event, msg) => {
+            // Callback : When we receive a message (cmds to execute)
+            // we fetch the cmds, execute them and send to the Processor the returned value
+            let command = msg.split("/")[1]
+
+            this.comCliEngine.send(eval(command), (r) => {
+                // Callback:
+            });
+            console.log("Response from server: "+msg); // arg contains message
+        });
     }
 }
