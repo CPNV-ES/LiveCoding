@@ -3,7 +3,7 @@ import subprocess
 class Ruby:
 
 	def __init__(self):
-		self.header = "load \"languages/targetLanguage/ruby/commands.rb\""
+		self.header = "load \"languages/ruby/commands.rb\""
 		self.footer = ""
 		# Language call is the real name of the command we'll run in the CLI
 		# We define it in case of versionning e.g : python 3

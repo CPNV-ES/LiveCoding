@@ -3,7 +3,6 @@ import os
 import json
 import logging
 from TempFile import TempFile
-from languages.LanguageFactory import LanguageFactory
 exec(open("setup.py").read())
 
 class Processor:

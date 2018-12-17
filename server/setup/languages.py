@@ -2,7 +2,7 @@ import os, fnmatch
 import json
 
 root = os.getcwd()
-path = root + "/languages/targetLanguage/"
+path = root + "/languages/"
 pattern = "__manifest__.py"
 languages = {}
 
