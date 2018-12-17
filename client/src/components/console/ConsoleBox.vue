@@ -29,10 +29,10 @@ export default {
       :class="message.type"
     >
       <span>
-        [{{ message.time.getHours() }}:{{ message.time.getMinutes() }}]
+        [{{ message.time.getHours() }}:{{ message.time.getMinutes() }}:{{ message.time.getSeconds() }}]
       </span>
       <span>
-        {{ message.content }}
+        {{ message.text }}
       </span>
     </div>
   </div>
