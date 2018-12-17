@@ -2,7 +2,8 @@ let colors = {
   log: 'hsl(0, 0%, 96%)',
   info: '#0fb9b1',
   warning: '#fa8231',
-  error: '#eb3b5a'
+  error: '#eb3b5a',
+  success: '#20bf6b'
 }
 
 /**

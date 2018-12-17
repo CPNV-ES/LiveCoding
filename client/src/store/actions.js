@@ -15,6 +15,11 @@ export default {
       let gameManager = new GameManager(ProviderFactory.create(state.game.provider, state.game.url))
       await gameManager.loadGame()
       commit('SET_GAME_MANAGER', gameManager)
+      commit('ADD_CONSOLE_MESSAGE', {
+        text: 'Game loaded ! Ready to go !',
+        type: 'success',
+        time: new Date()
+      })
     } catch (e) {
       commit('ADD_CONSOLE_MESSAGE', {
         text: 'Error during Game loading !',
