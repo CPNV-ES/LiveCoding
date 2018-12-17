@@ -10,6 +10,11 @@ export default {
   mounted () {
     // When the box for the game is mounted, we can load the default game
     this.loadGame()
+    this.$store.commit('ADD_CONSOLE_MESSAGE', {
+      text: 'Game box mounted, ready to load game !',
+      type: 'info',
+      time: new Date()
+    })
   },
   methods: {
     ...mapActions({

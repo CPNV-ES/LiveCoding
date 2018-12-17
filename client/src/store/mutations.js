@@ -1,4 +1,4 @@
-import { logError } from '@/console/DevConsole'
+import { log } from '@/console/DevConsole'
 
 /**
  * Mutations for the vuex store
@@ -54,10 +54,11 @@ export default {
    * @param {Object} message
    */
   ADD_CONSOLE_MESSAGE: (state, message) => {
-    message.id = 2
+    // Create a random id for each messages
+    message.id = crypto.getRandomValues(new Uint32Array(2)).join()
     // Add the message in the store
     state.console.messages.push(message)
     // Logs the message in the developpment console
-    logError(message.text, message.payload)
+    log(message)
   }
 }
