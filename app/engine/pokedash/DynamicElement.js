@@ -25,8 +25,8 @@ const classes = {
 }
 
 class DynamicElement{
-    constructor (className, opts){
-        return new classes[className](opts)
+    constructor (className, x, y, img){
+        return new classes[className](x, y, img)
     }
 }
 

@@ -4,4 +4,4 @@ class Boulder extends MovableElement{
     }
 }
 
-module.exports = Boulder
+// TO DELETE IF NOT USED : module.exports = Boulder

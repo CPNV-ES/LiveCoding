@@ -22,16 +22,23 @@ class PokedashGame{
 
         this.comCliEngine = comCli   // Engine Communication to the server
         this.mapElement = []
+        this.a 
+        this.b 
+        this.c
     }
 
    
     preload(){
         // Create PokedashGame's classes attribute amongst element found in the map to load in param
         //Example: Create this.pokemon and this.pokemonImg
+        console.log("Preload->this.mapName: " + this.mapName)
+        console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
         for (let ele in window[this.mapName.e]){
+            console.log("BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB")
             let eName = window[this.mapName].e[ele].name.toLowerCase()
             this[eName] //if ele = 0 -> this.road
             this[eName+'Img'] = loadImage("engine/pokedash/assets/"+eName+".png") // -> this.roadImg = loadImg(assets/road.jpg)
+            console.log("s: " + this[eName+'Img'])
         }    
     }
 
@@ -45,7 +52,7 @@ class PokedashGame{
         this.blockHeight = floor(this.HEIGHT/this.rows)
         this.blockWidth = floor(this.WIDTH/this.columns)
         canvas.parent("game")
-        // illegal constructor ??? test:=> new Element()
+        new Element()
         this.iterateOverMap()
         // The game is fully loaded, we can send all the command to the editor (through the builder)
         this.sendMessageToServer(JSON.stringify(this.availableCommands))
@@ -72,11 +79,12 @@ class PokedashGame{
                 /*if((this.mapName.e[x][y]) == pikachu){
                     this.mapElement.push(pikachu(x, y, this.pikachuImg))
                 }*/
-               // this.mapElement.push(new DynamicElement(element, [x*this.blockHeight, y*this.blockWidth, this[elementImg]]))
+               this.mapElement.push(new DynamicElement(element, x*this.blockHeight, y*this.blockWidth, this[elementImg]))
                //this.mapElement.push(new[element].apply(x*this.blockHeight, y*this.blockWidth, this[elementImg]))
 
             }
         }
+        console.log("map img: " + this.treeImg)
     }
 
     keyPressed(){
