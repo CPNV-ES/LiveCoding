@@ -30,7 +30,9 @@ All the json messages share the same structure :
 
 ```json
 {
-
+  "type": "message",
+  "message": "Error retrieving code from the client.",
+  "time": "1221212"
 }
 ```
 
@@ -42,4 +44,37 @@ In pure text, the raw code is directly transferred in one block to the server, w
 
 ## Errors
 
-In cas of runtime error, the server return to the client the error in a json format, for user friendly formatting.
+In case of error, the server will send a corresponding message to the client.
+They are two types of errors :
+
+### Server errors
+
+These are errors fired by the python server, they can be type check fail, or content mismatch...
+In these case the server will fire a message on the websocket with the type of error, and content.
+
+Example :
+```json
+{
+  "type": "error",
+  "code": "SERVER_ERROR",
+  "message": "Error retrieving code from the client.",
+  "time": "1221212"
+}
+```
+
+### Interpreter errors
+
+These errors are fired by the interpreter launched by the user when y run his code. It can by runtime
+error from the specified language, syntax/parsing errors, unexpected token...
+
+These errors are captured by the server and sended to the client for debugging.
+
+Example :
+```json
+{
+  "type": "error",
+  "code": "INTERPRETER_ERROR",
+  "message": "Unexpected token on line 12.",
+  "time": "1221212"
+}
+```
