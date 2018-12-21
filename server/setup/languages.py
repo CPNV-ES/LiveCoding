@@ -1,11 +1,11 @@
 import os, fnmatch
 import json
+from mlogging import mlog
 
 root = os.getcwd()
 path = root + "/languages/"
 pattern = "__manifest__.py"
 languages = {}
-
 directories = [d for d in os.listdir(path) if os.path.isdir(os.path.join(os.path.abspath(path), d))]
 
 for dir in directories:
@@ -18,3 +18,4 @@ for dir in directories:
             fileName = json.loads(content)['file name']
             languages[languageName] = fileName
             exec(open(currentDirectory + fileName).read())
+            mlog.show('Language ' + languageName + " has been loaded")
