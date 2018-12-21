@@ -22,30 +22,26 @@ class PokedashGame{
 
         this.comCliEngine = comCli   // Engine Communication to the server
         this.mapElement = []
-        this.a 
-        this.b 
-        this.c
+
     }
 
    
     preload(){
         // Create PokedashGame's classes attribute amongst element found in the map to load in param
         //Example: Create this.pokemon and this.pokemonImg
-        console.log("Preload->this.mapName: " + this.mapName)
-        console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
-        for (let ele in window[this.mapName.e]){
-            console.log("BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB")
+        console.log("------------ PRELOAD() ------------")
+        console.log("this.mapName: " + this.mapName)
+        for (let ele in window[this.mapName].e){ //<- PROBLEM HERE !! window[this.mapName.e] return undefined
             let eName = window[this.mapName].e[ele].name.toLowerCase()
-            this[eName] //if ele = 0 -> this.road
-            this[eName+'Img'] = loadImage("engine/pokedash/assets/"+eName+".png") // -> this.roadImg = loadImg(assets/road.jpg)
-            console.log("s: " + this[eName+'Img'])
+            this[eName] = null//if ele = 0 -> this.road
+            console.log("eName: "+eName)
+            this[eName+"Img"] = loadImage("engine/pokedash/assets/"+eName+"Img.png") // -> this.roadImg = loadImg(assets/road.jpg)
         }    
     }
 
     setup(){
         // Define dimension of the map and of each block
-        console.log("mapname: " + this.mapName)
-        console.log("tutorial.js elements: " + window[this.mapName].e[5])
+        console.log("------------ SETUP() ------------")
         let canvas = createCanvas(this.HEIGHT, this.WIDTH)
         this.columns = window[this.mapName].pattern.length    
         this.rows = window[this.mapName].pattern[0].length
@@ -62,35 +58,33 @@ class PokedashGame{
         background("#5E3F6B");
         // Display each element on the map
         for (let i = 0; i < this.mapElement.length; i++) {
-            this.mapElement[i].show();
+            this.mapElement[i].show()
         }
     }
 
     //Function to iterate through the pattern map to fill the array map
     iterateOverMap(){
+        console.log("------------ ITERATEOVERMAP() ------------")
         for (let x = 0; x < this.rows; x++){
             for (let y = 0; y < this.columns; y++) {
                 let idElement = window[this.mapName].pattern[x][y]
                 let element = window[this.mapName].e[idElement].name
                 let elementImg = element.toLowerCase()+'Img' 
-                console.log("id element: "+idElement)
+                /*console.log("id element: "+idElement)
                 console.log("element: " + element)
-                console.log("element image: " + elementImg)
-                /*if((this.mapName.e[x][y]) == pikachu){
-                    this.mapElement.push(pikachu(x, y, this.pikachuImg))
-                }*/
-               this.mapElement.push(new DynamicElement(element, x*this.blockHeight, y*this.blockWidth, this[elementImg]))
-               //this.mapElement.push(new[element].apply(x*this.blockHeight, y*this.blockWidth, this[elementImg]))
-
+                console.log("element image: " + elementImg) // si elementImg = roadImg*/
+                this.mapElement.push(new DynamicElement(element, x*this.blockHeight, y*this.blockWidth, this[elementImg]))
             }
         }
-        console.log("map img: " + this.treeImg)
+        console.log("this.tree: " + this.tree)
     }
 
     keyPressed(){
+        console.log("------------ KEYPRESSED() ------------")
     }
 
     sendMessageToServer(messageToSend){
+        console.log("------------ SENDMESSAGETOSERVER(messageToSend) ------------")
         // Send message (cmdsEvailable) to the Editor
         this.comCliEngine.send(messageToSend, (event, msg) => {
             // Callback : When we receive a message (cmds to execute)
