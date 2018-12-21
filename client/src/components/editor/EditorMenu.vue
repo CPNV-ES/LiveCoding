@@ -70,5 +70,8 @@ export default {
     <button class="is-blue spacing">
       Run
     </button>
+    <button class="spacing">
+      Infos
+    </button>
   </div>
 </template>

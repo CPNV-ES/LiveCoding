@@ -37,6 +37,13 @@ export default class Provider {
     return this.manifest.paths.interpreters
   }
   /**
+   * Returns the array of instructions
+   * @return {Array}
+   */
+  get gameInstructions () {
+    return this.manifest.instructions
+  }
+  /**
    * Loads the game scripts (described in the game manifest)
    */
   loadGame () {
