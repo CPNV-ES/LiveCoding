@@ -12,7 +12,7 @@ This file provide base informations about your game, thats allow the platform to
   "description": "A meaningless game for test purpose.",
   "data": {
     "game": "/game.js",
-    "assets": "/assets",
+    "assets": "/assets"
   },
   "interpreters": {
     "php": "interpreters/php.php",
@@ -60,6 +60,17 @@ The data key contains all the paths related to the game engine and assets.
   ...
   "data": {
     ...
+  }
+}
+```
+
+#### Data > game
+The game key specifies the entry file of the game.
+```json
+{
+  ...
+  "data": {
+    "game": "main.js"
   }
 }
 ```
