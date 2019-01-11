@@ -67,8 +67,24 @@ export default {
         Cobalt
       </option>
     </select>
-    <button class="is-blue spacing">
+    <!-- LAUNCH THE EXECUTION OF THE SCRIPT -->
+    <button
+      class="is-blue spacing"
+      title="Lancez l'execution de votre script !"
+    >
       Run
     </button>
+    <span
+      v-if="gameLoaded"
+    >
+      <button
+        v-for="(instruction, index) of gameManager.provider.gameInstructions"
+        :key="index"
+        class="spacing"
+        :title="instruction.description"
+      >
+        {{ instruction.name }}
+      </button>
+    </span>
   </div>
 </template>
