@@ -42,11 +42,11 @@ export default {
     >
       <!-- DISPLAY THE INTERPRETERS SUPPORTED BY THE GAME -->
       <option
-        v-for="lang in gameManager.provider.gameInterpreters"
-        :key="lang"
-        value="lang"
+        v-for="(lang, index) in gameManager.provider.gameInterpreters"
+        :key="index"
+        :value="index"
       >
-        {{ lang }}
+        {{ index }}
       </option>
     </select>
     <!-- SELECT COLOR THEME -->
@@ -67,8 +67,24 @@ export default {
         Cobalt
       </option>
     </select>
-    <button class="is-blue spacing">
+    <!-- LAUNCH THE EXECUTION OF THE SCRIPT -->
+    <button
+      class="is-blue spacing"
+      title="Lancez l'execution de votre script !"
+    >
       Run
     </button>
+    <span
+      v-if="gameLoaded"
+    >
+      <button
+        v-for="(instruction, index) of gameManager.provider.gameInstructions"
+        :key="index"
+        class="spacing"
+        :title="instruction.description"
+      >
+        {{ instruction.name }}
+      </button>
+    </span>
   </div>
 </template>

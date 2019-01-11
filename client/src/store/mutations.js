@@ -9,6 +9,7 @@ export default {
    * @param {String} value
    */
   UPDATE_EDITOR_CONTENT: (state, value) => {
+    localStorage.setItem(state.editor.language, value)
     state.editor.languagesContent[state.editor.language] = value
   },
   /**
@@ -16,6 +17,7 @@ export default {
    * @param {String} value
    */
   UPDATE_EDITOR_THEME: (state, value) => {
+    localStorage.setItem('editor-theme', value)
     state.editor.theme = value
   },
   /**
@@ -23,6 +25,7 @@ export default {
    * @param {String} value
    */
   UPDATE_EDITOR_LANGUAGE: (state, value) => {
+    localStorage.setItem('editor-language', value)
     state.editor.language = value
   },
   /**
@@ -30,6 +33,7 @@ export default {
    * @param {String} value
    */
   UPDATE_GAME_URL: (state, value) => {
+    localStorage.setItem('game-url', value)
     state.game.url = value
   },
   /**
@@ -37,6 +41,7 @@ export default {
    * @param {String} value
    */
   UPDATE_GAME_PROVIDER: (state, value) => {
+    localStorage.setItem('game-provider', value)
     state.game.provider = value
   },
   /**
@@ -46,12 +51,5 @@ export default {
   SET_GAME_MANAGER: (state, value) => {
     state.game.manager = value
     state.game.loaded = true
-  },
-  /**
-   * Add a console message
-   * @param {Object} message
-   */
-  NEW_MESSAGE: (state, message) => {
-    state.console.messages.push(message)
   }
 }
