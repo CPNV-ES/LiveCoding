@@ -42,11 +42,11 @@ export default {
     >
       <!-- DISPLAY THE INTERPRETERS SUPPORTED BY THE GAME -->
       <option
-        v-for="lang in gameManager.provider.gameInterpreters"
-        :key="lang"
-        value="lang"
+        v-for="(lang, index) in gameManager.provider.gameInterpreters"
+        :key="index"
+        :value="index"
       >
-        {{ lang }}
+        {{ index }}
       </option>
     </select>
     <!-- SELECT COLOR THEME -->
