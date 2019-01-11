@@ -4,12 +4,17 @@
 
 ## Changelog
 
-**v2.0.0-beta.0**
+**v2.0.0-beta.1**
 *This version is unstable*
-- New client for the platform, now runs in the browser and can load external games.
-- New code editor.
-- Adding support of python and js in the client editor.
-- New console view to display messages from the interpreter in a fancy way.
+
+**Client :**
+- Editor preferences are now saved in the localstorage for persistence after page reload.
+- Selected game are now saved in the localstorage for persistence after page reload.
+- Available languages are now dynamically displayed depending on the game loaded.
+- The game console can now display messages.
+  - 5 levels are available (log, info, success, warning, error).
+  - You can write in the console useg the dedicated store module.
+  - mutations and actions are available in the store module to easily add messages.
 
 ## Documentation
 
