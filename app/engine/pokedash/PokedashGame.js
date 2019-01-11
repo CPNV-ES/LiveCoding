@@ -32,9 +32,11 @@ class PokedashGame{
         console.log("this.mapName: " + this.mapName)
         for (let ele in window[this.mapName].e){
             let eName = window[this.mapName].e[ele].name.toLowerCase()
-            this[eName] = null//if ele = 0 -> this.road
             console.log("eName: "+eName)
-            this[eName+"Img"] = loadImage("engine/pokedash/assets/"+eName+"Img.png") // -> this.roadImg = loadImg(assets/road.jpg)
+
+            this[eName] = null//if ele = 0 -> this.pikachu
+            if(eName == 'road') continue //Not rendering the road (just the background). Easier to handle
+            this[eName+"Img"] = loadImage("engine/pokedash/assets/"+eName+"Img.png") // -> this.pikachu = loadImg(assets/pikachu.png)
         }    
     }
 
@@ -55,21 +57,34 @@ class PokedashGame{
 
     draw() { 
         background("#5E3F6B");
-        // Display each element on the map
-        for (let i = 0; i < this.mapElement.length; i++) {
-            this.mapElement[i].show()
+        for (let y = 0; y < this.columns; y++){
+            for (let x = 0; x < this.rows; x++) {
+                if(this.mapElement[x][y] == null) continue
+                this.mapElement[x][y].show()
+            }
         }
     }
  
     //Function to iterate through the pattern map to fill the array map
     iterateOverMap(){
+        //Instantiate 2d array in mapElement
+        for(let i = 0; i < this.rows; i++){
+            this.mapElement[i] = new Array(this.columns) 
+        }
         console.log("------------ ITERATEOVERMAP() ------------")
         for (let y = 0; y < this.columns; y++){
             for (let x = 0; x < this.rows; x++) {
                 let idElement = window[this.mapName].pattern[y][x]
+                //If the element is a road, we dont handle it
+                if(idElement == 9) {
+                    this.mapElement[x][y] = null
+                    continue
+                }
+
                 let element = window[this.mapName].e[idElement].name
-                let elementImg = element.toLowerCase()+'Img' 
-                this.mapElement.push(new DynamicElement(element, x*this.blockHeight, y*this.blockWidth, this[elementImg]))
+                let elementImg = element.toLowerCase()+'Img'
+                console.log(element)
+                this.mapElement[x][y] = new DynamicElement(element, x*this.blockHeight, y*this.blockWidth, this[elementImg])
             }
         }
     }
@@ -89,7 +104,7 @@ class PokedashGame{
     }
 
     sendMessageToServer(messageToSend){
-        console.log("This.pikachu: " +  this.mapElement[1].constructor.name)
+        //console.log("This.pikachu: " +  this.mapElement[0].constructor.name)
         console.log("------------ SENDMESSAGETOSERVER(messageToSend) ------------")
         // Send message (cmdsEvailable) to the Editor
         this.comCliEngine.send(messageToSend, (event, msg) => {
