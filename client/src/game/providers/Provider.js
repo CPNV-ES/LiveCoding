@@ -34,7 +34,7 @@ export default class Provider {
    * @return {String}
    */
   get gameInterpreters () {
-    return this.manifest.paths.interpreters
+    return this.manifest.interpreters
   }
   /**
    * Returns the array of instructions
