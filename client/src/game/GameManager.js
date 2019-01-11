@@ -1,3 +1,4 @@
+import { log } from '@/console/GameConsole'
 /**
  * The GameManager is the orchestrator of the game
  * He is responsible of :
@@ -37,5 +38,10 @@ export default class GameManager {
     // - Load the context of the game (with js module)
     // - loads the game context (suported languages)
     // - Create the game class
+    log({
+      text: 'startGame()',
+      type: 'log',
+      time: new Date()
+    })
   }
 }
