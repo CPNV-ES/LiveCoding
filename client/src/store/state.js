@@ -13,12 +13,12 @@ export default {
      * Default theme (on first load)
      * @type {String}
      * */
-    theme: 'solarized-dark',
+    theme: localStorage.getItem('editor-theme') || 'solarized-dark',
     /**
      * Default selected language
      * @type {String}
      */
-    language: localStorage.getItem('language') || 'ruby',
+    language: localStorage.getItem('editor-language') || 'ruby',
     // Mapping between the language and the content of the editor
     languagesContent: {
       javascript: localStorage.getItem('javascript') || `let tutu = 'Bienvenue sur LiveCoding'\ndebugger.log(tutu)\n`,
@@ -31,8 +31,8 @@ export default {
    * Information form the current loaded game
    */
   game: {
-    provider: 'url',
-    url: 'http://localhost:3333',
+    provider: localStorage.getItem('game-provider') || 'url',
+    url: localStorage.getItem('game-url') || 'http://localhost:3333',
     loaded: false,
     manager: null
   }
