@@ -22,16 +22,15 @@ class PokedashGame{
 
         this.comCliEngine = comCli   // Engine Communication to the server
         this.mapElement = []
-
     }
 
    
     preload(){
         // Create PokedashGame's classes attribute amongst element found in the map to load in param
-        //Example: Create this.pokemon and this.pokemonImg
+        // Example: Create this.pikachu and this.pikachuImg
         console.log("------------ PRELOAD() ------------")
         console.log("this.mapName: " + this.mapName)
-        for (let ele in window[this.mapName].e){ //<- PROBLEM HERE !! window[this.mapName.e] return undefined
+        for (let ele in window[this.mapName].e){
             let eName = window[this.mapName].e[ele].name.toLowerCase()
             this[eName] = null//if ele = 0 -> this.road
             console.log("eName: "+eName)
@@ -61,29 +60,36 @@ class PokedashGame{
             this.mapElement[i].show()
         }
     }
-
+ 
     //Function to iterate through the pattern map to fill the array map
     iterateOverMap(){
         console.log("------------ ITERATEOVERMAP() ------------")
-        for (let x = 0; x < this.rows; x++){
-            for (let y = 0; y < this.columns; y++) {
-                let idElement = window[this.mapName].pattern[x][y]
+        for (let y = 0; y < this.columns; y++){
+            for (let x = 0; x < this.rows; x++) {
+                let idElement = window[this.mapName].pattern[y][x]
                 let element = window[this.mapName].e[idElement].name
                 let elementImg = element.toLowerCase()+'Img' 
-                /*console.log("id element: "+idElement)
-                console.log("element: " + element)
-                console.log("element image: " + elementImg) // si elementImg = roadImg*/
                 this.mapElement.push(new DynamicElement(element, x*this.blockHeight, y*this.blockWidth, this[elementImg]))
             }
         }
-        console.log("this.tree: " + this.tree)
     }
 
-    keyPressed(){
-        console.log("------------ KEYPRESSED() ------------")
+    keyPressed(keyCode) {
+        if (keyCode === LEFT_ARROW){
+            console.log("Move Left")
+            this.pikachu.moveLeft();
+            console.log("Move Left")
+        }else if(keyCode === RIGHT_ARROW) {
+            this.pikachu.moveRight();
+        }else if(keyCode === UP_ARROW) {
+            this.pikachu.moveUp();
+        }else if(keyCode === DOWN_ARROW) {
+            this.pikachu.moveDown();
+        }
     }
 
     sendMessageToServer(messageToSend){
+        console.log("This.pikachu: " +  this.mapElement[1].constructor.name)
         console.log("------------ SENDMESSAGETOSERVER(messageToSend) ------------")
         // Send message (cmdsEvailable) to the Editor
         this.comCliEngine.send(messageToSend, (event, msg) => {
@@ -94,7 +100,8 @@ class PokedashGame{
             this.comCliEngine.send(eval(command), (r) => {
                 // Callback:
             });
-            console.log("Response from server: "+msg); // arg contains message
+            console.log("Response from server: " + msg); // arg contains message
         });
     }
+   
 }
