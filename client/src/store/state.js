@@ -18,13 +18,13 @@ export default {
      * Default selected language
      * @type {String}
      */
-    language: 'ruby',
+    language: localStorage.getItem('language') || 'ruby',
     // Mapping between the language and the content of the editor
     languagesContent: {
-      javascript: `let tutu = 'Bienvenue sur LiveCoding'\ndebugger.log(tutu)\n`,
-      ruby: `tutu = 'Bienvenue sur LiveCoding'\ndebugger.log tutu\n`,
-      php: `<?php\n$tutu = 'Bienvenue sur LiveCoding';\n$debugger->log($tutu);\n`,
-      python: `tutu = 'Bienvenue sur LiveCoding'\ndebugger.log(tutu)\n`
+      javascript: localStorage.getItem('javascript') || `let tutu = 'Bienvenue sur LiveCoding'\ndebugger.log(tutu)\n`,
+      ruby: localStorage.getItem('ruby') || `tutu = 'Bienvenue sur LiveCoding'\ndebugger.log tutu\n`,
+      php: localStorage.getItem('php') || `<?php\n$tutu = 'Bienvenue sur LiveCoding';\n$debugger->log($tutu);\n`,
+      python: localStorage.getItem('python') || `tutu = 'Bienvenue sur LiveCoding'\ndebugger.log(tutu)\n`
     }
   },
   /**
