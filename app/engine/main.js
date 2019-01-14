@@ -22,5 +22,5 @@ function draw() {
 
 // P5.js function
 function keyPressed() {
-    game.keyPressed(); //game.keyPressed(keyCode);
+    game.keyPressed(keyCode); //game.keyPressed(keyCode);
 }
