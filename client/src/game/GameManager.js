@@ -26,8 +26,6 @@ export default class GameManager {
     await this.provider.loadManifest()
     // Loads game classes
     await this.provider.loadGame()
-    // Starts the game
-    await this.startGame()
   }
   /**
    * Loads the game
@@ -39,7 +37,7 @@ export default class GameManager {
     // - loads the game context (suported languages)
     // - Create the game class
     log({
-      text: 'startGame()',
+      text: 'startGame() yeahh',
       type: 'log',
       time: new Date()
     })
