@@ -22,21 +22,23 @@ class PokedashGame{
 
         this.comCliEngine = comCli   // Engine Communication to the server
         this.mapElement = []
+        this.posX // Return position of the current player
+        this.posY
     }
 
    
     preload(){
         // Create PokedashGame's classes attribute amongst element found in the map to load in param
-        // Example: Create this.pikachu and this.pikachuImg
+        // Example: Create this.protagonist and this.protagonistImg
         console.log("------------ PRELOAD() ------------")
         console.log("this.mapName: " + this.mapName)
         for (let ele in window[this.mapName].e){
             let eName = window[this.mapName].e[ele].name.toLowerCase()
             console.log("eName: "+eName)
 
-            this[eName] = null//if ele = 0 -> this.pikachu
+            this[eName] = null//if ele = 0 -> this.protagonist
             if(eName == 'road') continue //Not rendering the road (just the background). Easier to handle
-            this[eName+"Img"] = loadImage("engine/pokedash/assets/"+eName+"Img.png") // -> this.pikachu = loadImg(assets/pikachu.png)
+            this[eName+"Img"] = loadImage("engine/pokedash/assets/"+eName+"Img.png") // -> this.protagonist = loadImg(assets/protagonist.png)
         }    
     }
 
@@ -59,7 +61,7 @@ class PokedashGame{
         background("#5E3F6B");
         for (let y = 0; y < this.columns; y++){
             for (let x = 0; x < this.rows; x++) {
-                if(this.mapElement[x][y] == null) continue
+                if(this.mapElement[x][y] == null) continue //If it's a road, we don't display elements
                 this.mapElement[x][y].show()
             }
         }
@@ -75,6 +77,7 @@ class PokedashGame{
         for (let y = 0; y < this.columns; y++){
             for (let x = 0; x < this.rows; x++) {
                 let idElement = window[this.mapName].pattern[y][x]
+                
                 //If the element is a road, we dont handle it
                 if(idElement == 9) {
                     this.mapElement[x][y] = null
@@ -85,26 +88,50 @@ class PokedashGame{
                 let elementImg = element.toLowerCase()+'Img'
                 console.log(element)
                 this.mapElement[x][y] = new DynamicElement(element, x*this.blockHeight, y*this.blockWidth, this[elementImg])
+               
+                // Moche, à changer par la suite. Recupère la position du joueur dans le tableau d'objet
+                if(this.mapElement[x][y].constructor.name == 'Protagonist') {
+                    this.posX = x
+                    this.posY = y
+                }
             }
-        }
+        }      
     }
 
-    keyPressed(keyCode) {
+    keyPressed(keyCode) { //To do: Put a switch
+       /* switch(keyCode){
+            case LEFT_ARROW: {
+                console.log("Move Left")
+                this.mapElement[this.posX][this.posY].moveLeft()
+                break 
+            }
+            case RIGHT_ARROW: {
+
+                break 
+            }
+            case UP_ARROW: {
+
+                break 
+            }
+            case DOWN_ARROW: {
+
+                break 
+            }
+        }*/
         if (keyCode === LEFT_ARROW){
-            console.log("Move Left")
-            this.pikachu.moveLeft();
-            console.log("Move Left")
-        }else if(keyCode === RIGHT_ARROW) {
-            this.pikachu.moveRight();
-        }else if(keyCode === UP_ARROW) {
-            this.pikachu.moveUp();
-        }else if(keyCode === DOWN_ARROW) {
-            this.pikachu.moveDown();
+            this.mapElement[this.posX][this.posY].moveLeft()
+        } else if(keyCode === RIGHT_ARROW) {
+            this.mapElement[this.posX][this.posY].moveRight()
+        } else if(keyCode === UP_ARROW) {
+            this.mapElement[this.posX][this.posY].moveUp()
+        } else if(keyCode === DOWN_ARROW) {
+            this.mapElement[this.posX][this.posY].moveDown()
         }
+        return false
     }
 
     sendMessageToServer(messageToSend){
-        //console.log("This.pikachu: " +  this.mapElement[0].constructor.name)
+        //console.log("This.playableCha: " +  this.mapElement[0].constructor.name)
         console.log("------------ SENDMESSAGETOSERVER(messageToSend) ------------")
         // Send message (cmdsEvailable) to the Editor
         this.comCliEngine.send(messageToSend, (event, msg) => {
