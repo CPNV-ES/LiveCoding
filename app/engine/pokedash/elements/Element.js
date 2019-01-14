@@ -4,6 +4,34 @@ class Element{
         this.y = y
         this.img = img
     }
+
+    get x(){
+        return this._x
+    }
+
+    get y(){
+        return this._y
+    }
+
+    get img(){
+        return this._img
+    }
+
+    set x(newX){
+        this._x = newX
+    }
+
+    set y(newY){
+        this._y = newY
+    }
+
+
+    set img(newImg){
+        this._img = newImg
+    }
+
+  
+
     show(){
         image(this.img, this.x, this.y)
     }
