@@ -7,8 +7,8 @@ When you tell the app to run your code, the app will start interactions with pro
 ## Execution lifecycle
 
 1. The client starts a new connexion with the server.
-2. The server indicates to the client that it is ready to receive data.
-3. The client transmit to server datas relative to the context of the app.
+2. Connexion opened, server is ready.
+3. The client transmit to server datas relative to the context of the app (played game, current language).
 4. The server loads the context for the current execution.
 5. The server indicates to the client that it is ready.
 6. The client send to the server the raw code writtent by the user.
@@ -16,6 +16,11 @@ When you tell the app to run your code, the app will start interactions with pro
 8. Script executions
   * The process can contact the game engine to execute commands on the game sinchronously.
 9. When the process die, the server indicate the end of the execution to the client.
+
+### Error cases
+
+* **The websocket connection crash :** The server clear the process.
+* **The process crash :** The server send to the client the error.
 
 ## Socket messages
 
