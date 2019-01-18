@@ -17,7 +17,7 @@ class Connection:
 
     # create and set a new socket connection 
     def init(self):
-        connection.init(self.server_address)
+        self.mainSocket = connection.init(self.server_address)
         return
 
     # open a socket connection 
