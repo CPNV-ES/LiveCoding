@@ -21,10 +21,15 @@ export default class UrlProvider extends Provider {
       throw new Error('Impossible to load the game manifest, check your url, or if a manifest is present.')
     }
   }
-  async loadGame () {
+  async loadGameClass () {
     try {
+      // Get the game code from source
       let response = await fetch(`${this.url}/${this.manifest.data.game}`)
-      console.log(await response.json())
+      let game = await response.text()
+      console.log(`${game}`)
+      eval(`${game}`)
+      // let toto = new Game()
+      // console.log(toto)
     } catch (e) {
       console.log(e)
     }
