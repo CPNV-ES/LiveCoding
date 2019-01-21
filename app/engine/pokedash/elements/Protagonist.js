@@ -1,6 +1,7 @@
 class Protagonist extends MovableElement{
     constructor(x, y, img){
         super(x, y, img)
+        this.isProtagonist = true
     }
 
     //static LIFE = 3 

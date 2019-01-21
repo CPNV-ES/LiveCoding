@@ -1,4 +1,4 @@
-class OpenDoor extends StaticElement{
+class OpenDoor extends MovableElement{
     constructor(x, y, img){
         super(x, y, img)
     }
