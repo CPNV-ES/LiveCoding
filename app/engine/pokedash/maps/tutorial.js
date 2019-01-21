@@ -30,14 +30,12 @@ tutorial = {
     ],
 
     e: {
-        0: Protagonist,
+        0: Protagonist, //There can be only one protagonist in the pattern
         1: Pokeball,
         2: Door,
         3: OpenDoor,
         4: Boulder,
         5: Tree,
         //9: Road
-    },
-
-    background: 'green' 
+    }
 }
