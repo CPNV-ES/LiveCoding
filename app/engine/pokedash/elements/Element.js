@@ -4,6 +4,8 @@ class Element{
         this.y = y
         this.img = img
         this.isMovable = Boolean
+        this.posX = this.x / game.blockHeight
+        this.posY = this.y / game.blockWidth
     }
     
     get x(){
