@@ -36,6 +36,6 @@ tutorial = {
         3: OpenDoor,
         4: Boulder,
         5: Tree,
-        //9: Road
+        9: Road
     }
 }

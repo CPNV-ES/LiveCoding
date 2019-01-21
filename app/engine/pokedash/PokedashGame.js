@@ -44,8 +44,8 @@ class PokedashGame{
             console.log("eName: "+eName)
 
             this[eName] = null//if ele = 0 -> this.protagonist = null
-            if(eName == 'road') continue //Not rendering the road (just the background). Easier to handle
-            this[eName+"Img"] = loadImage("engine/pokedash/assets/"+eName+"Img.png") // -> this.protagonist = loadImg(assets/protagonist.png)
+            if(eName == 'road')this[eName+"Img"] = null //Not rendering the road (just the background). Easier to handle
+            else this[eName+"Img"] = loadImage("engine/pokedash/assets/"+eName+"Img.png") // -> this.protagonist = loadImg(assets/protagonist.png)
         }    
     }
 
@@ -68,8 +68,8 @@ class PokedashGame{
         background("#5E3F6B");
         for (let y = 0; y < this.columns; y++){
             for (let x = 0; x < this.rows; x++) {
-                if(this.mapElement[x][y] == null) continue //If it's a road, we don't display elements
-                this.mapElement[x][y].show()
+                if(this.mapElement[x][y].constructor.name == 'Road') continue                
+                else this.mapElement[x][y].show()
             }
         }
     }
@@ -85,18 +85,11 @@ class PokedashGame{
             for (let x = 0; x < this.rows; x++) {
                 let idElement = window[this.mapName].pattern[y][x]
                 
-                //If the element is a road, we dont handle it
-                if(idElement == 9) {
-                    this.mapElement[x][y] = null
-                    continue
-                }
-
                 let element = window[this.mapName].e[idElement].name
                 let elementImg = element.toLowerCase()+'Img'
-                console.log(element)
                 this.mapElement[x][y] = new DynamicElement(element, x*this.blockHeight, y*this.blockWidth, this[elementImg])
                
-                // Moche, à changer par la suite. Recupère la position du joueur dans le tableau d'objet
+                // Recupère la position du joueur dans le tableau d'objet
                 if(this.mapElement[x][y].isProtagonist) {
                     this.posX = x
                     this.posY = y
@@ -148,9 +141,11 @@ class PokedashGame{
         let element = null
         if (keyCode === LEFT_ARROW){
             element = this.getElement(keyCode, 1)
+            element.action(keyCode) 
             this.mapElement[this.posX][this.posY].moveLeft()
         } else if(keyCode === RIGHT_ARROW) {
             element = this.getElement(keyCode, 1)
+            element.action(keyCode) 
             this.mapElement[this.posX][this.posY].moveRight()
         } else if(keyCode === UP_ARROW) {
             element = this.getElement(keyCode, 1)
@@ -160,6 +155,7 @@ class PokedashGame{
             this.mapElement[this.posX][this.posY].moveDown()
         }
         console.log(element)
+        element.action(keyCode)
         return false
     }
 
