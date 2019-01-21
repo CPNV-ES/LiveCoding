@@ -1,4 +1,4 @@
-class Road extends StaticElement{
+class Road extends MovableElement{
     constructor(x, y, img){
         super(x, y, img)
     }

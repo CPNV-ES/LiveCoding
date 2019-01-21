@@ -1,10 +1,11 @@
 class Element{
-    constructor(x, y, img){
+    constructor(x, y, img, isMovable){
         this.x = x
         this.y = y
         this.img = img
+        this.isMovable = Boolean
     }
-
+    
     get x(){
         return this._x
     }

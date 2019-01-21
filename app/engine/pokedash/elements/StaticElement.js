@@ -1,6 +1,6 @@
 class StaticElement extends Element {
-    constructor(x, y, img){
-        super(x, y, img)
+    constructor(x, y, img, isMovable){
+        super(x, y, img, isMovable=false)
     }
 }
 

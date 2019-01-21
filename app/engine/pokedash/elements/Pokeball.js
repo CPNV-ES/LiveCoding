@@ -1,4 +1,4 @@
-class Pokeball extends StaticElement{
+class Pokeball extends MovableElement{
     constructor(x, y, img){
         super(x, y, img)
     }
