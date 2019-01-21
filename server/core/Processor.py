@@ -1,7 +1,7 @@
 import socket
 import os
 import json
-from TempFile import TempFile
+from .TempFile import TempFile
 exec(open("setup.py").read())
 import languages
 

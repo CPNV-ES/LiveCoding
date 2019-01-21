@@ -3,7 +3,7 @@
 import socket
 import select
 from mlogging import mlog
-from Processor import Processor
+from .Processor import Processor
 
 class Listen:
 
