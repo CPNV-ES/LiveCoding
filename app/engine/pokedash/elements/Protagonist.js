@@ -11,4 +11,9 @@ class Protagonist extends MovableElement{
         this.x = this.x - game.blockWidth;
         return true;
     }*/
+
+    action(information){
+        console.log("bienvenue dans la méthode action de la classe Protagonist")
+        return true
+    }
 }

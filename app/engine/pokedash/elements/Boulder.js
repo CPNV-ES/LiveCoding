@@ -3,8 +3,10 @@ class Boulder extends MovableElement{
         super(x, y, img)
     }
 
-    action(comingFrom){
-        
+    action(information){
+        console.log("bienvenue dans la méthode action de la classe Boulder")
+        console.log("Information: " + information)
+        return true
     }
 
 }

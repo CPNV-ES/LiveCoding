@@ -3,11 +3,10 @@ class Tree extends StaticElement{
         super(x, y, img)
     }
 
-    action(){
+    action(information){
         console.log("bienvenue dans la méthode action de la classe Tree")
         return true
     }
-
 }
 
 // TO DELETE IF NOT USED : module.exports = Tree
