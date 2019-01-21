@@ -20,6 +20,13 @@ class PokedashGame{
             "moveDown()",
         ];
 
+        const directions = {
+            UP : Symbol( 'UP' ),
+            DOWN : Symbol( 'DOWN' ),
+            LEFT : Symbol( 'LEFT' ),
+            RIGHT: Symbol( 'RIGHT' )
+        }
+
         this.comCliEngine = comCli   // Engine Communication to the server
         this.mapElement = []
         this.posX // Return position of the current player
@@ -36,7 +43,7 @@ class PokedashGame{
             let eName = window[this.mapName].e[ele].name.toLowerCase()
             console.log("eName: "+eName)
 
-            this[eName] = null//if ele = 0 -> this.protagonist
+            this[eName] = null//if ele = 0 -> this.protagonist = null
             if(eName == 'road') continue //Not rendering the road (just the background). Easier to handle
             this[eName+"Img"] = loadImage("engine/pokedash/assets/"+eName+"Img.png") // -> this.protagonist = loadImg(assets/protagonist.png)
         }    
@@ -90,7 +97,7 @@ class PokedashGame{
                 this.mapElement[x][y] = new DynamicElement(element, x*this.blockHeight, y*this.blockWidth, this[elementImg])
                
                 // Moche, à changer par la suite. Recupère la position du joueur dans le tableau d'objet
-                if(this.mapElement[x][y].constructor.name == 'Protagonist') {
+                if(this.mapElement[x][y].isProtagonist) {
                     this.posX = x
                     this.posY = y
                 }
@@ -98,35 +105,61 @@ class PokedashGame{
         }      
     }
 
-    keyPressed(keyCode) { //To do: Put a switch
-       /* switch(keyCode){
-            case LEFT_ARROW: {
-                console.log("Move Left")
-                this.mapElement[this.posX][this.posY].moveLeft()
-                break 
-            }
-            case RIGHT_ARROW: {
+    isInArray(direction, distance){
+        
+    }
 
-                break 
-            }
-            case UP_ARROW: {
+    // Get element from protagonist
+    getElement(direction, distance){
+        if (distance < 0 ) return false
+        
+        let x = this.posX
+        let y = this.posY
+        let element
+        
+        if (direction === 'left' || direction === LEFT_ARROW){
+            x = x - distance
+            if (x < 0 ) return false // If it's out of the map
+            element = this.mapElement[this.posX - distance][this.posY]
+        }
 
-                break 
-            }
-            case DOWN_ARROW: {
+        if (direction === 'right' || direction === RIGHT_ARROW){
+            x = x + distance
+            if (x >= this.blockWidth ) return false // If it's out of the map
+            element = this.mapElement[this.posX + distance][this.posY]
+        }
 
-                break 
-            }
-        }*/
+        if (direction === 'up' || direction === UP_ARROW){
+            y = y - distance
+            if (y < 0 ) return false // If it's out of the map
+            element = this.mapElement[this.posX][this.posY - distance]
+        }
+
+        if (direction === 'down' || direction === DOWN_ARROW){
+            y = y + distance
+            if (y >= this.blockHeight) return false // If it's out of the map
+            element = this.mapElement[this.posX][this.posY + distance]
+        }
+        //if(element == null) return null
+        return element
+    }
+
+    keyPressed(keyCode) { 
+        let element = null
         if (keyCode === LEFT_ARROW){
+            element = this.getElement(keyCode, 1)
             this.mapElement[this.posX][this.posY].moveLeft()
         } else if(keyCode === RIGHT_ARROW) {
+            element = this.getElement(keyCode, 1)
             this.mapElement[this.posX][this.posY].moveRight()
         } else if(keyCode === UP_ARROW) {
+            element = this.getElement(keyCode, 1)
             this.mapElement[this.posX][this.posY].moveUp()
         } else if(keyCode === DOWN_ARROW) {
+            element = this.getElement(keyCode, 1)
             this.mapElement[this.posX][this.posY].moveDown()
         }
+        console.log(element)
         return false
     }
 
