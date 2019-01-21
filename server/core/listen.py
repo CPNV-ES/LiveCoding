@@ -7,13 +7,16 @@ from Processor import Processor
 
 class Listen:
 
+    mainSocket = None
+    processor = None
     connected = []
-    processor = Processor()
+    
     server_run = True
     time = 0.05
 
     def __init__(self, socket):
         self.mainSocket = socket
+        self.processor = Processor()
         return
 
     # add a new client socket connection
@@ -35,7 +38,7 @@ class Listen:
         except select.error:
             mlog.show("Clients connection error !")
         else:
-            self.getClientData(clientsToListen)
+            clientsToListen = self.getClientData(clientsToListen)
         return
 
     def getClientData(self, toListen):
@@ -46,14 +49,14 @@ class Listen:
                 mlog.show("New message received from client")
                 if recvMsg == "close":
                     client.close()
-                    self.clients.toListen.remove(client)
-                    self.clients.connected.remove(client)
+                    toListen.remove(client)
+                    self.connected.remove(client)
                     mlog.show("One client disconnected")
                 else:
                     mlog.show("New message received..")
                     self.processor.peel(recvMsg)
                     self.processor.execute(client)
-        return
+        return toListen
 
     def run(self):
         try:
@@ -69,7 +72,7 @@ class Listen:
 
     def closeAll(self):
         mlog.show("Close all opened connection")
-        for client in self.clients.connected:
+        for client in self.connected:
             client.close()
         return
 
