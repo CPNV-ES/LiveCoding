@@ -24,11 +24,8 @@ export default class UrlProvider extends Provider {
   async loadGameClass () {
     try {
       // Get the game code from source
-      let response = await fetch(`${this.url}/${this.manifest.data.game}`)
-      let game = await response.text()
-      console.log(`${game}`)
-      eval(`${game}`)
-      // let toto = new Game()
+      let game = await import(/* webpackIgnore: true */ `${this.url}/${this.manifest.data.game}`)
+      console.log(game)
       // console.log(toto)
     } catch (e) {
       console.log(e)
