@@ -19,12 +19,8 @@ export default {
       gameManager.startGame()
       dispatch('console/success', 'OK, Game started, ready to go !')
     } catch (e) {
-      commit('console/ADD_MESSAGE', {
-        text: 'Error during Game loading !',
-        payload: e,
-        type: 'error',
-        time: new Date()
-      }, { root: true })
+      console.error(e)
+      dispatch('console/error', 'Error during Game loading !')
     }
   },
   /**
