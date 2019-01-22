@@ -1,4 +1,3 @@
-import { log } from '@/console/GameConsole'
 /**
  * The GameManager is the orchestrator of the game
  * He is responsible of :
@@ -32,6 +31,6 @@ export default class GameManager {
    */
   async startGame () {
     // Create the base game class instance
-    this.game = new this.provider.gameModule.Game(document.getElementById('game-box'))
+    window.game = new this.provider.gameModule.Game(document.getElementById('game-box'))
   }
 }
