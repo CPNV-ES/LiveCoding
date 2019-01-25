@@ -29,8 +29,9 @@ class PokedashGame{
 
         this.comCliEngine = comCli   // Engine Communication to the server
         this.mapElement = []
-        this.posX // Return position of the current player
-        this.posY
+        // Return position of the current player
+        this.playerPosX 
+        this.playerPosY
     }
 
    
@@ -91,8 +92,8 @@ class PokedashGame{
                
                 // Recupère la position du joueur dans le tableau d'objet
                 if(this.mapElement[x][y].isProtagonist) {
-                    this.posX = x
-                    this.posY = y
+                    this.playerPosX = x
+                    this.playerPosY = y
                 }
             }
         }      
@@ -106,32 +107,32 @@ class PokedashGame{
     getElement(direction, distance){
         if (distance < 0 ) return false
         
-        let x = this.posX
-        let y = this.posY
+        let x = this.playerPosX
+        let y = this.playerPosY
         let element
         
         if (direction === 'left' || direction === LEFT_ARROW){
             x = x - distance
             if (x < 0 ) return false // If it's out of the map
-            element = this.mapElement[this.posX - distance][this.posY]
+            element = this.mapElement[this.playerPosX - distance][this.playerPosY]
         }
 
         if (direction === 'right' || direction === RIGHT_ARROW){
             x = x + distance
             if (x >= this.blockWidth ) return false // If it's out of the map
-            element = this.mapElement[this.posX + distance][this.posY]
+            element = this.mapElement[this.playerPosX + distance][this.playerPosY]
         }
 
         if (direction === 'up' || direction === UP_ARROW){
             y = y - distance
             if (y < 0 ) return false // If it's out of the map
-            element = this.mapElement[this.posX][this.posY - distance]
+            element = this.mapElement[this.playerPosX][this.playerPosY - distance]
         }
 
         if (direction === 'down' || direction === DOWN_ARROW){
             y = y + distance
             if (y >= this.blockHeight) return false // If it's out of the map
-            element = this.mapElement[this.posX][this.posY + distance]
+            element = this.mapElement[this.playerPosX][this.playerPosY + distance]
         }
         //if(element == null) return null
         return element
@@ -141,21 +142,23 @@ class PokedashGame{
         let element = null
         if (keyCode === LEFT_ARROW){
             element = this.getElement(keyCode, 1)
+            console.log(element)
             element.action(keyCode) 
-            this.mapElement[this.posX][this.posY].moveLeft()
+            //this.mapElement[this.playerPosX][this.playerPosY].moveLeft()
         } else if(keyCode === RIGHT_ARROW) {
             element = this.getElement(keyCode, 1)
             element.action(keyCode) 
-            this.mapElement[this.posX][this.posY].moveRight()
+           //this.mapElement[this.playerPosX][this.playerPosY].moveRight()
         } else if(keyCode === UP_ARROW) {
             element = this.getElement(keyCode, 1)
-            this.mapElement[this.posX][this.posY].moveUp()
+            element.action(keyCode) 
+            //this.mapElement[this.playerPosX][this.playerPosY].moveUp()
         } else if(keyCode === DOWN_ARROW) {
             element = this.getElement(keyCode, 1)
-            this.mapElement[this.posX][this.posY].moveDown()
+            element.action(keyCode) 
+            //this.mapElement[this.playerPosX][this.playerPosY].moveDown()
         }
-        console.log(element)
-        element.action(keyCode)
+        //element.action(keyCode)
         return false
     }
 
@@ -174,5 +177,4 @@ class PokedashGame{
             console.log("Response from server: " + msg); // arg contains message
         });
     }
-   
 }
