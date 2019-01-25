@@ -19,4 +19,14 @@ The LiveCoding platform is divided into 3 main parts :
 
 ## Client installation
 
+The client app uses webpack to build and optimize the code.
+Follow the steps to start development :
+
+1. Move into the `client` folder : `cd client`
+2. Installe the dependencies : `npm install`
+3. Run the development server : `npm run dev`
+4. Open a browser on `localhost:8080`
+
+You are ready to start writing code !
+
 ## Game installation
