@@ -24,18 +24,13 @@ export default class GameManager {
     // Loads the manifest of the game (from the external source)
     await this.provider.loadManifest()
     // Loads game classes
-    await this.provider.loadGame()
-    // Starts the game
-    await this.startGame()
+    await this.provider.loadGameClass()
   }
   /**
    * Loads the game
    */
   async startGame () {
-    // Each game must have a entry class, thi class will be used to access the game
-    // TODO :
-    // - Load the context of the game (with js module)
-    // - loads the game context (suported languages)
-    // - Create the game class
+    // Create the base game class instance
+    window.game = new this.provider.gameModule.Game(document.getElementById('game-box'))
   }
 }
