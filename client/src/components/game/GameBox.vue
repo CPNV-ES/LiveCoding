@@ -21,7 +21,5 @@ export default {
 </script>
 
 <template>
-  <div id="game-box">
-    Game
-  </div>
+  <div id="game-box" />
 </template>

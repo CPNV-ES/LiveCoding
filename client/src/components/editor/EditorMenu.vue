@@ -10,7 +10,8 @@ export default {
   computed: {
     ...mapState({
       gameLoaded: state => state.game.loaded,
-      gameManager: state => state.game.manager
+      gameManager: state => state.game.manager,
+      gameUrl: state => state.game.url
     }),
     language: {
       get () {
@@ -27,6 +28,12 @@ export default {
       set (value) {
         this.$store.commit('UPDATE_EDITOR_THEME', value)
       }
+    }
+  },
+  methods: {
+    openInstruction (uri) {
+      console.log(`${this.gameUrl}/${uri}`)
+      window.open(`${this.gameUrl}/${uri}`)
     }
   }
 }
@@ -82,6 +89,7 @@ export default {
         :key="index"
         class="spacing"
         :title="instruction.description"
+        @click="openInstruction(instruction.path)"
       >
         {{ instruction.name }}
       </button>
