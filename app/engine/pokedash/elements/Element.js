@@ -8,6 +8,25 @@ class Element{
         this.posY = this.y / game.blockWidth
     }
     
+    //You can only move a sprite one case to one case
+    moveSprite(direction){
+        if (direction === 'left' || direction === LEFT_ARROW){
+            this.x -= game.blockWidth
+        }
+
+        if (direction === 'right' || direction === RIGHT_ARROW){
+            this.x += game.blockWidth
+        }
+
+        if (direction === 'up' || direction === UP_ARROW){
+            this.y -= game.blockHeight
+        }
+
+        if (direction === 'down' || direction === DOWN_ARROW){
+            this.y += game.blockHeight
+        }
+    }
+
     get x(){
         return this._x
     }
