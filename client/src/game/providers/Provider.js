@@ -1,6 +1,9 @@
 /**
  * Provider base class
  *
+ * The provider is responsible to access the game datas
+ * He provide an abstraction to the real game location
+ *
  * @class
  * @author Bastien Nicoud
  */
@@ -42,11 +45,5 @@ export default class Provider {
    */
   get gameInstructions () {
     return this.manifest.instructions
-  }
-  /**
-   * Loads the game scripts (described in the game manifest)
-   */
-  loadGame () {
-    // - Get all the nesesary resources for the game
   }
 }
