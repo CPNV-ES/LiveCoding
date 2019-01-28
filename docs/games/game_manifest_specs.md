@@ -12,10 +12,6 @@ This file provide base informations about your game, thats allow the platform to
   "description": "A meaningless game for test purpose.",
   "data": {
     "game": "game.mjs",
-    "imports": [
-      "player.mjs",
-      "test.mjs"
-    ],
     "assets": "assets"
   },
   "interpreters": {
