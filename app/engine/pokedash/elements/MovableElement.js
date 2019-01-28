@@ -4,55 +4,42 @@ class MovableElement extends Element {
     }
 
     moveRight(){
-        console.log(this.posX, this.posY)
         let temp = game.mapElement[this.posX+1][this.posY]
         game.mapElement[this.posX+1][this.posY] = game.mapElement[this.posX][this.posY]
         game.mapElement[this.posX][this.posY] = temp
-        game.posX += 1
+        game.playerPosX += 1
         this.posX += 1
-        console.log("Movable Element move right")
-        //this.swapArray(game.posX, game.posY, 'right')  
         this.x = this.x + game.blockWidth //For sprite drawing
         return true
     }
 
     moveLeft(){
-        console.log(this.posX, this.posY)
         this.x = this.x - game.blockWidth //For sprite drawing
         let temp = game.mapElement[this.posX-1][this.posY]
         game.mapElement[this.posX-1][this.posY] = game.mapElement[this.posX][this.posY]
         game.mapElement[this.posX][this.posY] = temp
-        game.posX -= 1
+        game.playerPosX -= 1
         this.posX -=1
-        console.log("Movable Element move left")
-        //this.swapArray(game.posX, game.posY, 'left')
         return true
     }
     
     moveDown(){
-        console.log(this.posX, this.posY)
         this.y = this.y + game.blockHeight //For sprite drawing
         let temp = game.mapElement[this.posX][this.posY+1]
         game.mapElement[this.posX][this.posY+1] = game.mapElement[this.posX][this.posY]
         game.mapElement[this.posX][this.posY] = temp
-        game.posY += 1
+        game.playerPosY += 1
         this.posY += 1
-        console.log("Movable Element move down")
-        //this.swapArray(game.posX, game.posY, 'down')
-
         return true
     }
 
     moveUp(){
-        console.log(this.posX, this.posY)
         this.y = this.y - game.blockHeight //For sprite drawing
         let temp = game.mapElement[this.posX][this.posY-1]
         game.mapElement[this.posX][this.posY-1] = game.mapElement[this.posX][this.posY]
         game.mapElement[this.posX][this.posY] = temp
-        game.posY -= 1
+        game.playerPosY -= 1
         this.posY -=1
-        console.log("Movable Element move up")
-        //this.swapArray(game.posX, game.posY, 'up')
         return true     
     }
 
