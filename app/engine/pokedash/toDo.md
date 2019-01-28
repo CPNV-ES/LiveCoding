@@ -4,6 +4,10 @@
 ### TO DO
 - Doc Technique du projet
 - Idée d'ensemble du projet
+- Fonctions à développer pour le joueur:
+    - moveElement(direction) -> return true/false
+    - getElement(direction, distance) -> return string(objectName)
+    - moveSprite(direction, distance) -> return true/false
 
 ## 21.01.2019
 ### TO DO 
