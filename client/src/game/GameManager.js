@@ -23,6 +23,8 @@ export default class GameManager {
   async loadGame () {
     // Loads the manifest of the game (from the external source)
     await this.provider.loadManifest()
+    // Loads the available interpreters
+    await this.provider.loadInterpreters()
     // Loads game classes
     await this.provider.loadGameClass()
   }
@@ -31,6 +33,12 @@ export default class GameManager {
    */
   async startGame () {
     // Create the base game class instance
-    window.game = new this.provider.gameModule.Game(document.getElementById('game-box'))
+    window.game = new this.provider.gameModule.Game(
+      document.getElementById('game-box'),
+      this.provider.assetsBasePath
+    )
+    // Create a key to eval commands in the game scope
+    /* eslint-disable no-eval */
+    window.gameCommandEval = eval
   }
 }

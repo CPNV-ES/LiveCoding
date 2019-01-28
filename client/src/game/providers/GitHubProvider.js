@@ -5,17 +5,32 @@ import Provider from './Provider'
  */
 export default class GitHubProvider extends Provider {
   /**
-   * Loads the manifest of the specified game
-   * @async
+   * Github base url for raw files
+   * @type {String}
    */
-  async loadManifest () {
-    try {
-      // Test with fixed url... implement url parsing
-      let response = await fetch(`https://raw.githubusercontent.com/bastiennicoud/LiveCoding-Test-Game/master/manifest.json`)
-      let manifest = await response.json()
-      return manifest
-    } catch (e) {
-      throw new Error('Impossible to load the game manifest, check your url, or if a manifest is present.')
-    }
+  rawBaseUrl = 'https://cdn.jsdelivr.net/gh'
+  /**
+   * Github base url for rendered files
+   * @type {String}
+   */
+  defaultBaseUrl = 'https://github.com'
+  /**
+   * This method generate a plain raw url (to get code)
+   */
+  generateRawUrl (file) {
+    return `${this.rawBaseUrl}/${this.url}/${file}`
+  }
+  /**
+   * This method generate a url to rendered ressouce (for mardowns on github)
+   */
+  generateUrl (file) {
+    return `${this.defaultBaseUrl}/${this.url}/${file}`
+  }
+  /**
+   * Return the base path of the game assets
+   * @return {String}
+   */
+  get assetsBasePath () {
+    return `${this.rawBaseUrl}/${this.url}/${this.manifest.data.assets}`
   }
 }

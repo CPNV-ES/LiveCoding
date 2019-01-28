@@ -12,6 +12,8 @@ export default class Provider {
   url = ''
   /** @type {Object} */
   manifest = null
+  /** @type {Object} */
+  interpreters = {}
   /**
    * @param {String} url Url to the root folder of our game (where the manifest is stored)
    */
@@ -45,5 +47,64 @@ export default class Provider {
    */
   get gameInstructions () {
     return this.manifest.instructions
+  }
+  /**
+   * Return the base path of the game assets
+   * @return {String}
+   */
+  get assetsBasePath () {
+    return `${this.url}/${this.manifest.data.assets}/`
+  }
+  /**
+   * Generate an url to load a ressource
+   * @param {String} file path of the file
+   * @return {String}
+   */
+  generateRawUrl (file) {
+    return `${this.url}/${file}`
+  }
+  /**
+   * Generate an url to display a ressource
+   * @param {String} file path of the file
+   * @return {String}
+   */
+  generateUrl (file) {
+    return `${this.url}/${file}`
+  }
+  /**
+   * Loads the manifest of the specified game
+   * @async
+   */
+  async loadManifest () {
+    try {
+      // Test with fixed url... implement url parsing
+      let response = await fetch(this.generateRawUrl('manifest.json'))
+      this.manifest = await response.json()
+      return this.manifest
+    } catch (e) {
+      throw new Error('Impossible to load the game manifest, check your url, or if a manifest is present.')
+    }
+  }
+  /**
+   * Load the code for each available interpreters
+   */
+  async loadInterpreters () {
+    for (let interpreter in this.gameInterpreters) {
+      let response = await fetch(this.generateRawUrl(this.gameInterpreters[interpreter]))
+      this.interpreters[interpreter] = await response.text()
+    }
+  }
+  /**
+   * Loads the game class
+   */
+  async loadGameClass () {
+    try {
+      // Get the game code from source
+      this.gameModule = await import(/* webpackIgnore: true */ this.generateRawUrl(this.manifest.data.game))
+      return this.gameModule
+    } catch (e) {
+      console.error(e)
+      throw new Error('Impossible to load the game class, check your url, or if the manifest is corectly configured.')
+    }
   }
 }
