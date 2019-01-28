@@ -7,7 +7,7 @@ class PokedashGame{
         this.blockHeight
         this.blockWidth
         this.columns
-        this.rows
+        this.rows   
 
         this.availableCommands = [
             "isLeftSideFree()",
@@ -30,8 +30,11 @@ class PokedashGame{
         this.comCliEngine = comCli   // Engine Communication to the server
         this.mapElement = []
         // Return position of the current player
-        this.playerPosX 
-        this.playerPosY
+        this.playerPosX = 0
+        this.playerPosY = 0
+        this.doorPosX = 0
+        this.doorPosY = 0 
+        this.objectives = 0 // Number of objectives (pokeball) in the map
     }
 
    
@@ -90,10 +93,20 @@ class PokedashGame{
                 let elementImg = element.toLowerCase()+'Img'
                 this.mapElement[x][y] = new DynamicElement(element, x*this.blockHeight, y*this.blockWidth, this[elementImg])
                
-                // Recupère la position du joueur dans le tableau d'objet
+                // Récupère la position du joueur dans le tableau d'objet
                 if(this.mapElement[x][y].isProtagonist) {
                     this.playerPosX = x
                     this.playerPosY = y
+                }
+
+                // Récupère le nombre d'objectifs dans le jeu
+                if(this.mapElement[x][y].isObjective){
+                    this.objectives += 1
+                } 
+                
+                if(this.mapElement[x][y].constructor.name == "Door"){
+                    this.doorPosX = x
+                    this.doorPosY = y
                 }
             }
         }      
@@ -134,32 +147,54 @@ class PokedashGame{
             if (y >= this.blockHeight) return false // If it's out of the map
             element = this.mapElement[this.playerPosX][this.playerPosY + distance]
         }
-        //if(element == null) return null
-        return element
+
+        return element.constructor.name.toString() // Return the name of the classes element in string
     }
 
-    keyPressed(keyCode) { 
-        let element = null
+    keyPressed(keyCode) {
+        //let element = null
         if (keyCode === LEFT_ARROW){
-            element = this.getElement(keyCode, 1)
-            console.log(element)
-            element.action(keyCode) 
-            //this.mapElement[this.playerPosX][this.playerPosY].moveLeft()
+            // Check if not going out of the map
+            if(this.playerPosX <= 0) return false 
+            
+            //element = this.getElement(keyCode, 1)
+            this.mapElement[this.playerPosX][this.playerPosY].moveLeft()
+            this.closeDoor()
         } else if(keyCode === RIGHT_ARROW) {
-            element = this.getElement(keyCode, 1)
-            element.action(keyCode) 
-           //this.mapElement[this.playerPosX][this.playerPosY].moveRight()
+            // Check if not going out of the map
+            if(this.playerPosX >= this.rows - 1) return false 
+            
+            //element = this.getElement(keyCode, 1)
+            this.mapElement[this.playerPosX][this.playerPosY].moveRight()
+            let a = this.getObjectives()
+            this.openDoor()
+            console.log(a)
         } else if(keyCode === UP_ARROW) {
-            element = this.getElement(keyCode, 1)
-            element.action(keyCode) 
-            //this.mapElement[this.playerPosX][this.playerPosY].moveUp()
+            // Check if not going out of the map
+            if(this.playerPosY <= 0) return false 
+            //element = this.getElement(keyCode, 1)
+            this.mapElement[this.playerPosX][this.playerPosY].moveUp()
         } else if(keyCode === DOWN_ARROW) {
-            element = this.getElement(keyCode, 1)
-            element.action(keyCode) 
-            //this.mapElement[this.playerPosX][this.playerPosY].moveDown()
+            // Check if not going out of the map
+            if(this.playerPosY >= this.columns-1) return false 
+
+           // element = this.getElement(keyCode, 1)
+            this.mapElement[this.playerPosX][this.playerPosY].moveDown()
         }
         //element.action(keyCode)
-        return false
+        return true
+    }
+
+    getObjectives(){
+        return this.objectives
+    }
+
+    openDoor(){
+        console.log(this.mapElement[this.doorPosX][this.doorPosY])
+        this.mapElement[this.doorPosX][this.doorPosY].open()
+    }
+    closeDoor(){
+        this.mapElement[this.doorPosX][this.doorPosY].close()
     }
 
     sendMessageToServer(messageToSend){
