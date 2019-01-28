@@ -77,7 +77,7 @@ def isLeftSideFree
   STDERR.puts "none"
   STDERR.flush
 
-  puts 'isLeftSideFree();'
+  puts 'pacman.isLeftSideFree();'
   STDOUT.flush
   msg = STDIN.gets
   puts msg
@@ -94,7 +94,7 @@ def isRightSideFree
   STDERR.puts "none"
   STDERR.flush
 
-  puts 'isRightSideFree();'
+  puts 'pacman.isRightSideFree();'
   STDOUT.flush
   msg = STDIN.gets
   puts msg
@@ -111,7 +111,7 @@ def isUpSideFree
   STDERR.puts "none"
   STDERR.flush
 
-  puts 'isUpSideFree();'
+  puts 'pacman.isUpSideFree();'
   STDOUT.flush
   msg = STDIN.gets
   puts msg
@@ -128,7 +128,7 @@ def isDownSideFree
   STDERR.puts "none"
   STDERR.flush
 
-  puts 'isDownSideFree();'
+  puts 'pacman.isDownSideFree();'
   STDOUT.flush
   msg = STDIN.gets
   puts msg

@@ -1,0 +1,38 @@
+// Game console box styles
+
+#console-box {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  padding: 4px;
+
+  overflow: scroll;
+
+  .message {
+    padding: 4px 4px;
+
+    font-family: monospace;
+
+    color: $grey-light;
+
+    &.log {
+      color: $white-ter;
+    }
+
+    &.info {
+      color: $turquoise;
+    }
+
+    &.success {
+      color: $green;
+    }
+
+    &.warning {
+      color: $orange;
+    }
+
+    &.error {
+      color: $red;
+    }
+  }
+}

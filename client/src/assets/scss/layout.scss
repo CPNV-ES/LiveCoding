@@ -21,6 +21,7 @@
   grid-column-end: 2;
   grid-row-start: 2;
   grid-row-end: 4;
+  overflow: hidden;
 }
 
 #game-box {
@@ -33,7 +34,7 @@
 
 #console-box {
   background-color: $black-ter;
-  min-height: 140px;
+  height: 160px;
   grid-column-start: 2;
   grid-column-end: 3;
   grid-row-start: 3;

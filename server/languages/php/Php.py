@@ -1,13 +1,13 @@
 import subprocess
 
-class Ruby:
+class Php:
 
 	def __init__(self):
-		self.header = "load \"ruby/commands.rb\""
-		self.footer = ""
+		self.header = "<?php require \"languages/php/commands.php\";"
+		self.footer = "?>"
 		# Language call is the real name of the command we'll run in the CLI
-		# We define it in case of versionning e.g : python 3
-		self.languageCall = "ruby"
+		# We define it in case of versionning e.g : php 7 
+		self.languageCall = "php"
 		pass
 
 	def getFileHeader(self):

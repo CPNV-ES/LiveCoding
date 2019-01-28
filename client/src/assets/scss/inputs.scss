@@ -7,6 +7,11 @@ input, select {
   border-radius: 6px;
   transition: 0.1s ease-in-out;
 
+  //outline: none;
+  //outline-color: transparent;
+  //outline-style: none;
+  -webkit-appearance: none;
+
   background-color: $white-bis;
 
   &:focus {
