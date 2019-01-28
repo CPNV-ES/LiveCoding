@@ -47,15 +47,24 @@ export default class Provider {
     return this.manifest.instructions
   }
   /**
+   * Return the base path of the game assets
+   * @return {String}
+   */
+  get assetsBasePath () {
+    return `${this.url}/${this.manifest.data.assets}/`
+  }
+  /**
    * Generate an url to load a ressource
-   * @param {String} file path
+   * @param {String} file path of the file
+   * @return {String}
    */
   generateRawUrl (file) {
     return `${this.url}/${file}`
   }
   /**
    * Generate an url to display a ressource
-   * @param {String} file path
+   * @param {String} file path of the file
+   * @return {String}
    */
   generateUrl (file) {
     return `${this.url}/${file}`

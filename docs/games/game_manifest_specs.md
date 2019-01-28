@@ -85,24 +85,6 @@ The game key specifies the entry file of the game.
 This file **must be** and `.mjs` file, because the platform loads the game using es6 modules.
 This file must contain a base class called `Game`, the platform will instanciate this class to start the game, see the [Game class documentation](./game_class_specs.md) for detailed informations.
 
-#### data > imports
-The imports key is an array of paths. These paths can only reference `.mjs` files.
-All imports will be loaded by the platform in order and befor the loading of the `Game` class. This allows you to separate codebase.
-```json
-{
-  ...
-  "data": {
-    ...
-    "imports": [
-      "test.mjs",
-      "tutu.mjs"
-    ]
-    ...
-  }
-  ...
-}
-```
-
 #### data > assets
 This key specifies the location where all the game assets will be stored. The app will use this key to generate a complete path to the assets you can use to load assets in our game.
 ```json

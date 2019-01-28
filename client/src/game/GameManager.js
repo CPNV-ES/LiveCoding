@@ -31,6 +31,9 @@ export default class GameManager {
    */
   async startGame () {
     // Create the base game class instance
-    window.game = new this.provider.gameModule.Game(document.getElementById('game-box'))
+    window.game = new this.provider.gameModule.Game(
+      document.getElementById('game-box'),
+      this.provider.assetsBasePath
+    )
   }
 }

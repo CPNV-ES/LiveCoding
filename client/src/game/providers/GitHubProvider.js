@@ -26,4 +26,11 @@ export default class GitHubProvider extends Provider {
   generateUrl (file) {
     return `${this.defaultBaseUrl}/${this.url}/${file}`
   }
+  /**
+   * Return the base path of the game assets
+   * @return {String}
+   */
+  get assetsBasePath () {
+    return `${this.rawBaseUrl}/${this.url}/${this.manifest.data.assets}`
+  }
 }
