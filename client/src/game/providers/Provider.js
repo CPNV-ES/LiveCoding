@@ -12,6 +12,8 @@ export default class Provider {
   url = ''
   /** @type {Object} */
   manifest = null
+  /** @type {Object} */
+  interpreters = {}
   /**
    * @param {String} url Url to the root folder of our game (where the manifest is stored)
    */
@@ -81,6 +83,15 @@ export default class Provider {
       return this.manifest
     } catch (e) {
       throw new Error('Impossible to load the game manifest, check your url, or if a manifest is present.')
+    }
+  }
+  /**
+   * Load the code for each available interpreters
+   */
+  async loadInterpreters () {
+    for (let interpreter in this.gameInterpreters) {
+      let response = await fetch(this.generateRawUrl(this.gameInterpreters[interpreter]))
+      this.interpreters[interpreter] = await response.text()
     }
   }
   /**
