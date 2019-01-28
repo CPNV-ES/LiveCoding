@@ -32,8 +32,7 @@ export default {
   },
   methods: {
     openInstruction (uri) {
-      console.log(`${this.gameUrl}/${uri}`)
-      window.open(`${this.gameUrl}/${uri}`)
+      window.open(this.gameManager.provider.generateUrl(uri))
     }
   }
 }
