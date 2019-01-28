@@ -4,17 +4,25 @@
 
 ## Changelog
 
-**v2.0.0-beta.1**
+**v2.0.0-beta.2**
 *This version is unstable*
 
 **Client :**
-- Editor preferences are now saved in the localstorage for persistence after page reload.
-- Selected game are now saved in the localstorage for persistence after page reload.
-- Available languages are now dynamically displayed depending on the game loaded.
-- The game console can now display messages.
-  - 5 levels are available (log, info, success, warning, error).
-  - You can write in the console useg the dedicated store module.
-  - mutations and actions are available in the store module to easily add messages.
+- URL provider for game loading fully suporter
+- Game can be loaded via `.mjs` extension and the `import()` method
+- The game box is cleared between game loadings
+- Text writed in the editor is now saved into localstorage for persistance between sessions
+
+**Pokedash game :**
+- Dynamic map loading
+- Dynamic loading of objects on the map
+- Youc cam move the character on the map
+- You can test element presence on the map
+
+**Processor :**
+- New structure for the python classes
+- Dynamically register suported languanges
+- Tests with websocket connexion
 
 ## Documentation
 

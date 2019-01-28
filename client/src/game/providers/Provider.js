@@ -1,6 +1,9 @@
 /**
  * Provider base class
  *
+ * The provider is responsible to access the game datas
+ * He provide an abstraction to the real game location
+ *
  * @class
  * @author Bastien Nicoud
  */
@@ -44,9 +47,44 @@ export default class Provider {
     return this.manifest.instructions
   }
   /**
-   * Loads the game scripts (described in the game manifest)
+   * Generate an url to load a ressource
+   * @param {String} file path
    */
-  loadGame () {
-    // - Get all the nesesary resources for the game
+  generateRawUrl (file) {
+    return `${this.url}/${file}`
+  }
+  /**
+   * Generate an url to display a ressource
+   * @param {String} file path
+   */
+  generateUrl (file) {
+    return `${this.url}/${file}`
+  }
+  /**
+   * Loads the manifest of the specified game
+   * @async
+   */
+  async loadManifest () {
+    try {
+      // Test with fixed url... implement url parsing
+      let response = await fetch(this.generateRawUrl('manifest.json'))
+      this.manifest = await response.json()
+      return this.manifest
+    } catch (e) {
+      throw new Error('Impossible to load the game manifest, check your url, or if a manifest is present.')
+    }
+  }
+  /**
+   * Loads the game class
+   */
+  async loadGameClass () {
+    try {
+      // Get the game code from source
+      this.gameModule = await import(/* webpackIgnore: true */ this.generateRawUrl(this.manifest.data.game))
+      return this.gameModule
+    } catch (e) {
+      console.error(e)
+      throw new Error('Impossible to load the game class, check your url, or if the manifest is corectly configured.')
+    }
   }
 }

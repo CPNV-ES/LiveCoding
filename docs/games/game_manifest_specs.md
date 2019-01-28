@@ -11,8 +11,12 @@ This file provide base informations about your game, thats allow the platform to
   "name": "Test",
   "description": "A meaningless game for test purpose.",
   "data": {
-    "game": "/game.js",
-    "assets": "/assets"
+    "game": "game.mjs",
+    "imports": [
+      "player.mjs",
+      "test.mjs"
+    ],
+    "assets": "assets"
   },
   "interpreters": {
     "php": "interpreters/php.php",
@@ -23,10 +27,12 @@ This file provide base informations about your game, thats allow the platform to
   "instructions": [
     {
       "name": "Commandes",
+      "description": "Game commands index.",
       "path": "instructions/commands.md"
     },
     {
-      "name": "Consignes",
+      "name": "Instructions",
+      "description": "Instructions to finish the exercice.",
       "path": "instructions/readme.md"
     }
   ]
@@ -35,25 +41,26 @@ This file provide base informations about your game, thats allow the platform to
 
 ## Specification
 
-### Name
+### name
 Specifies the name of your game (displayed in the title bar of te LiveCoding app).
 ```json
 {
-  ...
   "name": ".."
+  ...
 }
 ```
 
-### Description
+### description
 A simple desription of the game.
 ```json
 {
   ...
   "description": ".."
+  ...
 }
 ```
 
-### Data
+### data
 The data key contains all the paths related to the game engine and assets.
 ```json
 {
@@ -64,19 +71,53 @@ The data key contains all the paths related to the game engine and assets.
 }
 ```
 
-#### Data > game
+#### data > game
 The game key specifies the entry file of the game.
 ```json
 {
   ...
   "data": {
-    "game": "main.js"
+    "game": "main.mjs"
   }
+  ...
+}
+```
+This file **must be** and `.mjs` file, because the platform loads the game using es6 modules.
+This file must contain a base class called `Game`, the platform will instanciate this class to start the game, see the [Game class documentation](./game_class_specs.md) for detailed informations.
+
+#### data > imports
+The imports key is an array of paths. These paths can only reference `.mjs` files.
+All imports will be loaded by the platform in order and befor the loading of the `Game` class. This allows you to separate codebase.
+```json
+{
+  ...
+  "data": {
+    ...
+    "imports": [
+      "test.mjs",
+      "tutu.mjs"
+    ]
+    ...
+  }
+  ...
 }
 ```
 
-### Interpreters
-The interpreters key cntains all the interpreters supported by the game, and the path to the command file specific to the game.
+#### data > assets
+This key specifies the location where all the game assets will be stored. The app will use this key to generate a complete path to the assets you can use to load assets in our game.
+```json
+{
+  ...
+  "data": {
+    ...
+    "assets": "assets"
+  }
+  ...
+}
+```
+
+### interpreters
+The interpreters key contains all the interpreters supported by the game, and the path to the command file specific to the game.
 ```json
 {
   ...
@@ -89,7 +130,7 @@ The interpreters key cntains all the interpreters supported by the game, and the
 }
 ```
 
-### Instructions
+### instructions
 The instructions key is an array that lists diffrents files containing instructions. LiveCoding will iterates the array and creates links on the navbar of the app to this files. This allow the user to consult the app instructions directly from the platform. If you use GitHub, the Markdown files will be rendered nicely !
 ```json
 {
@@ -97,10 +138,12 @@ The instructions key is an array that lists diffrents files containing instructi
   "instructions": [
     {
       "name": "Commandes",
+      "description": "Available commands in the game",
       "path": "instructions/commands.md"
     },
     {
       "name": "Consignes",
+      "description": "A litle exercice to test the game",
       "path": "instructions/readme.md"
     }
   ]
