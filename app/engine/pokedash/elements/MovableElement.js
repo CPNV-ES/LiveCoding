@@ -48,29 +48,34 @@ class MovableElement extends Element {
         if(isMovable) e.action(comingFrom)
     }*/
 
-   /* swapArray(x, y, direction){        
-        var temp = game.mapElement[x][y]
-        if (direction == 'right'){
-            game.mapElement[x][y] = game.mapElement[x+1][y]
-            game.mapElement[x+1][y] = temp
-            game.posX += 1
+    // Function so the player can swap between two sprites
+
+    // !!!!!! TO DO / TO TEST : maybe need to change also the x and y so the sprite can move !!!!
+    swapSprite(direction, distanceFrom, distanceTo){
+        let x = game.protagonist.posX
+        let y = game.protagonist.posY        
+        
+        if (direction === 'right' || direction === RIGHT_ARROW){
+            let temp = game.mapElement[x + distanceFrom][y]
+            game.mapElement[x + distanceFrom][y].x = 
+            game.mapElement[x + distanceFrom][y] = game.mapElement[x + distanceTo][y]
+            game.mapElement[x + distanceFrom][y] = temp
         }
-        if (direction == 'left'){
-            game.mapElement[x][y] = game.mapElement[x-1][y]
-            game.mapElement[x-1][y] = temp
-            game.posX -= 1
+        if (direction === 'left' || direction === LEFT_ARROW){
+            let temp = game.mapElement[x - distanceFrom][y]
+            game.mapElement[x - distanceFrom][y] = game.mapElement[x - distanceTo][y]
+            game.mapElement[x - distanceFrom][y] = temp
         } 
-        if (direction == 'down'){
-            game.mapElement[x][y] = game.mapElement[x][y+1]
-            game.mapElement[x][y+1] = temp
-            game.posY += 1
+        if (direction === 'down' || direction === DOWN_ARROW){
+            let temp = game.mapElement[x][y + distanceFrom]
+            game.mapElement[x][y + distanceFrom] = game.mapElement[x][y + distanceTo]
+            game.mapElement[x][y + distanceFrom] = temp
         }
-        if (direction == 'up'){
-            //game.mapElement[x][y].y -= game.blockHeight
-            game.mapElement[x][y] = game.mapElement[x][y-1]
-            game.mapElement[x][y-1] = temp
-            game.posY -= 1
+        if (direction === 'up' || direction === UP_ARROW){
+            let temp = game.mapElement[x][y - distanceFrom]
+            game.mapElement[x][y - distanceFrom] = game.mapElement[x][y - distanceTo]
+            game.mapElement[x][y - distanceFrom] = temp
         }
         console.log("x: " + game.posX, "y: " +game.posY)
-    }*/
+    }
 }
