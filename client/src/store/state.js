@@ -4,6 +4,7 @@
  * @author Bastien Nicoud
  */
 export default {
+  showAppParametersModal: false,
   /**
    * Stores all editor related datas
    * @type {Object}
@@ -26,6 +27,9 @@ export default {
       php: localStorage.getItem('php') || `<?php\n$tutu = 'Bienvenue sur LiveCoding';\n$debugger->log($tutu);\n`,
       python: localStorage.getItem('python') || `tutu = 'Bienvenue sur LiveCoding'\ndebugger.log(tutu)\n`
     }
+  },
+  processor: {
+    url: ''
   },
   /**
    * Information form the current loaded game

@@ -70,5 +70,11 @@ export default {
         Charger
       </p>
     </button>
+    <button
+      class="is-blue spacing"
+      @click="$store.commit('SHOW_APP_PARAMETERS_MODAL', true)"
+    >
+      Parametres
+    </button>
   </div>
 </template>
