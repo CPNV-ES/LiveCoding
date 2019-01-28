@@ -1,28 +1,45 @@
+<script>
+export default {
+  computed: {
+    processorUrl: {
+      get () {
+        return this.$store.state.processor.url
+      },
+      set (v) {
+        this.$store.commit('UPDATE_PROCESSOR_URL', v)
+      }
+    }
+  }
+}
+</script>
+
 <template>
   <transition name="modal">
     <div class="modal-mask">
       <div class="modal-wrapper">
         <div class="modal-container">
-          <div class="modal-header">
-            <slot name="header">
-              default header
-            </slot>
-          </div>
-
           <div class="modal-body">
-            <slot name="body">
-              default body
-            </slot>
+            <p>
+              Modifiez l'url du processor.
+              L'url doit être un endpoint websockets : <code>ws://processor.com</code>
+            </p>
+          </div>
+          <div class="modal-body">
+            <input
+              v-model="processorUrl"
+              class="full-width"
+              type="text"
+              placeholder="URL du processor"
+            >
           </div>
 
           <div class="modal-footer">
             <slot name="footer">
-              default footer
               <button
-                class="modal-default-button"
+                class="is-blue"
                 @click="$store.commit('SHOW_APP_PARAMETERS_MODAL', false)"
               >
-                OK
+                Fermer
               </button>
             </slot>
           </div>
