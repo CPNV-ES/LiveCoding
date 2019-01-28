@@ -7,7 +7,7 @@ class PokedashGame{
         this.blockHeight
         this.blockWidth
         this.columns
-        this.rows
+        this.rows   
 
         this.availableCommands = [
             "isLeftSideFree()",
@@ -28,10 +28,8 @@ class PokedashGame{
         }
 
         this.comCliEngine = comCli   // Engine Communication to the server
-        this.mapElement = []
-        // Return position of the current player
-        this.playerPosX 
-        this.playerPosY
+        this.mapElement = [] 
+        this.objectives = 0 // Number of objectives (pokeball) in the map
     }
 
    
@@ -84,31 +82,81 @@ class PokedashGame{
         console.log("------------ ITERATEOVERMAP() ------------")
         for (let y = 0; y < this.columns; y++){
             for (let x = 0; x < this.rows; x++) {
+                // Instantiate objects in the 2D array
                 let idElement = window[this.mapName].pattern[y][x]
-                
                 let element = window[this.mapName].e[idElement].name
                 let elementImg = element.toLowerCase()+'Img'
                 this.mapElement[x][y] = new DynamicElement(element, x*this.blockHeight, y*this.blockWidth, this[elementImg])
                
-                // Recupère la position du joueur dans le tableau d'objet
+                // Récupère la position du joueur dans le tableau d'objet
                 if(this.mapElement[x][y].isProtagonist) {
-                    this.playerPosX = x
-                    this.playerPosY = y
+                    this.protagonist = this.mapElement[x][y]
+                }
+
+                // Récupère le nombre d'objectifs dans le jeu
+                if(this.mapElement[x][y].isObjective){
+                    this.objectives += 1
+                } 
+                
+                if(this.mapElement[x][y].constructor.name == "Door"){
+                    this.door = this.mapElement[x][y]
                 }
             }
         }      
     }
 
-    isInArray(direction, distance){
-        
+    keyPressed(keyCode) {
+        //let element = null
+        if (keyCode === LEFT_ARROW){
+            // Check if not going out of the map
+            if(this.playerPosX <= 0) return false 
+            //element = this.getElement(keyCode, 1)
+            this.protagonist.moveLeft()
+
+        } else if(keyCode === RIGHT_ARROW) {
+            // Check if not going out of the map
+            if(this.protagonist.posX >= this.rows - 1) return false 
+            //element = this.getElement(keyCode, 1)
+            this.protagonist.moveRight()
+
+        } else if(keyCode === UP_ARROW) {
+            // Check if not going out of the map
+            if(this.protagonist.posY <= 0) return false 
+            //element = this.getElement(keyCode, 1)
+            this.protagonist.moveUp()
+
+        } else if(keyCode === DOWN_ARROW) {
+            // Check if not going out of the map
+            if(this.protagonist.posY >= this.columns-1) return false
+           // element = this.getElement(keyCode, 1)
+            this.protagonist.moveDown()
+
+        }
+        //element.action(keyCode)
+        return true
+    }
+
+    // Functions for user
+    getObjectives(){
+        return this.objectives
+    }
+
+    openDoor(){
+        if(this.objectives != 0) return false
+        this.mapElement[this.door.posX][this.door.posY].open()
+        return true
+    }
+    closeDoor(){
+        this.mapElement[this.doorPosX][this.doorPosY].close()
+        return true
     }
 
     // Get element from protagonist
     getElement(direction, distance){
-        if (distance < 0 ) return false
+        if (distance < 0) return false
         
-        let x = this.playerPosX
-        let y = this.playerPosY
+        let x = this.protagonist.posX
+        let y = this.protagonist.posY
         let element
         
         if (direction === 'left' || direction === LEFT_ARROW){
@@ -134,32 +182,7 @@ class PokedashGame{
             if (y >= this.blockHeight) return false // If it's out of the map
             element = this.mapElement[this.playerPosX][this.playerPosY + distance]
         }
-        //if(element == null) return null
-        return element
-    }
-
-    keyPressed(keyCode) { 
-        let element = null
-        if (keyCode === LEFT_ARROW){
-            element = this.getElement(keyCode, 1)
-            console.log(element)
-            element.action(keyCode) 
-            //this.mapElement[this.playerPosX][this.playerPosY].moveLeft()
-        } else if(keyCode === RIGHT_ARROW) {
-            element = this.getElement(keyCode, 1)
-            element.action(keyCode) 
-           //this.mapElement[this.playerPosX][this.playerPosY].moveRight()
-        } else if(keyCode === UP_ARROW) {
-            element = this.getElement(keyCode, 1)
-            element.action(keyCode) 
-            //this.mapElement[this.playerPosX][this.playerPosY].moveUp()
-        } else if(keyCode === DOWN_ARROW) {
-            element = this.getElement(keyCode, 1)
-            element.action(keyCode) 
-            //this.mapElement[this.playerPosX][this.playerPosY].moveDown()
-        }
-        //element.action(keyCode)
-        return false
+        return element.constructor.name.toString() // Return the name of the class's element in string
     }
 
     sendMessageToServer(messageToSend){
