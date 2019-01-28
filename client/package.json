@@ -12,7 +12,6 @@
     "monaco-editor": "^0.15.6",
     "monaco-editor-webpack-plugin": "^1.7.0",
     "monaco-themes": "^0.2.5",
-    "spectre.css": "^0.5.8",
     "vue": "^2.5.22",
     "vue-router": "^3.0.1",
     "vuex": "^3.0.1"
