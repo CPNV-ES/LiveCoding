@@ -3,7 +3,6 @@ const classes = {
     Door,
     Element,
     MovableElement,
-    OpenDoor,
     Protagonist,
     Pokeball,
     Road,
