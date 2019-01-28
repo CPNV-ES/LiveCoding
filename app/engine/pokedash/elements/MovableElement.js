@@ -7,7 +7,6 @@ class MovableElement extends Element {
         let temp = game.mapElement[this.posX+1][this.posY]
         game.mapElement[this.posX+1][this.posY] = game.mapElement[this.posX][this.posY]
         game.mapElement[this.posX][this.posY] = temp
-        game.playerPosX += 1
         this.posX += 1
         this.x = this.x + game.blockWidth //For sprite drawing
         return true
@@ -18,7 +17,6 @@ class MovableElement extends Element {
         let temp = game.mapElement[this.posX-1][this.posY]
         game.mapElement[this.posX-1][this.posY] = game.mapElement[this.posX][this.posY]
         game.mapElement[this.posX][this.posY] = temp
-        game.playerPosX -= 1
         this.posX -=1
         return true
     }
@@ -28,7 +26,6 @@ class MovableElement extends Element {
         let temp = game.mapElement[this.posX][this.posY+1]
         game.mapElement[this.posX][this.posY+1] = game.mapElement[this.posX][this.posY]
         game.mapElement[this.posX][this.posY] = temp
-        game.playerPosY += 1
         this.posY += 1
         return true
     }
@@ -38,7 +35,6 @@ class MovableElement extends Element {
         let temp = game.mapElement[this.posX][this.posY-1]
         game.mapElement[this.posX][this.posY-1] = game.mapElement[this.posX][this.posY]
         game.mapElement[this.posX][this.posY] = temp
-        game.playerPosY -= 1
         this.posY -=1
         return true     
     }
