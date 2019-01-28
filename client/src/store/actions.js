@@ -40,30 +40,57 @@ export default {
    * - launch the socket connexion
    * - send the code
    * - execute commands
-   * - clode the connexion
+   * - close the connexion
    */
-  run () {
+  run ({ state, dispatch }) {
+    dispatch('console/info', 'Running, try to contact processor.')
     try {
       // window.processor = new ProcessorConnexion()
-      let websocketConnexion = new WebSocket('ws://localhost:8765')
-      websocketConnexion.onopen = (oEvent) => {
-        console.log('WebSocket connexion opened')
+      let socket = new WebSocket(state.processor.url)
+      socket.onopen = (oEvent) => {
         console.log(oEvent)
+        dispatch('console/success', 'Processor connected, sending data !')
+        // step 1 : sending language
+        socket.send(state.editor.language)
+        socket.onmessage = (mEvent) => {
+          if (mEvent.data === 'OK') {
+            socket.send(window.gameManager.provider.interpreters[state.editor.language])
+            socket.onmessage = (mEvent) => {
+              if (mEvent.data === 'OK') {
+                socket.send(state.languagesContent[state.editor.language])
+                socket.onmessage = (mEvent) => {
+                  if (mEvent.data === 'OK') {
+                    dispatch('console/success', 'Processor successfully loaded script, launching process.')
+                    dispatch('console/info', 'Waiting for engine interactions')
+                    socket.onmessage = (mEvent) => {
+                      // Evaluate the command in the game context
+                      let result = window.gameCommandEval(mEvent.data)
+                      socket.send(result)
+                    }
+                  } else {
+                    socket.close()
+                  }
+                }
+              } else {
+                socket.close()
+              }
+            }
+          } else {
+            socket.close()
+          }
+        }
       }
-      websocketConnexion.onclose = (cEvent) => {
-        console.log('WebSocket connexion closed')
+      socket.onclose = (cEvent) => {
+        dispatch('console/info', 'Websocket connexion closed.')
         console.log(cEvent)
       }
-      websocketConnexion.onerror = (eEvent) => {
-        console.log('WebSocket error')
+      socket.onerror = (eEvent) => {
+        dispatch('console/error', 'Websocket connexion error.')
         console.log(eEvent)
-      }
-      websocketConnexion.onmessage = (msgEvent) => {
-        console.log('WebSocket message recieved')
-        console.log(msgEvent.data)
       }
     } catch (e) {
       console.error(e)
+      dispatch('console/error', 'Error during running !')
     }
   }
 }
