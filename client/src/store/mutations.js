@@ -40,6 +40,14 @@ export default {
    * Change the editor language
    * @param {String} value
    */
+  UPDATE_PROCESSOR_URL: (state, value) => {
+    localStorage.setItem('processor-url', value)
+    state.game.url = value
+  },
+  /**
+   * Change the editor language
+   * @param {String} value
+   */
   UPDATE_GAME_PROVIDER: (state, value) => {
     localStorage.setItem('game-provider', value)
     state.game.provider = value
@@ -51,5 +59,12 @@ export default {
   SET_GAME_MANAGER: (state, value) => {
     state.game.manager = value
     state.game.loaded = true
+  },
+  /**
+   * Show the parameters modal
+   * @param {Boolean}
+   */
+  SHOW_APP_PARAMETERS_MODAL: (state, value) => {
+    state.showAppParametersModal = value
   }
 }
