@@ -6,11 +6,11 @@ class Pokeball extends MovableElement{
     action(information){
         console.log("bienvenue dans la méthode action de la classe Pokeball")
         let game = PokedashGame
-        game.mapElement[this.posX][this.posY] = game.mapElement[game.playerPosX][game.playerPosY]
+        /*game.mapElement[this.posX][this.posY] = game.mapElement[game.playerPosX][game.playerPosY]
         game.mapElement[game.playerPosX][game.playerPosY] = new DynamicElement(Road, game.playerPosX*game.blockHeight, game.playerPosY*game.blockWidth, game.roadImg)
         Protagonist.pokeball += 1
         game.playerPosX = this.posX
-        game.playerPosY = this.posY
+        game.playerPosY = this.posY*/
         return true
     }
 }
