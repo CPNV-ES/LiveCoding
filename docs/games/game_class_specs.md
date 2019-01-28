@@ -13,5 +13,9 @@ To work properly thiy class must meet certain characteristics :
 
 LiveCoding will pass 2 parameters to the Game class :
 
-* `{Element}`The dom element in wich you have to display the game.
-* `{String}`The base path to the assets directory of our game.
+* `{Element}` The dom element in wich you have to display the game.
+* `{String}` The base path to the assets directory of our game.
+
+### Interpreters commands execution
+
+When the user launch his code, the processor will execute the code, and send game commants to the the `Game` class. So the commandes used in the interpreters must be available under the game class instance. Mode details about game commands [here](./game_commands_execution.md).

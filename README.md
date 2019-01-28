@@ -4,25 +4,25 @@
 
 ## Changelog
 
-**v2.0.0-beta.2**
+**v2.0.0-beta.3**
 *This version is unstable*
 
 **Client :**
-- URL provider for game loading fully suporter
-- Game can be loaded via `.mjs` extension and the `import()` method
-- The game box is cleared between game loadings
-- Text writed in the editor is now saved into localstorage for persistance between sessions
+- Game provider now supports
+  - Loading games from github
+  - Loading assets
+  - Loading interpreters code into the browser
+  - Links to instruction redirects to github with markdown preview
+  - Creating and starting the game under `window.game` scope
+- You can change the processor endpoint url into the parameters section
+- Test are realised to open the websocket connexion (not stable)
 
 **Pokedash game :**
-- Dynamic map loading
-- Dynamic loading of objects on the map
-- Youc cam move the character on the map
-- You can test element presence on the map
+- New methods to interact with the game (for future interpreters)
+- Open and close doors
 
 **Processor :**
-- New structure for the python classes
-- Dynamically register suported languanges
-- Tests with websocket connexion
+- websocket endpoint added (not stable)
 
 ## Documentation
 
