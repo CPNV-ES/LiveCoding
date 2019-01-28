@@ -1,3 +1,5 @@
+import asyncio
+import websockets
 import socket
 import os
 import json
@@ -17,7 +19,7 @@ class Processor:
 		self.userCmds = data.split('/', 1)[1]
 		self.language = languages.create(targetLanguage) # language is the real language object /ruby, Php, etc.)
 
-	def execute(self, socket):
+	async def execute(self, socket):
 		tmpFileToRun = TempFile(self.userCmds, self.language.getFileHeader(), self.language.getFileFooter())
 		tmpFileToRun.create()
 		print(tmpFileToRun.content)
@@ -34,13 +36,13 @@ class Processor:
 			print("La commande :")
 			print(cmdsJS)
 			# Send the JS commands through the socket and fetch the return message of the game execution
-			socket.send(cmdsJS.encode())
-			gameReturnedMsg = socket.recv(1024).decode()
+			await socket.send(cmdsJS.encode())
+			gameReturnedMsg = await socket.recv()
 			print(gameReturnedMsg)
 			# Put the game returned message into the STDIN (because the game method of the target langage wait a response to return it to the langage interpretor)
 			process.stdin.write(bytes(gameReturnedMsg+"\n","UTF-8"))
 			process.stdin.flush() # !! DONT FORGET TO FLUSH THE BUFER AFTER EACH WRITE !!
-			print("Returned by interpretor -> "+process.stdout.readline().decode())
+			print("Returned by interpretor -> " + process.stdout.readline().decode())
 		# Error detected -> send to the builder via the socket the errorMsg
 		else:
 			print("Il y a eu une erreur")
@@ -50,6 +52,6 @@ class Processor:
 			data['fileName'] = tmpFileToRun.getName()
 			json_data = json.dumps(data)
 
-			data = 'error/'+json_data
+			data = 'error/'+ json_data
 
 			socket.send(data.encode())
