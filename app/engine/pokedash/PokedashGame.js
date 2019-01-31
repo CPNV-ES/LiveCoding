@@ -109,7 +109,7 @@ class PokedashGame{
         //let element = null
         if (keyCode === LEFT_ARROW){
             // Check if not going out of the map
-            if(this.playerPosX <= 0) return false 
+            if(this.protagonist.posX <= 0) return false 
             //element = this.getElement(keyCode, 1)
             this.protagonist.moveLeft()
 
