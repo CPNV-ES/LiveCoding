@@ -6,12 +6,12 @@ import socket
 import select
 from mlogging import mlog
 from .Processor import Processor
+from mod import languages
 
 class Listen:
 
     mainSocket = None
     processor = None
-    languages = ['php', 'ruby']
     selectedLanguage = None
     
     def __init__(self, socket):
@@ -36,9 +36,10 @@ class Listen:
     # get the game language
     async def get_language(self):
         message = await self.mainSocket.recv()
-        if (message in self.languages):
+        mlog.show("Language game for client: " + message)
+        self.selectedLanguage = languages.loadLanguage(message)
+        if (self.selectedLanguage):
             await self.mainSocket.send('OK')
-            mlog.show("Language game for client: " + message)
         else:
             await self.mainSocket.send('ERROR/Not game for this language')
             mlog.show("The language " + message + " is not defined for this game")
