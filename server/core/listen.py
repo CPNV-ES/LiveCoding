@@ -47,7 +47,7 @@ class Listen:
 
     # get the game engine code form client
     async def get_engine(self):
-        self.game.content = await self.mainSocket.recv()
+        self.game.engine = await self.mainSocket.recv()
         mlog.show("Engine loaded successfully!")
         await self.mainSocket.send('OK')
         mlog.show(self.game.engine)
