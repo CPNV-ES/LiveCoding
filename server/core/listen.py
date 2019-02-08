@@ -1,4 +1,5 @@
-# Listen all from socket
+# Listen all from socket:
+# Get all data form client and create a new game then run it
 
 import asyncio
 import websockets
@@ -6,19 +7,15 @@ import socket
 import select
 from mlogging import mlog
 from .Processor import Processor
+from .game import Game
+import languages
 from mod import languages
 
 class Listen:
-
-    mainSocket = None
-    processor = None
-    selectedLanguage = None
     
     def __init__(self, socket):
-        self.mainSocket = socket
-        self.processor = Processor()
-        self.engine = None
-        self.content = None
+        self.mainSocket = socket          # the client socket to listen
+        self.game = None                  # the game to attach a this connection 
         return
 
     #protocol sequency
@@ -29,16 +26,18 @@ class Listen:
             return False
         if not await self.get_content():
             return False
-        if not await self.start_proxy():
+        if not await self.start_game():
             return False
         return True
     
-    # get the game language
+    # get the game language from client 
     async def get_language(self):
         message = await self.mainSocket.recv()
         mlog.show("Language game for client: " + message)
-        self.selectedLanguage = languages.loadLanguage(message)
-        if (self.selectedLanguage):
+        selectedLanguage = languages.loadLanguage(message)
+        if (selectedLanguage):
+            # create a new game for the selected language
+            self.game = Game(selectedLanguage)
             await self.mainSocket.send('OK')
         else:
             await self.mainSocket.send('ERROR/Not game for this language')
@@ -48,23 +47,23 @@ class Listen:
 
     # get the game engine code form client
     async def get_engine(self):
-        self.engine = await self.mainSocket.recv()
+        self.game.content = await self.mainSocket.recv()
         mlog.show("Engine loaded successfully!")
         await self.mainSocket.send('OK')
+        mlog.show(self.game.engine)
         return True
 
     # get code content form client
     async def get_content(self):
-        self.content = await self.mainSocket.recv()
+        self.game.content = await self.mainSocket.recv()
         mlog.show("Client code loaded successfully!")
         await self.mainSocket.send('OK')
+        mlog.show(self.game.content)
         return True
 
     # start the game
-    async def start_proxy(self):
-        #message = await self.mainSocket.recv()
-        #self.processor.peel(message)
-        #await self.processor.execute(self.mainSocket)
+    async def start_game(self):
+        await self.game.run(self.mainSocket)
         return True
 
     
