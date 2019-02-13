@@ -16,8 +16,10 @@ port = int(config.get("SOCKET CONFIGURATION","PORT"))
 async def game(websocket, path):
     mlog.show("New Client Connection")
     listen = Listen(websocket)
-    await listen.run()
-    await websocket.send("close game")
+    if await listen.run():
+        await websocket.send("close game")
+    else:
+        await websocket.send("close game with error")
     mlog.show("Client Connection Closed")
 
 mlog.show("Starting Live Coding Server .... Wait")
