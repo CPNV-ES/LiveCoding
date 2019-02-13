@@ -5,7 +5,7 @@
   "scripts": {
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "dev": "vue-cli-service serve"
+    "serve": "vue-cli-service serve"
   },
   "dependencies": {
     "modern-normalize": "^0.5.0",
