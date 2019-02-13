@@ -11,7 +11,7 @@ from mlogging import mlog
 class Game:
     
     def __init__(self, language, socket):
-        self.engine = None                                     # engine game defined by the client
+        self.classes = None                                     # engine game defined by the client
         self.content = None                                    # client game code 
         self.languageObject = languages.create(language)       # language with the engine
         self.languageName = language
@@ -21,7 +21,9 @@ class Game:
     
     async def run(self, socket):
         mlog.show("Starting the new game. Wait for ready....")
-        tmpFileToRun = TempFile(self.engine, self.content)                    # init and create new file with the game engine and the client code
+        mlog.show(self.languageObject.getFileHeader())
+        tmpFileToRun = TempFile(self.languageObject.getFileHeader(), self.classes, self.content)                    # init and create new file with the game engine and the client code
+
         self.process = Process(self.socket, tmpFileToRun, self.languageName)  # init the new game process
         self.process.run()                                                    # run the process
         pass
