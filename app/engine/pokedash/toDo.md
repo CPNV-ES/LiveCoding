@@ -1,5 +1,8 @@
 [//]: # "File created the 21.09.2019. This is a personnal file to remember where I was and what I'll have to do next time. I prefer doing this here to centralize all the information, instead on trello or something similar"
 # TO DO 
+
+## 06.02.2019
+Probleme: swap d'élément ne repositionne pas l'image, alors qu'ajouter un chiffre au x oui
 ## 25.01.2019
 ### TO DO
 - Doc Technique du projet

@@ -9,6 +9,7 @@ class MovableElement extends Element {
         game.mapElement[this.posX][this.posY] = temp
         this.posX += 1
         this.x = this.x + game.blockWidth //For sprite drawing
+        console.log(game.mapElement[this.posX-1][this.posY] )
         return true
     }
 
@@ -57,9 +58,10 @@ class MovableElement extends Element {
         
         if (direction === 'right' || direction === RIGHT_ARROW){
             let temp = game.mapElement[x + distanceFrom][y]
-            game.mapElement[x + distanceFrom][y].x = 
+            console.log(game.mapElement[x + distanceTo][y])
+           // this.game.mapElement[x + distanceFrom][y].x = 
             game.mapElement[x + distanceFrom][y] = game.mapElement[x + distanceTo][y]
-            game.mapElement[x + distanceFrom][y] = temp
+            game.mapElement[x + distanceFrom][y] = temp   
         }
         if (direction === 'left' || direction === LEFT_ARROW){
             let temp = game.mapElement[x - distanceFrom][y]
@@ -76,6 +78,6 @@ class MovableElement extends Element {
             game.mapElement[x][y - distanceFrom] = game.mapElement[x][y - distanceTo]
             game.mapElement[x][y - distanceFrom] = temp
         }
-        console.log("x: " + game.posX, "y: " +game.posY)
+        console.log("x: " + game.protagonist.posX, "y: " +game.protagonist.posY)
     }
 }

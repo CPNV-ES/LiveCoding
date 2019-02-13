@@ -42,9 +42,9 @@ class PokedashGame{
             let eName = window[this.mapName].e[ele].name.toLowerCase()
             console.log("eName: "+eName)
 
-            this[eName] = null//if ele = 0 -> this.protagonist = null
-            if(eName == 'road')this[eName+"Img"] = null //Not rendering the road (just the background). Easier to handle
-            else this[eName+"Img"] = loadImage("engine/pokedash/assets/"+eName+"Img.png") // -> this.protagonist = loadImg(assets/protagonist.png)
+            this[eName] = null//with ele = 0 -> this.protagonist = null
+            if(eName == 'road') this[eName+"Img"] = null //Not rendering the road (just the background). Easier to handle
+            else this[eName+"Img"] = loadImage("engine/pokedash/assets/"+eName+"Img.png") // -> this.protagonistImg = loadImg(assets/protagonist.png)
         }    
     }
 
@@ -86,7 +86,7 @@ class PokedashGame{
                 let idElement = window[this.mapName].pattern[y][x]
                 let element = window[this.mapName].e[idElement].name
                 let elementImg = element.toLowerCase()+'Img'
-                this.mapElement[x][y] = new DynamicElement(element, x*this.blockHeight, y*this.blockWidth, this[elementImg])
+                this.mapElement[x][y] = new DynamicElement(element, x*this.blockWidth, y*this.blockHeight, this[elementImg])
                
                 // Récupère la position du joueur dans le tableau d'objet
                 if(this.mapElement[x][y].isProtagonist) {
@@ -105,19 +105,35 @@ class PokedashGame{
         }      
     }
 
+    refreshPos(){
+        for (let y = 0; y < this.columns; y++){
+            for (let x = 0; x < this.rows; x++) {
+                // Refresh pos X and Y
+                this.mapElement[x][y].x = x * this.blockWidth
+                this.mapElement[x][y].y = y * this.blockHeight
+            }
+        }
+    }
+
     keyPressed(keyCode) {
         //let element = null
+        let element = this.getElement(keyCode, 1)
+        console.log('element: ' + element)
+        if(element == 'road') return false
         if (keyCode === LEFT_ARROW){
             // Check if not going out of the map
             if(this.protagonist.posX <= 0) return false 
             //element = this.getElement(keyCode, 1)
-            this.protagonist.moveLeft()
-
+            this.protagonist.moveLeft()           
+    
         } else if(keyCode === RIGHT_ARROW) {
             // Check if not going out of the map
             if(this.protagonist.posX >= this.rows - 1) return false 
+            console.log(this.protagonist.posX)
+            console.log(this.rows - 1)
             //element = this.getElement(keyCode, 1)
             this.protagonist.moveRight()
+           // this.protagonist.swapSprite(keyCode, 0, 1)
 
         } else if(keyCode === UP_ARROW) {
             // Check if not going out of the map
@@ -132,7 +148,12 @@ class PokedashGame{
             this.protagonist.moveDown()
 
         }
+        else{
+            return false
+        }
         //element.action(keyCode)
+        //this.protagonist.swapSprite(keyCode, 0, 1)
+        this.refreshPos()
         return true
     }
 
@@ -152,7 +173,7 @@ class PokedashGame{
     }
 
     // Get element from protagonist
-    getElement(direction, distance){
+    getElement(direction, distance, optionnal){
         if (distance < 0) return false
         
         let x = this.protagonist.posX
@@ -160,28 +181,28 @@ class PokedashGame{
         let element
         
         if (direction === 'left' || direction === LEFT_ARROW){
-            x = x - distance
             if (x < 0 ) return false // If it's out of the map
-            element = this.mapElement[this.playerPosX - distance][this.playerPosY]
+            element = this.mapElement[x - distance][y]
         }
 
-        if (direction === 'right' || direction === RIGHT_ARROW){
-            x = x + distance
-            if (x >= this.blockWidth ) return false // If it's out of the map
-            element = this.mapElement[this.playerPosX + distance][this.playerPosY]
+        else if (direction === 'right' || direction === RIGHT_ARROW){
+            if (x >= this.blockWidth + distance) return false // If it's out of the map
+            element = this.mapElement[x + distance][y]
         }
 
-        if (direction === 'up' || direction === UP_ARROW){
-            y = y - distance
+        else if (direction === 'up' || direction === UP_ARROW){
             if (y < 0 ) return false // If it's out of the map
-            element = this.mapElement[this.playerPosX][this.playerPosY - distance]
+            element = this.mapElement[x][y - distance]
         }
 
-        if (direction === 'down' || direction === DOWN_ARROW){
-            y = y + distance
-            if (y >= this.blockHeight) return false // If it's out of the map
-            element = this.mapElement[this.playerPosX][this.playerPosY + distance]
+        else if (direction === 'down' || direction === DOWN_ARROW){
+            if (y >= this.blockHeight + distance) return false // If it's out of the map
+            element = this.mapElement[x][y + distance]
         }
+        else return null
+
+        if(optionnal == 'admin') return element
+
         return element.constructor.name.toString() // Return the name of the class's element in string
     }
 
