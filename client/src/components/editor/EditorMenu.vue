@@ -33,6 +33,9 @@ export default {
   methods: {
     openInstruction (uri) {
       window.open(this.gameManager.provider.generateUrl(uri))
+    },
+    run () {
+      this.$store.dispatch('run')
     }
   }
 }
@@ -75,6 +78,7 @@ export default {
     </select>
     <!-- LAUNCH THE EXECUTION OF THE SCRIPT -->
     <button
+      @click="run"
       class="is-blue spacing"
       title="Lancez l'execution de votre script !"
     >
