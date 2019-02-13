@@ -14,12 +14,15 @@ export default class Provider {
   manifest = null
   /** @type {Object} */
   interpreters = {}
+  /** @type {Object} */
+  gameModule = {}
   /**
    * @param {String} url Url to the root folder of our game (where the manifest is stored)
    */
   constructor (url) {
     this.url = url
   }
+
   /**
    * Returns the name of the loaded game
    * @return {String}
