@@ -57,7 +57,7 @@ export default {
             socket.send(window.gameManager.provider.interpreters[state.editor.language])
             socket.onmessage = (mEvent) => {
               if (mEvent.data === 'OK') {
-                socket.send(state.languagesContent[state.editor.language])
+                socket.send(state.editor.languagesContent[state.editor.language])
                 socket.onmessage = (mEvent) => {
                   if (mEvent.data === 'OK') {
                     dispatch('console/success', 'Processor successfully loaded script, launching process.')
