@@ -20,6 +20,11 @@ export default {
      * @type {String}
      */
     language: localStorage.getItem('editor-language') || 'ruby',
+    /**
+     * Default font size
+     * @type {Number}
+     */
+    fontSize: 14,
     // Mapping between the language and the content of the editor
     languagesContent: {
       javascript: localStorage.getItem('javascript') || `let tutu = 'Bienvenue sur LiveCoding'\ndebugger.log(tutu)\n`,
