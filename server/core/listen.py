@@ -6,9 +6,7 @@ import websockets
 import socket
 import select
 from mlogging import mlog
-from .Processor import Processor
 from .game import Game
-import languages
 from mod import languages
 
 class Listen:
@@ -37,7 +35,7 @@ class Listen:
         selectedLanguage = languages.loadLanguage(message)
         if (selectedLanguage):
             # create a new game for the selected language
-            self.game = Game(selectedLanguage)
+            self.game = Game(selectedLanguage, self.mainSocket)
             await self.mainSocket.send('OK')
         else:
             await self.mainSocket.send('ERROR/Not game for this language')
