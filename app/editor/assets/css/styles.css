@@ -1,9 +1,0 @@
-#editor {
-    min-width: 600px;
-    min-height: 624px;
-}
-
-#editorControls {
-    display: flex;
-    justify-content: space-around;
-}
