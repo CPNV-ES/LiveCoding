@@ -50,7 +50,6 @@ class Listen:
         self.game.classes = await self.mainSocket.recv()
         mlog.show("Client game engine loaded successfully!")
         await self.mainSocket.send('OK')
-        mlog.show(self.game.classes)
         return True
 
     # get code content form client
@@ -59,7 +58,6 @@ class Listen:
         self.game.content = await self.mainSocket.recv()
         mlog.show("Client game code loaded successfully!")
         await self.mainSocket.send('OK')
-        mlog.show(self.game.content)
         return True
 
     # start the game
