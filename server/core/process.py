@@ -33,4 +33,5 @@ class Process:
     
     def proxyGame(self):
         # wait for client reponse
+        mlog.show("Starting proxy server ... Waiting for client answer...")
         pass
