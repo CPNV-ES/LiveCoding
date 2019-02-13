@@ -29,7 +29,7 @@ export default {
     }
   },
   processor: {
-    url: localStorage.getItem('processor-url') || 'ws://localhost:8787/processor'
+    url: localStorage.getItem('processor-url') || 'ws://localhost:8787/'
   },
   /**
    * Information form the current loaded game
