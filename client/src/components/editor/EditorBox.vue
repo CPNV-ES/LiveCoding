@@ -49,10 +49,11 @@ export default {
   mounted () {
     this.initEditor()
   },
+  /**
+   * When the component is destoyed
+   */
   beforeDestroy () {
-    /**
-     * Unmount the editor when the component is destroyed
-     */
+    // Unmount the editor when the component is destroyed
     this.editor && this.editor.dispose()
   },
   methods: {
