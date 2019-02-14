@@ -2,7 +2,7 @@
 
 // Container
 #app {
-  height: 100%;
+  height: 100vh;
   display: grid;
   grid-template-columns: auto 768px;
   grid-template-rows: 50px 768px auto;
@@ -34,7 +34,7 @@
 
 #console-box {
   background-color: $black-ter;
-  height: 160px;
+  min-height: 160px;
   grid-column-start: 2;
   grid-column-end: 3;
   grid-row-start: 3;
