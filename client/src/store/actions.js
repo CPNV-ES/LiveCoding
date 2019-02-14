@@ -64,8 +64,8 @@ export default {
                     dispatch('console/info', 'Waiting for engine interactions')
                     socket.onmessage = (mEvent) => {
                       // Evaluate the command in the game context
-                      let result = window.gameCommandEval(mEvent.data)
-                      socket.send(result)
+                      let tutu = window.game.executeGameCommand(mEvent.data)
+                      socket.send(tutu)
                     }
                   } else {
                     socket.close()
