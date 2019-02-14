@@ -25,6 +25,8 @@ export default class GameManager {
     await this.provider.loadManifest()
     // Loads the available interpreters
     await this.provider.loadInterpreters()
+    // Loads game libraries
+    await this.provider.loadLibraries()
     // Loads game classes
     await this.provider.loadGameClass()
   }
