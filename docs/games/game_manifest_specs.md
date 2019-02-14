@@ -11,6 +11,9 @@ This file provide base informations about your game, thats allow the platform to
   "name": "Test",
   "description": "A meaningless game for test purpose.",
   "data": {
+    "libraries": [
+      { "cdn": true, "url": "https://tutu.com/toto" }
+    ],
     "game": "game.mjs",
     "assets": "assets"
   },
