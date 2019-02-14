@@ -1,3 +1,5 @@
+import loadScript from './ScriptLoader'
+
 /**
  * Provider base class
  *
@@ -121,8 +123,8 @@ export default class Provider {
   async loadLibraries () {
     if (this.gameLibraries) {
       for (let library of this.gameLibraries) {
-        // Will check if the library needs to be imported from a cdn, or import it from the game repo directly.
-        await import(/* webpackIgnore: true */ library.cdn ? library.url : this.generateRawUrl(library.url))
+        // This custom method allows to load script globally
+        await loadScript(library.cdn ? library.url : this.generateRawUrl(library.url))
       }
     } else {
       console.info('No libraries to load')
