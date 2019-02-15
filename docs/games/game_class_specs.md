@@ -9,13 +9,37 @@ When you load your game, LiveCoding will import the main game file into the plat
 
 To work properly thiy class must meet certain characteristics :
 
-### Game class parameters
+### Game class constructor parameters
 
 LiveCoding will pass 2 parameters to the Game class :
 
 * `{Element}` The dom element in wich you have to display the game.
 * `{String}` The base path to the assets directory of our game.
 
-### Interpreters commands execution
+### Game class methods
 
-When the user launch his code, the processor will execute the code, and send game commants to the the `Game` class. So the commandes used in the interpreters must be available under the game class instance. Mode details about game commands [here](./game_commands_execution.md).
+The Game class must provide a specific method named `executeGameCommand` to execude the game commands sended by the processor. This method must accept a string (the command), and return the result in string format.
+
+### Game class example
+
+```js
+export class Game {
+
+  /**
+   * @param {HTMLElement} el
+   * @param {string} assetsBasePath
+   */
+  constructor (el, assetsBasePath) {
+    // Initialize your game
+  }
+
+  /**
+   * @param {string} command
+   * @return {string} command output
+   */
+  executeGameCommand (command) {
+    // Execute the command in your game and return the result
+  }
+
+}
+```

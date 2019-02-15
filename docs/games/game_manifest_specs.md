@@ -11,6 +11,9 @@ This file provide base informations about your game, thats allow the platform to
   "name": "Test",
   "description": "A meaningless game for test purpose.",
   "data": {
+    "libraries": [
+      { "cdn": true, "url": "https://tutu.com/toto" }
+    ],
     "game": "game.mjs",
     "assets": "assets"
   },
@@ -78,8 +81,31 @@ The game key specifies the entry file of the game.
   ...
 }
 ```
-This file **must be** and `.mjs` file, because the platform loads the game using es6 modules.
+This file **must be** and `.mjs` file that respect the esm modules specification, because the platform loads the game using es6 modules.
 This file must contain a base class called `Game`, the platform will instanciate this class to start the game, see the [Game class documentation](./game_class_specs.md) for detailed informations.
+
+#### data > libraries
+The libraries key is an array of libraries that needs to be loaded in the window context before loading the game.
+```json
+{
+  ...
+  "data": {
+    "libraries": [
+
+    ]
+  }
+  ...
+}
+```
+The array must contain objects thats respects the following pattern :
+```json
+{
+  "cdn": true,
+  "url": "http://test.com/mylibrary.min.js"
+}
+```
+The `cdn` key specifies if the ressource must be loaded form an external source (mostly cdn's) or if the library must be loaded directly from the game repo.
+The `url` key specify the resource endpoint.
 
 #### data > assets
 This key specifies the location where all the game assets will be stored. The app will use this key to generate a complete path to the assets you can use to load assets in our game.

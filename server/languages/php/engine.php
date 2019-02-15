@@ -18,12 +18,15 @@ class Engine
         fwrite(STDERR, "none\n");
         fflush(STDERR);
 
-        fwrite(STDOUT, $commandJS + "\n");
+        fgets(STDIN);
+
+        fwrite(STDOUT, $commandJS);
         fflush(STDOUT);
 
         $stdin = fgets(STDIN);
+        fflush(STDIN);
 
-        fwrite(STDOUT, $stdin."\n");
+        fwrite(STDOUT, $stdin);
         fflush(STDOUT);
 
         return $stdin;

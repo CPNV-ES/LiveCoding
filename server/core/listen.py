@@ -30,6 +30,7 @@ class Listen:
     
     # get the game language from client 
     async def get_language(self):
+        mlog.show("Waiting for the game language information ...")
         message = await self.mainSocket.recv()
         mlog.show("Language game for client: " + message)
         selectedLanguage = languages.loadLanguage(message)
@@ -45,18 +46,18 @@ class Listen:
 
     # get the game engine code form client
     async def get_classes(self):
+        mlog.show("Waiting for client game engine...")
         self.game.classes = await self.mainSocket.recv()
-        mlog.show("Engine loaded successfully!")
+        mlog.show("Client game engine loaded successfully!")
         await self.mainSocket.send('OK')
-        mlog.show(self.game.classes)
         return True
 
     # get code content form client
     async def get_content(self):
+        mlog.show("Waiting for the client game code ...")
         self.game.content = await self.mainSocket.recv()
-        mlog.show("Client code loaded successfully!")
+        mlog.show("Client game code loaded successfully!")
         await self.mainSocket.send('OK')
-        mlog.show(self.game.content)
         return True
 
     # start the game
