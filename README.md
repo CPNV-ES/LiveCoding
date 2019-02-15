@@ -10,7 +10,7 @@
 - Game are now loaded in a javascript module (via import method).
 - Games can specify libraries that will be loaded in the global context of the web page (required for some graphic libraries).
 - Games can now load asseds form their origin vie the `assetsBasePath` property.
-- You will find a list of compatible games below.
+- You fing a list of compatible games below.
 
 **Processor :**
 - Now sends back commands to the client.
