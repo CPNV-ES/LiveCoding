@@ -2,28 +2,40 @@
 > Livecoding is a desktop appliaction where newbies can learn the basics of programmation.
 > The principle is simple : You write commands in the in-app editor, press send, and the commands will interact the a little game (like pacman).
 
-## Changelog
+## Changelog - v2.0.0-beta.5
 
-**v2.0.0-beta.4**  
-*This version is unstable*
+*This version is unstable - do not use in production !*
 
 **Client :**
-- The client now loads the game interpreters locally to send it to the processor
-- Improvments for game loading form github 
-- Add processor connexion procedure
-  - The client can now send the code to the processsor when you run your code block
-
-**Pokedash game :**
-The pokedash game is now in a separate repo : [LiveCoding-Pokedash-Game](https://github.com/CPNV-ES/LiveCoding-Pokedash-Game). Games are now completly separated from the LiveCoding platform, you can load Games into the platform via game providers.
+- Game are now loaded in a javascript module (via import method).
+- Games can specify libraries that will be loaded in the global context of the web page (required for some graphic libraries).
+- Games can now load asseds form their origin vie the `assetsBasePath` property.
+- You fing a list of compatible games below.
 
 **Processor :**
-- Now supports `PHP`.
-- A websocket endpoint is available to start a code interpretation session form the client.
-_ The language engine, game interpreters and user code is now lodaed into a dedicated process when you run your code.
+- Now sends back commands to the client.
+- Possibility to launch several commands still in progress.
+
+**Games specs :**
+- The game `manifest.json` spec was updated, see it [here](https://github.com/CPNV-ES/LiveCoding/blob/master/docs/games/game_manifest_specs.md).
+- The `Game` class specs was updated, see new spec [here](https://github.com/CPNV-ES/LiveCoding/blob/master/docs/games/game_class_specs.md).
+
+**Pokedash game :**
+The legacy game shipped with livecoding is deprecated, the new default game are developped in his dedicated repo : [LiveCoding-Pokedash-Game](https://github.com/CPNV-ES/LiveCoding-Pokedash-Game).
+You can consult the changelog directly on the dedicated repository.
 
 ## Documentation
 
-You find all the documentation in the [docs folder](docs)
+You find all the documentation in the **[docs folder](docs)**.
+
+## Available games
+
+> A list of compatible games
+- **[Pokedash](https://github.com/CPNV-ES/LiveCoding-Pokedash-Game)** - Find the way to complete the level !
+- **[Block](https://github.com/bastiennicoud/LiveCoding-Block-Game)** - A TypeScript implementation of the legacy LiveCoding game (shipped in v1), mainly to provide a TypeScript game example, *not stable yet*.
+- **[Test](https://github.com/CPNV-ES/LiveCoding-Test-Game)** - For testing purpose, not really a game.
+
+Want to create your own game ? Follow the [docs](./docs#Creating-games-!).
 
 ## Authors :wave:
 
