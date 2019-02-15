@@ -24,5 +24,5 @@ class Game:
         tmpFileToRun = TempFile(self.languageObject.getFileHeader(), self.classes, self.content)                    # init and create new file with the game engine and the client code
 
         self.process = Process(self.socket, tmpFileToRun, self.languageName)  # init the new game process
-        self.process.run()                                                    # run the process
+        await self.process.run()                                                    # run the process
         pass
