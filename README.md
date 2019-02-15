@@ -26,7 +26,7 @@ You can consult the changelog directly on the dedicated repository.
 
 ## Documentation
 
-You find all the documentation in the **[docs folder](docs)**.
+You find all the documentation in the **[docs folder](docs)**, still being drafted.
 
 ## Available games
 
@@ -35,7 +35,7 @@ You find all the documentation in the **[docs folder](docs)**.
 - **[Block](https://github.com/bastiennicoud/LiveCoding-Block-Game)** - A TypeScript implementation of the legacy LiveCoding game (shipped in v1), mainly to provide a TypeScript game example, *not stable yet*.
 - **[Test](https://github.com/CPNV-ES/LiveCoding-Test-Game)** - For testing purpose, not really a game.
 
-Want to create your own game ? Follow the [docs](./docs#Creating-games-!).
+Want to create your own game ? Follow the [docs](./docs#creating-games-).
 
 ## Authors :wave:
 

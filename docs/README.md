@@ -19,7 +19,7 @@ Live coding is built arround two main blocks :
 * [Game frame](./client/game_frame.md)
 * [Console](./client/console.md)
 
-### Server side processor**
+### Server side processor
 
 * [The processor](./server/processor.md)
 * [Engines](./server/engines.md)
