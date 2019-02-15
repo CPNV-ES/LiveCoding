@@ -13,7 +13,8 @@ export default {
   computed: {
     ...mapState({
       language: state => state.editor.language,
-      theme: state => state.editor.theme
+      theme: state => state.editor.theme,
+      fontSize: state => state.editor.fontSize
     }),
     /**
      * Get and set the store with the current editor state
@@ -48,10 +49,11 @@ export default {
   mounted () {
     this.initEditor()
   },
+  /**
+   * When the component is destoyed
+   */
   beforeDestroy () {
-    /**
-     * Unmount the editor when the component is destroyed
-     */
+    // Unmount the editor when the component is destroyed
     this.editor && this.editor.dispose()
   },
   methods: {
@@ -64,7 +66,7 @@ export default {
         value: this.editorContent,
         theme: this.theme,
         language: this.language,
-        fontSize: 16,
+        fontSize: this.fontSize,
         minimap: {
           enabled: false
         }

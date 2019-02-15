@@ -18,6 +18,7 @@ Live coding is built arround two main blocks :
   * [Console](./client/console.md)
 * **Server side processor**
   * [The processor](./server/processor.md)
+  * [Engines](./server/engines.md)
 * **Creating games**
   * [Create your own game](./games/create_one.md)
   * [Game manifest specifications](./games/game_manifest_specs.md)

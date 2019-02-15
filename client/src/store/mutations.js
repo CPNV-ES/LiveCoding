@@ -42,7 +42,7 @@ export default {
    */
   UPDATE_PROCESSOR_URL: (state, value) => {
     localStorage.setItem('processor-url', value)
-    state.game.url = value
+    state.processor.url = value
   },
   /**
    * Change the editor language

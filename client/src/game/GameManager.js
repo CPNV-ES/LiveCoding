@@ -25,13 +25,16 @@ export default class GameManager {
     await this.provider.loadManifest()
     // Loads the available interpreters
     await this.provider.loadInterpreters()
+    // Loads game libraries
+    await this.provider.loadLibraries()
     // Loads game classes
     await this.provider.loadGameClass()
   }
   /**
-   * Loads the game
+   * Responsible to start the game
+   * This method instanciate the game base class declared in the game module
    */
-  async startGame () {
+  startGame () {
     // Create the base game class instance
     window.game = new this.provider.gameModule.Game(
       document.getElementById('game-box'),
