@@ -11,7 +11,7 @@ pattern = "__manifest__.py"
 directories = [d for d in os.listdir(path) if os.path.isdir(os.path.join(os.path.abspath(path), d))]
 
 def loadLanguage(name):
-    mlog.show("Loading " + name + " language")
+    mlog.show("Loading " + name + " language...")
     for dir in directories:                                                                       # start to search manifest.py file into all sub folders
         currentDirectory = path + dir + "/"
         files = os.listdir(currentDirectory)
