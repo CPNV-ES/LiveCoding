@@ -1,3 +1,5 @@
+import { GameManifestValidator } from './GameManifestValidator'
+
 /**
  * The GameManager is the orchestrator of the game
  * He is responsible of :
@@ -23,6 +25,12 @@ export default class GameManager {
   async loadGame () {
     // Loads the manifest of the game (from the external source)
     await this.provider.loadManifest()
+    // Check the manifest validity
+    let validator = new GameManifestValidator(this.provider.manifest)
+    // Validate format
+    validator.checkFormat()
+    // Check if specified languages are compatible
+    validator.checkLanguages()
     // Loads the available interpreters
     await this.provider.loadInterpreters()
     // Loads game libraries
@@ -33,6 +41,8 @@ export default class GameManager {
   /**
    * Responsible to start the game
    * This method instanciate the game base class declared in the game module
+   *
+   * Change the game api, this method must be asynchronus
    */
   startGame () {
     // Create the base game class instance
