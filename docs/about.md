@@ -10,8 +10,4 @@ LiveCoding is a platform to learn how to code in different languages via small g
 
 ## Architecture main elements
 
-<object data="./diagrams/platform_architecture.pdf" type="application/pdf" width="700px" height="700px">
-    <embed src="./diagrams/platform_architecture.pdf">
-        <p>This browser does not support PDFs. Please download the PDF to view it: <a href="./diagrams/platform_architecture.pdf">Download PDF</a>.</p>
-    </embed>
-</object>
+![platform architecture](./diagrams/platform_architecture.pdf)
