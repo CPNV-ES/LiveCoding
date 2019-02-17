@@ -10,4 +10,4 @@ LiveCoding is a platform to learn how to code in different languages via small g
 
 ## Architecture main elements
 
-![platform architecture](./diagrams/platform_architecture.pdf)
+![platform architecture](./diagrams/platform_architecture.svg)
