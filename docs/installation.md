@@ -21,6 +21,8 @@ cd LiveCoding
 
 ## Processor installation
 
+...coming
+
 ## Client installation
 
 The client app uses webpack to build and optimize the code.
