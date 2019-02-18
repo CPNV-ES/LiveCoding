@@ -67,6 +67,7 @@ export default {
         theme: this.theme,
         language: this.language,
         fontSize: this.fontSize,
+        fontFamily: 'IBM Plex Mono',
         minimap: {
           enabled: false
         }
