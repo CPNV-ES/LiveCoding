@@ -7,6 +7,11 @@
 import { mapState } from 'vuex'
 
 export default {
+  data () {
+    return {
+      loader: false
+    }
+  },
   computed: {
     ...mapState({
       gameLoaded: state => state.game.loaded,
@@ -97,7 +102,10 @@ export default {
         title="Lancez l'execution de votre script !"
         @click="run"
       >
-        <button class="button is-primary">
+        <button
+          class="button is-primary"
+          :class="{ 'is-loading': loader }"
+        >
           <span class="icon is-left">
             <i class="fas fa-play" />
           </span>

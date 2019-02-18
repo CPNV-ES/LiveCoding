@@ -33,9 +33,27 @@ export default {
      * Launch the game loading procedure
      */
     async load () {
-      this.loader = true
-      await this.$store.dispatch('load')
-      this.loader = false
+      try {
+        this.loader = true
+        await this.$store.dispatch('load')
+        this.$snackbar.open({
+          message: 'Game loaded, ready !',
+          type: 'is-success',
+          position: 'is-top',
+          actionText: 'OK',
+          duration: 3000
+        })
+      } catch {
+        this.$snackbar.open({
+          message: 'Error during game loading, see console for details',
+          type: 'is-danger',
+          position: 'is-top',
+          actionText: 'OK',
+          duration: 4500
+        })
+      } finally {
+        this.loader = false
+      }
     },
     /**
      * Displays the settings modal

@@ -33,6 +33,7 @@ export default {
       // Display little message in the game box
       document.getElementById('game-box').innerHTML = 'Aucun jeu chargé !'
       dispatch('console/error', 'Error during Game loading !')
+      throw new Error()
     }
   },
   /**
