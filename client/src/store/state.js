@@ -4,7 +4,6 @@
  * @author Bastien Nicoud
  */
 export default {
-  showAppParametersModal: false,
   /**
    * Stores all editor related datas
    * @type {Object}

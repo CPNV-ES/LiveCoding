@@ -1,4 +1,6 @@
 <script>
+import ParametersBox from '@/components/ParametersBox'
+
 /**
  * This components display the inputs to load a game from a url
  */
@@ -34,6 +36,16 @@ export default {
       this.loader = true
       await this.$store.dispatch('load')
       this.loader = false
+    },
+    /**
+     * Displays the settings modal
+     */
+    openSettingsModal () {
+      this.$modal.open({
+        parent: this,
+        component: ParametersBox,
+        hasModalCard: true
+      })
     }
   }
 }
@@ -85,7 +97,7 @@ export default {
       <div class="control">
         <button
           class="button is-primary"
-          @click="$store.commit('SHOW_APP_PARAMETERS_MODAL', true)"
+          @click="openSettingsModal()"
         >
           Settings
         </button>
