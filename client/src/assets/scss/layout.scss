@@ -5,11 +5,11 @@
   height: 100vh;
   display: grid;
   grid-template-columns: auto 768px;
-  grid-template-rows: 50px 768px auto;
+  grid-template-rows: 52px 768px auto;
 }
 
 // Childs of the grid
-#nav-bar {
+#navbar {
   grid-column-start: 1;
   grid-column-end: 3;
   grid-row-start: 1;

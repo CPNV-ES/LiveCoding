@@ -59,12 +59,5 @@ export default {
   SET_GAME_MANAGER: (state, value) => {
     state.game.manager = value
     state.game.loaded = true
-  },
-  /**
-   * Show the parameters modal
-   * @param {Boolean}
-   */
-  SHOW_APP_PARAMETERS_MODAL: (state, value) => {
-    state.showAppParametersModal = value
   }
 }

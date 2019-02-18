@@ -20,7 +20,7 @@ export default {
     <div
       v-for="message in messages"
       :key="message.id"
-      class="message"
+      class="c-message"
       :class="message.type"
     >
       <span>
