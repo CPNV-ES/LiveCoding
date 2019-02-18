@@ -1,10 +1,5 @@
 # Setup LiveCoding fo developpment
 
-The LiveCoding platform is divided into 3 main parts :
-* **The processor :** responsible to run the differents suported languages.
-* **The client :** provide the code editor and the frame for the game.
-* **The games :** provide the engine and the game runtime.
-
 ## Requirements
 
 ### Processor
@@ -15,18 +10,41 @@ The LiveCoding platform is divided into 3 main parts :
 ### Client
 * [Node.js ^11](https://nodejs.org/en/)
 
+## Get the sources
+
+```shell
+# Clone the repo
+git clone git@github.com:CPNV-ES/LiveCoding.git
+
+cd LiveCoding
+```
+
 ## Processor installation
+
+...coming
 
 ## Client installation
 
 The client app uses webpack to build and optimize the code.
 Follow the steps to start development :
 
-1. Move into the `client` folder : `cd client`
-2. Installe the dependencies : `npm install`
-3. Run the development server : `npm run dev`
-4. Open a browser on `localhost:8080`
+```shell
+# 1. go to the client folder
+cd client
 
-You are ready to start writing code !
+# 2. Install the dependencies
+npm i
 
-## Game installation
+# 3. Run the development server
+npm run serve
+
+# 4. If you want to build the app for production
+npm run build
+```
+
+Open your browser on `localhost:8080`. You are ready to start writing code !
+
+## Game development
+
+If you want to create a new game, follow the [creating game guide](./README.md).
+If you vant to update an existing game, follow development instruction on the game repo.
