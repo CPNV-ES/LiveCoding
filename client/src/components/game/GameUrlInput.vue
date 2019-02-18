@@ -40,41 +40,56 @@ export default {
 </script>
 
 <template>
-  <div class="nav-right">
-    <select
-      v-model="provider"
-      class="spacing"
-    >
-      <option value="github">
-        GitHub
-      </option>
-      <option value="url">
-        URL
-      </option>
-    </select>
-    <input
-      v-model="url"
-      class="spacing"
-      type="text"
-      placeholder="URL du jeux"
-    >
-    <button
-      class="is-blue spacing"
-      @click="load()"
-    >
-      <span
-        v-if="loader"
-        class="loader-spinner"
-      />
-      <p v-else>
-        Charger
-      </p>
-    </button>
-    <button
-      class="is-blue spacing"
-      @click="$store.commit('SHOW_APP_PARAMETERS_MODAL', true)"
-    >
-      Parametres
-    </button>
+  <div class="navbar-item">
+    <div class="field is-grouped">
+      <div class="control">
+        <div class="field has-addons">
+          <p class="control">
+            <span class="select">
+              <select
+                v-model="provider"
+                class="spacing"
+              >
+                <option value="github">
+                  GitHub
+                </option>
+                <option value="url">
+                  URL
+                </option>
+              </select>
+            </span>
+          </p>
+          <p class="control has-icons-left">
+            <input
+              v-model="url"
+              class="input"
+              type="text"
+              placeholder="URL du jeux"
+              style="min-width: 300px;"
+            >
+            <span class="icon is-small is-left">
+              <i class="fas fa-link" />
+            </span>
+          </p>
+          <p class="control">
+            <button
+              class="button is-primary"
+              :class="{ 'is-loading': loader }"
+              @click="load()"
+            >
+              Load
+            </button>
+          </p>
+        </div>
+      </div>
+      <div class="control">
+        <button
+          class="button is-primary"
+          @click="$store.commit('SHOW_APP_PARAMETERS_MODAL', true)"
+        >
+          Settings
+        </button>
+      </div>
+    </div>
   </div>
 </template>
