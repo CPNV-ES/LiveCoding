@@ -7,7 +7,7 @@ So Vue.js is mainly used to simplify the reactive updates of the dom and organiz
 
 ## Components of the app
 
-![app components](./diagrams/app_components.svg)
+![app components](../diagrams/app_components.svg)
 
 ## Vue store
 
