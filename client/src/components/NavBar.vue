@@ -23,14 +23,25 @@ export default {
 </script>
 
 <template>
-  <nav id="nav-bar">
-    <!-- EDITOR MENU - LANG SELECTION - THEME -->
-    <EditorMenu />
-    <!-- APP NAME AND GAME NAME -->
-    <div class="nav-center">
-      <h1>LiveCoding{{ gameLoaded ? ` - ${gameManager.provider.gameName}` : '' }}</h1>
+  <nav
+    id="navbar"
+    class="navbar"
+    role="navigation"
+    aria-label="main navigation"
+  >
+    <div class="navbar-menu">
+      <div class="navbar-start">
+        <EditorMenu />
+        <div class="navbar-item">
+          <h1 class="title is-5">
+            LiveCoding{{ gameLoaded ? ` - ${gameManager.provider.gameName}` : '' }}
+          </h1>
+        </div>
+      </div>
+
+      <div class="navbar-end">
+        <GameUrlInput />
+      </div>
     </div>
-    <!-- GAME LOADING INPUTS -->
-    <GameUrlInput />
   </nav>
 </template>

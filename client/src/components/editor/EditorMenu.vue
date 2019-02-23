@@ -7,6 +7,11 @@
 import { mapState } from 'vuex'
 
 export default {
+  data () {
+    return {
+      loader: false
+    }
+  },
   computed: {
     ...mapState({
       gameLoaded: state => state.game.loaded,
@@ -42,60 +47,71 @@ export default {
 </script>
 
 <template>
-  <div class="nav-left">
-    <!-- LANGUAGES LIST -->
-    <select
-      v-if="gameLoaded"
-      v-model="language"
-      class="spacing"
-    >
-      <!-- DISPLAY THE INTERPRETERS SUPPORTED BY THE GAME -->
-      <option
-        v-for="(lang, index) in gameManager.provider.gameInterpreters"
-        :key="index"
-        :value="index"
+  <div class="navbar-item">
+    <div class="field is-grouped">
+      <p
+        v-if="gameLoaded"
+        class="control has-icons-left"
       >
-        {{ index }}
-      </option>
-    </select>
-    <!-- SELECT COLOR THEME -->
-    <select
-      v-model="theme"
-      class="spacing"
-    >
-      <option value="vs">
-        Light
-      </option>
-      <option value="vs-dark">
-        Dark
-      </option>
-      <option value="solarized-dark">
-        Solarized Dark
-      </option>
-      <option value="cobalt">
-        Cobalt
-      </option>
-    </select>
-    <!-- LAUNCH THE EXECUTION OF THE SCRIPT -->
-    <button
-      @click="run"
-      class="is-blue spacing"
-      title="Lancez l'execution de votre script !"
-    >
-      Run
-    </button>
-    <span
-      v-if="gameLoaded"
-    >
-      <button
-        v-for="(instruction, index) of gameManager.provider.gameInstructions"
-        :key="index"
-        class="spacing"
-        :title="instruction.description"
-        @click="openInstruction(instruction.path)"
+        <span class="select">
+          <!-- LANGUAGES LIST -->
+          <select
+            v-model="language"
+            class="spacing"
+          >
+            <option
+              v-for="(lang, index) in gameManager.provider.gameInterpreters"
+              :key="index"
+              :value="index"
+            >
+              {{ index }}
+            </option>
+          </select>
+        </span>
+        <span class="icon is-left">
+          <i class="fas fa-terminal" />
+        </span>
+      </p>
+      <p class="control has-icons-left">
+        <span class="select">
+          <!-- SELECT COLOR THEME -->
+          <select
+            v-model="theme"
+            class="spacing"
+          >
+            <option value="vs">
+              Light
+            </option>
+            <option value="vs-dark">
+              Dark
+            </option>
+            <option value="solarized-dark">
+              Solarized Dark
+            </option>
+            <option value="cobalt">
+              Cobalt
+            </option>
+          </select>
+        </span>
+        <span class="icon is-left">
+          <i class="fas fa-palette" />
+        </span>
+      </p>
+      <div
+        class="control"
+        title="Lancez l'execution de votre script !"
+        @click="run"
       >
-        {{ instruction.name }}
-      </button>
-    </span>
+        <button
+          class="button is-primary"
+          :class="{ 'is-loading': loader }"
+        >
+          <span class="icon is-left">
+            <i class="fas fa-play" />
+          </span>
+          <p>Run</p>
+        </button>
+      </div>
+    </div>
   </div>
 </template>

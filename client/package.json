@@ -8,7 +8,7 @@
     "serve": "vue-cli-service serve"
   },
   "dependencies": {
-    "modern-normalize": "^0.5.0",
+    "buefy": "^0.7.2",
     "monaco-editor": "^0.15.6",
     "monaco-editor-webpack-plugin": "^1.7.0",
     "monaco-themes": "^0.2.5",

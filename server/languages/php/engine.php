@@ -15,21 +15,23 @@ class Engine
 
     public static function send($commandJS){
         self::initialize();
+
         fwrite(STDERR, "none\n");
-        fflush(STDERR);
+        while (fgets(STDIN) !== "ready\n") {
+        }
 
-        fgets(STDIN);
-
-        fwrite(STDOUT, $commandJS);
+        fwrite(STDOUT,"ready\n");
         fflush(STDOUT);
 
-        $stdin = fgets(STDIN);
+        fwrite(STDOUT, $commandJS."\n");
+        fflush(STDOUT);
+        //$stdin = fgets(STDIN);
         fflush(STDIN);
 
-        fwrite(STDOUT, $stdin);
+        //fwrite(STDOUT, $stdin);
         fflush(STDOUT);
 
-        return $stdin;
+        return;
     }
 }
 

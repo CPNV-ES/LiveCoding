@@ -8,7 +8,7 @@ Live coding is built arround two main blocks :
 
 ## In general
 
-* [About LiveCoding, main concepts](./about.md)
+* [About LiveCoding, platform architecture](./about.md)
 * [Installation for developement](./installation.md)
 * [Protocol between app and processor](./websocket_protocol.md)
 

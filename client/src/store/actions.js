@@ -1,5 +1,6 @@
 import GameManager from '@/game/GameManager'
 import ProviderFactory from '@/game/providers/ProviderFactory'
+import { ProcessorProxyFactory } from '@/processor/ProcessorProxyFactory'
 // import ProcessorConnexion from '@/game/processor/ProcessorConnexion'
 
 /**
@@ -32,6 +33,7 @@ export default {
       // Display little message in the game box
       document.getElementById('game-box').innerHTML = 'Aucun jeu chargé !'
       dispatch('console/error', 'Error during Game loading !')
+      throw new Error()
     }
   },
   /**
@@ -44,6 +46,9 @@ export default {
    */
   run ({ state, dispatch }) {
     dispatch('console/info', 'Running, try to contact processor.')
+    // Get the right processor proxy depending the language
+    let processorProxy = ProcessorProxyFactory.create(state.editor.language)
+    // Launch the code interpretation
     try {
       // window.processor = new ProcessorConnexion()
       let socket = new WebSocket(state.processor.url)
