@@ -73,12 +73,15 @@ class Process:
         pass
 
     async def stdinWrite(self, value):
+        self.process.stdin.write(bytes(value + "\n","UTF-8"))
         pass
 
     async def stderrWrite(self, value):
+        self.process.stderr.write(bytes(value + "\n","UTF-8"))
         pass
 
     async def stdoutWrite(self, value):
+        self.process.stdout.write(bytes(value + "\n","UTF-8"))
         pass
 
     # flush all data in stdin stdout stderr
