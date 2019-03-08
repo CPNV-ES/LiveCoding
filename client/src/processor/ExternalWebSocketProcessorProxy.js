@@ -1,8 +1,13 @@
 /**
  * Manage an execution of a user script with the processor
+ * @class
+ * @author Bastien Nicoud
  */
 export class ExternalWebSocketProcessorProxy {
-
+  /**
+   *
+   * @param {Object} context must contain all game context datas required by processor proxy
+   */
   constructor ({ dispatch, processorUrl, language, interpreter, userScript }) {
     this.dispatch = dispatch
     this.processorUrl = processorUrl
@@ -73,7 +78,6 @@ export class ExternalWebSocketProcessorProxy {
    * Close the connexion and stop the process execution
    */
   stopExecution () {
-    this.socket.send('CLOSE_PROCESS')
-    this.socket.close()
+    this.socket.close(4000, 'PROCESS_ENDED_BY_USER')
   }
 }

@@ -56,7 +56,7 @@ export default {
         userScript: state.editor.languagesContent[state.editor.language]
       })
       await window.processorProxy.launchExecution()
-      dispatch('console/success', 'Process corectly executed !')
+      dispatch('console/info', 'Process terminated !')
     } catch (e) {
       dispatch('console/error', 'Error during process execution.')
       throw new Error()
