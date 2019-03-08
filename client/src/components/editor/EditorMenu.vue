@@ -40,7 +40,11 @@ export default {
       window.open(this.gameManager.provider.generateUrl(uri))
     },
     run () {
-      this.$store.dispatch('run')
+      try {
+        this.$store.dispatch('run')
+      } catch (e) {
+        console.log('erreur de run')
+      }
     }
   }
 }
@@ -99,12 +103,13 @@ export default {
       </p>
       <div
         class="control"
-        title="Lancez l'execution de votre script !"
-        @click="run"
+        :title="gameLoaded ? 'Lancez l\'execution de votre script !' : 'Aucun jeux n\'est chargé !'"
       >
         <button
           class="button is-primary"
           :class="{ 'is-loading': loader }"
+          :disabled="!gameLoaded"
+          @click="run"
         >
           <span class="icon is-left">
             <i class="fas fa-play" />
