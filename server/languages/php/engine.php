@@ -25,13 +25,14 @@ class Engine
 
         fwrite(STDOUT, $commandJS."\n");
         fflush(STDOUT);
-        //$stdin = fgets(STDIN);
+
+        $stdin = fgets(STDIN);
         fflush(STDIN);
 
-        //fwrite(STDOUT, $stdin);
+        fwrite(STDOUT, "close\n");
         fflush(STDOUT);
 
-        return;
+        return $stdin;
     }
 }
 

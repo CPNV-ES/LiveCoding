@@ -36,11 +36,12 @@ class Process:
             self.process.stderr.flush()
 
             if errorMsg.strip() == "none":
-                await self.waitForReady()            
+                await self.waitForReady()     
                 cmdsJS = await self.getCommand()
                 await self.sendCommandToClient(cmdsJS)
                 message = await self.socket.recv()
                 mlog.show("Received confirmation from client: "+ message)
+                self.process.stdin.write(bytes(message + "\n","UTF-8"))
                 
             else:
                 mlog.show("Process error.. Game has been stopped..")
