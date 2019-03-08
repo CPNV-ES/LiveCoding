@@ -2,19 +2,7 @@
 
 class Engine
 {
-
-    private static $initialized = false;
-
-    private static function initialize(){
-
-        if (self::$initialized)
-            return;
-        
-        self::$initialized = true;
-    }
-
     public static function send($commandJS){
-        self::initialize();
 
         fwrite(STDERR, "none\n");
         while (fgets(STDIN) !== "ready\n") {
