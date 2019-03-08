@@ -43,7 +43,7 @@ class Process:
                 mlog.show("Received confirmation from client: "+ message)
                 self.process.stdin.write(bytes(message + "\n","UTF-8"))
                 
-            else:
+            if errorMsg.strip() != "none" and errorMsg.strip() != None:
                 mlog.show("Process error.. Game has been stopped..")
                 mlog.show("Error message: " + errorMsg)
                 self.socket.send("ERROR/" + errorMsg)
