@@ -48,17 +48,25 @@ export default {
     try {
       dispatch('console/info', 'Running, try to contact processor.')
       // Get the right processor proxy depending the language
-      let processorProxy = ProcessorProxyFactory.create(state.editor.language, {
+      window.processorProxy = ProcessorProxyFactory.create(state.editor.language, {
+        dispatch: dispatch,
         processorUrl: state.processor.url,
         language: state.editor.language,
         interpreter: window.gameManager.provider.interpreters[state.editor.language],
         userScript: state.editor.languagesContent[state.editor.language]
       })
-      await processorProxy.launchExecution()
+      window.processorProxy.launchExecution()
       dispatch('console/success', 'Process corectly executed !')
-    } catch {
+    } catch (e) {
       dispatch('console/error', 'Error during process execution.')
       throw new Error()
     }
+  },
+  /**
+   * Stop the execution of the process
+   */
+  stop ({ dispatch }) {
+    dispatch('console/info', 'Stopping the process.')
+    window.processorProxy.stopExecution()
   }
 }
