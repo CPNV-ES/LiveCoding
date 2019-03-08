@@ -55,7 +55,7 @@ export default {
         interpreter: window.gameManager.provider.interpreters[state.editor.language],
         userScript: state.editor.languagesContent[state.editor.language]
       })
-      window.processorProxy.launchExecution()
+      await window.processorProxy.launchExecution()
       dispatch('console/success', 'Process corectly executed !')
     } catch (e) {
       dispatch('console/error', 'Error during process execution.')
