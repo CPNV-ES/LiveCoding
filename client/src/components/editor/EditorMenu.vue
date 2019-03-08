@@ -101,6 +101,7 @@ export default {
           <i class="fas fa-palette" />
         </span>
       </p>
+      <!-- START THE SCRIPT BUTTON -->
       <div
         class="control"
         :title="gameLoaded ? 'Lancez l\'execution de votre script !' : 'Aucun jeux n\'est chargé !'"
@@ -115,6 +116,19 @@ export default {
             <i class="fas fa-play" />
           </span>
           <p>Run</p>
+        </button>
+      </div>
+      <!-- STOP SCRIPT EXECUTION IN CASE OF PROBLEM -->
+      <div
+        class="control"
+        title="Stoppez l'execution du script"
+      >
+        <button
+          class="button is-danger"
+        >
+          <span class="icon is-left">
+            <i class="fas fa-stop" />
+          </span>
         </button>
       </div>
     </div>
