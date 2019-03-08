@@ -39,11 +39,22 @@ export default {
     openInstruction (uri) {
       window.open(this.gameManager.provider.generateUrl(uri))
     },
-    run () {
+    async run () {
       try {
-        this.$store.dispatch('run')
+        this.loader = true
+        // Launch the process execution, and wait the end the execution
+        await this.$store.dispatch('run')
       } catch (e) {
-        console.log('erreur de run')
+        console.error('Error during process exection')
+        this.$snackbar.open({
+          message: 'Error during script execution, check console !',
+          type: 'is-danger',
+          position: 'is-top',
+          actionText: 'OK',
+          duration: 4500
+        })
+      } finally {
+        this.loader = false
       }
     }
   }
@@ -118,8 +129,9 @@ export default {
           <p>Run</p>
         </button>
       </div>
-      <!-- STOP SCRIPT EXECUTION IN CASE OF PROBLEM -->
+      <!-- STOP SCRIPT EXECUTION IN CASE OF PROBLEM - Showed only when process running -->
       <div
+        v-if="loader"
         class="control"
         title="Stoppez l'execution du script"
       >
