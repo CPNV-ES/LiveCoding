@@ -73,6 +73,7 @@ export class ExternalWebSocketProcessorProxy {
    * Close the connexion and stop the process execution
    */
   stopExecution () {
+    this.socket.send('CLOSE_PROCESS')
     this.socket.close()
   }
 }
