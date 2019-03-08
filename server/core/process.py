@@ -52,7 +52,7 @@ class Process:
     async def waitForReady(self):
         _pass = True
         while True:
-            self.flushAll()
+            
             self.process.stdin.write(bytes("ready\n","UTF-8"))
             res = self.process.stdout.readline().decode().strip()
             if _pass:
@@ -62,6 +62,8 @@ class Process:
             if res == "ready":
                 self.flushAll()
                 return
+            
+            self.flushAll()
         pass
 
     async def getCommand(self):
