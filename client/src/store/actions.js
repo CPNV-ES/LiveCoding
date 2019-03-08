@@ -44,58 +44,29 @@ export default {
    * - execute commands
    * - close the connexion
    */
-  run ({ state, dispatch }) {
-    dispatch('console/info', 'Running, try to contact processor.')
-    // Get the right processor proxy depending the language
-    let processorProxy = ProcessorProxyFactory.create(state.editor.language)
-    // Launch the code interpretation
+  async run ({ state, dispatch }) {
     try {
-      // window.processor = new ProcessorConnexion()
-      let socket = new WebSocket(state.processor.url)
-      socket.onopen = (oEvent) => {
-        console.log(oEvent)
-        dispatch('console/success', 'Processor connected, sending data !')
-        // step 1 : sending language
-        socket.send(state.editor.language)
-        socket.onmessage = (mEvent) => {
-          if (mEvent.data === 'OK') {
-            socket.send(window.gameManager.provider.interpreters[state.editor.language])
-            socket.onmessage = (mEvent) => {
-              if (mEvent.data === 'OK') {
-                socket.send(state.editor.languagesContent[state.editor.language])
-                socket.onmessage = (mEvent) => {
-                  if (mEvent.data === 'OK') {
-                    dispatch('console/success', 'Processor successfully loaded script, launching process.')
-                    dispatch('console/info', 'Waiting for engine interactions')
-                    socket.onmessage = (mEvent) => {
-                      // Evaluate the command in the game context
-                      let tutu = window.game.executeGameCommand(mEvent.data)
-                      socket.send(tutu)
-                    }
-                  } else {
-                    socket.close()
-                  }
-                }
-              } else {
-                socket.close()
-              }
-            }
-          } else {
-            socket.close()
-          }
-        }
-      }
-      socket.onclose = (cEvent) => {
-        dispatch('console/info', 'Websocket connexion closed.')
-        console.log(cEvent)
-      }
-      socket.onerror = (eEvent) => {
-        dispatch('console/error', 'Websocket connexion error.')
-        console.log(eEvent)
-      }
+      dispatch('console/info', 'Running, try to contact processor.')
+      // Get the right processor proxy depending the language
+      window.processorProxy = ProcessorProxyFactory.create(state.editor.language, {
+        dispatch: dispatch,
+        processorUrl: state.processor.url,
+        language: state.editor.language,
+        interpreter: window.gameManager.provider.interpreters[state.editor.language],
+        userScript: state.editor.languagesContent[state.editor.language]
+      })
+      await window.processorProxy.launchExecution()
+      dispatch('console/success', 'Process corectly executed !')
     } catch (e) {
-      console.error(e)
-      dispatch('console/error', 'Error during running !')
+      dispatch('console/error', 'Error during process execution.')
+      throw new Error()
     }
+  },
+  /**
+   * Stop the execution of the process
+   */
+  stop ({ dispatch }) {
+    dispatch('console/info', 'Stopping the process.')
+    window.processorProxy.stopExecution()
   }
 }
