@@ -1,9 +1,11 @@
 class Engine
     def self.send(commandJS)
         STDERR.puts "none"
+
         loop do
-            break if fgets(STDIN) != "ready\n"
+            break if fgets(STDIN) == "ready\n"
         end
+        
         STDOUT.puts "ready\n"
         STDOUT.flush
 
