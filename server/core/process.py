@@ -43,7 +43,7 @@ class Process:
                 mlog.show("Received confirmation from client: "+ message)
                 self.process.stdin.write(bytes(message + "\n","UTF-8"))
                 
-            if errorMsg.strip() != "none" and errorMsg.strip() != None:
+            if errorMsg.strip() != "none" and errorMsg.strip() != "":
                 mlog.show("Process error.. Game has been stopped..")
                 mlog.show("Error message: " + errorMsg)
                 self.socket.send("ERROR/" + errorMsg)
@@ -52,7 +52,7 @@ class Process:
     async def waitForReady(self):
         _pass = True
         while True:
-            
+            self.flushAll()
             self.process.stdin.write(bytes("ready\n","UTF-8"))
             res = self.process.stdout.readline().decode().strip()
             if _pass:
@@ -62,8 +62,6 @@ class Process:
             if res == "ready":
                 self.flushAll()
                 return
-            
-            self.flushAll()
         pass
 
     async def getCommand(self):
