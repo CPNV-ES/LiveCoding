@@ -56,6 +56,9 @@ export default {
       } finally {
         this.loader = false
       }
+    },
+    stop () {
+      this.$store.dispatch('stop')
     }
   }
 }
@@ -137,6 +140,7 @@ export default {
       >
         <button
           class="button is-danger"
+          @click="stop"
         >
           <span class="icon is-left">
             <i class="fas fa-stop" />
