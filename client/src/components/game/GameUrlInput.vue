@@ -1,16 +1,15 @@
 <script>
 import ParametersBox from '@/components/ParametersBox'
+import { mapState } from 'vuex'
 
 /**
  * This components display the inputs to load a game from a url
  */
 export default {
-  data () {
-    return {
-      loader: false
-    }
-  },
   computed: {
+    ...mapState({
+      loading: state => state.game.loading
+    }),
     url: {
       get () {
         return this.$store.state.game.url
@@ -34,7 +33,6 @@ export default {
      */
     async load () {
       try {
-        this.loader = true
         await this.$store.dispatch('load')
         this.$snackbar.open({
           message: 'Game loaded, ready !',
@@ -51,8 +49,6 @@ export default {
           actionText: 'OK',
           duration: 4500
         })
-      } finally {
-        this.loader = false
       }
     },
     /**
@@ -104,7 +100,7 @@ export default {
           <p class="control">
             <button
               class="button is-primary"
-              :class="{ 'is-loading': loader }"
+              :class="{ 'is-loading': loading }"
               @click="load()"
             >
               Load

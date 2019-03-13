@@ -59,5 +59,12 @@ export default {
   SET_GAME_MANAGER: (state, value) => {
     state.game.manager = value
     state.game.loaded = true
+  },
+  /**
+   * Set the game loading state
+   * @param {boolean} value
+   */
+  SET_GAME_LOADING_STATE: (state, value) => {
+    state.game.loading = value
   }
 }
