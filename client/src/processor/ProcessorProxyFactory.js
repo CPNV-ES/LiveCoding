@@ -17,6 +17,10 @@ export class ProcessorProxyFactory {
       {
         name: 'php',
         class: ExternalWebSocketProcessorProxy
+      },
+      {
+        name: 'ruby',
+        class: ExternalWebSocketProcessorProxy
       }
     ]
   }

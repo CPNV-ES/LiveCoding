@@ -39,8 +39,8 @@ export default {
    * Information form the current loaded game
    */
   game: {
-    provider: localStorage.getItem('game-provider') || 'url',
-    url: localStorage.getItem('game-url') || 'http://localhost:3333',
+    provider: localStorage.getItem('game-provider') || 'github',
+    url: localStorage.getItem('game-url') || 'CPNV-ES/LiveCoding-Test-Game@v1.1.8',
     loaded: false,
     manager: null
   }

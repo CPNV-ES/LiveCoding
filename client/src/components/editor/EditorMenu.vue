@@ -25,22 +25,32 @@ export default {
       set (value) {
         this.$store.commit('UPDATE_EDITOR_LANGUAGE', value)
       }
-    },
-    theme: {
-      get () {
-        return this.$store.state.editor.theme
-      },
-      set (value) {
-        this.$store.commit('UPDATE_EDITOR_THEME', value)
-      }
     }
   },
   methods: {
     openInstruction (uri) {
       window.open(this.gameManager.provider.generateUrl(uri))
     },
-    run () {
-      this.$store.dispatch('run')
+    async run () {
+      try {
+        this.loader = true
+        // Launch the process execution, and wait the end the execution
+        await this.$store.dispatch('run')
+      } catch (e) {
+        console.error('Error during process exection')
+        this.$snackbar.open({
+          message: 'Error during script execution, check console !',
+          type: 'is-danger',
+          position: 'is-top',
+          actionText: 'OK',
+          duration: 4500
+        })
+      } finally {
+        this.loader = false
+      }
+    },
+    stop () {
+      this.$store.dispatch('stop')
     }
   }
 }
@@ -72,44 +82,36 @@ export default {
           <i class="fas fa-terminal" />
         </span>
       </p>
-      <p class="control has-icons-left">
-        <span class="select">
-          <!-- SELECT COLOR THEME -->
-          <select
-            v-model="theme"
-            class="spacing"
-          >
-            <option value="vs">
-              Light
-            </option>
-            <option value="vs-dark">
-              Dark
-            </option>
-            <option value="solarized-dark">
-              Solarized Dark
-            </option>
-            <option value="cobalt">
-              Cobalt
-            </option>
-          </select>
-        </span>
-        <span class="icon is-left">
-          <i class="fas fa-palette" />
-        </span>
-      </p>
+      <!-- START THE SCRIPT BUTTON -->
       <div
         class="control"
-        title="Lancez l'execution de votre script !"
-        @click="run"
+        :title="gameLoaded ? 'Lancez l\'execution de votre script !' : 'Aucun jeux n\'est chargé !'"
       >
         <button
           class="button is-primary"
           :class="{ 'is-loading': loader }"
+          :disabled="!gameLoaded"
+          @click="run"
         >
           <span class="icon is-left">
             <i class="fas fa-play" />
           </span>
           <p>Run</p>
+        </button>
+      </div>
+      <!-- STOP SCRIPT EXECUTION IN CASE OF PROBLEM - Showed only when process running -->
+      <div
+        v-if="loader"
+        class="control"
+        title="Stoppez l'execution du script"
+      >
+        <button
+          class="button is-danger"
+          @click="stop"
+        >
+          <span class="icon is-left">
+            <i class="fas fa-stop" />
+          </span>
         </button>
       </div>
     </div>

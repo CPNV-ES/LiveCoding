@@ -36,11 +36,12 @@ class Process:
             self.process.stderr.flush()
 
             if errorMsg.strip() == "none":
-                await self.waitForReady()            
+                await self.waitForReady()     
                 cmdsJS = await self.getCommand()
                 await self.sendCommandToClient(cmdsJS)
                 message = await self.socket.recv()
                 mlog.show("Received confirmation from client: "+ message)
+                self.process.stdin.write(bytes(message + "\n","UTF-8"))
                 
             else:
                 mlog.show("Process error.. Game has been stopped..")
@@ -73,12 +74,15 @@ class Process:
         pass
 
     async def stdinWrite(self, value):
+        self.process.stdin.write(bytes(value + "\n","UTF-8"))
         pass
 
     async def stderrWrite(self, value):
+        self.process.stderr.write(bytes(value + "\n","UTF-8"))
         pass
 
     async def stdoutWrite(self, value):
+        self.process.stdout.write(bytes(value + "\n","UTF-8"))
         pass
 
     # flush all data in stdin stdout stderr

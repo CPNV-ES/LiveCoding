@@ -11,6 +11,14 @@ export default {
       set (v) {
         this.$store.commit('UPDATE_PROCESSOR_URL', v)
       }
+    },
+    theme: {
+      get () {
+        return this.$store.state.editor.theme
+      },
+      set (value) {
+        this.$store.commit('UPDATE_EDITOR_THEME', value)
+      }
     }
   }
 }
@@ -45,6 +53,37 @@ export default {
         </div>
         <p class="help">
           L'url doit être un endpoint websockets : <code>ws://processor.com</code>
+        </p>
+      </div>
+
+      <div class="field">
+        <label class="label">
+          Editor theme
+        </label>
+        <p class="control has-icons-left">
+          <span class="select">
+            <!-- SELECT COLOR THEME -->
+            <select
+              v-model="theme"
+              class="spacing"
+            >
+              <option value="vs">
+                Light
+              </option>
+              <option value="vs-dark">
+                Dark
+              </option>
+              <option value="solarized-dark">
+                Solarized Dark
+              </option>
+              <option value="cobalt">
+                Cobalt
+              </option>
+            </select>
+          </span>
+          <span class="icon is-left">
+            <i class="fas fa-palette" />
+          </span>
         </p>
       </div>
     </section>
