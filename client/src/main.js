@@ -5,6 +5,7 @@ import Modal from 'buefy/dist/components/modal'
 import Snackbar from 'buefy/dist/components/snackbar'
 
 import '@/assets/scss/main.scss'
+import './registerServiceWorker'
 
 Vue.config.productionTip = false
 
