@@ -18,7 +18,7 @@ module.exports = {
     }
   },
   productionSourceMap: false,
-  publicPath: '/LiveCoding',
+  // publicPath: '/LiveCoding',
   configureWebpack: {
     plugins: [
       new MonacoWebpackPlugin({
