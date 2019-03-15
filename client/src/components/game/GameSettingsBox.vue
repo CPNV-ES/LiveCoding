@@ -115,6 +115,37 @@ export default {
           <strong>URL</strong> : <code>http://mon-nom-de-deomaine.com/chemin</code>
         </p>
       </div>
+      <!-- SHARE LINK -->
+      <div class="field">
+        <label class="label">
+          Lien de partage
+        </label>
+        <div class="field has-addons">
+          <p class="control has-icons-left is-expanded">
+            <input
+              value="toto et tutu"
+              class="input"
+              type="text"
+              placeholder="URL du jeux"
+            >
+            <span class="icon is-small is-left">
+              <i class="fas fa-share-square" />
+            </span>
+          </p>
+          <p class="control">
+            <button
+              class="button is-link"
+            >
+              <span class="icon is-small is-left">
+                <i class="fas fa-copy" />
+              </span>
+            </button>
+          </p>
+        </div>
+        <p class="help">
+          Copiez cet url et partagez le, il permet d'ouvrir LiveCoding directement avec le jeux actuel.
+        </p>
+      </div>
     </section>
     <footer class="modal-card-foot">
       <button
