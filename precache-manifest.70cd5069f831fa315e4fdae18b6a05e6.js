@@ -1,10 +1,10 @@
 self.__precacheManifest = [
   {
-    "revision": "514d0b52b2317d81bd7a",
-    "url": "/LiveCoding/css/app.0c7f5fbf.css"
+    "revision": "55d5fc63a91bbe780689",
+    "url": "/LiveCoding/css/app.f75a7fa3.css"
   },
   {
-    "revision": "514d0b52b2317d81bd7a",
+    "revision": "55d5fc63a91bbe780689",
     "url": "/LiveCoding/js/app.476fbaa8.js"
   },
   {
@@ -260,7 +260,7 @@ self.__precacheManifest = [
     "url": "/LiveCoding/typescript.worker.js"
   },
   {
-    "revision": "ebdc8b834422e9a02181732f6b240287",
+    "revision": "1d5c786a7da2da838e04b6dbe71cfdd8",
     "url": "/LiveCoding/index.html"
   },
   {
