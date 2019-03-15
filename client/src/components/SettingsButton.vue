@@ -1,5 +1,5 @@
 <script>
-import ParametersBox from '@/components/ParametersBox'
+import SettingsBox from '@/components/SettingsBox'
 
 /**
  * This components display the inputs to load a game from a url
@@ -12,7 +12,7 @@ export default {
     openSettingsModal () {
       this.$modal.open({
         parent: this,
-        component: ParametersBox,
+        component: SettingsBox,
         hasModalCard: true
       })
     }
@@ -28,7 +28,7 @@ export default {
           class="button is-primary"
           @click="openSettingsModal()"
         >
-          Settings
+          Paramètres
         </button>
       </div>
     </div>

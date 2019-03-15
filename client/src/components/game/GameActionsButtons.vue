@@ -67,7 +67,7 @@ export default {
           class="button is-primary"
           @click="openGameParametersModal()"
         >
-          Game
+          Jeux
         </button>
       </div>
     </div>
