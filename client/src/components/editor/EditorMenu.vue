@@ -115,7 +115,7 @@ export default {
         </button>
       </div>
       <div
-        v-if="gameManager.provider.gameInstructions"
+        v-if="gameManager && gameManager.provider.gameInstructions"
         class="control"
       >
         <div class="dropdown is-hoverable">
