@@ -12,6 +12,10 @@ Vue.config.productionTip = false
 Vue.use(Modal)
 Vue.use(Snackbar)
 
+if (window.innerWidth < 770) {
+  alert("La résolution d'écran est trop faible pour afficher l'application, aggrandissez la fenetre ou utiliser un autre appareil.")
+}
+
 new Vue({
   store,
   render: h => h(App)
