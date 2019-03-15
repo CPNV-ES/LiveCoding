@@ -24,7 +24,8 @@ export default class GitHubProvider extends Provider {
    * This method generate a url to rendered ressouce (for mardowns on github)
    */
   generateUrl (file) {
-    return `${this.defaultBaseUrl}/${this.url}/${file}`
+    let parts = this.url.split('@', 2)
+    return `${this.defaultBaseUrl}/${parts[0]}/blob/${parts[1]}/${file}`
   }
   /**
    * Return the base path of the game assets

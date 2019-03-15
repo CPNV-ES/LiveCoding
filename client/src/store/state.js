@@ -23,7 +23,7 @@ export default {
      * Default font size
      * @type {Number}
      */
-    fontSize: 14,
+    fontSize: localStorage.getItem('editor-font-size') || 14,
     // Mapping between the language and the content of the editor
     languagesContent: {
       javascript: localStorage.getItem('javascript') || `let tutu = 'Bienvenue sur LiveCoding'\ndebugger.log(tutu)\n`,
@@ -33,12 +33,13 @@ export default {
     }
   },
   processor: {
-    url: localStorage.getItem('processor-url') || 'ws://localhost:8787/'
+    url: localStorage.getItem('processor-url') || 'ws://localhost:12800/'
   },
   /**
    * Information form the current loaded game
    */
   game: {
+    loading: false,
     provider: localStorage.getItem('game-provider') || 'github',
     url: localStorage.getItem('game-url') || 'CPNV-ES/LiveCoding-Test-Game@v1.1.8',
     loaded: false,

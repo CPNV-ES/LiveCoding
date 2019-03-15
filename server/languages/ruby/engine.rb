@@ -1,19 +1,25 @@
 class Engine
     def self.send(commandJS)
-        STDERR.puts "none"
-        loop do
-            break if fgets(STDIN) != "ready\n"
+        STDERR.puts "none\n"
+        
+        while STDIN.gets != "ready" do
         end
-        STDOUT.puts "ready\n"
+        STDIN.flush
+
+        puts "ready"
         STDOUT.flush
 
-        STDOUT.puts commandJS + "\n"
+        puts commandJS
         STDOUT.flush
+
+        while STDIN.gets != "ready" do
+        end
+        STDIN.flush
 
         msg = STDIN.gets
         STDIN.flush
 
-        STDOUT.puts "close\n"
+        puts "close"
         STDOUT.flush
 
         msg

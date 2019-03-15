@@ -10,6 +10,11 @@ import Cobalt from 'monaco-themes/themes/Cobalt.json'
 import { mapState } from 'vuex'
 
 export default {
+  data () {
+    return {
+      monaco: null
+    }
+  },
   computed: {
     ...mapState({
       language: state => state.editor.language,
@@ -40,6 +45,12 @@ export default {
     theme (newVal) {
       if (this.monaco) {
         window.monaco.editor.setTheme(newVal)
+      }
+    },
+    // Theme change
+    fontSize (newVal) {
+      if (this.monaco) {
+        this.monaco.updateOptions({ fontSize: newVal })
       }
     }
   },

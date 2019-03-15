@@ -14,6 +14,7 @@ export default {
    */
   async load ({ state, commit, dispatch }) {
     try {
+      commit('SET_GAME_LOADING_STATE', true)
       // Clear the content of the game box
       document.getElementById('game-box').innerHTML = ''
       // Create a new game manager for the game
@@ -34,6 +35,8 @@ export default {
       document.getElementById('game-box').innerHTML = 'Aucun jeu chargé !'
       dispatch('console/error', 'Error during Game loading !')
       throw new Error()
+    } finally {
+      commit('SET_GAME_LOADING_STATE', false)
     }
   },
   /**

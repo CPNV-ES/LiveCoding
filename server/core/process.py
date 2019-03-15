@@ -9,6 +9,7 @@ from mod import languages
 from mlogging import mlog
 import subprocess
 import time
+from mod import io
 
 class Process:
 
@@ -30,64 +31,38 @@ class Process:
     async def proxyGame(self):
         #loop until process is running
         while self.process.poll() is None:
-            self.process.stdout.flush()
-            self.process.stdin.flush()
-            errorMsg = self.process.stderr.readline().decode()
-            self.process.stderr.flush()
+            errorMsg = await io.stderrGet(self.process)
 
-            if errorMsg.strip() == "none":
+            if errorMsg == "none":
                 await self.waitForReady()     
-                cmdsJS = await self.getCommand()
+                cmdsJS = await io.stdoutGet(self.process)
                 await self.sendCommandToClient(cmdsJS)
                 message = await self.socket.recv()
+                if message == 'PROCESS_ENDED_BY_USER':
+                    mlog.show("Game closed by User. By...")
+                    self.process.terminate()
+                    break
                 mlog.show("Received confirmation from client: "+ message)
-                self.process.stdin.write(bytes(message + "\n","UTF-8"))
-                
-            else:
+                await self.waitForReady()
+                await io.stdinWrite(self.process, message)
+                                
+            if errorMsg.strip() != "none" and errorMsg.strip() != "":
                 mlog.show("Process error.. Game has been stopped..")
                 mlog.show("Error message: " + errorMsg)
                 self.socket.send("ERROR/" + errorMsg)
-        pass
+                self.process.terminate()
+                break
+        return
 
     async def waitForReady(self):
-        _pass = True
+        mlog.show("Wait for new command to process...!")
         while True:
-            self.flushAll()
-            self.process.stdin.write(bytes("ready\n","UTF-8"))
-            res = self.process.stdout.readline().decode().strip()
-            if _pass:
-                mlog.show("Wait for new command to process...!")
-                _pass = False
-
-            if res == "ready":
-                self.flushAll()
+            await io.stdinWrite(self.process, "ready")
+            if await io.stdoutGet(self.process) == "ready":
                 return
-        pass
-
-    async def getCommand(self):
-        return self.process.stdout.readline().decode().strip()
-        pass
+        return
 
     async def sendCommandToClient(self, value):
         mlog.show("Send command to client: " + value)
         await self.socket.send(value)
-        pass
-
-    async def stdinWrite(self, value):
-        self.process.stdin.write(bytes(value + "\n","UTF-8"))
-        pass
-
-    async def stderrWrite(self, value):
-        self.process.stderr.write(bytes(value + "\n","UTF-8"))
-        pass
-
-    async def stdoutWrite(self, value):
-        self.process.stdout.write(bytes(value + "\n","UTF-8"))
-        pass
-
-    # flush all data in stdin stdout stderr
-    def flushAll(self):
-        self.process.stdout.flush()
-        self.process.stdin.flush()
-        self.process.stderr.flush()
         pass

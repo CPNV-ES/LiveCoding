@@ -114,6 +114,45 @@ export default {
           </span>
         </button>
       </div>
+      <div
+        v-if="gameManager && gameManager.provider.gameInstructions"
+        class="control"
+      >
+        <div class="dropdown is-hoverable">
+          <div class="dropdown-trigger">
+            <button
+              class="button"
+              aria-haspopup="true"
+              aria-controls="dropdown-menu"
+            >
+              <span>Instructions</span>
+              <span class="icon is-small">
+                <i
+                  class="fas fa-angle-down"
+                  aria-hidden="true"
+                />
+              </span>
+            </button>
+          </div>
+          <div
+            id="dropdown-menu"
+            class="dropdown-menu"
+            role="menu"
+          >
+            <div class="dropdown-content">
+              <a
+                v-for="instruction of gameManager.provider.gameInstructions"
+                :key="instruction.path"
+                :href="gameManager.provider.generateUrl(instruction.path)"
+                class="dropdown-item"
+                target="_blank"
+              >
+                {{ instruction.name }}
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>

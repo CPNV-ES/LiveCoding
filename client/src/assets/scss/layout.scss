@@ -4,8 +4,15 @@
 #app {
   height: 100vh;
   display: grid;
-  grid-template-columns: auto 768px;
-  grid-template-rows: 52px 768px auto;
+  grid-template-columns: auto 80vh;
+  grid-template-rows: 52px 80vh auto;
+}
+
+@media screen and (max-width: 1200px) {
+  #app {
+    grid-template-columns: auto 50vw;
+    grid-template-rows: 52px 50vw auto;
+  }
 }
 
 // Childs of the grid
@@ -34,7 +41,7 @@
 
 #console-box {
   background-color: $black-ter;
-  min-height: 160px;
+  // min-height: 160px;
   grid-column-start: 2;
   grid-column-end: 3;
   grid-row-start: 3;
