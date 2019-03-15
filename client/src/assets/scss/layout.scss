@@ -4,8 +4,8 @@
 #app {
   height: 100vh;
   display: grid;
-  grid-template-columns: auto 768px;
-  grid-template-rows: 52px 768px auto;
+  grid-template-columns: auto 50vw;
+  grid-template-rows: 52px 50vw auto;
 }
 
 // Childs of the grid
