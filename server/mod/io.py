@@ -2,29 +2,32 @@
 
 import subprocess
 
-def stdinGet(process):
-    res = process.stdin.readline().decode()
+async def stdinGet(process):
+    res = process.stdin.readline().decode().strip()
     process.stdin.flush()
     return res
 
-def stdoutGet(process):
-    res = process.stdout.readline().decode()
+async def stdoutGet(process):
+    res = process.stdout.readline().decode().strip()
     process.stdout.flush()
     return res
 
-def stderrGet(process):
-    res = process.stderr.readline().decode()
-    process.stdout.flush()
+async def stderrGet(process):
+    res = process.stderr.readline().decode().strip()
+    process.stderr.flush()
     return res
 
-def stdinWrite(process, value):
+async def stdinWrite(process, value):
     process.stdin.write(bytes(value + "\n","UTF-8"))
+    process.stdin.flush()
     return True
 
-def stderrWrite(process, value):
+async def stderrWrite(process, value):
     process.stderr.write(bytes(value + "\n","UTF-8"))
+    process.stderr.flush()
     return True
 
-def stdoutWrite(process, value):
+async def stdoutWrite(process, value):
     process.stdout.write(bytes(value + "\n","UTF-8"))
+    process.stdout.flush()
     return True

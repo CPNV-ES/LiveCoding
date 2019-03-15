@@ -26,9 +26,6 @@ class Engine
         $stdin = fgets(STDIN);
         fflush(STDIN);
 
-        fwrite(STDOUT,"close\n");
-        fflush(STDOUT);
-
         return $stdin;
     }
 }
