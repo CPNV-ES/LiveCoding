@@ -30,39 +30,41 @@ class Process:
     async def proxyGame(self):
         #loop until process is running
         while self.process.poll() is None:
-            self.process.stdout.flush()
-            self.process.stdin.flush()
             errorMsg = self.process.stderr.readline().decode()
-            self.process.stderr.flush()
+            self.flushAll()
 
             if errorMsg.strip() == "none":
                 await self.waitForReady()     
                 cmdsJS = await self.getCommand()
                 await self.sendCommandToClient(cmdsJS)
                 message = await self.socket.recv()
+                if message == 'PROCESS_ENDED_BY_USER':
+                    self.process.terminate()
+                    break
                 mlog.show("Received confirmation from client: "+ message)
+                await self.waitForReady()
                 self.process.stdin.write(bytes(message + "\n","UTF-8"))
-                
-            else:
+                self.process.stdin.flush()
+
+                                
+            if errorMsg.strip() != "none" and errorMsg.strip() != "":
                 mlog.show("Process error.. Game has been stopped..")
                 mlog.show("Error message: " + errorMsg)
                 self.socket.send("ERROR/" + errorMsg)
-        pass
+                self.process.terminate()
+                break
+        return
 
     async def waitForReady(self):
-        _pass = True
+        mlog.show("Wait for new command to process...!")
         while True:
             self.flushAll()
             self.process.stdin.write(bytes("ready\n","UTF-8"))
             res = self.process.stdout.readline().decode().strip()
-            if _pass:
-                mlog.show("Wait for new command to process...!")
-                _pass = False
-
             if res == "ready":
                 self.flushAll()
                 return
-        pass
+        return
 
     async def getCommand(self):
         return self.process.stdout.readline().decode().strip()
