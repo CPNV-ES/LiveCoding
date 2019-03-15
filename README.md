@@ -2,22 +2,21 @@
 > Livecoding is a desktop appliaction where newbies can learn the basics of programmation.
 > The principle is simple : You write commands in the in-app editor, press send, and the commands will interact the a little game (like pacman).
 
-## Changelog - v2.0.0-beta.7
+## Changelog - v2.0.0-beta.8
 
 *This version is unstable - do not use in production !*
 
 **Client :**
 - Now deployed via Github pages : [LiveCoding](https://cpnv-es.github.io/LiveCoding/).
-- Editor theme menu now in the settings modal.
-- *Client<->processor* protocol managment now separated in a dedicated class.
-- The entire process execution now managed in dedicated class.
-- Process execution supports async/await, allows to display loaders and manage errors easily with async content.
-- New *stop button* displayed when a process is running.
-- Commandy are now proxied to the game engine.
+- Support of mobile devices (tablets only).
+- Livecoding implement PWA support, the app is installable on mobile and desktop (with chrome).
+- A serviceWorker is registered to update the app and manage assets cache.
+- Layout now responsive (tablets, desktop).
+- Instructions links now displayed in a dropdown menu.
 
 **Processor :**
-- PHP fully suported, with multiple operations
-- Ruby partial support
+- Fix processor crash with commands return params.
+- Now support process interuption via `PROCESS_ENDED_BY_USER` code.
 
 **Pokedash game :**
 The legacy game shipped with livecoding is deprecated, the new default game are developped in his dedicated repo : [LiveCoding-Pokedash-Game](https://github.com/CPNV-ES/LiveCoding-Pokedash-Game).
