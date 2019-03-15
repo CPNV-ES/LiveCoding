@@ -4,14 +4,16 @@
  *
  * @author Bastien Nicoud
  */
-import GameUrlInput from '@/components/game/GameUrlInput'
 import EditorMenu from '@/components/editor/EditorMenu'
+import GameActionsButtons from '@/components/game/GameActionsButtons'
+import SettingsButton from '@/components/SettingsButton'
 import { mapState } from 'vuex'
 
 export default {
   components: {
-    GameUrlInput,
-    EditorMenu
+    GameActionsButtons,
+    EditorMenu,
+    SettingsButton
   },
   data () {
     return {
@@ -41,6 +43,7 @@ export default {
           LiveCoding{{ gameLoaded ? ` - ${gameManager.provider.gameName}` : '' }}
         </h1>
       </div>
+      <!-- Burger for little screens -->
       <a
         role="button"
         class="navbar-burger burger"
@@ -61,7 +64,8 @@ export default {
       :class="{ 'is-active': toggle_burger }"
     >
       <div class="navbar-end">
-        <GameUrlInput />
+        <GameActionsButtons />
+        <SettingsButton />
       </div>
     </div>
   </nav>

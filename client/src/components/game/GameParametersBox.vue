@@ -1,9 +1,8 @@
 <script>
-import ParametersBox from '@/components/ParametersBox'
 import { mapState } from 'vuex'
 
 /**
- * This components display the inputs to load a game from a url
+ * This component is displayed when you open the settings modal
  */
 export default {
   computed: {
@@ -50,25 +49,27 @@ export default {
           duration: 4500
         })
       }
-    },
-    /**
-     * Displays the settings modal
-     */
-    openSettingsModal () {
-      this.$modal.open({
-        parent: this,
-        component: ParametersBox,
-        hasModalCard: true
-      })
     }
   }
 }
 </script>
 
 <template>
-  <div class="navbar-item">
-    <div class="field is-grouped">
-      <div class="control">
+  <div
+    class="modal-card"
+    style="width: auto"
+  >
+    <header class="modal-card-head">
+      <p class="modal-card-title">
+        Paramètres du jeux
+      </p>
+    </header>
+    <section class="modal-card-body">
+      <!-- GAME URL -->
+      <div class="field">
+        <label class="label">
+          Source du jeux
+        </label>
         <div class="field has-addons">
           <p class="control">
             <span class="select">
@@ -91,7 +92,7 @@ export default {
               class="input"
               type="text"
               placeholder="URL du jeux"
-              style="min-width: 300px;"
+              style="min-width: 400px;"
             >
             <span class="icon is-small is-left">
               <i class="fas fa-link" />
@@ -107,15 +108,21 @@ export default {
             </button>
           </p>
         </div>
+        <p class="help">
+          Séléctionnez la source du jeux (GitHub, URL).<br>
+          Puis entrez l'adresse du jeux au bon format :<br>
+          <strong>GitHub</strong> : <code>UTILISATEUR</code> / <code>DEPOT</code> @ <code>BRANCHE | TAG</code><br>
+          <strong>URL</strong> : <code>http://mon-nom-de-deomaine.com/chemin</code>
+        </p>
       </div>
-      <div class="control">
-        <button
-          class="button is-primary"
-          @click="openSettingsModal()"
-        >
-          Settings
-        </button>
-      </div>
-    </div>
+    </section>
+    <footer class="modal-card-foot">
+      <button
+        class="button is-primary"
+        @click="$parent.close()"
+      >
+        OK
+      </button>
+    </footer>
   </div>
 </template>

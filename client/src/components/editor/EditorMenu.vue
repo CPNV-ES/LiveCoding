@@ -114,6 +114,7 @@ export default {
           </span>
         </button>
       </div>
+      <!-- DISPLAY INSTRUCTION DROPDOWN -->
       <div
         v-if="gameManager && gameManager.provider.gameInstructions"
         class="control"
