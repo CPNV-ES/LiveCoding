@@ -1,5 +1,5 @@
 <script>
-import GameParametersBox from '@/components/game/GameParametersBox'
+import GameSettingsBox from '@/components/game/GameSettingsBox'
 import { mapState } from 'vuex'
 
 /**
@@ -38,10 +38,10 @@ export default {
     /**
      * Displays the settings modal
      */
-    openGameParametersModal () {
+    openGameSettingsModal () {
       this.$modal.open({
         parent: this,
-        component: GameParametersBox,
+        component: GameSettingsBox,
         hasModalCard: true
       })
     }
@@ -65,7 +65,7 @@ export default {
       <div class="control">
         <button
           class="button is-primary"
-          @click="openGameParametersModal()"
+          @click="openGameSettingsModal()"
         >
           Jeux
         </button>
