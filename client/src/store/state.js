@@ -23,7 +23,7 @@ export default {
      * Default font size
      * @type {Number}
      */
-    fontSize: 14,
+    fontSize: localStorage.getItem('editor-font-size') || 14,
     // Mapping between the language and the content of the editor
     languagesContent: {
       javascript: localStorage.getItem('javascript') || `let tutu = 'Bienvenue sur LiveCoding'\ndebugger.log(tutu)\n`,

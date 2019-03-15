@@ -21,6 +21,14 @@ export default {
     state.editor.theme = value
   },
   /**
+   * Change the editor theme
+   * @param {String} value
+   */
+  UPDATE_EDITOR_FONT_SIZE: (state, value) => {
+    localStorage.setItem('editor-font-size', value)
+    state.editor.fontSize = value
+  },
+  /**
    * Change the editor language
    * @param {String} value
    */
