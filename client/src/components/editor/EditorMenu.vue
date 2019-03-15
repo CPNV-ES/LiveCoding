@@ -7,6 +7,11 @@
 import { mapState } from 'vuex'
 
 export default {
+  data () {
+    return {
+      loader: false
+    }
+  },
   computed: {
     ...mapState({
       gameLoaded: state => state.game.loaded,
@@ -20,78 +25,134 @@ export default {
       set (value) {
         this.$store.commit('UPDATE_EDITOR_LANGUAGE', value)
       }
-    },
-    theme: {
-      get () {
-        return this.$store.state.editor.theme
-      },
-      set (value) {
-        this.$store.commit('UPDATE_EDITOR_THEME', value)
-      }
     }
   },
   methods: {
     openInstruction (uri) {
       window.open(this.gameManager.provider.generateUrl(uri))
+    },
+    async run () {
+      try {
+        this.loader = true
+        // Launch the process execution, and wait the end the execution
+        await this.$store.dispatch('run')
+      } catch (e) {
+        console.error('Error during process exection')
+        this.$snackbar.open({
+          message: 'Error during script execution, check console !',
+          type: 'is-danger',
+          position: 'is-top',
+          actionText: 'OK',
+          duration: 4500
+        })
+      } finally {
+        this.loader = false
+      }
+    },
+    stop () {
+      this.$store.dispatch('stop')
     }
   }
 }
 </script>
 
 <template>
-  <div class="nav-left">
-    <!-- LANGUAGES LIST -->
-    <select
-      v-if="gameLoaded"
-      v-model="language"
-      class="spacing"
-    >
-      <!-- DISPLAY THE INTERPRETERS SUPPORTED BY THE GAME -->
-      <option
-        v-for="(lang, index) in gameManager.provider.gameInterpreters"
-        :key="index"
-        :value="index"
+  <div class="navbar-item">
+    <div class="field is-grouped">
+      <p
+        v-if="gameLoaded"
+        class="control has-icons-left"
       >
-        {{ index }}
-      </option>
-    </select>
-    <!-- SELECT COLOR THEME -->
-    <select
-      v-model="theme"
-      class="spacing"
-    >
-      <option value="vs">
-        Light
-      </option>
-      <option value="vs-dark">
-        Dark
-      </option>
-      <option value="solarized-dark">
-        Solarized Dark
-      </option>
-      <option value="cobalt">
-        Cobalt
-      </option>
-    </select>
-    <!-- LAUNCH THE EXECUTION OF THE SCRIPT -->
-    <button
-      class="is-blue spacing"
-      title="Lancez l'execution de votre script !"
-    >
-      Run
-    </button>
-    <span
-      v-if="gameLoaded"
-    >
-      <button
-        v-for="(instruction, index) of gameManager.provider.gameInstructions"
-        :key="index"
-        class="spacing"
-        :title="instruction.description"
-        @click="openInstruction(instruction.path)"
+        <span class="select">
+          <!-- LANGUAGES LIST -->
+          <select
+            v-model="language"
+            class="spacing"
+          >
+            <option
+              v-for="(lang, index) in gameManager.provider.gameInterpreters"
+              :key="index"
+              :value="index"
+            >
+              {{ index }}
+            </option>
+          </select>
+        </span>
+        <span class="icon is-left">
+          <i class="fas fa-terminal" />
+        </span>
+      </p>
+      <!-- START THE SCRIPT BUTTON -->
+      <div
+        class="control"
+        :title="gameLoaded ? 'Lancez l\'execution de votre script !' : 'Aucun jeux n\'est chargé !'"
       >
-        {{ instruction.name }}
-      </button>
-    </span>
+        <button
+          class="button is-primary"
+          :class="{ 'is-loading': loader }"
+          :disabled="!gameLoaded"
+          @click="run"
+        >
+          <span class="icon is-left">
+            <i class="fas fa-play" />
+          </span>
+          <p>Run</p>
+        </button>
+      </div>
+      <!-- STOP SCRIPT EXECUTION IN CASE OF PROBLEM - Showed only when process running -->
+      <div
+        v-if="loader"
+        class="control"
+        title="Stoppez l'execution du script"
+      >
+        <button
+          class="button is-danger"
+          @click="stop"
+        >
+          <span class="icon is-left">
+            <i class="fas fa-stop" />
+          </span>
+        </button>
+      </div>
+      <div
+        v-if="gameManager && gameManager.provider.gameInstructions"
+        class="control"
+      >
+        <div class="dropdown is-hoverable">
+          <div class="dropdown-trigger">
+            <button
+              class="button"
+              aria-haspopup="true"
+              aria-controls="dropdown-menu"
+            >
+              <span>Instructions</span>
+              <span class="icon is-small">
+                <i
+                  class="fas fa-angle-down"
+                  aria-hidden="true"
+                />
+              </span>
+            </button>
+          </div>
+          <div
+            id="dropdown-menu"
+            class="dropdown-menu"
+            role="menu"
+          >
+            <div class="dropdown-content">
+              <a
+                v-for="instruction of gameManager.provider.gameInstructions"
+                :key="instruction.path"
+                :href="gameManager.provider.generateUrl(instruction.path)"
+                class="dropdown-item"
+                target="_blank"
+              >
+                {{ instruction.name }}
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>

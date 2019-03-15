@@ -10,10 +10,16 @@ import Cobalt from 'monaco-themes/themes/Cobalt.json'
 import { mapState } from 'vuex'
 
 export default {
+  data () {
+    return {
+      monaco: null
+    }
+  },
   computed: {
     ...mapState({
       language: state => state.editor.language,
-      theme: state => state.editor.theme
+      theme: state => state.editor.theme,
+      fontSize: state => state.editor.fontSize
     }),
     /**
      * Get and set the store with the current editor state
@@ -40,6 +46,12 @@ export default {
       if (this.monaco) {
         window.monaco.editor.setTheme(newVal)
       }
+    },
+    // Theme change
+    fontSize (newVal) {
+      if (this.monaco) {
+        this.monaco.updateOptions({ fontSize: newVal })
+      }
     }
   },
   /**
@@ -48,10 +60,11 @@ export default {
   mounted () {
     this.initEditor()
   },
+  /**
+   * When the component is destoyed
+   */
   beforeDestroy () {
-    /**
-     * Unmount the editor when the component is destroyed
-     */
+    // Unmount the editor when the component is destroyed
     this.editor && this.editor.dispose()
   },
   methods: {
@@ -64,7 +77,8 @@ export default {
         value: this.editorContent,
         theme: this.theme,
         language: this.language,
-        fontSize: 16,
+        fontSize: this.fontSize,
+        fontFamily: 'IBM Plex Mono',
         minimap: {
           enabled: false
         }

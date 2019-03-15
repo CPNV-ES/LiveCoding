@@ -13,6 +13,11 @@ export default {
     GameUrlInput,
     EditorMenu
   },
+  data () {
+    return {
+      toggle_burger: false
+    }
+  },
   computed: {
     ...mapState({
       gameLoaded: state => state.game.loaded,
@@ -23,14 +28,41 @@ export default {
 </script>
 
 <template>
-  <nav id="nav-bar">
-    <!-- EDITOR MENU - LANG SELECTION - THEME -->
-    <EditorMenu />
-    <!-- APP NAME AND GAME NAME -->
-    <div class="nav-center">
-      <h1>LiveCoding{{ gameLoaded ? ` - ${gameManager.provider.gameName}` : '' }}</h1>
+  <nav
+    id="navbar"
+    class="navbar"
+    role="navigation"
+    aria-label="main navigation"
+  >
+    <div class="navbar-brand">
+      <EditorMenu />
+      <div class="navbar-item">
+        <h1 class="title is-5">
+          LiveCoding{{ gameLoaded ? ` - ${gameManager.provider.gameName}` : '' }}
+        </h1>
+      </div>
+      <a
+        role="button"
+        class="navbar-burger burger"
+        :class="{ 'is-active': toggle_burger }"
+        data-target="navMenu"
+        aria-label="menu"
+        aria-expanded="false"
+        @click="toggle_burger = !toggle_burger"
+      >
+        <span aria-hidden="true" />
+        <span aria-hidden="true" />
+        <span aria-hidden="true" />
+      </a>
     </div>
-    <!-- GAME LOADING INPUTS -->
-    <GameUrlInput />
+
+    <div
+      class="navbar-menu"
+      :class="{ 'is-active': toggle_burger }"
+    >
+      <div class="navbar-end">
+        <GameUrlInput />
+      </div>
+    </div>
   </nav>
 </template>

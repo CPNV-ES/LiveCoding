@@ -21,6 +21,14 @@ export default {
     state.editor.theme = value
   },
   /**
+   * Change the editor theme
+   * @param {String} value
+   */
+  UPDATE_EDITOR_FONT_SIZE: (state, value) => {
+    localStorage.setItem('editor-font-size', value)
+    state.editor.fontSize = value
+  },
+  /**
    * Change the editor language
    * @param {String} value
    */
@@ -42,7 +50,7 @@ export default {
    */
   UPDATE_PROCESSOR_URL: (state, value) => {
     localStorage.setItem('processor-url', value)
-    state.game.url = value
+    state.processor.url = value
   },
   /**
    * Change the editor language
@@ -61,10 +69,10 @@ export default {
     state.game.loaded = true
   },
   /**
-   * Show the parameters modal
-   * @param {Boolean}
+   * Set the game loading state
+   * @param {boolean} value
    */
-  SHOW_APP_PARAMETERS_MODAL: (state, value) => {
-    state.showAppParametersModal = value
+  SET_GAME_LOADING_STATE: (state, value) => {
+    state.game.loading = value
   }
 }
