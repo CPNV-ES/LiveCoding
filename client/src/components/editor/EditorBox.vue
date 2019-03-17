@@ -79,6 +79,7 @@ export default {
         language: this.language,
         fontSize: this.fontSize,
         fontFamily: 'IBM Plex Mono',
+        automaticLayout: true,
         minimap: {
           enabled: false
         }
