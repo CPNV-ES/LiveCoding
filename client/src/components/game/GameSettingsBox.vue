@@ -1,5 +1,5 @@
 <script>
-import { mapState } from 'vuex'
+import { mapState, mapGetters } from 'vuex'
 
 /**
  * This component is displayed when you open the settings modal
@@ -8,6 +8,9 @@ export default {
   computed: {
     ...mapState({
       loading: state => state.game.loading
+    }),
+    ...mapGetters({
+      shareUrl: 'shareUrl'
     }),
     url: {
       get () {
@@ -49,6 +52,18 @@ export default {
           duration: 4500
         })
       }
+    },
+    copyToClipboard () {
+      let copyText = this.$refs.copyTextToClipboard
+      copyText.select()
+      document.execCommand('copy')
+      this.$snackbar.open({
+        message: 'Lien de partage copié !',
+        type: 'is-success',
+        position: 'is-top',
+        actionText: 'OK',
+        duration: 3000
+      })
     }
   }
 }
@@ -123,7 +138,8 @@ export default {
         <div class="field has-addons">
           <p class="control has-icons-left is-expanded">
             <input
-              value="toto et tutu"
+              ref="copyTextToClipboard"
+              :value="shareUrl"
               class="input"
               type="text"
               placeholder="URL du jeux"
@@ -135,6 +151,7 @@ export default {
           <p class="control">
             <button
               class="button is-link"
+              @click="copyToClipboard"
             >
               <span class="icon is-small is-left">
                 <i class="fas fa-copy" />
