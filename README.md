@@ -2,17 +2,14 @@
 > Livecoding is a desktop appliaction where newbies can learn the basics of programmation.
 > The principle is simple : You write commands in the in-app editor, press send, and the commands will interact the a little game (like pacman).
 
-## Changelog - v2.0.0-beta.8
+## Changelog - v2.0.0-beta.9
 
 *This version is unstable - do not use in production !*
 
 **Client :**
-- Now deployed via Github pages : [LiveCoding](https://cpnv-es.github.io/LiveCoding/).
-- Support of mobile devices (tablets only).
-- Livecoding implement PWA support, the app is installable on mobile and desktop (with chrome).
-- A serviceWorker is registered to update the app and manage assets cache.
-- Layout now responsive (tablets, desktop).
-- Instructions links now displayed in a dropdown menu.
+- Game menu now in a dedicated modal.
+- The editor noe auto resize when you resize the browser window.
+- On little screens a burger menu regroups the right navbar menus.
 
 **Processor :**
 - Fix processor crash with commands return params.
