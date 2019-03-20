@@ -1,4 +1,3 @@
-import { LocalProcessorProxy } from './LocalProcessorProxy'
 import { ExternalWebSocketProcessorProxy } from './ExternalWebSocketProcessorProxy'
 
 /**
@@ -10,10 +9,6 @@ export class ProcessorProxyFactory {
    */
   static get processorProxies () {
     return [
-      {
-        name: 'javascript',
-        class: LocalProcessorProxy
-      },
       {
         name: 'php',
         class: ExternalWebSocketProcessorProxy
