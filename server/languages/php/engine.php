@@ -26,7 +26,7 @@ class Engine
         $stdin = fgets(STDIN);
         fflush(STDIN);
 
-        return $stdin;
+        return str_replace("\n","", $stdin);
     }
 }
 
