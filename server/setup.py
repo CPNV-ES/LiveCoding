@@ -1,1 +1,0 @@
-exec(open("./setup/languages.py").read())
