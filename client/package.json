@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "buefy": "^0.7.3",
+    "file-saver": "^2.0.1",
     "monaco-editor": "^0.16.0",
     "monaco-editor-webpack-plugin": "^1.7.0",
     "monaco-themes": "^0.2.5",
