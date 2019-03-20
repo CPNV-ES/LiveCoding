@@ -4,7 +4,7 @@
  *
  * @author Bastien Nicoud
  */
-import { mapState } from 'vuex'
+import { mapState, mapActions } from 'vuex'
 
 export default {
   data () {
@@ -28,9 +28,10 @@ export default {
     }
   },
   methods: {
-    openInstruction (uri) {
-      window.open(this.gameManager.provider.generateUrl(uri))
-    },
+    ...mapActions([
+      'saveEditorContent',
+      'importEditorContent'
+    ]),
     async run () {
       try {
         this.loader = true
@@ -111,6 +112,33 @@ export default {
         >
           <span class="icon is-left">
             <i class="fas fa-stop" />
+          </span>
+        </button>
+      </div>
+      <!-- SAVE / IMPORT -->
+      <div
+        class="control"
+        title="Sauvegardez le code dans l'éditeur sur votre ordinateur."
+      >
+        <button
+          class="button is-success"
+          @click="saveEditorContent"
+        >
+          <span class="icon">
+            <i class="fas fa-save" />
+          </span>
+        </button>
+      </div>
+      <div
+        class="control"
+        title="Importez un fichier du language sélectionné."
+      >
+        <button
+          class="button is-info"
+          @click="importEditorContent"
+        >
+          <span class="icon">
+            <i class="fas fa-file-import" />
           </span>
         </button>
       </div>
