@@ -49,7 +49,7 @@ class Process:
             if errorMsg.strip() != "none" and errorMsg.strip() != "":
                 mlog.show("Process error.. Game has been stopped..")
                 mlog.show("Error message: " + errorMsg)
-                self.socket.send("ERROR/" + errorMsg)
+                await self.socket.send("ERROR/" + errorMsg)
                 self.process.terminate()
                 break
         return
