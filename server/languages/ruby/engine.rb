@@ -20,6 +20,6 @@ class Engine
         msg = STDIN.gets
         STDIN.flush
 
-        msg
+        msg.gsub("\n","")
     end
 end
