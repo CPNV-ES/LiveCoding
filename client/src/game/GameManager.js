@@ -44,12 +44,13 @@ export default class GameManager {
    *
    * Change the game api, this method must be asynchronus
    */
-  startGame () {
+  startGame (console) {
     // Create the base game class instance
-    window.game = new this.provider.gameModule.Game(
-      document.getElementById('game-box'),
-      this.provider.assetsBasePath
-    )
+    window.game = new this.provider.gameModule.Game({
+      element: document.getElementById('game-box'),
+      assetsBasePath: this.provider.assetsBasePath,
+      console: console
+    })
     // Create a key to eval commands in the game scope
     /* eslint-disable no-eval */
     window.gameCommandEval = eval
