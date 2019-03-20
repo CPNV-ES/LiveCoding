@@ -20,13 +20,6 @@ class PokedashGame{
             "moveDown()",
         ];
 
-        const directions = {
-            UP : Symbol( 'UP' ),
-            DOWN : Symbol( 'DOWN' ),
-            LEFT : Symbol( 'LEFT' ),
-            RIGHT: Symbol( 'RIGHT' )
-        }
-
         this.comCliEngine = comCli   // Engine Communication to the server
         this.mapElement = [] 
         this.objectives = 0 // Number of objectives (pokeball) in the map
