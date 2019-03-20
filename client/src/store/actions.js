@@ -1,7 +1,7 @@
 import GameManager from '@/game/GameManager'
 import ProviderFactory from '@/game/providers/ProviderFactory'
 import { ProcessorProxyFactory } from '@/processor/ProcessorProxyFactory'
-// import ProcessorConnexion from '@/game/processor/ProcessorConnexion'
+import { saveAs } from 'file-saver'
 
 /**
  * Actions for the vuex store
@@ -77,5 +77,26 @@ export default {
   stop ({ dispatch }) {
     dispatch('console/info', 'Stopping the process.')
     window.processorProxy.stopExecution()
+  },
+  /**
+   * Save the content of the current editor in a file
+   */
+  async saveEditorContent ({ state }) {
+    const file = new File(
+      [state.editor.languagesContent[state.editor.language]],
+      `livecoding.${state.editor.language}`,
+      { type: 'text/plain;charset=utf-8' }
+    )
+    saveAs(file)
+  },
+  /**
+   * Import a file in the current editor language
+   */
+  async importEditorContent ({ state }) {
+    const file = new Blob(
+      [state.editor.languagesContent[state.editor.language]],
+      { type: 'text/plain;charset=utf-8' }
+    )
+    saveAs(file, `livecoding.${state.editor.language}`)
   }
 }
