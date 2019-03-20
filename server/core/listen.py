@@ -5,7 +5,7 @@ import asyncio
 import websockets
 import socket
 import select
-from mlogging import mlog
+from mod import mlog
 from .game import Game
 from mod import languages
 

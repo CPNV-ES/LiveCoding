@@ -6,7 +6,7 @@ import json
 from .TempFile import TempFile
 from .process import Process
 import languages
-from mlogging import mlog
+from mod import mlog
 
 class Game:
     
