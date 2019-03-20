@@ -6,7 +6,7 @@ import json
 from .TempFile import TempFile
 import languages
 from mod import languages
-from mlogging import mlog
+from mod import mlog
 import subprocess
 import time
 from mod import io

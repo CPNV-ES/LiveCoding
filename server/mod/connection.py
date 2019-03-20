@@ -1,6 +1,6 @@
 # Create a new socket connection 
 
-from mlogging import mlog
+from mod import mlog
 import socket
 import sys
 

@@ -1,4 +1,4 @@
-import availableLanguages from '@/processor/AvailableLanguages'
+import { ProcessorProxyFactory } from '@/processor/ProcessorProxyFactory'
 
 /**
  * Responsible to validates the manifest.json style
@@ -65,11 +65,11 @@ export class GameManifestValidator {
   checkLanguages () {
     if (this.formatChecked) {
       // Check if each manifest languages are included in the availableLanguages constant
-      if (Object.keys(this.manifest.interpreters).every(e => availableLanguages.includes(e))) {
+      if (Object.keys(this.manifest.interpreters).every(l => ProcessorProxyFactory.processorProxies.map(e => e.name).includes(l))) {
         console.log('Tous les languanges sont suportés')
         return true
       } else {
-        throw new Error(`Some specified languages are not suported by the platform, supported languages : ${availableLanguages.toString()}`)
+        throw new Error(`Some specified languages are not suported by the platform, supported languages : ${ProcessorProxyFactory.processorProxies.map(e => e.name).toString()}`)
       }
     } else {
       throw new Error('You need to check the manifest format before checking the languages !')
