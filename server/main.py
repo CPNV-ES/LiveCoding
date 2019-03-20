@@ -1,6 +1,6 @@
 from core.listen import Listen
 from core.connection import Connection
-from mlogging import mlog
+from mod import mlog
 import socket
 import configparser
 import asyncio
