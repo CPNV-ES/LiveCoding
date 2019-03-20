@@ -27,7 +27,13 @@ export default {
       commit('SET_GAME_MANAGER', window.gameManager)
       dispatch('console/success', 'OK, Game loaded !')
       // Launch the game
-      window.gameManager.startGame()
+      window.gameManager.startGame({
+        info: (m) => dispatch('console/info', m),
+        log: (m) => dispatch('console/log', m),
+        success: (m) => dispatch('console/success', m),
+        warning: (m) => dispatch('console/warning', m),
+        error: (m) => dispatch('console/error', m)
+      })
       dispatch('console/success', 'OK, Game started, ready to go !')
     } catch (e) {
       console.error(e)
