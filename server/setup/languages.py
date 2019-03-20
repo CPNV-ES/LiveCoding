@@ -1,6 +1,6 @@
 import os, fnmatch
 import json
-from mlogging import mlog
+from mod import mlog
 
 root = os.getcwd()
 path = root + "/languages/"
