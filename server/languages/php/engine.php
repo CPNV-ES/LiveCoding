@@ -3,28 +3,24 @@
 class Engine
 {
     public static function send($commandJS){
-
+        
         fwrite(STDERR, "none\n");
+        fflush(STDERR);
 
-        while (fgets(STDIN) !== "ready\n") {
-        }
-        fflush(STDIN);
-
-        fwrite(STDOUT,"ready\n");
+        fwrite(STDOUT,"start\n");
         fflush(STDOUT);
 
         fwrite(STDOUT, $commandJS."\n");
         fflush(STDOUT);
 
-        while (fgets(STDIN) !== "ready\n") {
-        }
-        fflush(STDIN);
-
-        fwrite(STDOUT,"ready\n");
+        fwrite(STDOUT,"insert\n");
         fflush(STDOUT);
 
         $stdin = fgets(STDIN);
         fflush(STDIN);
+
+        fwrite(STDOUT,"close\n");
+        fflush(STDOUT);
 
         return str_replace("\n","", $stdin);
     }
