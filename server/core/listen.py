@@ -3,8 +3,6 @@
 
 import asyncio
 import websockets
-import socket
-import select
 from mod import mlog
 from .game import Game
 from mod import languages
