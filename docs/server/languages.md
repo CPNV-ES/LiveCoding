@@ -7,6 +7,9 @@ You can find the languages module into "~/server/languages" folder.
 To be able to create and use a new language you must put it inside the language module.
 The module must have a very precise structure to be recognized and used.
 
+## How it work
+
+
 ## How to create
 Create a new language module step by step
 
