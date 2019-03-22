@@ -143,6 +143,7 @@ export default {
               type="file"
               name="resume"
               @change="importEditorContent($refs.fileInput.files)"
+              @click="$refs.fileInput.value = null"
             >
             <span class="file-cta">
               <span class="file-icon">
