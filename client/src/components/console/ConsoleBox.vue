@@ -11,6 +11,15 @@ export default {
     ...mapState({
       messages: state => state.console.messages
     })
+  },
+  updated () {
+    this.$nextTick(() => this.scrollToEnd())
+  },
+  methods: {
+    scrollToEnd: function () {
+      // scroll to the start of the last message
+      this.$el.scrollTop = this.$el.lastElementChild.offsetTop
+    }
   }
 }
 </script>
