@@ -1,3 +1,6 @@
+# Class Engine
+# read and write to/form server proxy
+
 class Engine
     def self.send(commandJS)
         

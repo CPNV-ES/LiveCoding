@@ -1,5 +1,6 @@
-# Listen all from socket:
+# Class Listen
 # Get all data form client and create a new game then run it
+# v1.0
 
 import asyncio
 import websockets
@@ -10,19 +11,19 @@ from mod import languages
 class Listen:
     
     def __init__(self, socket):
-        self.mainSocket = socket          # the client socket to listen
+        self.mainSocket = socket          # the client websocket to listen
         self.game = None                  # the game to attach a this connection 
         return
 
     #protocol sequency
     async def run(self):
-        if not await self.get_language(): 
+        if not await self.get_language():   # get language name
             return False
-        if not await self.get_classes():
+        if not await self.get_classes():    # get game classes
             return False
-        if not await self.get_content():
+        if not await self.get_content():    # get client code
             return False
-        if not await self.start_game():
+        if not await self.start_game():     # start a new game
             return False
         return True
     

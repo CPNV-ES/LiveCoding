@@ -1,4 +1,6 @@
-import logging
+# Logger module
+# Use logging and coloredlogs to have very nice messages
+
 import coloredlogs, logging
 
 coloredlogs.install()
