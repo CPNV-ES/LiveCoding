@@ -145,6 +145,7 @@ export default {
               class="input"
               type="text"
               placeholder="URL du jeux"
+              readonly
             >
             <span class="icon is-small is-left">
               <i class="fas fa-share-square" />
