@@ -2,17 +2,16 @@
 > Livecoding is a desktop appliaction where newbies can learn the basics of programmation.
 > The principle is simple : You write commands in the in-app editor, press send, and the commands will interact the a little game (like pacman).
 
-## Changelog - v2.0.0-beta.10
+## Changelog - v2.0.0-beta.11
 
 *This version is unstable - do not use in production !*
 
 **Client :**
-- Manifest validator now uses the proxy language list to check the available languages.
-- The gameManager now injects the console in the game constructor for easy logging.
+- Add save button to download the content editor into a file.
+- Add import button to load a file into the editor content
 
 **Processor :**
-- Fix command errors with first command execution.
-- Fix string parsing error in php engine.
+- Update on the synchronisation procedure between processor and languages process.
 
 **Pokedash game :**
 The legacy game shipped with livecoding is deprecated, the new default game are developped in his dedicated repo : [LiveCoding-Pokedash-Game](https://github.com/CPNV-ES/LiveCoding-Pokedash-Game).
