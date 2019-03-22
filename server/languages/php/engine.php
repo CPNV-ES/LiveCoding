@@ -1,5 +1,6 @@
 <?php
-
+// Class Engine
+// Read and write to/form server proxy
 class Engine
 {
     public static function send($commandJS){
