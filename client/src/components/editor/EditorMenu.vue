@@ -117,6 +117,7 @@ export default {
       </div>
       <!-- SAVE / IMPORT -->
       <div
+        v-if="gameLoaded"
         class="control"
         title="Sauvegardez le code dans l'éditeur sur votre ordinateur."
       >
@@ -130,17 +131,26 @@ export default {
         </button>
       </div>
       <div
+        v-if="gameLoaded"
         class="control"
         title="Importez un fichier du language sélectionné."
       >
-        <button
-          class="button is-info"
-          @click="importEditorContent"
-        >
-          <span class="icon">
-            <i class="fas fa-file-import" />
-          </span>
-        </button>
+        <div class="file is-primary">
+          <label class="file-label">
+            <input
+              ref="fileInput"
+              class="file-input"
+              type="file"
+              name="resume"
+              @change="importEditorContent($refs.fileInput.files)"
+            >
+            <span class="file-cta">
+              <span class="file-icon">
+                <i class="fas fa-upload" />
+              </span>
+            </span>
+          </label>
+        </div>
       </div>
       <!-- DISPLAY INSTRUCTION DROPDOWN -->
       <div
@@ -185,3 +195,13 @@ export default {
     </div>
   </div>
 </template>
+
+<style lang="scss">
+.file-cta {
+  padding: 5px 10px !important;
+}
+
+.file-icon {
+  margin: 0px !important;
+}
+</style>
