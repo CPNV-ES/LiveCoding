@@ -70,7 +70,7 @@ export default class Provider {
    * @return {String}
    */
   get assetsBasePath () {
-    return `${this.url}/${this.manifest.data.assets}/`
+    return `${this.url}/${this.manifest.data.assets}`
   }
 
   /**
