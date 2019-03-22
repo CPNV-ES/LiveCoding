@@ -77,6 +77,7 @@ export default {
           <select
             v-model="language"
             class="spacing"
+            :disabled="running"
           >
             <option
               v-for="(lang, index) in gameManager.provider.gameInterpreters"
