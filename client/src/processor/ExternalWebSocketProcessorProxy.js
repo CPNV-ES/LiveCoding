@@ -50,9 +50,16 @@ export class ExternalWebSocketProcessorProxy {
                     this.dispatch('console/success', 'Processor successfully loaded script, launching process.')
                     this.dispatch('console/info', 'Waiting for engine interactions')
                     this.socket.onmessage = async (mEvent) => {
+                      // Check message content to determine action to execute
                       // Evaluate the command in the game context
-                      if (mEvent.data === 'close game') {
+                      if (mEvent.data === 'CLOSE_GAME') {
+                        console.log('CLOSE_GAME')
                         this.socket.close()
+                      } else if (mEvent.data === 'CLOSE_GAME_WITH_WEBSOCKET_ERRORS') {
+                        console.log('CLOSE_GAME_WITH_WEBSOCKET_ERRORS')
+                        this.socket.close()
+                      } else if (mEvent.data.startsWith('PROCESS_ERROR')) {
+                        this.dispatch('console/error', mEvent.data.substring(13))
                       } else {
                         let tutu = await window.game.executeGameCommand(mEvent.data)
                         this.socket.send(tutu)
