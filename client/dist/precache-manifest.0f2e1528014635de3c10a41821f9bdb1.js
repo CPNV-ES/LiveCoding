@@ -1,11 +1,11 @@
 self.__precacheManifest = [
   {
-    "revision": "1dbb38790b03416135de",
+    "revision": "1a446e0a5e014de31027",
     "url": "/LiveCoding/css/app.521e5c61.css"
   },
   {
-    "revision": "1dbb38790b03416135de",
-    "url": "/LiveCoding/js/app.01c69642.js"
+    "revision": "1a446e0a5e014de31027",
+    "url": "/LiveCoding/js/app.02142987.js"
   },
   {
     "revision": "584ffc7cd02d5b743335",
@@ -236,12 +236,12 @@ self.__precacheManifest = [
     "url": "/LiveCoding/js/chunk-774ac664.db105340.js"
   },
   {
-    "revision": "b2fced9d53ac447065dd",
+    "revision": "d4e290341461f5f774d7",
     "url": "/LiveCoding/css/chunk-vendors.2c9fa0f8.css"
   },
   {
-    "revision": "b2fced9d53ac447065dd",
-    "url": "/LiveCoding/js/chunk-vendors.50555fa2.js"
+    "revision": "d4e290341461f5f774d7",
+    "url": "/LiveCoding/js/chunk-vendors.c37b93c2.js"
   },
   {
     "revision": "679bf55259d721f8f65649d4535d23e4",
@@ -260,7 +260,7 @@ self.__precacheManifest = [
     "url": "/LiveCoding/typescript.worker.js"
   },
   {
-    "revision": "ff2f41e35c038dd297561874c04c4e37",
+    "revision": "b559c910d1bac3563191781534f67a43",
     "url": "/LiveCoding/index.html"
   },
   {
