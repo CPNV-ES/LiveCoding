@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/LiveCoding/precache-manifest.715c4f1c524498d52eae93fa9b05ef41.js"
+  "/LiveCoding/precache-manifest.3a95ae2e2e6e70c66328ef8ffa055478.js"
 );
 
 workbox.core.setCacheNameDetails({prefix: "livecoding"});
