@@ -16,5 +16,6 @@ class TempFile:
 		self.file.write(bytes(self.engineGame + "\n" + self.engine + "\n" + self.content + "\n", "UTF-8"))
 		self.file.seek(0)
 
+	# get the temp file name
 	def getName(self):
 		return self.file.name
