@@ -1,9 +1,7 @@
 import asyncio
 import websockets
-import socket
 import os
-import json
-from .TempFile import TempFile
+from .tempFile import TempFile
 from .process import Process
 import languages
 from mod import mlog

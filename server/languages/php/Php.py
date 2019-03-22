@@ -1,5 +1,3 @@
-import subprocess
-
 class Php:
 
 	def __init__(self):
@@ -18,7 +16,3 @@ class Php:
 
 	def getlanguageCall(self):
 		return self.languageCall
-
-	def runProcessAndFetchIt(self, fileToRun):
-		# Open a command line and run the userCmds tmp file into the good interpretor
-		return subprocess.Popen(self.languageCall+" "+fileToRun.getName(), shell=True, stdout=subprocess.PIPE, stdin=subprocess.PIPE, stderr=subprocess.PIPE)

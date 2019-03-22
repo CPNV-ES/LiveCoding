@@ -1,14 +1,8 @@
 import asyncio
 import websockets
-import socket
 import os
-import json
-from .TempFile import TempFile
-import languages
-from mod import languages
 from mod import mlog
 import subprocess
-import time
 from mod import io
 
 class Process:
@@ -30,35 +24,39 @@ class Process:
     
     async def proxyGame(self):
         #loop until process is running
+        count = 0
         while self.process.poll() is None:
             errorMsg = await io.stderrGet(self.process)
 
             if errorMsg == "none":
-                await self.waitForReady()     
+                await self.waitForReady("start")     
                 cmdsJS = await io.stdoutGet(self.process)
                 await self.sendCommandToClient(cmdsJS)
                 message = await self.socket.recv()
+                mlog.show("Received confirmation from client: "+ message)
+                await self.waitForReady("insert")
+                await io.stdinWrite(self.process, message)
+                await self.waitForReady("close")
                 if message == 'PROCESS_ENDED_BY_USER':
                     mlog.show("Game closed by User. By...")
                     self.process.terminate()
                     break
-                mlog.show("Received confirmation from client: "+ message)
-                await self.waitForReady()
-                await io.stdinWrite(self.process, message)
+                count = count + 1
+                
                                 
             if errorMsg.strip() != "none" and errorMsg.strip() != "":
                 mlog.show("Process error.. Game has been stopped..")
                 mlog.show("Error message: " + errorMsg)
-                self.socket.send("ERROR/" + errorMsg)
+                await self.socket.send("ERROR/" + errorMsg)
                 self.process.terminate()
                 break
+                
+        mlog.show("Commandes executed: " + str(count))
         return
 
-    async def waitForReady(self):
-        mlog.show("Wait for new command to process...!")
+    async def waitForReady(self, value):
         while True:
-            await io.stdinWrite(self.process, "ready")
-            if await io.stdoutGet(self.process) == "ready":
+            if await io.stdoutGet(self.process) == value:
                 return
         return
 
