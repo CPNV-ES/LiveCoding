@@ -1,7 +1,6 @@
 from core.listen import Listen
 from core.connection import Connection
 from mod import mlog
-import socket
 import configparser
 import asyncio
 import websockets
