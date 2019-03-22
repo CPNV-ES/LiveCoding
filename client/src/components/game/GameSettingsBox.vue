@@ -117,7 +117,6 @@ export default {
           <p class="control">
             <button
               class="button is-primary"
-              :disabled="loading"
               :class="{ 'is-loading': loading }"
               :disabled="running || loading"
               @click="load()"
