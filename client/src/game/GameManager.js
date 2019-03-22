@@ -51,8 +51,5 @@ export default class GameManager {
       assetsBasePath: this.provider.assetsBasePath,
       console: console
     })
-    // Create a key to eval commands in the game scope
-    /* eslint-disable no-eval */
-    window.gameCommandEval = eval
   }
 }

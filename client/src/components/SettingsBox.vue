@@ -102,6 +102,9 @@ export default {
         <div class="control has-icons-left">
           <div class="select">
             <select v-model="fontSize">
+              <option value="10">
+                10
+              </option>
               <option value="12">
                 12
               </option>
@@ -113,6 +116,9 @@ export default {
               </option>
               <option value="18">
                 18
+              </option>
+              <option value="20">
+                20
               </option>
               <option value="22">
                 22

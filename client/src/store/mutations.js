@@ -69,6 +69,14 @@ export default {
     state.game.loaded = true
   },
   /**
+   * Clear game manager in case of loading error
+   * @param {String} value
+   */
+  CLEAR_GAME_MANAGER: (state) => {
+    state.game.manager = null
+    state.game.loaded = false
+  },
+  /**
    * Set the game loading state
    * @param {boolean} value
    */
