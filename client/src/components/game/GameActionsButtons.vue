@@ -8,7 +8,8 @@ import { mapState } from 'vuex'
 export default {
   computed: {
     ...mapState({
-      loading: state => state.game.loading
+      loading: state => state.game.loading,
+      running: state => state.processor.running
     })
   },
   methods: {
@@ -55,6 +56,8 @@ export default {
       <div class="control">
         <button
           class="button is-warning"
+          :class="{ 'is-loading': loading }"
+          :disabled="running || loading"
           @click="reload()"
         >
           <span class="icon is-left">

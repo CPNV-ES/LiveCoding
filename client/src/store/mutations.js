@@ -82,5 +82,12 @@ export default {
    */
   SET_GAME_LOADING_STATE: (state, value) => {
     state.game.loading = value
+  },
+  /**
+   * Set the game loading state
+   * @param {boolean} value
+   */
+  SET_PROCESS_RUNNING_STATE: (state, value) => {
+    state.processor.running = value
   }
 }
