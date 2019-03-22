@@ -57,7 +57,7 @@ class Process:
             if errorMsg.strip() != "none" and errorMsg.strip() != "":          
                 mlog.show("Process error.. Game has been stopped..")
                 mlog.show("Error message: " + errorMsg)
-                await self.socket.send("ERROR/" + errorMsg)                    # send the error to client
+                await self.socket.send("PROCESS_ERROR" + errorMsg)                    # send the error to client
                 self.process.terminate()                                       # stop the subprocess 
                 break       
                 

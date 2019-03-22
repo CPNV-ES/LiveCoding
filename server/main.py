@@ -18,7 +18,7 @@ async def game(websocket, path):
     if await listen.run():
         await websocket.send("CLOSE_GAME")
     else:
-        await websocket.send("CLOSE_GAME_WITH_ERRORS")
+        await websocket.send("CLOSE_GAME_WITH_WEBSOCKET_ERRORS")
     mlog.show("Client Connection Closed")
 
 mlog.show("Starting Live Coding Server .... Wait")
