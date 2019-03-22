@@ -25,6 +25,14 @@ export default {
       set (value) {
         this.$store.commit('UPDATE_EDITOR_LANGUAGE', value)
       }
+    },
+    running: {
+      get () {
+        return this.$store.state.processor.running
+      },
+      set (value) {
+        this.$store.commit('SET_PROCESS_RUNNING_STATE', value)
+      }
     }
   },
   methods: {
@@ -34,7 +42,7 @@ export default {
     ]),
     async run () {
       try {
-        this.loader = true
+        this.running = true
         // Launch the process execution, and wait the end the execution
         await this.$store.dispatch('run')
       } catch (e) {
@@ -47,7 +55,7 @@ export default {
           duration: 4500
         })
       } finally {
-        this.loader = false
+        this.running = false
       }
     },
     stop () {
@@ -69,6 +77,7 @@ export default {
           <select
             v-model="language"
             class="spacing"
+            :disabled="running"
           >
             <option
               v-for="(lang, index) in gameManager.provider.gameInterpreters"
@@ -90,7 +99,7 @@ export default {
       >
         <button
           class="button is-primary"
-          :class="{ 'is-loading': loader }"
+          :class="{ 'is-loading': running }"
           :disabled="!gameLoaded"
           @click="run"
         >
@@ -102,7 +111,7 @@ export default {
       </div>
       <!-- STOP SCRIPT EXECUTION IN CASE OF PROBLEM - Showed only when process running -->
       <div
-        v-if="loader"
+        v-if="running"
         class="control"
         title="Stoppez l'execution du script"
       >

@@ -33,6 +33,7 @@ export default {
     }
   },
   processor: {
+    running: false,
     url: localStorage.getItem('processor-url') || 'ws://localhost:12800/'
   },
   /**

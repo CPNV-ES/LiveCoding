@@ -7,7 +7,8 @@ import { mapState, mapGetters } from 'vuex'
 export default {
   computed: {
     ...mapState({
-      loading: state => state.game.loading
+      loading: state => state.game.loading,
+      running: state => state.processor.running
     }),
     ...mapGetters({
       shareUrl: 'shareUrl'
@@ -116,8 +117,8 @@ export default {
           <p class="control">
             <button
               class="button is-primary"
-              :disabled="loading"
               :class="{ 'is-loading': loading }"
+              :disabled="running || loading"
               @click="load()"
             >
               Load
@@ -144,6 +145,7 @@ export default {
               class="input"
               type="text"
               placeholder="URL du jeux"
+              readonly
             >
             <span class="icon is-small is-left">
               <i class="fas fa-share-square" />
