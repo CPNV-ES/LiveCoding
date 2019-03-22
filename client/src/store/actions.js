@@ -2,6 +2,8 @@ import GameManager from '@/game/GameManager'
 import ProviderFactory from '@/game/providers/ProviderFactory'
 import { ProcessorProxyFactory } from '@/processor/ProcessorProxyFactory'
 import { saveAs } from 'file-saver'
+import { languagesExtensions } from './languagesExtensions'
+import { Snackbar } from 'buefy/dist/components/snackbar'
 
 /**
  * Actions for the vuex store
@@ -40,6 +42,7 @@ export default {
       // Display little message in the game box
       document.getElementById('game-box').innerHTML = 'Aucun jeu chargé !'
       dispatch('console/error', 'Error during Game loading !')
+      commit('CLEAR_GAME_MANAGER')
       throw new Error()
     } finally {
       commit('SET_GAME_LOADING_STATE', false)
@@ -84,7 +87,7 @@ export default {
   async saveEditorContent ({ state }) {
     const file = new File(
       [state.editor.languagesContent[state.editor.language]],
-      `livecoding.${state.editor.language}`,
+      `livecoding.${languagesExtensions[state.editor.language]}`,
       { type: 'text/plain;charset=utf-8' }
     )
     saveAs(file)
@@ -92,11 +95,44 @@ export default {
   /**
    * Import a file in the current editor language
    */
-  async importEditorContent ({ state }) {
-    const file = new Blob(
-      [state.editor.languagesContent[state.editor.language]],
-      { type: 'text/plain;charset=utf-8' }
-    )
-    saveAs(file, `livecoding.${state.editor.language}`)
+  importEditorContent ({ commit, dispatch, state }, fileList) {
+    if (state.game.loaded) {
+      let file = fileList[0]
+      let fileExtension = file.name.split('.').pop()
+      // Check file extension
+      if (ProcessorProxyFactory.processorProxies.map(e => e.name).includes(Object.keys(languagesExtensions).find(key => languagesExtensions[key] === fileExtension))) {
+        dispatch('console/info', 'Fichier supporté')
+        // Get file
+        let fr = new FileReader()
+        // Declare onload callback
+        fr.onload = (e) => {
+          console.log(e.target.result)
+          commit('UPDATE_EDITOR_CONTENT', e.target.result)
+          // Reset the editor value directly on the editor instance
+          // Nesesary because the editor component can not watch the editor content state
+          window.scriptEditor.getModel().setValue(e.target.result)
+        }
+        fr.readAsText(fileList[0])
+        commit('UPDATE_EDITOR_LANGUAGE', Object.keys(languagesExtensions).find(key => languagesExtensions[key] === fileExtension))
+      } else {
+        Snackbar.open({
+          message: 'Language non supporté.',
+          type: 'is-warning',
+          position: 'is-top',
+          actionText: 'OK',
+          duration: 4500
+        })
+        dispatch('console/warning', 'Language non supporté.')
+      }
+    } else {
+      Snackbar.open({
+        message: "Vous ne pouvez pas importer de fichier si aucun jeux n'est chargé.",
+        type: 'is-warning',
+        position: 'is-top',
+        actionText: 'OK',
+        duration: 4500
+      })
+      dispatch('console/warning', "Vous ne pouvez pas importer de fichier si aucun jeux n'est chargé.")
+    }
   }
 }
