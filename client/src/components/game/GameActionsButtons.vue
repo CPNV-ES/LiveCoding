@@ -55,6 +55,8 @@ export default {
       <div class="control">
         <button
           class="button is-warning"
+          :class="{ 'is-loading': loading }"
+          :disabled="loading"
           @click="reload()"
         >
           <span class="icon is-left">
