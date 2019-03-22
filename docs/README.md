@@ -21,6 +21,7 @@ Live coding is built arround two main blocks :
 
 ### Server side processor
 
+* [Introduction](./server/intro.md)
 * [The processor](./server/processor.md)
 * [Engines](./server/engines.md)
 
