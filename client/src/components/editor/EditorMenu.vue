@@ -4,7 +4,7 @@
  *
  * @author Bastien Nicoud
  */
-import { mapState } from 'vuex'
+import { mapState, mapActions } from 'vuex'
 
 export default {
   data () {
@@ -28,9 +28,10 @@ export default {
     }
   },
   methods: {
-    openInstruction (uri) {
-      window.open(this.gameManager.provider.generateUrl(uri))
-    },
+    ...mapActions([
+      'saveEditorContent',
+      'importEditorContent'
+    ]),
     async run () {
       try {
         this.loader = true
@@ -114,6 +115,44 @@ export default {
           </span>
         </button>
       </div>
+      <!-- SAVE / IMPORT -->
+      <div
+        v-if="gameLoaded"
+        class="control"
+        title="Sauvegardez le code dans l'éditeur sur votre ordinateur."
+      >
+        <button
+          class="button is-success"
+          @click="saveEditorContent"
+        >
+          <span class="icon">
+            <i class="fas fa-save" />
+          </span>
+        </button>
+      </div>
+      <div
+        v-if="gameLoaded"
+        class="control"
+        title="Importez un fichier du language sélectionné."
+      >
+        <div class="file is-primary">
+          <label class="file-label">
+            <input
+              ref="fileInput"
+              class="file-input"
+              type="file"
+              name="resume"
+              @change="importEditorContent($refs.fileInput.files)"
+              @click="$refs.fileInput.value = null"
+            >
+            <span class="file-cta">
+              <span class="file-icon">
+                <i class="fas fa-upload" />
+              </span>
+            </span>
+          </label>
+        </div>
+      </div>
       <!-- DISPLAY INSTRUCTION DROPDOWN -->
       <div
         v-if="gameManager && gameManager.provider.gameInstructions"
@@ -157,3 +196,13 @@ export default {
     </div>
   </div>
 </template>
+
+<style lang="scss">
+.file-cta {
+  padding: 5px 10px !important;
+}
+
+.file-icon {
+  margin: 0px !important;
+}
+</style>

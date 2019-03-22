@@ -36,21 +36,21 @@ export default {
   watch: {
     // Language change
     language (newVal) {
-      if (this.monaco) {
-        window.monaco.editor.setModelLanguage(this.monaco.getModel(), newVal)
-        this.monaco.getModel().setValue(this.editorContent)
+      if (window.scriptEditor) {
+        window.monaco.editor.setModelLanguage(window.scriptEditor.getModel(), newVal)
+        window.scriptEditor.getModel().setValue(this.editorContent)
       }
     },
     // Theme change
     theme (newVal) {
-      if (this.monaco) {
+      if (window.scriptEditor) {
         window.monaco.editor.setTheme(newVal)
       }
     },
     // Theme change
     fontSize (newVal) {
-      if (this.monaco) {
-        this.monaco.updateOptions({ fontSize: newVal })
+      if (window.scriptEditor) {
+        window.scriptEditor.updateOptions({ fontSize: newVal })
       }
     }
   },
@@ -88,13 +88,13 @@ export default {
       monaco.editor.defineTheme('solarized-dark', SolarizedDark)
       monaco.editor.defineTheme('cobalt', Cobalt)
       // Create the editor with default option
-      this.monaco = monaco.editor.create(document.getElementById('editor-box'), options)
+      window.scriptEditor = monaco.editor.create(document.getElementById('editor-box'), options)
       /**
        * Register observers on the editor
        */
-      this.monaco.onDidChangeModelContent(event => {
+      window.scriptEditor.onDidChangeModelContent(event => {
         // Get the current content of the editor
-        let value = this.monaco.getValue()
+        let value = window.scriptEditor.getValue()
         if (this.editorContent !== value) {
           this.editorContent = value
         }
