@@ -59,4 +59,3 @@ When the command is send proxyServer wait for a confirmation that are after send
 ## Complete sequence
 
 ![Alt text](./../diagrams/proxy_protocol.svg)
-<img src="./../diagrams/proxy_protocol.svg">
