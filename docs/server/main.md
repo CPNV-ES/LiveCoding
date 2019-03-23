@@ -1,4 +1,5 @@
 #LiveCoding Server
+
 This is the main documentation for LiveCoding Server. LiveCoding server allow to execute the client game code.
 There are three base points you must know to the server:
 
