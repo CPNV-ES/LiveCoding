@@ -1,9 +1,18 @@
 # Environment preparation
 
 ## Intro
-The purpose of this document is to indicate how to set up a server that will be used to process game commands.
+The purpose of this document is to indicate how to set up a server that will be used to process game commands and to run the server.
 
 ## Windows
+
+###Pyton3
+LiveCoding server is writen in python language. So it is necessary to install python in your system to run the server.
+
+Follow this link to install python3: [Python3 install](https://realpython.com/installing-python/)
+
+###Pip3
+Pip3 allow you to install python modules. Normally pip3 is installed with python3. So there is nothing to do.
+
 ### PHP
 1. Go to http://windows.php.net/download/
 2. Download the latest Non Thread Safe binaries
@@ -24,6 +33,17 @@ The purpose of this document is to indicate how to set up a server that will be 
 4. ```$ ruby <filename.rb>```
 
 ## Linux
+
+###Python3
+LiveCoding server is writen in python language. So it is necessary to install python in your system to run the server. to install python3 type the follow command in your console:
+
+	# apt-get install build-essential
+
+###Pip3
+Pip3 allow you to install python modules.To install pip3 type the follow command in your console:
+
+	# apt-get install python-pip3
+
 ### PHP
 1.```$ sudo apt-get install php-5```
 2. ```$ php -f <filename.php>```
@@ -35,3 +55,14 @@ The purpose of this document is to indicate how to set up a server that will be 
 ### Ruby
 1.```$ sudo apt-get install ruby-full```
 2. ```$ ruby <filename.rb>```
+
+## Required mudules
+In ordre to use added modules in LiveCoding server you must install using **pip3**:
+
+Colored Logs
+
+	# pip3 install colored coloredlogs
+
+Websockets
+
+	# pip3 install websockets
