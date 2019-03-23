@@ -20,3 +20,8 @@ This section explains you how you can add a new language in the server and how t
 This section explains you the server proxy role and how it work
 
 [The server proxy](proxyProtocol.md)
+
+## Required Environment
+This section explain you how to install required package to install and run the livecCoding server
+
+[The server proxy](environment.md)
