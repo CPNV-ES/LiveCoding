@@ -57,4 +57,6 @@ The server proxy send the command to run to client using a json format whenever 
 When the command is send proxyServer wait for a confirmation that are after sended to the process using the stdin channel
 
 ## Complete sequence
-![alt text](https://github.com/CPNV-ES/LiveCoding/tree/serverDoc/docs/diagrams/proxy_protocol.svg)
+
+![Alt text](./../diagrams/proxy_protocol.svg)
+<img src="./../diagrams/proxy_protocol.svg">
