@@ -57,20 +57,4 @@ The server proxy send the command to run to client using a json format whenever 
 When the command is send proxyServer wait for a confirmation that are after sended to the process using the stdin channel
 
 ## Complete sequence
-
-Now we can explain the complete sequence betewenn Client-serverProxy-Process.
-
-The process execute all code stored into a temporary file. This file contains all game commands writen by the client that must be executed to play the game. When the client start a new game all code is sended to server that launch a new process in background to execute the client-code. Each instructions the subprocess must be send to client the game instructions to execute. At this point a serverProxy is used.
-This is the sequence
-
-1. subprocess open a new command -> send **none** code to stderr
-1. a **none** code is received by serverProxy -> start to listen stdout
-1. subprocess is ready to go -> send **start** code to stdout
-1. a **start** code is received by serverProxy -> ready to listen the next stdout
-1. subprocess send the command to execute to proxy using stdout
-1. a **command to execute** is received by proxy -> send **command to execute** to client
-1. the client send a reponse to serverProxy
-1. the serverProxy send the client reponse to subporcess using stdin
-1. a confirmation i received by suprocess -> read reponse value and return it to engine
-1. subprocess close the current command -> send close to server proxy
-1. serverProxy receiv **close** code -> ready for the next iteration
+![alt text](https://github.com/CPNV-ES/LiveCoding/tree/serverDoc/docs/diagrams/proxy_protocol.svg)
