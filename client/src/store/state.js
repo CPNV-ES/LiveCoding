@@ -26,10 +26,10 @@ export default {
     fontSize: localStorage.getItem('editor-font-size') || 14,
     // Mapping between the language and the content of the editor
     languagesContent: {
-      javascript: localStorage.getItem('javascript') || `let tutu = 'Bienvenue sur LiveCoding'\ndebugger.log(tutu)\n`,
-      ruby: localStorage.getItem('ruby') || `tutu = 'Bienvenue sur LiveCoding'\ndebugger.log tutu\n`,
-      php: localStorage.getItem('php') || `<?php\n$tutu = 'Bienvenue sur LiveCoding';\n$debugger->log($tutu);\n`,
-      python: localStorage.getItem('python') || `tutu = 'Bienvenue sur LiveCoding'\ndebugger.log(tutu)\n`
+      javascript: localStorage.getItem('javascript') || `let tutu = 'Bienvenue sur LiveCoding'\nwriteConsole(tutu)\n`,
+      ruby: localStorage.getItem('ruby') || `tutu = 'Bienvenue sur LiveCoding'\nwrite_console(tutu)\n`,
+      php: localStorage.getItem('php') || `<?php\n$tutu = 'Bienvenue sur LiveCoding';\nwriteConsole($tutu);\n`,
+      python: localStorage.getItem('python') || `tutu = 'Bienvenue sur LiveCoding'\nwriteConsole(tutu)\n`
     }
   },
   processor: {
