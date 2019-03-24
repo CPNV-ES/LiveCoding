@@ -21,9 +21,10 @@ Live coding is built arround two main blocks :
 
 ### Server side processor
 
-* [Introduction](./server/intro.md)
-* [The processor](./server/processor.md)
-* [Engines](./server/engines.md)
+* [Install Server](server/environment.md)
+* [The server architecture](server/serverArchitecture.md)
+* [Add a new language](server/languages.md)
+* [The server proxy](server/proxyProtocol.md)
 
 ### Creating games !
 
