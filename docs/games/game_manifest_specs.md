@@ -58,7 +58,7 @@ A simple desription of the game.
 
 ### data
 The data key contains all the paths related to the game engine and assets.
-```json
+```js
 {
   "data": {
     // See below for child key specs
@@ -80,7 +80,7 @@ This file must contain a base class called `Game` exported with es6 syntax : `ex
 
 #### data > libraries
 The libraries key is an array of libraries that needs to be loaded in the window context before loading the game.
-```json
+```js
 {
   "data": {
     "libraries": [
