@@ -11,14 +11,14 @@ The methods and classes you want to make available in the supported languages mu
 ```php
 function hello () {
   // Call the game
-  Engine::send('hello()')
+  Engine::send('hello()');
 }
 ```
 Here, the hello function will be available to the user, so he can call it in his code.
 
 ### Interaction with the game
 
-As the game is executed in the browser and the code written by the client is executed on the server side, it is necessary to allow them to communicate. 
+As the game is executed in the browser and the code written by the client is executed on the server side, it is necessary to allow them to communicate.
 
 #### Processor side
 
