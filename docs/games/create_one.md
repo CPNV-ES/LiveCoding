@@ -19,4 +19,13 @@ You can organize your game structure as you want, but you need to corectly decla
 
 ## Required files
 
+To create a functional set, you need at least 3 files :
+
+* **manifest.json**, The main file that will gather all the important information of the game.
+* A `.js` fils that contains the game logic, you must specify the `.js` path in the manifest.
+* Minimum one commands file to translate `php` or `ruby` user code to game interactions, see [game commands execution docs](./game_commands_execution.md) to understand structure and possibilities of commands.
+
 ## Javascript Game engines
+
+To create more sophisticated games, you can use javascript game engines. For example, the [Pokedash](https://github.com/CPNV-ES/LiveCoding-Pokedash-Game) game uses [p5.js](https://p5js.org/), and the [Block](https://github.com/bastiennicoud/LiveCoding-Block-Game) game uses [PIXI.js](http://www.pixijs.com/).
+Most of this game engines needs to be loaded in the main page, and not in a js module (under the hood, the games are lodaed in a javascript module via the new `import()` method). To load js libraries globally, you must use the libraries key in the manifest [see details here](./game_manifest_specs.md#data->-libraries).
