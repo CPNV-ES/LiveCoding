@@ -34,4 +34,13 @@ export default class GitHubProvider extends Provider {
   get assetsBasePath () {
     return `${this.rawBaseUrl}/${this.url}/${this.manifest.data.assets}`
   }
+
+  /**
+   * Return the base path of the game assets
+   * @return {String}
+   */
+  get shareString () {
+    let parts = this.url.split('@', 2)
+    return `&repo=${encodeURIComponent(parts[0])}&version=${encodeURIComponent(parts[1])}`
+  }
 }
