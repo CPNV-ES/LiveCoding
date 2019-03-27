@@ -21,7 +21,7 @@ cd LiveCoding
 
 ## Processor installation
 
-...coming
+[Install Server Processor](server/environment.md)
 
 ## Client installation
 
