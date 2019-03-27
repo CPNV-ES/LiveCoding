@@ -74,6 +74,14 @@ export default class Provider {
   }
 
   /**
+   * Return the base path of the game assets
+   * @return {String}
+   */
+  get shareString () {
+    return ``
+  }
+
+  /**
    * Generate an url to load a ressource
    * @param {String} file path of the file
    * @return {String}

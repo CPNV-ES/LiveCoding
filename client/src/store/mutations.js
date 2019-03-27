@@ -37,7 +37,7 @@ export default {
     state.editor.language = value
   },
   /**
-   * Change the editor language
+   * Change the game url
    * @param {String} value
    */
   UPDATE_GAME_URL: (state, value) => {
