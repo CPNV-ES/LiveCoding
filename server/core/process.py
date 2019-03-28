@@ -41,8 +41,7 @@ class Process:
                 await self.waitForReady("start")                               # wait until server is ready
                 cmdsJS = await io.stdoutGet(self.process)                      # get command from process to send to client
                 await self.sendCommandToClient(cmdsJS)                         # send the command to the client
-                message = await self.socket.recv()                             # wait for client confirmation 
-                mlog.show("Received confirmation from client: "+ message)      
+                message = await self.getReponseFromClient()                    # get reponse from client 
                 await self.waitForReady("insert")                              # wait until server is ready
                 await io.stdinWrite(self.process, message)                     # send to process the client confirmation                         
                 await self.waitForReady("close")                               # wait until server is ready
@@ -74,6 +73,24 @@ class Process:
 
     # send the command received from process to client
     async def sendCommandToClient(self, value):
-        mlog.show("Send command to client: " + value)
-        await self.socket.send(value)
-        pass
+        try:
+            mlog.show("Send command to client: " + value)
+            await self.socket.send(value)
+            return True
+        except: 
+            mlog.show("Client is disconnected.. Process will be close")
+            self.process.terminate()
+            return None
+        return None
+
+    # get reponse from client
+    async def getReponseFromClient(self):
+        try:
+            message = await self.socket.recv()                             # wait for client confirmation 
+            mlog.show("Received confirmation from client: "+ message)  
+            return message
+        except: 
+            mlog.show("Client is disconnected.. Process will be close")
+            self.process.terminate()
+            return None
+        return None
