@@ -14,7 +14,7 @@ Live coding is built arround two main blocks :
 * [Install client for dev](./client/installation.md)
 * [Client app structure](./client/strucutre.md)
 * [The store](./client/store.md)
-* [The editor](./client/editor.md)
+* [The code editor](./client/editor.md)
 * [Game frame](./client/game_frame.md)
 * [Console](./client/console.md)
 * [Game loading/starting](./client/game_managment.md)
