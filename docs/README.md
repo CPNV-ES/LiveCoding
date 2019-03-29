@@ -30,3 +30,5 @@ Live coding is built arround two main blocks :
 
 * [Create your own game](./games/create_one.md)
 * [Game manifest specifications](./games/game_manifest_specs.md)
+* [Game class specifications](./games/game_class_specs.md)
+* [Game commands execution](./games/game_commands_execution.md)
