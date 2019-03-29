@@ -21,7 +21,7 @@ Live coding is built arround two main blocks :
 
 ## Server side processor
 
-* [Install Server](server/1_environment.md)
+* [Install Server](server/1_install.md)
 * [The server architecture](server/2_serverArchitecture.md)
 * [Add a new language](server/3_languages.md)
 * [The server proxy](server/4_proxyProtocol.md)
