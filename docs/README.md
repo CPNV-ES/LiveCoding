@@ -6,25 +6,25 @@ Live coding is built arround two main blocks :
 
 ## In general
 
-* [About LiveCoding, platform architecture](./about.md)
-* [Protocol between app and processor](./websocket_protocol.md)
+* [About LiveCoding, platform architecture](./1_about.md)
+* [Protocol between app and processor](./2_websocket_protocol.md)
 
 ## Client side app
 
-* [Install client for dev](./client/installation.md)
-* [Client app structure](./client/strucutre.md)
-* [The store](./client/store.md)
-* [The code editor](./client/editor.md)
-* [Game frame](./client/game_frame.md)
-* [Console](./client/console.md)
-* [Game loading/starting](./client/game_managment.md)
+* [Install client for dev](./client/1_installation.md)
+* [Client app structure](./client/2_strucutre.md)
+* [The store](./client/3_store.md)
+* [The code editor](./client/4_editor.md)
+* [Game frame](./client/5_game_frame.md)
+* [Console](./client/6_console.md)
+* [Game loading/starting](./client/7_game_managment.md)
 
 ## Server side processor
 
-* [Install Server](server/environment.md)
-* [The server architecture](server/serverArchitecture.md)
-* [Add a new language](server/languages.md)
-* [The server proxy](server/proxyProtocol.md)
+* [Install Server](server/1_environment.md)
+* [The server architecture](server/2_serverArchitecture.md)
+* [Add a new language](server/3_languages.md)
+* [The server proxy](server/4_proxyProtocol.md)
 
 ## Creating games !
 
