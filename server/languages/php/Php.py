@@ -1,7 +1,8 @@
 class Php:
 
 	def __init__(self):
-		self.header = "<?php require \"languages/php/engine.php\";?>"
+		self.header = None
+		self.engine = "<?php require \"languages/php/engine.php\";?>"
 		self.footer = "?>"
 		# Language call is the real name of the command we'll run in the CLI
 		# We define it in case of versionning e.g : php 7 
@@ -10,6 +11,9 @@ class Php:
 
 	def getFileHeader(self):
 		return self.header
+
+	def getFileEngine(self):
+		return self.engine
 
 	def getFileFooter(self):
 		return self.footer

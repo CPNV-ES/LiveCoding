@@ -11,7 +11,7 @@ There are three base points you must know to the server:
 ## Install server
 This section explain you how to install required package to install and run the livecCoding server
 
-[Install Server](environment.md)
+[Install Server](install.md)
 
 ## Classes Structure
 This section explains you the main server structure and how the server work to iterate whith the client
