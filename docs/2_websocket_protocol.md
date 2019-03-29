@@ -14,9 +14,9 @@ When you tell the app to run your code, the app will start interactions with pro
 6. **CLIENT** send to the server the user script
 7. **SERVER** respond with `OK` when the script are loaded
 8. **SERVER** launch the process and now act as a proxy between porcess ant the game.
-  * **SERVER** proxy a command from the process to the client
-  * **CLIENT** respond to the processor the command result
-  * ...
+    * **SERVER** proxy a command from the process to the client
+    * **CLIENT** respond to the processor the command result
+    * ...
 9. **SERVER** End the connexion when the process end's.
 
 > A complete interaction diagram is available in the [server docs](./server/4_proxyProtocol.md#complete-sequence)
