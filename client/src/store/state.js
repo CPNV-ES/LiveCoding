@@ -45,7 +45,7 @@ export default {
   game: {
     loading: false,
     provider: localStorage.getItem('game-provider') || 'github',
-    url: localStorage.getItem('game-url') || 'CPNV-ES/LiveCoding-Pokedash-Game@v1.0.4',
+    url: localStorage.getItem('game-url') || 'CPNV-ES/LiveCoding-Pokedash-Game@v1.1.0',
     loaded: false,
     manager: null
   }
