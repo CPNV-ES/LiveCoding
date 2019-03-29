@@ -40,7 +40,7 @@ export class Game {
    * @param {HTMLElement} el
    * @param {string} assetsBasePath
    */
-  constructor (el, assetsBasePath) {
+  constructor ({ el, assetsBasePath }) {
     // Initialize your game
   }
 
