@@ -38,12 +38,6 @@ To read and write from/to the channels subprocess use a static class called **En
 ## Protocol ServerProxy-Process
 The communication between the server proxy and the subprocess is managed by the engine class using a simple communication protocol that allows to synchronize the server proxy-process communication.
 
-There are three communication channels between the server and the process
-
-- Stdin
-- Sdterr
-- Stdout
-
 Protocol code strings and sequency are:
 
 - none
