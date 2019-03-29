@@ -1,6 +1,6 @@
 # Setup client app for developpment
 
-The client app is devlopped with mdern bild tools and js framework, so you need a little bit tooling to start developping.
+The client app is developped with mdern bild tools and js framework, so you need a little bit tooling to start developping.
 
 ### Requirements
 
@@ -12,7 +12,7 @@ The client app is devlopped with mdern bild tools and js framework, so you need 
   * Chrome for Android **^71**
   * Safari IOS **^11.1**
 
-> As you can note, the platform requires relatively modern browsers.This is because we use many modern javascript features like [dynamic imports](https://caniuse.com/#feat=es6-module-dynamic-import) and [CSS grids](https://caniuse.com/#feat=css-grid).
+> As you can note, the platform requires relatively modern browsers. This is because we use many modern javascript features like [dynamic imports](https://caniuse.com/#feat=es6-module-dynamic-import) and [CSS grids](https://caniuse.com/#feat=css-grid).
 
 ## Installation
 
@@ -60,3 +60,5 @@ git commit -m "Add app build for v2.0.0..."
 # The command must be ran at the root of LiveCoding folder, it will not works form the client folder..
 git subtree push --prefix client/dist origin gh-pages
 ```
+
+> GitHub pages documentation [here](https://help.github.com/en#github-pages-basics).
