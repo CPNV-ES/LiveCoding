@@ -26,6 +26,11 @@ Live coding is built arround two main blocks :
 * [Add a new language](server/3_languages.md)
 * [The server proxy](server/4_proxyProtocol.md)
 
+## Deployment
+
+* [Client hosting](./deployment/1_client.md)
+* [Processor hosting](./deployment/2_processor.md)
+
 ## Creating games !
 
 * [Create your own game](./games/1_create_one.md)
