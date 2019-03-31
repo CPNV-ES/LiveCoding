@@ -2,17 +2,17 @@
 > Livecoding is a desktop appliaction where newbies can learn the basics of programmation.
 > The principle is simple : You write commands in the in-app editor, press send, and the commands will interact the a little game (like pacman).
 
-## Changelog - v2.0.0
+## Changelog - v2.0.1
 
 *Report issues [here](https://github.com/CPNV-ES/LiveCoding/issues)*
 
 **Client :**
 - Share url now supported
-- Add docs for gameManager
+- Add deployment docs
 
 **Processor :**
 - Fix process kill error
-- Docs update
+- Add deployment docs
 
 ## Available games
 
